@@ -1,0 +1,10 @@
+
+-Siblings as potential instrument. 
+In a frictionless world, asset availability has no impact on college admission choice; it merely changes debt vs. equity financing.
+However, families with more children will have assets split between multiple siblings.
+Therefore, ceteris paribus, students with more siblings will require more debt to attend college.
+Thus, could regress final wage using siblings as an instrument for debt.
+
+Potential problems:
+-Differences between older/younger siblings. Could only look at firstborn children.
+-Students with fewer siblings could get other types of parental investment, leading to other boots. EG extracurriculars.
