@@ -1,0 +1,16 @@
+
+
+Reference
+Number     Year  Variable Description                                           Question Name  
+-------------------------------------------------------------------------------------------------
+C00001.00  XRND  ID CODE OF CHILD                                               CPUBID         
+C00002.00  XRND  ID CODE OF MOTHER OF CHILD                                     MPUBID         
+C00053.00  XRND  RACE OF CHILD (MOTHER'S RACIAL/ETHNIC COHORT FROM SCREENER)    CRACE          
+C00054.00  XRND  SEX OF CHILD                                                   CSEX           
+C00057.00  XRND  DATE OF BIRTH OF CHILD - YEAR                                  CYRB           
+Y17551.00  2006  FIELD OF STUDY IN CURRENT/MOST RECENT COLLEGE -- NUMERIC CODE  Q4-64          
+Y17562.00  2006  AMOUNT OF LOAN TO COVER COST OF YEAR'S COLLEGE EXPENSES        Q4-70          
+Y20361.00  2008  FIELD OF STUDY IN CURRENT/MOST RECENT COLLEGE -- NUMERIC CODE  Q4-64          
+Y20372.00  2008  AMOUNT OF LOAN TO COVER COST OF YEAR'S COLLEGE EXPENSES        Q4-70          
+Y22670.00  XRND  VERSION_R26 CHILD/YOUNG ADULT                                  VERSION_R26    
+Y23606.00  2010  FIELD OF STUDY IN CURRENT/MOST RECENT COLLEGE -- NUMERIC CODE  Q4-64          

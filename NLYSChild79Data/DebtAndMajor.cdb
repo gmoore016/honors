@@ -1,0 +1,397 @@
+C00001.00    [CPUBID]                                       Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             ID CODE OF CHILD
+ 
+PUBLIC IDENTIFICATION CODE OF CHILD
+ 
+UNIVERSE: All biological children of NLSY79 mothers, regardless of age.
+The following child cases have been deleted from the Child db as of the current 
+survey round:
+1226902 - Determined to be a nonbio child; Mother Supplement reports in 2006 & 
+2008; child not assessed.
+864903 - Spurious duplicate child case; no assessment data.
+265404 - Determined to be a nonbio child; 2000-2006 assessment history deleted 
+from record.
+591304 - Determined to be a nonbio child; never assessed.
+ 
+   11521           1 TO 9999999: See Min & Max values below for range as of this
+                          release
+  -------
+   11521
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>   11521      MISSING(-7)       0
+ 
+Min:            201        Max:        1267501        Mean:           600866.53
+ 
+Lead In: None.
+Default Next Question: C00002.00
+--------------------------------------------------------------------------------
+C00002.00    [MPUBID]                                       Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             ID CODE OF MOTHER OF CHILD
+ 
+PUBLIC IDENTIFICATION CODE OF MOTHER OF CHILD
+ 
+UNIVERSE: All biological children of NLSY79 mothers, regardless of age.
+SEE YOUTH REFERENCE NUMBER R(    1.)
+ 
+   11521           1 TO 12686: NLSY79 Public ID
+  -------
+   11521
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>   11521      MISSING(-7)       0
+ 
+Min:              2        Max:          12675        Mean:             6008.65
+ 
+Lead In: C00001.00[Default]
+Default Next Question: C00003.00
+--------------------------------------------------------------------------------
+C00053.00    [CRACE]                                        Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             RACE OF CHILD (MOTHER'S RACIAL/ETHNIC COHORT FROM SCREENER)
+ 
+RACE OF CHILD (MOTHER'S RACIAL/ETHNIC COHORT FROM SCREENER)
+Child race/ethnicity is based on the report of the mother. See NLSY79 main Youth
+Reference Number R( 2147.)
+ 
+    2219       1 HISPANIC
+    3191       2 BLACK
+    6111       3 NON-BLACK, NON-HISPANIC
+  -------
+   11521
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>   11521      MISSING(-7)       0
+ 
+Lead In: C00052.00[Default]
+Default Next Question: C00054.00
+--------------------------------------------------------------------------------
+C00054.00    [CSEX]                                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             SEX OF CHILD
+ 
+SEX OF CHILD
+ 
+    5882       1 MALE
+    5638       2 FEMALE
+  -------
+   11520
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       1
+TOTAL =========>   11521      MISSING(-7)       0
+ 
+Lead In: C00053.00[Default]
+Default Next Question: C00055.00
+--------------------------------------------------------------------------------
+C00057.00    [CYRB]                                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             DATE OF BIRTH OF CHILD - YEAR
+ 
+DATE OF BIRTH OF CHILD - YEAR
+ 
+    1222        1970 TO 1978: < before 1979
+     528        1979
+     607        1980
+     714        1981
+     703        1982
+     715        1983
+     656        1984
+     676        1985
+     617        1986
+     622        1987
+     583        1988
+     629        1989
+     495        1990
+     422        1991
+     400        1992
+     349        1993
+     296        1994
+     243        1995
+     229        1996
+     213        1997
+     155        1998
+     127        1999
+      98        2000
+      81        2001
+      45        2002
+      33        2003
+      23        2004
+      15        2005
+      11        2006
+       4        2007
+       3        2008
+       3        2009
+       2        2010
+       2        2011
+  -------
+   11521
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>   11521      MISSING(-7)       0
+ 
+Min:           1970        Max:           2011        Mean:             1986.08
+ 
+Lead In: C00055.00[Default]
+Default Next Question: C00057.01
+--------------------------------------------------------------------------------
+Y17551.00    [Q4-64]                                        Survey Year: 2006
+  PRIMARY VARIABLE
+
+ 
+             FIELD OF STUDY IN CURRENT/MOST RECENT COLLEGE -- NUMERIC CODE
+ 
+(INTERVIEWER: CODE WITHOUT READING CATEGORIES.)
+ 
+     110       0 NONE, NO MAJOR DECLARED YET
+       8       1 AGRICULTURE / NATURAL RESOURCES
+       5       2 ANTHROPOLOGY
+       2       3 ARCHAEOLOGY
+       7       4 ARCHITECTURE/ENVIRONMENTAL DESIGN
+       1       5 AREA STUDIES
+      54       6 BIOLOGICAL SCIENCES
+     250       7 BUSINESS
+      48       8 COMMUNICATIONS
+      70       9 COMPUTER/INFORMATION SCIENCE
+      62      10 CRIMINOLOGY
+       7      11 ECONOMICS
+     116      12 EDUCATION
+      61      13 ENGINEERING
+      13      14 ENGLISH
+      42      15 FINE AND APPLIED ARTS
+       4      16 FOREIGN LANGUAGES
+      19      17 HISTORY
+       2      18 HOME ECONOMICS
+       1      19 INTERDISCIPLINARY STUDIES
+       4      20 MATHEMATICS
+     136      21 NURSING
+      86      22 OTHER HEALTH PROFESSIONS
+       4      23 PHILOSOPHY
+      14      24 PHYSICAL SCIENCES
+      17      25 POLITICAL SCIENCE AND GOVERNMENT
+       4      26 PRE-DENTAL
+      11      27 PRE-LAW
+      13      28 PRE-MED
+       3      29 PRE-VET
+      53      30 PSYCHOLOGY
+      20      31 SOCIOLOGY
+      16      32 SOCIAL WORK
+      11      33 THEOLOGY/RELIGIOUS STUDIES
+     251      99 OTHER FIELD (SPECIFY)
+  -------
+    1525
+ 
+Refusal(-1)            0
+Don't Know(-2)        13
+TOTAL =========>    1538      MISSING(-7)    9983
+ 
+Lead In: Y17548.00[Default] Y17550.00[Default]  Y17547.00[1:1]
+Default Next Question: Y17552.00
+--------------------------------------------------------------------------------
+Y17562.00    [Q4-70]                                        Survey Year: 2006
+  PRIMARY VARIABLE
+
+ 
+             AMOUNT OF LOAN TO COVER COST OF YEAR'S COLLEGE EXPENSES
+ 
+What was the amount of the loan?
+ 
+       9         500 TO 999
+      34        1000 TO 1499
+      24        1500 TO 1999
+      37        2000 TO 2499
+      24        2500 TO 2999
+      38        3000 TO 3499
+      14        3500 TO 3999
+      29        4000 TO 4499
+       4        4500 TO 4999
+     168        5000 TO 99999999: 5000+
+  -------
+     381
+ 
+Refusal(-1)            0
+Don't Know(-2)        62
+TOTAL =========>     443      MISSING(-7)   11078
+ 
+Min:            500        Max:          54000        Mean:             5909.86
+ 
+Lead In: Y17561.00[Default]
+Default Next Question: Y17563.00
+--------------------------------------------------------------------------------
+Y20361.00    [Q4-64]                                        Survey Year: 2008
+  PRIMARY VARIABLE
+
+ 
+             FIELD OF STUDY IN CURRENT/MOST RECENT COLLEGE -- NUMERIC CODE
+ 
+(INTERVIEWER: CODE WITHOUT READING CATEGORIES.)
+ 
+      93       0 NONE, NO MAJOR DECLARED YET
+       6       1 AGRICULTURE / NATURAL RESOURCES
+       5       2 ANTHROPOLOGY
+       1       3 ARCHAEOLOGY
+      10       4 ARCHITECTURE/ENVIRONMENTAL DESIGN
+       5       5 AREA STUDIES
+      69       6 BIOLOGICAL SCIENCES
+     288       7 BUSINESS
+      52       8 COMMUNICATIONS
+      79       9 COMPUTER/INFORMATION SCIENCE
+      72      10 CRIMINOLOGY
+      11      11 ECONOMICS
+     138      12 EDUCATION
+      75      13 ENGINEERING
+      14      14 ENGLISH
+      40      15 FINE AND APPLIED ARTS
+      11      16 FOREIGN LANGUAGES
+      25      17 HISTORY
+       4      18 HOME ECONOMICS
+       2      19 INTERDISCIPLINARY STUDIES
+       8      20 MATHEMATICS
+     165      21 NURSING
+     107      22 OTHER HEALTH PROFESSIONS
+       3      23 PHILOSOPHY
+      21      24 PHYSICAL SCIENCES
+      23      25 POLITICAL SCIENCE AND GOVERNMENT
+       2      26 PRE-DENTAL
+      13      27 PRE-LAW
+      23      28 PRE-MED
+       5      29 PRE-VET
+      72      30 PSYCHOLOGY
+      24      31 SOCIOLOGY
+      18      32 SOCIAL WORK
+       8      33 THEOLOGY/RELIGIOUS STUDIES
+     311      99 OTHER FIELD (SPECIFY)
+  -------
+    1803
+ 
+Refusal(-1)            1
+Don't Know(-2)        10
+TOTAL =========>    1814      MISSING(-7)    9707
+ 
+Lead In: Y20358.00[Default] Y20360.00[Default]  Y20357.00[1:1]
+Default Next Question: Y20362.00
+--------------------------------------------------------------------------------
+Y20372.00    [Q4-70]                                        Survey Year: 2008
+  PRIMARY VARIABLE
+
+ 
+             AMOUNT OF LOAN TO COVER COST OF YEAR'S COLLEGE EXPENSES
+ 
+What was the amount of the loan(s)?
+ 
+       1           1 TO 499
+      12         500 TO 999
+      24        1000 TO 1499
+      22        1500 TO 1999
+      42        2000 TO 2499
+      16        2500 TO 2999
+      34        3000 TO 3499
+      32        3500 TO 3999
+      24        4000 TO 4499
+      15        4500 TO 4999
+     270        5000 TO 99999999: 5000+
+  -------
+     492
+ 
+Refusal(-1)            0
+Don't Know(-2)        81
+TOTAL =========>     573      MISSING(-7)   10948
+ 
+Min:            442        Max:          80000        Mean:             7716.12
+ 
+Lead In: Y20371.00[Default]
+Default Next Question: Y20373.00
+--------------------------------------------------------------------------------
+Y22670.00    [VERSION_R26]                                  Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             VERSION_R26 CHILD/YOUNG ADULT
+ 
+This variable identifies the release version of the current NLSY79 Child/Young 
+Adult data set, This information allows User Services to identify the release 
+version used by a researcher who is asking a question and to access past 
+versions of the data if necessary.
+ 
+   11521         458
+  -------
+   11521
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>   11521      MISSING(-7)       0
+ 
+Min:            458        Max:            458        Mean:                 458
+ 
+Lead In: Y12053.00[Default]
+Default Next Question: Y12054.00
+--------------------------------------------------------------------------------
+Y23606.00    [Q4-64]                                        Survey Year: 2010
+  PRIMARY VARIABLE
+
+ 
+             FIELD OF STUDY IN CURRENT/MOST RECENT COLLEGE -- NUMERIC CODE
+ 
+(INTERVIEWER: CODE WITHOUT READING CATEGORIES.)
+ 
+      96       0 NONE, NO MAJOR DECLARED YET
+      17       1 AGRICULTURE / NATURAL RESOURCES
+       5       2 ANTHROPOLOGY
+       0       3 ARCHAEOLOGY
+       8       4 ARCHITECTURE/ENVIRONMENTAL DESIGN
+       5       5 AREA STUDIES
+      82       6 BIOLOGICAL SCIENCES
+     306       7 BUSINESS
+      52       8 COMMUNICATIONS
+      68       9 COMPUTER/INFORMATION SCIENCE
+      89      10 CRIMINOLOGY
+      15      11 ECONOMICS
+     169      12 EDUCATION
+      83      13 ENGINEERING
+      23      14 ENGLISH
+      50      15 FINE AND APPLIED ARTS
+       4      16 FOREIGN LANGUAGES
+      23      17 HISTORY
+       3      18 HOME ECONOMICS
+       2      19 INTERDISCIPLINARY STUDIES
+      15      20 MATHEMATICS
+     168      21 NURSING
+     153      22 OTHER HEALTH PROFESSIONS
+       5      23 PHILOSOPHY
+      20      24 PHYSICAL SCIENCES
+      31      25 POLITICAL SCIENCE AND GOVERNMENT
+       5      26 PRE-DENTAL
+      17      27 PRE-LAW
+      17      28 PRE-MED
+       5      29 PRE-VET
+      80      30 PSYCHOLOGY
+      26      31 SOCIOLOGY
+      26      32 SOCIAL WORK
+       9      33 THEOLOGY/RELIGIOUS STUDIES
+     367      99 OTHER FIELD (SPECIFY)
+  -------
+    2044
+ 
+Refusal(-1)            0
+Don't Know(-2)        18
+TOTAL =========>    2062      MISSING(-7)    9459
+ 
+Lead In: Y23603.00[Default] Y23605.00[Default]  Y23602.00[1:1]
+Default Next Question: Y23607.00
