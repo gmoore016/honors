@@ -205,6 +205,27 @@ TOTAL =========>    1538      MISSING(-7)    9983
 Lead In: Y17548.00[Default] Y17550.00[Default]  Y17547.00[1:1]
 Default Next Question: Y17552.00
 --------------------------------------------------------------------------------
+Y17561.00    [Q4-69]                                        Survey Year: 2006
+  PRIMARY VARIABLE
+
+ 
+             R RECEIVE LOAN TO COVER COST OF YEAR'S COLLEGE EXPENSES
+ 
+Did you receive a loan to cover any of the costs for this year's college 
+expenses?
+ 
+     443       1 Yes
+     599       0 No   (Go To Y17564.00)
+  -------
+    1042
+ 
+Refusal(-1)            2   (Go To Y17564.00)
+Don't Know(-2)        11   (Go To Y17564.00)
+TOTAL =========>    1055      MISSING(-7)   10466
+ 
+Lead In: Y17559.00[Default] Y17560.00[Default]
+Default Next Question: Y17562.00
+--------------------------------------------------------------------------------
 Y17562.00    [Q4-70]                                        Survey Year: 2006
   PRIMARY VARIABLE
 
@@ -287,6 +308,27 @@ TOTAL =========>    1814      MISSING(-7)    9707
  
 Lead In: Y20358.00[Default] Y20360.00[Default]  Y20357.00[1:1]
 Default Next Question: Y20362.00
+--------------------------------------------------------------------------------
+Y20371.00    [Q4-69]                                        Survey Year: 2008
+  PRIMARY VARIABLE
+
+ 
+             R RECEIVE LOAN TO COVER COST OF YEAR'S COLLEGE EXPENSES
+ 
+Did you receive a loan to cover any of the costs for this year's college 
+expenses?
+ 
+     573       1 Yes
+     681       0 No   (Go To Y20374.00)
+  -------
+    1254
+ 
+Refusal(-1)            1   (Go To Y20374.00)
+Don't Know(-2)        11   (Go To Y20374.00)
+TOTAL =========>    1266      MISSING(-7)   10255
+ 
+Lead In: Y20369.00[Default] Y20370.00[Default]
+Default Next Question: Y20372.00
 --------------------------------------------------------------------------------
 Y20372.00    [Q4-70]                                        Survey Year: 2008
   PRIMARY VARIABLE

@@ -1,3 +1,8 @@
+clear all
+
+infile using Download/DebtAndMajor.dct
+
+//Labels from site
 label define vlC0005300   1 "HISPANIC"  2 "BLACK"  3 "NON-BLACK, NON-HISPANIC"
 label values C0005300 vlC0005300
 label define vlC0005400   1 "MALE"  2 "FEMALE"
@@ -6,38 +11,57 @@ label define vlC0005700   1979 "1979"  1980 "1980"  1981 "1981"  1982 "1982"  19
 label values C0005700 vlC0005700
 label define vlY1755100   0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  6 "BIOLOGICAL SCIENCES"  7 "BUSINESS"  8 "COMMUNICATIONS"  9 "COMPUTER/INFORMATION SCIENCE"  10 "CRIMINOLOGY"  11 "ECONOMICS"  12 "EDUCATION"  13 "ENGINEERING"  14 "ENGLISH"  15 "FINE AND APPLIED ARTS"  16 "FOREIGN LANGUAGES"  17 "HISTORY"  18 "HOME ECONOMICS"  19 "INTERDISCIPLINARY STUDIES"  20 "MATHEMATICS"  21 "NURSING"  22 "OTHER HEALTH PROFESSIONS"  23 "PHILOSOPHY"  24 "PHYSICAL SCIENCES"  25 "POLITICAL SCIENCE AND GOVERNMENT"  26 "PRE-DENTAL"  27 "PRE-LAW"  28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
 label values Y1755100 vlY1755100
+label define vlY1756100   1 "Yes"  0 "No"
+label values Y1756100 vlY1756100
 label define vlY1756200   0 "0"
 label values Y1756200 vlY1756200
 label define vlY2036100   0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  6 "BIOLOGICAL SCIENCES"  7 "BUSINESS"  8 "COMMUNICATIONS"  9 "COMPUTER/INFORMATION SCIENCE"  10 "CRIMINOLOGY"  11 "ECONOMICS"  12 "EDUCATION"  13 "ENGINEERING"  14 "ENGLISH"  15 "FINE AND APPLIED ARTS"  16 "FOREIGN LANGUAGES"  17 "HISTORY"  18 "HOME ECONOMICS"  19 "INTERDISCIPLINARY STUDIES"  20 "MATHEMATICS"  21 "NURSING"  22 "OTHER HEALTH PROFESSIONS"  23 "PHILOSOPHY"  24 "PHYSICAL SCIENCES"  25 "POLITICAL SCIENCE AND GOVERNMENT"  26 "PRE-DENTAL"  27 "PRE-LAW"  28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
 label values Y2036100 vlY2036100
+label define vlY2037100   1 "Yes"  0 "No"
+label values Y2037100 vlY2037100
 label define vlY2037200   0 "0"
 label values Y2037200 vlY2037200
 label define vlY2267000   458 "458"
 label values Y2267000 vlY2267000
 label define vlY2360600   0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  6 "BIOLOGICAL SCIENCES"  7 "BUSINESS"  8 "COMMUNICATIONS"  9 "COMPUTER/INFORMATION SCIENCE"  10 "CRIMINOLOGY"  11 "ECONOMICS"  12 "EDUCATION"  13 "ENGINEERING"  14 "ENGLISH"  15 "FINE AND APPLIED ARTS"  16 "FOREIGN LANGUAGES"  17 "HISTORY"  18 "HOME ECONOMICS"  19 "INTERDISCIPLINARY STUDIES"  20 "MATHEMATICS"  21 "NURSING"  22 "OTHER HEALTH PROFESSIONS"  23 "PHILOSOPHY"  24 "PHYSICAL SCIENCES"  25 "POLITICAL SCIENCE AND GOVERNMENT"  26 "PRE-DENTAL"  27 "PRE-LAW"  28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
 label values Y2360600 vlY2360600
-/* Crosswalk for Reference number & Question name
- * Uncomment and edit this RENAME statement to rename variables for ease of use.
- * This command does not guarantee uniqueness
- */
-  /* *start* */
-/*
-  rename C0000100 CPUBID_XRND 
-  rename C0000200 MPUBID_XRND 
-  rename C0005300 CRACE_XRND 
-  rename C0005400 CSEX_XRND 
-  rename C0005700 CYRB_XRND 
-  rename Y1755100 Q4_64_2006   // Q4-64
-  rename Y1756200 Q4_70_2006   // Q4-70
-  rename Y2036100 Q4_64_2008   // Q4-64
-  rename Y2037200 Q4_70_2008   // Q4-70
-  rename Y2267000 VERSION_R26_XRND 
-  rename Y2360600 Q4_64_2010   // Q4-64
-*/
-  /* *end* */  
-/* To convert variable names to lower case use the TOLOWER command 
- *      (type findit tolower and follow the links to install).
- * TOLOWER VARLIST will change listed variables to lower case; 
- *  TOLOWER without a specified variable list will convert all variables in the dataset to lower case
- */
-/* tolower */
+
+//ID Numbers
+rename C0000100 cid
+rename C0000200 mid
+
+//Demographics
+rename C0005300 race
+rename C0005400 sex
+rename C0005700 dob
+
+//Fields of study
+rename Y1755100 maj06
+rename Y2036100 maj08
+rename Y2360600 maj10
+
+//Receive loan?
+rename Y1756100 recloan06
+rename Y2037100 recloan08
+
+//Loan quantities
+rename Y1756200 loan06
+rename Y2037200 loan08
+
+//Get only observations with data on receiving loans
+drop if recloan06 == -7 & recloan08 == -7
+
+//If student did not receive loan, loan = 0
+replace loan06 = 0 if !recloan06
+replace loan08 = 0 if !recloan08
+
+hist loan06 if loan06 > 0, freq width(500) 
+graph export loan06all.pdf, replace
+hist loan06 if loan06 > 0 & loan06 < 5000, freq width(500)
+graph export loan06sml.pdf, replace 
+
+hist loan08 if loan08 > 0, freq width(500) 
+graph export loan08all.pdf, replace
+hist loan08 if loan08 > 0 & loan08 < 5000, freq width(500) 
+graph export loan08sml.pdf, replace
+
