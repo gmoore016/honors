@@ -55,13 +55,4 @@ drop if recloan06 == -7 & recloan08 == -7
 replace loan06 = 0 if !recloan06
 replace loan08 = 0 if !recloan08
 
-hist loan06 if loan06 > 0, freq width(500) 
-graph export loan06all.pdf, replace
-hist loan06 if loan06 > 0 & loan06 < 5000, freq width(500)
-graph export loan06sml.pdf, replace 
-
-hist loan08 if loan08 > 0, freq width(500) 
-graph export loan08all.pdf, replace
-hist loan08 if loan08 > 0 & loan08 < 5000, freq width(500) 
-graph export loan08sml.pdf, replace
 
