@@ -1,0 +1,89 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.8 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{nyt/global/}
+    \entry{lucca2015}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=8d513c4b6b7bc29373b7ad09cc2127fd}{%
+           family={Lucca},
+           familyi={L\bibinitperiod},
+           given={David\bibnamedelima O},
+           giveni={D\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+        {{uniquename=0,hash=90c6dd1711d430af628a30e9e8b7d308}{%
+           family={Nadauld},
+           familyi={N\bibinitperiod},
+           given={Taylor},
+           giveni={T\bibinitperiod}}}%
+        {{uniquename=0,hash=612ce1fdced28ac6ddecedd2b0fa6793}{%
+           family={Shen},
+           familyi={S\bibinitperiod},
+           given={Karen},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{1f3d79a031ba44f9474447af7410a8a5}
+      \strng{fullhash}{1f3d79a031ba44f9474447af7410a8a5}
+      \strng{authornamehash}{1f3d79a031ba44f9474447af7410a8a5}
+      \strng{authorfullhash}{1f3d79a031ba44f9474447af7410a8a5}
+      \field{sortinit}{L}
+      \field{sortinithash}{7bba64db83423e3c29ad597f3b682cf3}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Review of Financial Studies}
+      \field{title}{Credit supply and the rise in college tuition: Evidence from the expansion in federal student aid programs}
+      \field{year}{2015}
+    \endentry
+    \entry{rothstein2011}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=19192fe53caa301de3ea1ecacca56af9}{%
+           family={Rothstein},
+           familyi={R\bibinitperiod},
+           given={Jesse},
+           giveni={J\bibinitperiod}}}%
+        {{uniquename=0,hash=e874efd1490f44516c5e810399cfcbf6}{%
+           family={Rouse},
+           familyi={R\bibinitperiod},
+           given={Cecilia\bibnamedelima Elena},
+           giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{eb8662ef873f0a14d16981d0feb0195a}
+      \strng{fullhash}{eb8662ef873f0a14d16981d0feb0195a}
+      \strng{authornamehash}{eb8662ef873f0a14d16981d0feb0195a}
+      \strng{authorfullhash}{eb8662ef873f0a14d16981d0feb0195a}
+      \field{sortinit}{R}
+      \field{sortinithash}{c15bc8eb6936bc6b3c8baa9e8575af53}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Public Economics}
+      \field{number}{1-2}
+      \field{title}{Constrained after college: Student loans and early-career occupational choices}
+      \field{volume}{95}
+      \field{year}{2011}
+      \field{pages}{149\bibrangedash 163}
+      \range{pages}{15}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
