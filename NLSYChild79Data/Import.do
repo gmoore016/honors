@@ -1,30 +1,16 @@
 clear all
 
-infile using Download/DebtAndMajor.dct
+infile using Download/child.dct
 
-//Labels from site
-label define vlC0005300   1 "HISPANIC"  2 "BLACK"  3 "NON-BLACK, NON-HISPANIC"
-label values C0005300 vlC0005300
-label define vlC0005400   1 "MALE"  2 "FEMALE"
-label values C0005400 vlC0005400
-label define vlC0005700   1979 "1979"  1980 "1980"  1981 "1981"  1982 "1982"  1983 "1983"  1984 "1984"  1985 "1985"  1986 "1986"  1987 "1987"  1988 "1988"  1989 "1989"  1990 "1990"  1991 "1991"  1992 "1992"  1993 "1993"  1994 "1994"  1995 "1995"  1996 "1996"  1997 "1997"  1998 "1998"  1999 "1999"  2000 "2000"  2001 "2001"  2002 "2002"  2003 "2003"  2004 "2004"  2005 "2005"  2006 "2006"  2007 "2007"  2008 "2008"  2009 "2009"  2010 "2010"  2011 "2011"  2012 "2012"  2013 "2013"  2014 "2014"  2015 "2015"
-label values C0005700 vlC0005700
-label define vlY1755100   0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  6 "BIOLOGICAL SCIENCES"  7 "BUSINESS"  8 "COMMUNICATIONS"  9 "COMPUTER/INFORMATION SCIENCE"  10 "CRIMINOLOGY"  11 "ECONOMICS"  12 "EDUCATION"  13 "ENGINEERING"  14 "ENGLISH"  15 "FINE AND APPLIED ARTS"  16 "FOREIGN LANGUAGES"  17 "HISTORY"  18 "HOME ECONOMICS"  19 "INTERDISCIPLINARY STUDIES"  20 "MATHEMATICS"  21 "NURSING"  22 "OTHER HEALTH PROFESSIONS"  23 "PHILOSOPHY"  24 "PHYSICAL SCIENCES"  25 "POLITICAL SCIENCE AND GOVERNMENT"  26 "PRE-DENTAL"  27 "PRE-LAW"  28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
-label values Y1755100 vlY1755100
-label define vlY1756100   1 "Yes"  0 "No"
-label values Y1756100 vlY1756100
-label define vlY1756200   0 "0"
-label values Y1756200 vlY1756200
-label define vlY2036100   0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  6 "BIOLOGICAL SCIENCES"  7 "BUSINESS"  8 "COMMUNICATIONS"  9 "COMPUTER/INFORMATION SCIENCE"  10 "CRIMINOLOGY"  11 "ECONOMICS"  12 "EDUCATION"  13 "ENGINEERING"  14 "ENGLISH"  15 "FINE AND APPLIED ARTS"  16 "FOREIGN LANGUAGES"  17 "HISTORY"  18 "HOME ECONOMICS"  19 "INTERDISCIPLINARY STUDIES"  20 "MATHEMATICS"  21 "NURSING"  22 "OTHER HEALTH PROFESSIONS"  23 "PHILOSOPHY"  24 "PHYSICAL SCIENCES"  25 "POLITICAL SCIENCE AND GOVERNMENT"  26 "PRE-DENTAL"  27 "PRE-LAW"  28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
-label values Y2036100 vlY2036100
-label define vlY2037100   1 "Yes"  0 "No"
-label values Y2037100 vlY2037100
-label define vlY2037200   0 "0"
-label values Y2037200 vlY2037200
-label define vlY2267000   458 "458"
-label values Y2267000 vlY2267000
-label define vlY2360600   0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  6 "BIOLOGICAL SCIENCES"  7 "BUSINESS"  8 "COMMUNICATIONS"  9 "COMPUTER/INFORMATION SCIENCE"  10 "CRIMINOLOGY"  11 "ECONOMICS"  12 "EDUCATION"  13 "ENGINEERING"  14 "ENGLISH"  15 "FINE AND APPLIED ARTS"  16 "FOREIGN LANGUAGES"  17 "HISTORY"  18 "HOME ECONOMICS"  19 "INTERDISCIPLINARY STUDIES"  20 "MATHEMATICS"  21 "NURSING"  22 "OTHER HEALTH PROFESSIONS"  23 "PHILOSOPHY"  24 "PHYSICAL SCIENCES"  25 "POLITICAL SCIENCE AND GOVERNMENT"  26 "PRE-DENTAL"  27 "PRE-LAW"  28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
-label values Y2360600 vlY2360600
+//Unneeded documentation parameter
+drop Y2267000
+
+//Define labels
+label define raceLab   1 "HISPANIC"  2 "BLACK"  3 "NON-BLACK, NON-HISPANIC"
+label define sexLab  1 "MALE"  2 "FEMALE"
+label define majLab  0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  6 "BIOLOGICAL SCIENCES"  7 "BUSINESS"  8 "COMMUNICATIONS"  9 "COMPUTER/INFORMATION SCIENCE"  10 "CRIMINOLOGY"  11 "ECONOMICS"  12 "EDUCATION"  13 "ENGINEERING"  14 "ENGLISH"  15 "FINE AND APPLIED ARTS"  16 "FOREIGN LANGUAGES"  17 "HISTORY"  18 "HOME ECONOMICS"  19 "INTERDISCIPLINARY STUDIES"  20 "MATHEMATICS"  21 "NURSING"  22 "OTHER HEALTH PROFESSIONS"  23 "PHILOSOPHY"  24 "PHYSICAL SCIENCES"  25 "POLITICAL SCIENCE AND GOVERNMENT"  26 "PRE-DENTAL"  27 "PRE-LAW"  28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
+label define ynLab  1 "Yes"  0 "No"
+label define regionLab 1 "NORTHEAST" 2 "NORTH CENTRAL" 3 "SOUTH" 4 "WEST"
 
 //ID Numbers
 rename C0000100 cid
@@ -32,27 +18,70 @@ rename C0000200 mid
 
 //Demographics
 rename C0005300 race
+label values race raceLab
 rename C0005400 sex
+label values sex sexLab
 rename C0005700 dob
 
 //Fields of study
-rename Y1755100 maj06
-rename Y2036100 maj08
+rename Y1025600 maj0
+rename Y1270800 maj2
+rename Y1504800 maj4
+rename Y1755100 maj6
+rename Y2036100 maj8
 rename Y2360600 maj10
 
+label values maj* majLab
+
 //Receive loan?
-rename Y1756100 recloan06
-rename Y2037100 recloan08
+rename Y1026600 recloan0
+rename Y1271800 recloan2
+rename Y1505800 recloan4
+rename Y1756100 recloan6
+rename Y2037100 recloan8
+rename Y2361600 recloan10
+
+label values recloan* ynLab
+
+//Region
+rename Y1193000 region0
+rename Y1435200 region2
+rename Y1673400 region4
+rename Y1949200 region6
+rename Y2267800 region8
+rename Y2616700 region10
+
+label values region* regionLab
 
 //Loan quantities
-rename Y1756200 loan06
-rename Y2037200 loan08
+rename Y1026700 loan0
+rename Y1271900 loan2
+rename Y1505900 loan4
+rename Y1756200 loan6
+rename Y2037200 loan8
+rename Y2361700 loan10
+
+forval i = 0(2)10{
+	replace recloan`i' = . if recloan`i' < 0
+}
 
 //Get only observations with data on receiving loans
-drop if recloan06 == -7 & recloan08 == -7
+drop if missing(recloan0) & missing(recloan2) ///
+	& missing(recloan4) & missing(recloan6) ///
+	& missing(recloan8) & missing(recloan10)
 
-//If student did not receive loan, loan = 0
-replace loan06 = 0 if !recloan06
-replace loan08 = 0 if !recloan08
+//Change to long data
+reshape long maj recloan loan region, i(cid) j(year)
 
+//Code to Stata missings
+replace maj = . if maj < 0
+replace loan = 0 if !recloan & !missing(recloan)
+replace loan = . if loan < 0
+replace region = . if region < 0
+replace recloan = . if recloan < 0
+
+//Generates dummy for after policy change
+gen cohort = (year >= 8)
+label define cohLab 0 "control" 1 "test"
+label values cohort cohLab
 
