@@ -19,7 +19,83 @@
 
 \refsection{0}
   \sortlist[entry]{nyt/global/}
-    \entry{lucca2015}{article}{}
+    \entry{angrist2009}{book}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=f5ec0d3fc432a434d9adc3d886d9b074}{%
+           family={Angrist},
+           familyi={A\bibinitperiod},
+           given={Joshua\bibnamedelima David},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{uniquename=0,hash=a371aa94a6e25bcbee7d55da6003fbe6}{%
+           family={Pischke},
+           familyi={P\bibinitperiod},
+           given={J\"{o}rn-Steffen},
+           giveni={J\bibinithyphendelim S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Princeton}%
+      }
+      \list{publisher}{1}{%
+        {Princeton University Press}%
+      }
+      \strng{namehash}{5920c0438c66c358f00cf689a5133a83}
+      \strng{fullhash}{5920c0438c66c358f00cf689a5133a83}
+      \strng{authornamehash}{5920c0438c66c358f00cf689a5133a83}
+      \strng{authorfullhash}{5920c0438c66c358f00cf689a5133a83}
+      \field{sortinit}{A}
+      \field{sortinithash}{3248043b5fe8d0a34dab5ab6b8d4309b}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{isbn}{978-0-691-12034-8 978-0-691-12035-5}
+      \field{note}{OCLC: ocn231586808}
+      \field{pagetotal}{373}
+      \field{shorttitle}{Mostly Harmless Econometrics}
+      \field{title}{Mostly Harmless Econometrics: An Empiricist's Companion}
+      \field{year}{2009}
+      \field{dateera}{ce}
+      \keyw{Econometrics,Regression analysis}
+    \endentry
+    \entry{feiveson2018}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=8612420c178b4ea2e2618d7f217cd3ac}{%
+           family={Feiveson},
+           familyi={F\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod}}}%
+        {{uniquename=0,hash=b0a070ce4d46ce401634958db3155733}{%
+           family={Mezza},
+           familyi={M\bibinitperiod},
+           given={Alvaro},
+           giveni={A\bibinitperiod}}}%
+        {{uniquename=0,hash=3d68445bb8fa8038e822cd10e7541178}{%
+           family={Sommer},
+           familyi={S\bibinitperiod},
+           given={Kamila},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{3130d2687426f49d4a63a0cf95f6f73a}
+      \strng{fullhash}{3130d2687426f49d4a63a0cf95f6f73a}
+      \strng{authornamehash}{3130d2687426f49d4a63a0cf95f6f73a}
+      \strng{authorfullhash}{3130d2687426f49d4a63a0cf95f6f73a}
+      \field{sortinit}{F}
+      \field{sortinithash}{276475738cc058478c1677046f857703}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2380-7172}
+      \field{journaltitle}{FEDS Notes}
+      \field{month}{2}
+      \field{number}{2127}
+      \field{title}{Student {{Loan Debt}} and {{Aggregate Consumption Growth}}}
+      \field{volume}{2018}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \verb{doi}
+      \verb 10.17016/2380-7172.2127
+      \endverb
+    \endentry
+    \entry{lucca2018}{article}{}
       \name{author}{3}{}{%
         {{uniquename=0,hash=8d513c4b6b7bc29373b7ad09cc2127fd}{%
            family={Lucca},
@@ -43,12 +119,125 @@
       \strng{authorfullhash}{1f3d79a031ba44f9474447af7410a8a5}
       \field{sortinit}{L}
       \field{sortinithash}{7bba64db83423e3c29ad597f3b682cf3}
-      \field{labeldatesource}{year}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{day}{21}
+      \field{issn}{0893-9454, 1465-7368}
+      \field{journaltitle}{The Review of Financial Studies}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{shorttitle}{Credit {{Supply}} and the {{Rise}} in {{College Tuition}}}
+      \field{title}{Credit {{Supply}} and the {{Rise}} in {{College Tuition}}: {{Evidence}} from the {{Expansion}} in {{Federal Student Aid Programs}}}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \verb{doi}
+      \verb 10.1093/rfs/hhy069
+      \endverb
+      \verb{file}
+      \verb C:\\Users\\gmoor\\Zotero\\storage\\NMWFKF3M\\Lucca et al. - 2018 - Credit Supply and the Rise in College Tuition Evi.pdf
+      \endverb
+    \endentry
+    \entry{mcfarland2017}{report}{useprefix=true}
+      \name{author}{15}{}{%
+        {{uniquename=0,hash=304d5e36e6267ff4a65f1dafff75a6d7}{%
+           family={McFarland},
+           familyi={M\bibinitperiod},
+           given={Joel},
+           giveni={J\bibinitperiod}}}%
+        {{uniquename=0,hash=fe2895dc77cf3f6f6ebb28ec72d3cec2}{%
+           family={Hussar},
+           familyi={H\bibinitperiod},
+           given={Bill},
+           giveni={B\bibinitperiod}}}%
+        {{uniquename=0,hash=1497beb3e7f87a615e65be157af765f4}{%
+           family={Brey},
+           familyi={B\bibinitperiod},
+           given={Cristobal},
+           giveni={C\bibinitperiod},
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{uniquename=0,hash=212fcf9c0a2987ef649c9d75e4fd1291}{%
+           family={Snyder},
+           familyi={S\bibinitperiod},
+           given={Tom},
+           giveni={T\bibinitperiod}}}%
+        {{uniquename=0,hash=66a2746de95223ec2e9e78a901ee1cf8}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Xiaolei},
+           giveni={X\bibinitperiod}}}%
+        {{uniquename=0,hash=5189689afbe9b03d110fd877546675a3}{%
+           family={Wilkinson-Flicker},
+           familyi={W\bibinithyphendelim F\bibinitperiod},
+           given={Sidney},
+           giveni={S\bibinitperiod}}}%
+        {{uniquename=0,hash=498ebdfc9b0a58e239a42f6f65d9d545}{%
+           family={Gebrekristos},
+           familyi={G\bibinitperiod},
+           given={Semhar},
+           giveni={S\bibinitperiod}}}%
+        {{uniquename=0,hash=23d6ab0bbbd57fbed45efd5ae334c718}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Jijun},
+           giveni={J\bibinitperiod}}}%
+        {{uniquename=0,hash=e591545c723da5a2a6ec72e6a34dbef6}{%
+           family={Rathbun},
+           familyi={R\bibinitperiod},
+           given={Amy},
+           giveni={A\bibinitperiod}}}%
+        {{uniquename=0,hash=2770a10e6e3fb6e8fbdeabefbac4cbe5}{%
+           family={Barmer},
+           familyi={B\bibinitperiod},
+           given={Amy},
+           giveni={A\bibinitperiod}}}%
+        {{uniquename=0,hash=8756c1a54896a4cd69fcb495fd10bfd3}{%
+           family={Mann},
+           familyi={M\bibinitperiod},
+           given={Farrah\bibnamedelima Bullock},
+           giveni={F\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{uniquename=0,hash=12b32279b3809faa71824bb21bfc670a}{%
+           family={Hinz},
+           familyi={H\bibinitperiod},
+           given={Serena},
+           giveni={S\bibinitperiod}}}%
+        {{uniquename=0,hash=b7ecd0b7e0d84cce0e961056c001723d}{%
+           family={Nachazel},
+           familyi={N\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{uniquename=0,hash=21b5e2950cd16826a4dccc647cb88f26}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={Wyatt},
+           giveni={W\bibinitperiod}}}%
+        {{uniquename=0,hash=d1c18f20626373e4998d975bf558e295}{%
+           family={Ossolinski},
+           familyi={O\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{03e01f100c4c1d4484c2e95a1012b04a}
+      \strng{fullhash}{f03a9e5117c5aa9f03f9b66632acdb86}
+      \strng{authornamehash}{03e01f100c4c1d4484c2e95a1012b04a}
+      \strng{authorfullhash}{f03a9e5117c5aa9f03f9b66632acdb86}
+      \field{sortinit}{M}
+      \field{sortinithash}{c26a05ef03e4429073ed5c825140fac3}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{The Review of Financial Studies}
-      \field{title}{Credit supply and the rise in college tuition: Evidence from the expansion in federal student aid programs}
-      \field{year}{2015}
+      \field{langid}{english}
+      \field{number}{NCES 2017-144}
+      \field{series}{The Condition of Education}
+      \field{title}{The {{Condition}} of {{Education}}}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{pages}{116\bibrangedash 121}
+      \range{pages}{6}
+      \verb{file}
+      \verb C:\\Users\\gmoor\\Zotero\\storage\\ET975KTQ\\McFarland et al. - The Condition of Education 2017.pdf
+      \endverb
     \endentry
     \entry{rothstein2011}{article}{}
       \name{author}{2}{}{%
@@ -63,25 +252,34 @@
            given={Cecilia\bibnamedelima Elena},
            giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
       }
-      \list{publisher}{1}{%
-        {Elsevier}%
-      }
       \strng{namehash}{eb8662ef873f0a14d16981d0feb0195a}
       \strng{fullhash}{eb8662ef873f0a14d16981d0feb0195a}
       \strng{authornamehash}{eb8662ef873f0a14d16981d0feb0195a}
       \strng{authorfullhash}{eb8662ef873f0a14d16981d0feb0195a}
       \field{sortinit}{R}
       \field{sortinithash}{c15bc8eb6936bc6b3c8baa9e8575af53}
-      \field{labeldatesource}{year}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{In the early 2000s, a highly selective university introduced a ``no-loans'' policy under which the loan component of financial aid awards was replaced with grants. We use this natural experiment to identify the causal effect of student debt on employment outcomes. In the standard life-cycle model, young people make optimal educational investment decisions if they are able to finance these investments by borrowing against future earnings; the presence of debt has only income effects on investment decisions. We find that debt causes graduates to choose substantially higher-salary jobs and reduces the probability that students choose low-paid ``public interest'' jobs. We also find some evidence that debt affects students' academic decisions during college. Our estimates suggest that recent college graduates are not life-cycle agents. Two potential explanations are that young workers are credit constrained or that they are averse to holding debt. We find suggestive evidence that debt reduces students' donations to the institution in the years after they graduate and increases the likelihood that a graduate will default on a pledge made during her senior year; we argue this result is more likely consistent with credit constraints than with debt aversion.}
+      \field{issn}{00472727}
       \field{journaltitle}{Journal of Public Economics}
+      \field{langid}{english}
+      \field{month}{2}
       \field{number}{1-2}
-      \field{title}{Constrained after college: Student loans and early-career occupational choices}
+      \field{shorttitle}{Constrained after College}
+      \field{title}{Constrained after College: {{Student}} Loans and Early-Career Occupational Choices}
       \field{volume}{95}
       \field{year}{2011}
+      \field{dateera}{ce}
       \field{pages}{149\bibrangedash 163}
       \range{pages}{15}
+      \verb{doi}
+      \verb 10.1016/j.jpubeco.2010.09.015
+      \endverb
+      \verb{file}
+      \verb C:\\Users\\gmoor\\Zotero\\storage\\6RBVTIHL\\Rothstein and Rouse - 2011 - Constrained after college Student loans and early.pdf;C:\\Users\\gmoor\\Zotero\\storage\\967WEGVR\\Rothstein and Rouse - 2011 - Constrained after college Student loans and early.pdf;C:\\Users\\gmoor\\Zotero\\storage\\GP4S3T9T\\Rothstein and Rouse - 2011 - Constrained after college Student loans and early.pdf
+      \endverb
     \endentry
   \endsortlist
 \endrefsection
