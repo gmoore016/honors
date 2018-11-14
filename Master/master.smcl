@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}C:\Users\gmoor\Desktop\honors\Master\master.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}31 Oct 2018, 13:20:05
+ {txt}opened on:  {res} 7 Nov 2018, 14:00:13
 {txt}
 {com}. 
 . set more off
@@ -59,7 +59,7 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
 . tempfile parInc
 {txt}
 {com}. save `parInc'
-{txt}file C:\Users\gmoor\AppData\Local\Temp\ST_01000001.tmp saved
+{txt}file C:\Users\gmoor\AppData\Local\Temp\ST_00000001.tmp saved
 
 {com}. 
 . cd ../NLSYChild79Data
@@ -409,19 +409,19 @@ Iteration 4:{space 3}log likelihood = {res:-32118.131}
 {space 18}region {c |}
 {space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-.1812183{col 38}{space 2} .1113407{col 49}{space 1}   -1.63{col 58}{space 3}0.104{col 66}{space 4}-.3994421{col 79}{space 3} .0370055
 {txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-.1176064{col 38}{space 2} .1175847{col 49}{space 1}   -1.00{col 58}{space 3}0.317{col 66}{space 4}-.3480683{col 79}{space 3} .1128554
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-.2274668{col 38}{space 2} .1065283{col 49}{space 1}   -2.14{col 58}{space 3}0.033{col 66}{space 4}-.4362584{col 79}{space 3}-.0186752
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-.2274668{col 38}{space 2} .1065283{col 49}{space 1}   -2.14{col 58}{space 3}0.033{col 66}{space 4}-.4362584{col 79}{space 3}-.0186751
 {txt}{space 24} {c |}
-{space 17}recloan {c |}{col 26}{res}{space 2}-.0652083{col 38}{space 2} .4725152{col 49}{space 1}   -0.14{col 58}{space 3}0.890{col 66}{space 4}-.9913211{col 79}{space 3} .8609044
-{txt}{space 19}_cons {c |}{col 26}{res}{space 2}-.9192035{col 38}{space 2} .1292693{col 49}{space 1}   -7.11{col 58}{space 3}0.000{col 66}{space 4}-1.172567{col 79}{space 3}-.6658403
+{space 17}recloan {c |}{col 26}{res}{space 2}-.0652084{col 38}{space 2} .4725152{col 49}{space 1}   -0.14{col 58}{space 3}0.890{col 66}{space 4}-.9913212{col 79}{space 3} .8609044
+{txt}{space 19}_cons {c |}{col 26}{res}{space 2}-.9192035{col 38}{space 2} .1292694{col 49}{space 1}   -7.11{col 58}{space 3}0.000{col 66}{space 4}-1.172567{col 79}{space 3}-.6658402
 {txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                 /athrho {c |}{col 26}{res}{space 2}-.0144157{col 38}{space 2} .3467455{col 49}{space 1}   -0.04{col 58}{space 3}0.967{col 66}{space 4}-.6940245{col 79}{space 3} .6651931
+                 /athrho {c |}{col 26}{res}{space 2}-.0144158{col 38}{space 2} .3467456{col 49}{space 1}   -0.04{col 58}{space 3}0.967{col 66}{space 4}-.6940246{col 79}{space 3} .6651931
 {txt}                /lnsigma {c |}{col 26}{res}{space 2} 8.379867{col 38}{space 2} .0126088{col 49}{space 1}  664.60{col 58}{space 3}0.000{col 66}{space 4} 8.355154{col 79}{space 3} 8.404579
 {txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                     rho{col 26}{c |}{res}{space 2}-.0144147{col 38}{space 2} .3466735{col 66}{space 4}-.6005612{col 79}{space 3}  .581809
+{col 1}                     rho{col 26}{c |}{res}{space 2}-.0144148{col 38}{space 2} .3466735{col 66}{space 4}-.6005612{col 79}{space 3}  .581809
 {col 1}{txt}                   sigma{col 26}{c |}{res}{space 2} 4358.427{col 38}{space 2} 54.95466{col 66}{space 4} 4252.038{col 79}{space 3} 4467.478
 {txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{p 0 15 91}Instrumented:{space 2}loan{p_end}
-{p 0 15 91}Instruments:{space 3}year 2.race 3.race 2.sex 2.region 3.region 4.region recloan cohort parInc{p_end}
+{p 0 15 42}Instrumented:{space 2}loan{p_end}
+{p 0 15 42}Instruments:{space 3}year 2.race 3.race 2.sex 2.region 3.region 4.region recloan cohort parInc{p_end}
 {hline 90}
 Wald test of exogeneity (/athrho = 0): chi2({res}1{txt}) = {res}    0.00{txt}{col 59}Prob > chi2 = {res}0.9668
 {txt}
@@ -517,52 +517,54 @@ Iteration 2:{space 3}log likelihood = {res:-32688.596}  (not concave)
 Iteration 3:{space 3}log likelihood = {res: -32688.59}  
 Iteration 4:{space 3}log likelihood = {res:-32688.519}  
 Iteration 5:{space 3}log likelihood = {res:-32688.359}  
-Iteration 6:{space 3}log likelihood = {res:-32688.303}  
+Iteration 6:{space 3}log likelihood = {res:-32688.302}  
 Iteration 7:{space 3}log likelihood = {res:-32688.201}  (not concave)
 Iteration 8:{space 3}log likelihood = {res:-32688.188}  (not concave)
 Iteration 9:{space 3}log likelihood = {res:-32688.187}  
-Iteration 10:{space 2}log likelihood = {res:-32688.154}  
-Iteration 11:{space 2}log likelihood = {res:-32688.121}  
-Iteration 12:{space 2}log likelihood = {res: -32688.09}  (not concave)
-Iteration 13:{space 2}log likelihood = {res:-32688.088}  
-Iteration 14:{space 2}log likelihood = {res:-32688.085}  
-Iteration 15:{space 2}log likelihood = {res:-32688.084}  
+Iteration 10:{space 2}log likelihood = {res:-32688.156}  
+Iteration 11:{space 2}log likelihood = {res:-32688.131}  
+Iteration 12:{space 2}log likelihood = {res:  -32688.1}  (not concave)
+Iteration 13:{space 2}log likelihood = {res:-32688.097}  
+Iteration 14:{space 2}log likelihood = {res: -32688.09}  
+Iteration 15:{space 2}log likelihood = {res:-32688.085}  
 Iteration 16:{space 2}log likelihood = {res:-32688.084}  
+Iteration 17:{space 2}log likelihood = {res:-32688.084}  
+Iteration 18:{space 2}log likelihood = {res:-32688.084}  
 {res}
 {txt}Probit model with endogenous regressors{col 51}Number of obs{col 67}= {res}      3145
-{txt}{col 51}Wald chi2({res}8{txt}){col 67}= {res}     99.94
+{txt}{col 51}Wald chi2({res}8{txt}){col 67}= {res}    100.02
 {txt}Log likelihood = {res}-32688.084{txt}{col 51}Prob > chi2{col 67}= {res}    0.0000
 
 {txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      z{col 58}   P>|z|{col 66}     [95% Con{col 79}f. Interval]
 {hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 20}loan {c |}{col 26}{res}{space 2}-.0001442{col 38}{space 2} .0000721{col 49}{space 1}   -2.00{col 58}{space 3}0.045{col 66}{space 4}-.0002854{col 79}{space 3}-2.98e-06
-{txt}{space 20}year {c |}{col 26}{res}{space 2} .0506443{col 38}{space 2}  .010857{col 49}{space 1}    4.66{col 58}{space 3}0.000{col 66}{space 4} .0293649{col 79}{space 3} .0719237
+{space 20}loan {c |}{col 26}{res}{space 2}-.0001442{col 38}{space 2} .0000722{col 49}{space 1}   -2.00{col 58}{space 3}0.046{col 66}{space 4}-.0002857{col 79}{space 3}-2.74e-06
+{txt}{space 20}year {c |}{col 26}{res}{space 2} .0506474{col 38}{space 2} .0108589{col 49}{space 1}    4.66{col 58}{space 3}0.000{col 66}{space 4} .0293644{col 79}{space 3} .0719304
 {txt}{space 24} {c |}
 {space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} .1913589{col 38}{space 2} .0686866{col 49}{space 1}    2.79{col 58}{space 3}0.005{col 66}{space 4} .0567356{col 79}{space 3} .3259822
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} .1010018{col 38}{space 2} .0982267{col 49}{space 1}    1.03{col 58}{space 3}0.304{col 66}{space 4}-.0915189{col 79}{space 3} .2935226
+{space 18}BLACK  {c |}{col 26}{res}{space 2} .1913637{col 38}{space 2} .0686766{col 49}{space 1}    2.79{col 58}{space 3}0.005{col 66}{space 4}   .05676{col 79}{space 3} .3259674
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} .1010409{col 38}{space 2} .0983403{col 49}{space 1}    1.03{col 58}{space 3}0.304{col 66}{space 4}-.0917026{col 79}{space 3} .2937843
 {txt}{space 24} {c |}
 {space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2}-.1482059{col 38}{space 2} .0993836{col 49}{space 1}   -1.49{col 58}{space 3}0.136{col 66}{space 4}-.3429942{col 79}{space 3} .0465824
+{space 17}FEMALE  {c |}{col 26}{res}{space 2}-.1481598{col 38}{space 2} .0995831{col 49}{space 1}   -1.49{col 58}{space 3}0.137{col 66}{space 4}-.3433391{col 79}{space 3} .0470194
 {txt}{space 24} {c |}
 {space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-.2010023{col 38}{space 2} .0902895{col 49}{space 1}   -2.23{col 58}{space 3}0.026{col 66}{space 4}-.3779666{col 79}{space 3} -.024038
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-.3086813{col 38}{space 2} .1024136{col 49}{space 1}   -3.01{col 58}{space 3}0.003{col 66}{space 4}-.5094084{col 79}{space 3}-.1079543
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-.3269828{col 38}{space 2} .0864096{col 49}{space 1}   -3.78{col 58}{space 3}0.000{col 66}{space 4}-.4963425{col 79}{space 3}-.1576232
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-.2009814{col 38}{space 2} .0903351{col 49}{space 1}   -2.22{col 58}{space 3}0.026{col 66}{space 4} -.378035{col 79}{space 3}-.0239278
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-.3087153{col 38}{space 2}  .102476{col 49}{space 1}   -3.01{col 58}{space 3}0.003{col 66}{space 4}-.5095646{col 79}{space 3}-.1078659
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-.3269793{col 38}{space 2} .0864025{col 49}{space 1}   -3.78{col 58}{space 3}0.000{col 66}{space 4}-.4963249{col 79}{space 3}-.1576336
 {txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2}-.3858084{col 38}{space 2} .5301255{col 49}{space 1}   -0.73{col 58}{space 3}0.467{col 66}{space 4}-1.424835{col 79}{space 3} .6532185
+{space 19}_cons {c |}{col 26}{res}{space 2}-.3855389{col 38}{space 2} .5313809{col 49}{space 1}   -0.73{col 58}{space 3}0.468{col 66}{space 4}-1.427026{col 79}{space 3} .6559486
 {txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                 /athrho {c |}{col 26}{res}{space 2} .9553936{col 38}{space 2} .8540832{col 49}{space 1}    1.12{col 58}{space 3}0.263{col 66}{space 4}-.7185787{col 79}{space 3} 2.629366
+                 /athrho {c |}{col 26}{res}{space 2}  .955841{col 38}{space 2} .8563506{col 49}{space 1}    1.12{col 58}{space 3}0.264{col 66}{space 4}-.7225753{col 79}{space 3} 2.634257
 {txt}                /lnsigma {c |}{col 26}{res}{space 2} 8.561204{col 38}{space 2} .0126088{col 49}{space 1}  678.99{col 58}{space 3}0.000{col 66}{space 4} 8.536491{col 79}{space 3} 8.585917
 {txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                     rho{col 26}{c |}{res}{space 2} .7422151{col 38}{space 2}  .383583{col 66}{space 4}-.6160281{col 79}{space 3}   .98965
-{col 1}{txt}                   sigma{col 26}{c |}{res}{space 2} 5224.969{col 38}{space 2} 65.88069{col 66}{space 4} 5097.428{col 79}{space 3} 5355.701
+{col 1}                     rho{col 26}{c |}{res}{space 2}  .742416{col 38}{space 2}  .384346{col 66}{space 4} -.618502{col 79}{space 3} .9897503
+{col 1}{txt}                   sigma{col 26}{c |}{res}{space 2} 5224.969{col 38}{space 2} 65.88072{col 66}{space 4} 5097.428{col 79}{space 3} 5355.701
 {txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{p 0 15 91}Instrumented:{space 2}loan{p_end}
-{p 0 15 91}Instruments:{space 3}year 2.race 3.race 2.sex 2.region 3.region 4.region loanHat{p_end}
+{p 0 15 42}Instrumented:{space 2}loan{p_end}
+{p 0 15 42}Instruments:{space 3}year 2.race 3.race 2.sex 2.region 3.region 4.region loanHat{p_end}
 {hline 90}
-Wald test of exogeneity (/athrho = 0): chi2({res}1{txt}) = {res}    1.25{txt}{col 59}Prob > chi2 = {res}0.2633
+Wald test of exogeneity (/athrho = 0): chi2({res}1{txt}) = {res}    1.25{txt}{col 59}Prob > chi2 = {res}0.2643
 {txt}
 {com}. 
 . probit artMaj year loanHat i.race i.sex i.region if !missing(recloan)
@@ -670,723 +672,4 @@ Iteration 4:{space 3}log likelihood = {res:-220.29133}
 {com}. 
 {txt}end of do-file
 
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
-{txt}
-{com}. tabulate race
-
-    {txt}RACE OF CHILD (FROM {c |}
-   MOTHERS SCREENER 79) {c |}      Freq.     Percent        Cum.
-{hline 24}{c +}{hline 35}
-               HISPANIC {c |}{res}      3,170       20.00       20.00
-{txt}                  BLACK {c |}{res}      5,050       31.86       51.86
-{txt}NON-BLACK, NON-HISPANIC {c |}{res}      7,630       48.14      100.00
-{txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}     15,850      100.00
-{txt}
 {com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
-{txt}
-{com}. hist parInc
-{txt}(bin={res}40{txt}, start={res}0{txt}, width={res}11999.575{txt})
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
-{txt}
-{com}. hist parInc, freq
-{txt}(bin={res}40{txt}, start={res}0{txt}, width={res}11999.575{txt})
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
-{txt}
-{com}. hist loan
-{txt}(bin={res}35{txt}, start={res}0{txt}, width={res}2428.5714{txt})
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
-{txt}
-{com}. tabulate region
-
-       {txt}region {c |}      Freq.     Percent        Cum.
-{hline 14}{c +}{hline 35}
-    NORTHEAST {c |}{res}      1,478       12.50       12.50
-{txt}NORTH CENTRAL {c |}{res}      3,198       27.05       39.55
-{txt}        SOUTH {c |}{res}      4,891       41.37       80.93
-{txt}         WEST {c |}{res}      2,255       19.07      100.00
-{txt}{hline 14}{c +}{hline 35}
-        Total {c |}{res}     11,822      100.00
-{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. ls
-{txt}  <dir>  10/30/18 19:05  {res}.                 
-{txt}  <dir>  10/30/18 19:05  {res}..                
-{txt}  <dir>  10/09/18 19:06  {res}Download          
-{txt}   2.7k  10/16/18 19:12  {res}Import.do         
-{txt}   2.3k  10/02/18 12:42  {res}loan06all.pdf     
-{txt}   2.2k  10/02/18 12:42  {res}loan06sml.pdf     
-{txt}   2.5k  10/02/18 12:42  {res}loan08all.pdf     
-{txt}   2.2k  10/02/18 12:42  {res}loan08sml.pdf     
-{txt}  74.7k  10/31/18 12:06  {res}master.smcl       
-{txt}   0.2k  10/09/18 16:47  {res}RevisedReg.do     
-
-{com}. cd ..
-{res}C:\Users\gmoor\Desktop\honors
-
-{com}. ls
-{txt}  <dir>  10/30/18 19:04  {res}.                 
-{txt}  <dir>  10/30/18 19:04  {res}..                
-{txt}  <dir>  10/04/18 14:42  {res}.git              
-{txt}   0.0k   8/14/18 18:12  {res}.gitignore        
-{txt}   0.6k   8/15/18 15:38  {res}Brainstorming.txt 
-{txt}  <dir>  10/31/18 13:20  {res}Master            
-{txt}   1.4k  10/24/18 11:55  {res}master.smcl       
-{txt}  <dir>  10/16/18 18:53  {res}NLSY79ParentData  
-{txt}  <dir>  10/30/18 19:05  {res}NLSYChild79Data   
-{txt}  <dir>   9/10/18 22:18  {res}Sources           
-{txt}  <dir>  10/30/18 19:05  {res}Tables            
-{txt}   0.9k  10/23/18 21:39  {res}test tobit iv.do  
-{txt}  10.4k  10/23/18 21:39  {res}test_tobit_iv_method.log
-
-{com}. cd Tables
-{res}C:\Users\gmoor\Desktop\honors\Tables
-
-{com}. ls
-{txt}  <dir>  10/30/18 19:05  {res}.                 
-{txt}  <dir>  10/30/18 19:05  {res}..                
-{txt}  <dir>  10/30/18 19:06  {res}Code              
-{txt}  <dir>  10/30/18 19:06  {res}Output            
-
-{com}. cd Code
-{res}C:\Users\gmoor\Desktop\honors\Tables\Code
-
-{com}. do tables
-{txt}
-{com}. /*
-> Makes tables
-> */
-. 
-. tabulate year, sum(loan)
-
-            {txt}{c |}           Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-          0 {c |}  {res} 1397.0552    2572.465         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res}  2383.936    5250.978        3921
-{txt}
-{com}. quietly tabout year using ../Output/loanStats.tex, ///
->         style(tex) ///Forces tex output
->         sum c(mean loan sd loan count loan) ///Marks as summary table (two-way)
->         replace //Replaces previous version
-{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoor\Desktop\honors\Tables\Code\tables.do"
-{txt}
-{com}. /*
-> Makes tables
-> */
-. 
-. //Creates table in Stata window
-. tabulate year, sum(loan)
-
-            {txt}{c |}           Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-          0 {c |}  {res} 1397.0552    2572.465         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res}  2383.936    5250.978        3921
-{txt}
-{com}. //Writes table to loanStats.tex
-. quietly tabout year using ../Output/loanStats.tex, ///
->         style(tex) ///Forces tex output
->         sum c(mean loan sd loan count loan) ///Marks as summary table (two-way)
->         replace //Replaces previous version
-{txt}
-{com}. 
-. //Creates table in Stata window
-. tabulate race
-
-    {txt}RACE OF CHILD (FROM {c |}
-   MOTHERS SCREENER 79) {c |}      Freq.     Percent        Cum.
-{hline 24}{c +}{hline 35}
-               HISPANIC {c |}{res}      3,170       20.00       20.00
-{txt}                  BLACK {c |}{res}      5,050       31.86       51.86
-{txt}NON-BLACK, NON-HISPANIC {c |}{res}      7,630       48.14      100.00
-{txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}     15,850      100.00
-{txt}
-{com}. quietly tabout race using../Output/raceStats.tex, ///
->         style(tex) replace
-{err}factor variables and time-series operators not allowed
-{txt}{search r(101):r(101);}
-
-end of do-file
-
-{search r(101):r(101);}
-
-{com}. ls
-{txt}  <dir>  10/31/18 13:24  {res}.                 
-{txt}  <dir>  10/31/18 13:24  {res}..                
-{txt}   0.6k  10/31/18 13:24  {res}tables.do         
-
-{com}. do tables
-{txt}
-{com}. /*
-> Makes tables
-> */
-. 
-. //Creates table in Stata window
-. tabulate year, sum(loan)
-
-            {txt}{c |}           Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-          0 {c |}  {res} 1397.0552    2572.465         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res}  2383.936    5250.978        3921
-{txt}
-{com}. //Writes table to loanStats.tex
-. quietly tabout year using ../Output/loanStats.tex, ///
->         style(tex) ///Forces tex output
->         sum c(mean loan sd loan count loan) ///Marks as summary table (two-way)
->         replace //Replaces previous version
-{txt}
-{com}. 
-. //Creates table in Stata window
-. tabulate race
-
-    {txt}RACE OF CHILD (FROM {c |}
-   MOTHERS SCREENER 79) {c |}      Freq.     Percent        Cum.
-{hline 24}{c +}{hline 35}
-               HISPANIC {c |}{res}      3,170       20.00       20.00
-{txt}                  BLACK {c |}{res}      5,050       31.86       51.86
-{txt}NON-BLACK, NON-HISPANIC {c |}{res}      7,630       48.14      100.00
-{txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}     15,850      100.00
-{txt}
-{com}. quietly tabout race using../Output/raceStats.tex, ///
->         style(tex) replace
-{err}factor variables and time-series operators not allowed
-{txt}{search r(101):r(101);}
-
-end of do-file
-
-{search r(101):r(101);}
-
-{com}. do "C:\Users\gmoor\Desktop\honors\Tables\Code\tables.do"
-{txt}
-{com}. /*
-> Makes tables
-> */
-. 
-. //Creates table in Stata window
-. tabulate year, sum(loan)
-
-            {txt}{c |}           Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-          0 {c |}  {res} 1397.0552    2572.465         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res}  2383.936    5250.978        3921
-{txt}
-{com}. //Writes table to loanStats.tex
-. quietly tabout year using ../Output/loanStats.tex, ///
->         style(tex) ///Forces tex output
->         sum c(mean loan sd loan count loan) ///Marks as summary table (two-way)
->         replace //Replaces previous version
-{txt}
-{com}. 
-. //Creates table in Stata window
-. tabulate race
-
-    {txt}RACE OF CHILD (FROM {c |}
-   MOTHERS SCREENER 79) {c |}      Freq.     Percent        Cum.
-{hline 24}{c +}{hline 35}
-               HISPANIC {c |}{res}      3,170       20.00       20.00
-{txt}                  BLACK {c |}{res}      5,050       31.86       51.86
-{txt}NON-BLACK, NON-HISPANIC {c |}{res}      7,630       48.14      100.00
-{txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}     15,850      100.00
-{txt}
-{com}. quietly tabout race using ../Output/raceStats.tex, ///
->         style(tex) replace
-{txt}
-{com}. 
-. hist parInc, freq
-{txt}(bin={res}40{txt}, start={res}0{txt}, width={res}11999.575{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncHist.svg, replace
-{err}{p 0 4 2}
-output-file suffix "svg" not recognized{break}
-specify correct suffix or specify as() option
-{p_end}
-{txt}{search r(198):r(198);}
-
-end of do-file
-
-{search r(198):r(198);}
-
-{com}. help graph export
-
-. do "C:\Users\gmoor\Desktop\honors\Tables\Code\tables.do"
-{txt}
-{com}. /*
-> Makes tables
-> */
-. 
-. //Creates table in Stata window
-. tabulate year, sum(loan)
-
-            {txt}{c |}           Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-          0 {c |}  {res} 1397.0552    2572.465         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res}  2383.936    5250.978        3921
-{txt}
-{com}. //Writes table to loanStats.tex
-. quietly tabout year using ../Output/loanStats.tex, ///
->         style(tex) ///Forces tex output
->         sum c(mean loan sd loan count loan) ///Marks as summary table (two-way)
->         replace //Replaces previous version
-{txt}
-{com}. 
-. //Creates table in Stata window
-. tabulate race
-
-    {txt}RACE OF CHILD (FROM {c |}
-   MOTHERS SCREENER 79) {c |}      Freq.     Percent        Cum.
-{hline 24}{c +}{hline 35}
-               HISPANIC {c |}{res}      3,170       20.00       20.00
-{txt}                  BLACK {c |}{res}      5,050       31.86       51.86
-{txt}NON-BLACK, NON-HISPANIC {c |}{res}      7,630       48.14      100.00
-{txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}     15,850      100.00
-{txt}
-{com}. quietly tabout race using ../Output/raceStats.tex, ///
->         style(tex) replace
-{txt}
-{com}. 
-. hist parInc, freq
-{txt}(bin={res}40{txt}, start={res}0{txt}, width={res}11999.575{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncHist.eps, replace
-{txt}(note: file ../Output/parIncHist.eps not found)
-(file ../Output/parIncHist.eps written in EPS format)
-
-{com}. 
-. tabulate region
-
-       {txt}region {c |}      Freq.     Percent        Cum.
-{hline 14}{c +}{hline 35}
-    NORTHEAST {c |}{res}      1,478       12.50       12.50
-{txt}NORTH CENTRAL {c |}{res}      3,198       27.05       39.55
-{txt}        SOUTH {c |}{res}      4,891       41.37       80.93
-{txt}         WEST {c |}{res}      2,255       19.07      100.00
-{txt}{hline 14}{c +}{hline 35}
-        Total {c |}{res}     11,822      100.00
-{txt}
-{com}. graph export ../Output/regionStats.tex, ///
->         style(tex) replace
-{err}{p 0 4 2}
-output-file suffix "tex" not recognized{break}
-specify correct suffix or specify as() option
-{p_end}
-{txt}{search r(198):r(198);}
-
-end of do-file
-
-{search r(198):r(198);}
-
-{com}. do "C:\Users\gmoor\Desktop\honors\Tables\Code\tables.do"
-{txt}
-{com}. /*
-> Makes tables
-> */
-. 
-. //Creates table in Stata window
-. tabulate year, sum(loan)
-
-            {txt}{c |}           Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-          0 {c |}  {res} 1397.0552    2572.465         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res}  2383.936    5250.978        3921
-{txt}
-{com}. //Writes table to loanStats.tex
-. quietly tabout year using ../Output/loanStats.tex, ///
->         style(tex) ///Forces tex output
->         sum c(mean loan sd loan count loan) ///Marks as summary table (two-way)
->         replace //Replaces previous version
-{txt}
-{com}. 
-. //Creates table in Stata window
-. tabulate race
-
-    {txt}RACE OF CHILD (FROM {c |}
-   MOTHERS SCREENER 79) {c |}      Freq.     Percent        Cum.
-{hline 24}{c +}{hline 35}
-               HISPANIC {c |}{res}      3,170       20.00       20.00
-{txt}                  BLACK {c |}{res}      5,050       31.86       51.86
-{txt}NON-BLACK, NON-HISPANIC {c |}{res}      7,630       48.14      100.00
-{txt}{hline 24}{c +}{hline 35}
-                  Total {c |}{res}     15,850      100.00
-{txt}
-{com}. quietly tabout race using ../Output/raceStats.tex, ///
->         style(tex) replace
-{txt}
-{com}. 
-. hist parInc, freq
-{txt}(bin={res}40{txt}, start={res}0{txt}, width={res}11999.575{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncHist.eps, replace
-{txt}(file ../Output/parIncHist.eps written in EPS format)
-
-{com}. 
-. tabulate region
-
-       {txt}region {c |}      Freq.     Percent        Cum.
-{hline 14}{c +}{hline 35}
-    NORTHEAST {c |}{res}      1,478       12.50       12.50
-{txt}NORTH CENTRAL {c |}{res}      3,198       27.05       39.55
-{txt}        SOUTH {c |}{res}      4,891       41.37       80.93
-{txt}         WEST {c |}{res}      2,255       19.07      100.00
-{txt}{hline 14}{c +}{hline 35}
-        Total {c |}{res}     11,822      100.00
-{txt}
-{com}. quietly tabout region using ../Output/regionStats.tex, ///
->         style(tex) replace
-{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
-{txt}
-{com}. tabulate race, sum(loan)
-
-    {txt}RACE OF {c |}
-CHILD (FROM {c |}
-    MOTHERS {c |}
-   SCREENER {c |}           Summary of loan
-        79) {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-   HISPANIC {c |}  {res} 1663.3844   3920.4135         861
-  {txt}    BLACK {c |}  {res} 2461.4108   4891.8314        1278
-  {txt}NON-BLACK {c |}  {res} 2676.5185   5980.5736        1782
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res}  2383.936    5250.978        3921
-{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
-{txt}
-{com}. tabulate race, sum(loan recloan)
-{err}option {bf:sum()} incorrectly specified
-{txt}{search r(198):r(198);}
-
-end of do-file
-
-{search r(198):r(198);}
-
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
-{txt}
-{com}. quietly tabout race using ../Output/raceStats.tex, ///
->         sum c(mean recloan mean loan sd loan count loan)
-{err}The file ../Output/raceStats.tex already exists, but you haven't
-used either the replace or append option. Please change
-the file name or include replace or append.
-{txt}
-{com}.         style(tex) replace
-{err}style is a class
-{txt}{search r(4002):r(4002);}
-
-end of do-file
-
-{search r(4002):r(4002);}
-
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
-{txt}
-{com}. quietly tabout race using ../Output/raceStats.tex, ///
->         sum c(mean recloan mean loan sd loan count loan) ///
->         style(tex) replace
-{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. count if race == 2 & recloan
-{res} 4356
-
-{com}. count if race == 2
-{res} 5050
-
-{com}. tabulate year, sum(region)
-
-            {txt}{c |}          Summary of region
-       year {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-          0 {c |}  {res} 2.6855301   .91461558        1396
-  {txt}        2 {c |}  {res}  2.688835   .91172898        2060
-  {txt}        4 {c |}  {res} 2.6742365   .91746444        2554
-  {txt}        6 {c |}  {res} 2.6471595   .93272899        2922
-  {txt}        8 {c |}  {res} 2.6692042   .93168508        2890
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res} 2.6701912    .9233859       11822
-
-{com}. tabulate region, sum(year)
-
-            {txt}{c |}           Summary of year
-     region {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-  NORTHEAST {c |}  {res} 4.7794317   2.6348653        1478
-  {txt}NORTH CEN {c |}  {res} 4.6253909    2.650607        3198
-  {txt}    SOUTH {c |}  {res} 4.6321816   2.6629817        4891
-  {txt}     WEST {c |}  {res} 4.6456763   2.6699464        2255
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res}  4.651328   2.6575836       11822
-
-{com}. tabulate region year
-
-              {txt}{c |}                          year
-       region {c |}         0          2          4          6          8 {c |}     Total
-{hline 14}{c +}{hline 55}{c +}{hline 10}
-    NORTHEAST {c |}{res}       165        236        310        392        375 {txt}{c |}{res}     1,478 
-{txt}NORTH CENTRAL {c |}{res}       377        568        696        792        765 {txt}{c |}{res}     3,198 
-{txt}        SOUTH {c |}{res}       586        857      1,064      1,193      1,191 {txt}{c |}{res}     4,891 
-{txt}         WEST {c |}{res}       268        399        484        545        559 {txt}{c |}{res}     2,255 
-{txt}{hline 14}{c +}{hline 55}{c +}{hline 10}
-        Total {c |}{res}     1,396      2,060      2,554      2,922      2,890 {txt}{c |}{res}    11,822 
-
-
-{com}. tabulate year region
-
-           {txt}{c |}                   region
-      year {c |} NORTHEAST  NORTH CEN      SOUTH       WEST {c |}     Total
-{hline 11}{c +}{hline 44}{c +}{hline 10}
-         0 {c |}{res}       165        377        586        268 {txt}{c |}{res}     1,396 
-{txt}         2 {c |}{res}       236        568        857        399 {txt}{c |}{res}     2,060 
-{txt}         4 {c |}{res}       310        696      1,064        484 {txt}{c |}{res}     2,554 
-{txt}         6 {c |}{res}       392        792      1,193        545 {txt}{c |}{res}     2,922 
-{txt}         8 {c |}{res}       375        765      1,191        559 {txt}{c |}{res}     2,890 
-{txt}{hline 11}{c +}{hline 44}{c +}{hline 10}
-     Total {c |}{res}     1,478      3,198      4,891      2,255 {txt}{c |}{res}    11,822 
-
-
-{com}. help tabulate twoway
-
-. tabulate year region, r
-{txt}
-{c TLC}{hline 16}{c TRC}
-{c |} Key{col 18}{c |}
-{c LT}{hline 16}{c RT}
-{c |}{space 3}{it:frequency}{col 18}{c |}
-{c |}{space 1}{it:row percentage}{col 18}{c |}
-{c BLC}{hline 16}{c BRC}
-
-           {c |}                   region
-      year {c |} NORTHEAST  NORTH CEN      SOUTH       WEST {c |}     Total
-{hline 11}{c +}{hline 44}{c +}{hline 10}
-         0 {c |}{res}       165        377        586        268 {txt}{c |}{res}     1,396 
-           {txt}{c |}{res}     11.82      27.01      41.98      19.20 {txt}{c |}{res}    100.00 
-{txt}{hline 11}{c +}{hline 44}{c +}{hline 10}
-         2 {c |}{res}       236        568        857        399 {txt}{c |}{res}     2,060 
-           {txt}{c |}{res}     11.46      27.57      41.60      19.37 {txt}{c |}{res}    100.00 
-{txt}{hline 11}{c +}{hline 44}{c +}{hline 10}
-         4 {c |}{res}       310        696      1,064        484 {txt}{c |}{res}     2,554 
-           {txt}{c |}{res}     12.14      27.25      41.66      18.95 {txt}{c |}{res}    100.00 
-{txt}{hline 11}{c +}{hline 44}{c +}{hline 10}
-         6 {c |}{res}       392        792      1,193        545 {txt}{c |}{res}     2,922 
-           {txt}{c |}{res}     13.42      27.10      40.83      18.65 {txt}{c |}{res}    100.00 
-{txt}{hline 11}{c +}{hline 44}{c +}{hline 10}
-         8 {c |}{res}       375        765      1,191        559 {txt}{c |}{res}     2,890 
-           {txt}{c |}{res}     12.98      26.47      41.21      19.34 {txt}{c |}{res}    100.00 
-{txt}{hline 11}{c +}{hline 44}{c +}{hline 10}
-     Total {c |}{res}     1,478      3,198      4,891      2,255 {txt}{c |}{res}    11,822 
-           {txt}{c |}{res}     12.50      27.05      41.37      19.07 {txt}{c |}{res}    100.00 
-
-
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
-{txt}
-{com}. /*
-> Makes tables
-> */
-. 
-. //Creates table in Stata window
-. tabulate year, sum(loan)
-
-            {txt}{c |}           Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-          0 {c |}  {res} 1397.0552    2572.465         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res}  2383.936    5250.978        3921
-{txt}
-{com}. //Writes table to loanStats.tex
-. quietly tabout year using ../Output/loanStats.tex, ///
->         style(tex) ///Forces tex output
->         sum c(mean loan sd loan count loan) ///Marks as summary table (two-way)
->         replace //Replaces previous version
-{txt}
-{com}. 
-. //Creates table in Stata window
-. tabulate race, sum(loan)
-
-    {txt}RACE OF {c |}
-CHILD (FROM {c |}
-    MOTHERS {c |}
-   SCREENER {c |}           Summary of loan
-        79) {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-   HISPANIC {c |}  {res} 1663.3844   3920.4135         861
-  {txt}    BLACK {c |}  {res} 2461.4108   4891.8314        1278
-  {txt}NON-BLACK {c |}  {res} 2676.5185   5980.5736        1782
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res}  2383.936    5250.978        3921
-{txt}
-{com}. quietly tabout race using ../Output/raceStats.tex, ///
->         sum c(mean recloan mean loan sd loan count loan) ///
->         style(tex) replace
-{txt}
-{com}. 
-. hist parInc, freq
-{txt}(bin={res}40{txt}, start={res}0{txt}, width={res}11999.575{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncHist.eps, replace
-{txt}(file ../Output/parIncHist.eps written in EPS format)
-
-{com}. 
-. tabulate region
-
-       {txt}region {c |}      Freq.     Percent        Cum.
-{hline 14}{c +}{hline 35}
-    NORTHEAST {c |}{res}      1,478       12.50       12.50
-{txt}NORTH CENTRAL {c |}{res}      3,198       27.05       39.55
-{txt}        SOUTH {c |}{res}      4,891       41.37       80.93
-{txt}         WEST {c |}{res}      2,255       19.07      100.00
-{txt}{hline 14}{c +}{hline 35}
-        Total {c |}{res}     11,822      100.00
-{txt}
-{com}. quietly tabout region using ../Output/regionStats.tex, ///
->         style(tex) replace 
-{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
-{txt}
-{com}. /*
-> Makes tables
-> */
-. 
-. //Creates table in Stata window
-. tabulate year, sum(loan)
-
-            {txt}{c |}           Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-          0 {c |}  {res} 1397.0552    2572.465         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res}  2383.936    5250.978        3921
-{txt}
-{com}. //Writes table to loanStats.tex
-. quietly tabout year using ../Output/loanStats.tex, ///
->         style(tex) ///Forces tex output
->         sum c(mean loan sd loan count loan) ///Marks as summary table (two-way)
->         replace //Replaces previous version
-{txt}
-{com}. 
-. //Creates table in Stata window
-. tabulate race, sum(loan)
-
-    {txt}RACE OF {c |}
-CHILD (FROM {c |}
-    MOTHERS {c |}
-   SCREENER {c |}           Summary of loan
-        79) {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-   HISPANIC {c |}  {res} 1663.3844   3920.4135         861
-  {txt}    BLACK {c |}  {res} 2461.4108   4891.8314        1278
-  {txt}NON-BLACK {c |}  {res} 2676.5185   5980.5736        1782
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res}  2383.936    5250.978        3921
-{txt}
-{com}. quietly tabout race using ../Output/raceStats.tex, ///
->         sum c(mean recloan mean loan sd loan count loan) ///
->         style(tex) replace
-{txt}
-{com}. 
-. hist parInc, freq
-{txt}(bin={res}40{txt}, start={res}0{txt}, width={res}11999.575{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncHist.eps, replace
-{txt}(file ../Output/parIncHist.eps written in EPS format)
-
-{com}. 
-. tabulate region
-
-       {txt}region {c |}      Freq.     Percent        Cum.
-{hline 14}{c +}{hline 35}
-    NORTHEAST {c |}{res}      1,478       12.50       12.50
-{txt}NORTH CENTRAL {c |}{res}      3,198       27.05       39.55
-{txt}        SOUTH {c |}{res}      4,891       41.37       80.93
-{txt}         WEST {c |}{res}      2,255       19.07      100.00
-{txt}{hline 14}{c +}{hline 35}
-        Total {c |}{res}     11,822      100.00
-{txt}
-{com}. quietly tabout region using ../Output/regionStats.tex, ///
->         style(tex) replace 
-{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. count if loan == 0
-{res} 2360
-
-{com}. count if recloan & !missing(recloan)
-{res} 1824
-
-{com}. exit, clear
