@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.3)  13 NOV 2018 23:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.3)  29 NOV 2018 20:04
 entering extended mode
 **./Honors.tex
 (Honors.tex
@@ -668,25 +668,25 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
 {C:/Users/gmoor/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-[2] [3] [4] <Images/Lucca6a.png, id=18, 538.51187pt x 383.4325pt>
+[2] [3] [4] [5] <Images/Lucca6a.png, id=22, 538.51187pt x 383.4325pt>
 File: Images/Lucca6a.png Graphic file (type png)
 
 <use Images/Lucca6a.png>
-Package pdftex.def Info: Images/Lucca6a.png used on input line 85.
+Package pdftex.def Info: Images/Lucca6a.png used on input line 93.
 (pdftex.def)             Requested size: 210.70462pt x 150.02368pt.
- <Images/Lucca6b.png, id=20, 520.94624pt x 377.41pt>
+ <Images/Lucca6b.png, id=24, 520.94624pt x 377.41pt>
 File: Images/Lucca6b.png Graphic file (type png)
 
 <use Images/Lucca6b.png>
-Package pdftex.def Info: Images/Lucca6b.png used on input line 91.
+Package pdftex.def Info: Images/Lucca6b.png used on input line 99.
 (pdftex.def)             Requested size: 210.70462pt x 152.64865pt.
- [5 <./Images/Lucca6a.png> <./Images/Lucca6b.png>]
-[6] [7] [8] [9]
+ [6 <./Images/Lucca6a.png> <./Images/Lucca6b.png>]
+[7] [8] [9] [10]
 Package microtype Info: Loading generic settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [10] (Honors.aux)
+ [11] [12] (Honors.aux)
 
 Package biblatex Warning: Please rerun LaTeX.
 (biblatex)                Page breaks have changed.
@@ -696,13 +696,13 @@ Package logreq Info: Writing requests to 'Honors.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 12281 strings out of 493320
- 211072 string characters out of 3129865
- 665366 words of memory out of 3000000
- 15567 multiletter control sequences out of 15000+200000
- 14897 words of font info for 96 fonts, out of 3000000 for 9000
+ 12307 strings out of 493320
+ 211606 string characters out of 3129865
+ 665608 words of memory out of 3000000
+ 15589 multiletter control sequences out of 15000+200000
+ 15056 words of font info for 98 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 45i,11n,66p,1362b,1325s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 45i,11n,66p,1362b,1382s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/gmoor/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts
 /cm/cmbx12.pfb><C:/Users/gmoor/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cm/cmcsc10.pfb><C:/Users/gmoor/AppData/Local/Programs/MiKTeX 2.9/
@@ -721,9 +721,9 @@ s/gmoor/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10
 .pfb><C:/Users/gmoor/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
 nts/cm/cmtt10.pfb><C:/Users/gmoor/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
 /public/amsfonts/symbols/msbm10.pfb>
-Output written on Honors.pdf (10 pages, 238968 bytes).
+Output written on Honors.pdf (12 pages, 247286 bytes).
 PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
+ 106 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  15883 words of extra memory for PDF output out of 17280 (max. 10000000)
 

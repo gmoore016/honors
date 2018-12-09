@@ -2146,13 +2146,19 @@
   <bcf:section number="0">
     <bcf:citekey order="1">mcfarland2017</bcf:citekey>
     <bcf:citekey order="2">feiveson2018</bcf:citekey>
-    <bcf:citekey order="3">rothstein2011</bcf:citekey>
-    <bcf:citekey order="4">lucca2018</bcf:citekey>
-    <bcf:citekey order="5">lucca2018</bcf:citekey>
-    <bcf:citekey order="6">lucca2018</bcf:citekey>
+    <bcf:citekey order="3">baum2003</bcf:citekey>
+    <bcf:citekey order="4">minicozzi2005</bcf:citekey>
+    <bcf:citekey order="5">burdman2005</bcf:citekey>
+    <bcf:citekey order="5">field2009</bcf:citekey>
+    <bcf:citekey order="5">callender2005</bcf:citekey>
+    <bcf:citekey order="6">field2009</bcf:citekey>
     <bcf:citekey order="7">rothstein2011</bcf:citekey>
     <bcf:citekey order="8">lucca2018</bcf:citekey>
-    <bcf:citekey order="9">angrist2009</bcf:citekey>
+    <bcf:citekey order="9">lucca2018</bcf:citekey>
+    <bcf:citekey order="10">lucca2018</bcf:citekey>
+    <bcf:citekey order="11">rothstein2011</bcf:citekey>
+    <bcf:citekey order="12">lucca2018</bcf:citekey>
+    <bcf:citekey order="13">angrist2009</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nyt/global/" type="entry" sortscheme="nyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

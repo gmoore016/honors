@@ -56,6 +56,105 @@
       \field{dateera}{ce}
       \keyw{Econometrics,Regression analysis}
     \endentry
+    \entry{baum2003}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=f3f300f4c4e659d40d784e40d93bc962}{%
+           family={Baum},
+           familyi={B\bibinitperiod},
+           given={Sandy},
+           giveni={S\bibinitperiod}}}%
+        {{uniquename=0,hash=c75ddaed5629fca5b5f841333f6d72bb}{%
+           family={O'Malley},
+           familyi={O\bibinitperiod},
+           given={Marie},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{531c33fa60e9b0b499b464c1e64bc434}
+      \strng{fullhash}{531c33fa60e9b0b499b464c1e64bc434}
+      \strng{authornamehash}{531c33fa60e9b0b499b464c1e64bc434}
+      \strng{authorfullhash}{531c33fa60e9b0b499b464c1e64bc434}
+      \field{sortinit}{B}
+      \field{sortinithash}{5f6fa000f686ee5b41be67ba6ff7962d}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{english}
+      \field{number}{3}
+      \field{title}{College on {{Credit}}: {{How Borrowers Perceive Their Education Debt}}}
+      \field{volume}{33}
+      \field{year}{2003}
+      \field{dateera}{ce}
+      \field{pages}{14}
+      \range{pages}{1}
+      \verb{file}
+      \verb C:\\Users\\gmoor\\Zotero\\storage\\RSESDMRR\\Baum and O'Malley - 2003 - College on Credit How Borrowers Perceive Their Ed.pdf
+      \endverb
+    \endentry
+    \entry{burdman2005}{report}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=567cd31fec525ffa3c3f90a40ecd9e2e}{%
+           family={Burdman},
+           familyi={B\bibinitperiod},
+           given={Pamela},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {U. C. Berkeley Center for Studies in Higher Education}%
+      }
+      \strng{namehash}{567cd31fec525ffa3c3f90a40ecd9e2e}
+      \strng{fullhash}{567cd31fec525ffa3c3f90a40ecd9e2e}
+      \strng{authornamehash}{567cd31fec525ffa3c3f90a40ecd9e2e}
+      \strng{authorfullhash}{567cd31fec525ffa3c3f90a40ecd9e2e}
+      \field{sortinit}{B}
+      \field{sortinithash}{5f6fa000f686ee5b41be67ba6ff7962d}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{10}
+      \field{number}{CSHE.13.05}
+      \field{series}{Research \& Occasional Paper Series}
+      \field{title}{The {{Student Debt Dilemma}}: {{Debt Aversion}} as a {{Barrier}} to {{College Access}}}
+      \field{year}{2005}
+      \field{dateera}{ce}
+      \verb{file}
+      \verb C:\\Users\\gmoor\\Zotero\\storage\\4XUYTMZK\\rop.burdman.13.05.pdf
+      \endverb
+    \endentry
+    \entry{callender2005}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=42619ab3c4bb78a67d1aff828ebd04e9}{%
+           family={Callender},
+           familyi={C\bibinitperiod},
+           given={Claire},
+           giveni={C\bibinitperiod}}}%
+        {{uniquename=0,hash=b04935a3e28a824f1f0b916b33c8f377}{%
+           family={Jackson},
+           familyi={J\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{4efdbfea7d6edafb8f8f59e7c86c872a}
+      \strng{fullhash}{4efdbfea7d6edafb8f8f59e7c86c872a}
+      \strng{authornamehash}{4efdbfea7d6edafb8f8f59e7c86c872a}
+      \strng{authorfullhash}{4efdbfea7d6edafb8f8f59e7c86c872a}
+      \field{sortinit}{C}
+      \field{sortinithash}{095692fd22cc3c74d7fe223d02314dbd}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Social Policy}
+      \field{month}{10}
+      \field{number}{4}
+      \field{title}{Does the {{Fear}} of {{Debt Deter Students}} from {{Higher Education}}?}
+      \field{volume}{34}
+      \field{year}{2005}
+      \field{dateera}{ce}
+      \field{pages}{509\bibrangedash 540}
+      \range{pages}{32}
+      \verb{file}
+      \verb C:\\Users\\gmoor\\Zotero\\storage\\I3G8V7L4\\out.pdf
+      \endverb
+    \endentry
     \entry{feiveson2018}{article}{}
       \name{author}{3}{}{%
         {{uniquename=0,hash=8612420c178b4ea2e2618d7f217cd3ac}{%
@@ -93,6 +192,42 @@
       \field{dateera}{ce}
       \verb{doi}
       \verb 10.17016/2380-7172.2127
+      \endverb
+    \endentry
+    \entry{field2009}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=629d59402293ffebc27d2ed4dcee4f8a}{%
+           family={Field},
+           familyi={F\bibinitperiod},
+           given={Erica},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{629d59402293ffebc27d2ed4dcee4f8a}
+      \strng{fullhash}{629d59402293ffebc27d2ed4dcee4f8a}
+      \strng{authornamehash}{629d59402293ffebc27d2ed4dcee4f8a}
+      \strng{authorfullhash}{629d59402293ffebc27d2ed4dcee4f8a}
+      \field{sortinit}{F}
+      \field{sortinithash}{276475738cc058478c1677046f857703}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{American Economic Journal: Applied Economics}
+      \field{number}{1}
+      \field{title}{Educational {{Debt Burden}} and {{Career Choice}}: {{Evidence}} from a {{Financial Aid Experiment}} at {{NYU Law School}}}
+      \field{urlday}{21}
+      \field{urlmonth}{11}
+      \field{urlyear}{2018}
+      \field{volume}{1}
+      \field{year}{2009}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 21}
+      \range{pages}{21}
+      \verb{file}
+      \verb C:\\Users\\gmoor\\Zotero\\storage\\4N7AKRLR\\25760145.pdf
+      \endverb
+      \verb{url}
+      \verb https://www-jstor-org.ezproxy.bowdoin.edu/stable/pdf/25760145.pdf?refreqid=excelsior%3Ae250b6ff7cc574a78cf7a242d247a794
       \endverb
     \endentry
     \entry{lucca2018}{article}{}
@@ -237,6 +372,42 @@
       \range{pages}{6}
       \verb{file}
       \verb C:\\Users\\gmoor\\Zotero\\storage\\ET975KTQ\\McFarland et al. - The Condition of Education 2017.pdf
+      \endverb
+    \endentry
+    \entry{minicozzi2005}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=8d49731e872e22d5b464ea1a71e5f887}{%
+           family={Minicozzi},
+           familyi={M\bibinitperiod},
+           given={Alexandra},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{8d49731e872e22d5b464ea1a71e5f887}
+      \strng{fullhash}{8d49731e872e22d5b464ea1a71e5f887}
+      \strng{authornamehash}{8d49731e872e22d5b464ea1a71e5f887}
+      \strng{authorfullhash}{8d49731e872e22d5b464ea1a71e5f887}
+      \field{sortinit}{M}
+      \field{sortinithash}{c26a05ef03e4429073ed5c825140fac3}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper studies the effect of educational debt on a college attendee's future wage and wage growth. I hypothesize that those who took larger loans to pay for college are subject to higher borrowing interest rates and thus prefer income profiles with higher initial earnings, sacrificing future income growth, relative to those who did not take on large educational debt. Using data for men in the 1987 National Postsecondary Student Aid Survey, I find that higher educational debt is associated with higher initial wage rate the year after finishing school and lower wage growth over the next 4 years.}
+      \field{issn}{02727757}
+      \field{journaltitle}{Economics of Education Review}
+      \field{langid}{english}
+      \field{month}{8}
+      \field{number}{4}
+      \field{title}{The Short Term Effect of Educational Debt on Job Decisions}
+      \field{volume}{24}
+      \field{year}{2005}
+      \field{dateera}{ce}
+      \field{pages}{417\bibrangedash 430}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1016/j.econedurev.2004.05.008
+      \endverb
+      \verb{file}
+      \verb C:\\Users\\gmoor\\Zotero\\storage\\NM82BG77\\Minicozzi - 2005 - The short term effect of educational debt on job d.pdf
       \endverb
     \endentry
     \entry{rothstein2011}{article}{}
