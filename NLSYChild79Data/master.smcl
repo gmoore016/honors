@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}C:\Users\gmoor\Desktop\honors\NLSYChild79Data\master.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}30 Oct 2018, 17:58:11
+ {txt}opened on:  {res} 4 Dec 2018, 17:40:25
 {txt}
 {com}. 
 . set more off
@@ -59,7 +59,7 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
 . tempfile parInc
 {txt}
 {com}. save `parInc'
-{txt}file C:\Users\gmoor\AppData\Local\Temp\ST_01000001.tmp saved
+{txt}file C:\Users\gmoor\AppData\Local\Temp\ST_00000001.tmp saved
 
 {com}. 
 . cd ../NLSYChild79Data
@@ -122,6 +122,8 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
 {com}. label define ynLab  1 "Yes"  0 "No"
 {txt}
 {com}. label define regionLab 1 "NORTHEAST" 2 "NORTH CENTRAL" 3 "SOUTH" 4 "WEST"
+{txt}
+{com}. label define majTypeLab 0 "Humanities" 1 "STEM" 2 "Social Science" 3 "Professions" 4 "Business"
 {txt}
 {com}. 
 . //ID Numbers
@@ -267,6 +269,43 @@ Number of obs.                 {res}    3170   {txt}->{res}   19020
 {com}. label values cohort cohLab
 {txt}
 {com}. 
+. //Places majors into bins
+. gen majType = .
+{txt}(19020 missing values generated)
+
+{com}. //Humanities: Area Studies (5) English (14) Art (15) Language (16) History (17)
+. //              Interdisciplinary Studies (19) Philosophy (23) Theology (33)
+. replace majType = 0 if inlist(maj, 5, 14, 15, 16, 17, 19, 23, 33)
+{txt}(415 real changes made)
+
+{com}. //STEM: Agriculture (1) Architecture (4) Biology (6) CS(9) Engineering (13) 
+. //              Math (20) Physics (24)
+. replace majType = 1 if inlist(maj, 1, 4, 6, 9, 13, 20, 24)
+{txt}(1178 real changes made)
+
+{com}. //Social Science: Anthropology(2) Archaeology (3) Economics (11) Home Ec (18)
+. //              Political Science (25) Psychology (30) Sociology (31)
+. replace majType = 2 if inlist(maj, 2, 3, 11, 18, 25, 30, 31)
+{txt}(562 real changes made)
+
+{com}. //Professional: Communications (8) Criminology (10) Education (12)
+. //              Nursing (21) Other Health (22) Pre-Dental/Law/Med/Vet (26-29)
+. //              Social Work (32)
+. replace majType = 3 if inlist(maj, 7, 8, 10, 12, 21, 22, 26, 27, 28, 29, 32)
+{txt}(3550 real changes made)
+
+{com}. //Business: Business (7)
+. replace majType = 4 if maj == 7
+{txt}(1126 real changes made)
+
+{com}. 
+. assert missing(majType) == missing(maj) | maj == 0 | maj == 99
+{txt}
+{com}. 
+. label values majType majTypeLab
+{txt}
+{com}. 
+. 
 . 
 {txt}end of do-file
 
@@ -283,1613 +322,16 @@ Number of obs.                 {res}    3170   {txt}->{res}   19020
 {col 5}{hline 41}
 
 {com}. 
-{txt}end of do-file
-
-{com}. count if !missing(loan)
-{res} 5257
-
-{com}. count
-{res}19020
-
-{com}. count if loan & !missing(loan)
-{res} 2172
-
-{com}. count if loan == 0
-{res} 3085
-
-{com}. count if loan & !missing(loan)
-{res} 2172
-
-{com}. by year: tab loan
-{err}not sorted
-{txt}{search r(5):r(5);}
-
-{com}. sort year
-
-. by year: tab loan
-
-{txt}{hline}
--> year = 0
-
-       loan {c |}      Freq.     Percent        Cum.
-{hline 12}{c +}{hline 35}
-          0 {c |}{res}        212       61.63       61.63
-{txt}        200 {c |}{res}          1        0.29       61.92
-{txt}        235 {c |}{res}          1        0.29       62.21
-{txt}        336 {c |}{res}          1        0.29       62.50
-{txt}        350 {c |}{res}          1        0.29       62.79
-{txt}        600 {c |}{res}          1        0.29       63.08
-{txt}        684 {c |}{res}          1        0.29       63.37
-{txt}        700 {c |}{res}          1        0.29       63.66
-{txt}        735 {c |}{res}          1        0.29       63.95
-{txt}        800 {c |}{res}          2        0.58       64.53
-{txt}        900 {c |}{res}          2        0.58       65.12
-{txt}       1000 {c |}{res}          5        1.45       66.57
-{txt}       1200 {c |}{res}          1        0.29       66.86
-{txt}       1300 {c |}{res}          3        0.87       67.73
-{txt}       1350 {c |}{res}          1        0.29       68.02
-{txt}       1500 {c |}{res}          6        1.74       69.77
-{txt}       1550 {c |}{res}          1        0.29       70.06
-{txt}       1600 {c |}{res}          2        0.58       70.64
-{txt}       1750 {c |}{res}          1        0.29       70.93
-{txt}       1800 {c |}{res}          1        0.29       71.22
-{txt}       2000 {c |}{res}         15        4.36       75.58
-{txt}       2100 {c |}{res}          1        0.29       75.87
-{txt}       2300 {c |}{res}          1        0.29       76.16
-{txt}       2365 {c |}{res}          1        0.29       76.45
-{txt}       2400 {c |}{res}          3        0.87       77.33
-{txt}       2500 {c |}{res}          9        2.62       79.94
-{txt}       2600 {c |}{res}          1        0.29       80.23
-{txt}       2625 {c |}{res}          4        1.16       81.40
-{txt}       2637 {c |}{res}          1        0.29       81.69
-{txt}       2650 {c |}{res}          1        0.29       81.98
-{txt}       2750 {c |}{res}          1        0.29       82.27
-{txt}       2800 {c |}{res}          1        0.29       82.56
-{txt}       2900 {c |}{res}          1        0.29       82.85
-{txt}       3000 {c |}{res}          9        2.62       85.47
-{txt}       3100 {c |}{res}          1        0.29       85.76
-{txt}       3125 {c |}{res}          1        0.29       86.05
-{txt}       3200 {c |}{res}          1        0.29       86.34
-{txt}       3300 {c |}{res}          1        0.29       86.63
-{txt}       3500 {c |}{res}          1        0.29       86.92
-{txt}       3600 {c |}{res}          1        0.29       87.21
-{txt}       4000 {c |}{res}          6        1.74       88.95
-{txt}       4250 {c |}{res}          1        0.29       89.24
-{txt}       4400 {c |}{res}          2        0.58       89.83
-{txt}       5000 {c |}{res}         10        2.91       92.73
-{txt}       5500 {c |}{res}          3        0.87       93.60
-{txt}       6000 {c |}{res}          4        1.16       94.77
-{txt}       6500 {c |}{res}          1        0.29       95.06
-{txt}       7000 {c |}{res}          2        0.58       95.64
-{txt}       7420 {c |}{res}          1        0.29       95.93
-{txt}       8000 {c |}{res}          3        0.87       96.80
-{txt}       9000 {c |}{res}          3        0.87       97.67
-{txt}      10000 {c |}{res}          3        0.87       98.55
-{txt}      11000 {c |}{res}          2        0.58       99.13
-{txt}      13000 {c |}{res}          1        0.29       99.42
-{txt}      15000 {c |}{res}          1        0.29       99.71
-{txt}      18000 {c |}{res}          1        0.29      100.00
-{txt}{hline 12}{c +}{hline 35}
-      Total {c |}{res}        344      100.00
-
-{txt}{hline}
--> year = 2
-
-       loan {c |}      Freq.     Percent        Cum.
-{hline 12}{c +}{hline 35}
-          0 {c |}{res}        379       62.96       62.96
-{txt}          4 {c |}{res}          1        0.17       63.12
-{txt}        200 {c |}{res}          1        0.17       63.29
-{txt}        300 {c |}{res}          1        0.17       63.46
-{txt}        320 {c |}{res}          1        0.17       63.62
-{txt}        500 {c |}{res}          1        0.17       63.79
-{txt}        600 {c |}{res}          1        0.17       63.95
-{txt}        700 {c |}{res}          1        0.17       64.12
-{txt}        900 {c |}{res}          1        0.17       64.29
-{txt}        970 {c |}{res}          1        0.17       64.45
-{txt}       1000 {c |}{res}          8        1.33       65.78
-{txt}       1100 {c |}{res}          1        0.17       65.95
-{txt}       1200 {c |}{res}          7        1.16       67.11
-{txt}       1300 {c |}{res}          5        0.83       67.94
-{txt}       1312 {c |}{res}          1        0.17       68.11
-{txt}       1313 {c |}{res}          1        0.17       68.27
-{txt}       1400 {c |}{res}          3        0.50       68.77
-{txt}       1500 {c |}{res}         13        2.16       70.93
-{txt}       1600 {c |}{res}          3        0.50       71.43
-{txt}       1650 {c |}{res}          1        0.17       71.59
-{txt}       1700 {c |}{res}          1        0.17       71.76
-{txt}       2000 {c |}{res}         27        4.49       76.25
-{txt}       2063 {c |}{res}          1        0.17       76.41
-{txt}       2100 {c |}{res}          1        0.17       76.58
-{txt}       2200 {c |}{res}          2        0.33       76.91
-{txt}       2250 {c |}{res}          1        0.17       77.08
-{txt}       2300 {c |}{res}          2        0.33       77.41
-{txt}       2400 {c |}{res}          3        0.50       77.91
-{txt}       2500 {c |}{res}         13        2.16       80.07
-{txt}       2543 {c |}{res}          1        0.17       80.23
-{txt}       2600 {c |}{res}          5        0.83       81.06
-{txt}       2625 {c |}{res}          1        0.17       81.23
-{txt}       2650 {c |}{res}          1        0.17       81.40
-{txt}       2800 {c |}{res}          1        0.17       81.56
-{txt}       3000 {c |}{res}         13        2.16       83.72
-{txt}       3300 {c |}{res}          1        0.17       83.89
-{txt}       3500 {c |}{res}          6        1.00       84.88
-{txt}       3600 {c |}{res}          3        0.50       85.38
-{txt}       4000 {c |}{res}         12        1.99       87.38
-{txt}       4200 {c |}{res}          1        0.17       87.54
-{txt}       4300 {c |}{res}          1        0.17       87.71
-{txt}       4500 {c |}{res}          3        0.50       88.21
-{txt}       5000 {c |}{res}         14        2.33       90.53
-{txt}       5500 {c |}{res}          5        0.83       91.36
-{txt}       5558 {c |}{res}          1        0.17       91.53
-{txt}       6000 {c |}{res}         13        2.16       93.69
-{txt}       6300 {c |}{res}          1        0.17       93.85
-{txt}       6500 {c |}{res}          1        0.17       94.02
-{txt}       6600 {c |}{res}          1        0.17       94.19
-{txt}       6800 {c |}{res}          1        0.17       94.35
-{txt}       7000 {c |}{res}          3        0.50       94.85
-{txt}       7400 {c |}{res}          1        0.17       95.02
-{txt}       7500 {c |}{res}          2        0.33       95.35
-{txt}       8000 {c |}{res}          2        0.33       95.68
-{txt}       8175 {c |}{res}          1        0.17       95.85
-{txt}       8600 {c |}{res}          1        0.17       96.01
-{txt}       8900 {c |}{res}          1        0.17       96.18
-{txt}       9000 {c |}{res}          2        0.33       96.51
-{txt}       9500 {c |}{res}          2        0.33       96.84
-{txt}      10000 {c |}{res}          7        1.16       98.01
-{txt}      10800 {c |}{res}          1        0.17       98.17
-{txt}      12000 {c |}{res}          1        0.17       98.34
-{txt}      14000 {c |}{res}          3        0.50       98.84
-{txt}      15000 {c |}{res}          2        0.33       99.17
-{txt}      17000 {c |}{res}          1        0.17       99.34
-{txt}      18000 {c |}{res}          1        0.17       99.50
-{txt}      22000 {c |}{res}          1        0.17       99.67
-{txt}      27000 {c |}{res}          1        0.17       99.83
-{txt}      40000 {c |}{res}          1        0.17      100.00
-{txt}{hline 12}{c +}{hline 35}
-      Total {c |}{res}        602      100.00
-
-{txt}{hline}
--> year = 4
-
-       loan {c |}      Freq.     Percent        Cum.
-{hline 12}{c +}{hline 35}
-          0 {c |}{res}        489       59.49       59.49
-{txt}        100 {c |}{res}          1        0.12       59.61
-{txt}        168 {c |}{res}          1        0.12       59.73
-{txt}        200 {c |}{res}          1        0.12       59.85
-{txt}        234 {c |}{res}          1        0.12       59.98
-{txt}        236 {c |}{res}          1        0.12       60.10
-{txt}        300 {c |}{res}          1        0.12       60.22
-{txt}        350 {c |}{res}          1        0.12       60.34
-{txt}        400 {c |}{res}          1        0.12       60.46
-{txt}        600 {c |}{res}          1        0.12       60.58
-{txt}        650 {c |}{res}          1        0.12       60.71
-{txt}        700 {c |}{res}          1        0.12       60.83
-{txt}        800 {c |}{res}          1        0.12       60.95
-{txt}        815 {c |}{res}          1        0.12       61.07
-{txt}       1000 {c |}{res}         12        1.46       62.53
-{txt}       1200 {c |}{res}         13        1.58       64.11
-{txt}       1250 {c |}{res}          1        0.12       64.23
-{txt}       1300 {c |}{res}          8        0.97       65.21
-{txt}       1400 {c |}{res}          1        0.12       65.33
-{txt}       1500 {c |}{res}         10        1.22       66.55
-{txt}       1612 {c |}{res}          1        0.12       66.67
-{txt}       1644 {c |}{res}          1        0.12       66.79
-{txt}       1700 {c |}{res}          1        0.12       66.91
-{txt}       1750 {c |}{res}          1        0.12       67.03
-{txt}       1800 {c |}{res}          1        0.12       67.15
-{txt}       1900 {c |}{res}          1        0.12       67.27
-{txt}       2000 {c |}{res}         34        4.14       71.41
-{txt}       2025 {c |}{res}          1        0.12       71.53
-{txt}       2100 {c |}{res}          1        0.12       71.65
-{txt}       2163 {c |}{res}          1        0.12       71.78
-{txt}       2200 {c |}{res}          3        0.36       72.14
-{txt}       2250 {c |}{res}          1        0.12       72.26
-{txt}       2300 {c |}{res}          1        0.12       72.38
-{txt}       2375 {c |}{res}          1        0.12       72.51
-{txt}       2400 {c |}{res}          3        0.36       72.87
-{txt}       2500 {c |}{res}         14        1.70       74.57
-{txt}       2536 {c |}{res}          1        0.12       74.70
-{txt}       2600 {c |}{res}          3        0.36       75.06
-{txt}       2700 {c |}{res}          4        0.49       75.55
-{txt}       2750 {c |}{res}          1        0.12       75.67
-{txt}       2900 {c |}{res}          1        0.12       75.79
-{txt}       3000 {c |}{res}         23        2.80       78.59
-{txt}       3200 {c |}{res}          2        0.24       78.83
-{txt}       3313 {c |}{res}          1        0.12       78.95
-{txt}       3500 {c |}{res}         16        1.95       80.90
-{txt}       3600 {c |}{res}          1        0.12       81.02
-{txt}       3635 {c |}{res}          1        0.12       81.14
-{txt}       3700 {c |}{res}          1        0.12       81.27
-{txt}       4000 {c |}{res}         18        2.19       83.45
-{txt}       4050 {c |}{res}          1        0.12       83.58
-{txt}       4400 {c |}{res}          2        0.24       83.82
-{txt}       4500 {c |}{res}          3        0.36       84.18
-{txt}       4625 {c |}{res}          1        0.12       84.31
-{txt}       4800 {c |}{res}          1        0.12       84.43
-{txt}       4900 {c |}{res}          1        0.12       84.55
-{txt}       5000 {c |}{res}         17        2.07       86.62
-{txt}       5400 {c |}{res}          1        0.12       86.74
-{txt}       5500 {c |}{res}         12        1.46       88.20
-{txt}       6000 {c |}{res}         16        1.95       90.15
-{txt}       6265 {c |}{res}          1        0.12       90.27
-{txt}       6500 {c |}{res}          4        0.49       90.75
-{txt}       6600 {c |}{res}          2        0.24       91.00
-{txt}       6650 {c |}{res}          1        0.12       91.12
-{txt}       7000 {c |}{res}          3        0.36       91.48
-{txt}       8000 {c |}{res}         12        1.46       92.94
-{txt}       8100 {c |}{res}          1        0.12       93.07
-{txt}       8500 {c |}{res}          1        0.12       93.19
-{txt}       9000 {c |}{res}          4        0.49       93.67
-{txt}      10000 {c |}{res}         11        1.34       95.01
-{txt}      10500 {c |}{res}          3        0.36       95.38
-{txt}      10560 {c |}{res}          1        0.12       95.50
-{txt}      11000 {c |}{res}          3        0.36       95.86
-{txt}      12000 {c |}{res}          7        0.85       96.72
-{txt}      13000 {c |}{res}          2        0.24       96.96
-{txt}      14000 {c |}{res}          2        0.24       97.20
-{txt}      15000 {c |}{res}          3        0.36       97.57
-{txt}      16000 {c |}{res}          3        0.36       97.93
-{txt}      17000 {c |}{res}          2        0.24       98.18
-{txt}      18000 {c |}{res}          3        0.36       98.54
-{txt}      20000 {c |}{res}          1        0.12       98.66
-{txt}      21000 {c |}{res}          1        0.12       98.78
-{txt}      23000 {c |}{res}          1        0.12       98.91
-{txt}      25000 {c |}{res}          2        0.24       99.15
-{txt}      30000 {c |}{res}          3        0.36       99.51
-{txt}      32000 {c |}{res}          1        0.12       99.64
-{txt}      35000 {c |}{res}          1        0.12       99.76
-{txt}      40000 {c |}{res}          1        0.12       99.88
-{txt}      85000 {c |}{res}          1        0.12      100.00
-{txt}{hline 12}{c +}{hline 35}
-      Total {c |}{res}        822      100.00
-
-{txt}{hline}
--> year = 6
-
-       loan {c |}      Freq.     Percent        Cum.
-{hline 12}{c +}{hline 35}
-          0 {c |}{res}        599       61.12       61.12
-{txt}        500 {c |}{res}          1        0.10       61.22
-{txt}        600 {c |}{res}          2        0.20       61.43
-{txt}        695 {c |}{res}          1        0.10       61.53
-{txt}        700 {c |}{res}          1        0.10       61.63
-{txt}        800 {c |}{res}          3        0.31       61.94
-{txt}        900 {c |}{res}          1        0.10       62.04
-{txt}       1000 {c |}{res}         14        1.43       63.47
-{txt}       1200 {c |}{res}         11        1.12       64.59
-{txt}       1250 {c |}{res}          1        0.10       64.69
-{txt}       1293 {c |}{res}          1        0.10       64.80
-{txt}       1300 {c |}{res}          4        0.41       65.20
-{txt}       1400 {c |}{res}          3        0.31       65.51
-{txt}       1500 {c |}{res}         15        1.53       67.04
-{txt}       1600 {c |}{res}          1        0.10       67.14
-{txt}       1700 {c |}{res}          1        0.10       67.24
-{txt}       1750 {c |}{res}          3        0.31       67.55
-{txt}       1792 {c |}{res}          1        0.10       67.65
-{txt}       1800 {c |}{res}          2        0.20       67.86
-{txt}       1900 {c |}{res}          1        0.10       67.96
-{txt}       2000 {c |}{res}         30        3.06       71.02
-{txt}       2200 {c |}{res}          1        0.10       71.12
-{txt}       2300 {c |}{res}          1        0.10       71.22
-{txt}       2400 {c |}{res}          4        0.41       71.63
-{txt}       2432 {c |}{res}          1        0.10       71.73
-{txt}       2500 {c |}{res}          9        0.92       72.65
-{txt}       2600 {c |}{res}         12        1.22       73.88
-{txt}       2700 {c |}{res}          1        0.10       73.98
-{txt}       2750 {c |}{res}          1        0.10       74.08
-{txt}       2800 {c |}{res}          1        0.10       74.18
-{txt}       3000 {c |}{res}         34        3.47       77.65
-{txt}       3062 {c |}{res}          1        0.10       77.76
-{txt}       3300 {c |}{res}          1        0.10       77.86
-{txt}       3360 {c |}{res}          1        0.10       77.96
-{txt}       3400 {c |}{res}          1        0.10       78.06
-{txt}       3500 {c |}{res}          9        0.92       78.98
-{txt}       3600 {c |}{res}          3        0.31       79.29
-{txt}       3700 {c |}{res}          1        0.10       79.39
-{txt}       3900 {c |}{res}          1        0.10       79.49
-{txt}       4000 {c |}{res}         27        2.76       82.24
-{txt}       4250 {c |}{res}          1        0.10       82.35
-{txt}       4456 {c |}{res}          1        0.10       82.45
-{txt}       4500 {c |}{res}          3        0.31       82.76
-{txt}       4786 {c |}{res}          1        0.10       82.86
-{txt}       5000 {c |}{res}         37        3.78       86.63
-{txt}       5200 {c |}{res}          1        0.10       86.73
-{txt}       5335 {c |}{res}          1        0.10       86.84
-{txt}       5400 {c |}{res}          1        0.10       86.94
-{txt}       5500 {c |}{res}          7        0.71       87.65
-{txt}       6000 {c |}{res}         19        1.94       89.59
-{txt}       6500 {c |}{res}          4        0.41       90.00
-{txt}       6700 {c |}{res}          1        0.10       90.10
-{txt}       7000 {c |}{res}          9        0.92       91.02
-{txt}       7500 {c |}{res}          3        0.31       91.33
-{txt}       8000 {c |}{res}         10        1.02       92.35
-{txt}       8500 {c |}{res}          2        0.20       92.55
-{txt}       8700 {c |}{res}          1        0.10       92.65
-{txt}       9000 {c |}{res}          6        0.61       93.27
-{txt}       9300 {c |}{res}          1        0.10       93.37
-{txt}       9500 {c |}{res}          2        0.20       93.57
-{txt}      10000 {c |}{res}         10        1.02       94.59
-{txt}      10470 {c |}{res}          1        0.10       94.69
-{txt}      11000 {c |}{res}          6        0.61       95.31
-{txt}      12000 {c |}{res}          5        0.51       95.82
-{txt}      12500 {c |}{res}          3        0.31       96.12
-{txt}      13000 {c |}{res}          2        0.20       96.33
-{txt}      13600 {c |}{res}          1        0.10       96.43
-{txt}      14000 {c |}{res}          3        0.31       96.73
-{txt}      15000 {c |}{res}          4        0.41       97.14
-{txt}      15476 {c |}{res}          1        0.10       97.24
-{txt}      16000 {c |}{res}          3        0.31       97.55
-{txt}      17000 {c |}{res}          1        0.10       97.65
-{txt}      17600 {c |}{res}          1        0.10       97.76
-{txt}      18000 {c |}{res}          2        0.20       97.96
-{txt}      18500 {c |}{res}          2        0.20       98.16
-{txt}      19000 {c |}{res}          1        0.10       98.27
-{txt}      20000 {c |}{res}          5        0.51       98.78
-{txt}      22000 {c |}{res}          2        0.20       98.98
-{txt}      23000 {c |}{res}          2        0.20       99.18
-{txt}      24000 {c |}{res}          1        0.10       99.29
-{txt}      25000 {c |}{res}          2        0.20       99.49
-{txt}      30000 {c |}{res}          2        0.20       99.69
-{txt}      36000 {c |}{res}          1        0.10       99.80
-{txt}      50000 {c |}{res}          1        0.10       99.90
-{txt}      54000 {c |}{res}          1        0.10      100.00
-{txt}{hline 12}{c +}{hline 35}
-      Total {c |}{res}        980      100.00
-
-{txt}{hline}
--> year = 8
-
-       loan {c |}      Freq.     Percent        Cum.
-{hline 12}{c +}{hline 35}
-          0 {c |}{res}        681       58.06       58.06
-{txt}        442 {c |}{res}          1        0.09       58.14
-{txt}        500 {c |}{res}          3        0.26       58.40
-{txt}        600 {c |}{res}          2        0.17       58.57
-{txt}        700 {c |}{res}          1        0.09       58.65
-{txt}        702 {c |}{res}          1        0.09       58.74
-{txt}        800 {c |}{res}          2        0.17       58.91
-{txt}        900 {c |}{res}          2        0.17       59.08
-{txt}        943 {c |}{res}          1        0.09       59.16
-{txt}       1000 {c |}{res}          9        0.77       59.93
-{txt}       1006 {c |}{res}          1        0.09       60.02
-{txt}       1100 {c |}{res}          2        0.17       60.19
-{txt}       1200 {c |}{res}          7        0.60       60.78
-{txt}       1300 {c |}{res}          3        0.26       61.04
-{txt}       1350 {c |}{res}          1        0.09       61.13
-{txt}       1400 {c |}{res}          1        0.09       61.21
-{txt}       1500 {c |}{res}         13        1.11       62.32
-{txt}       1600 {c |}{res}          1        0.09       62.40
-{txt}       1700 {c |}{res}          2        0.17       62.57
-{txt}       1750 {c |}{res}          2        0.17       62.75
-{txt}       1755 {c |}{res}          1        0.09       62.83
-{txt}       1800 {c |}{res}          1        0.09       62.92
-{txt}       1900 {c |}{res}          2        0.17       63.09
-{txt}       2000 {c |}{res}         29        2.47       65.56
-{txt}       2050 {c |}{res}          1        0.09       65.64
-{txt}       2080 {c |}{res}          1        0.09       65.73
-{txt}       2100 {c |}{res}          3        0.26       65.98
-{txt}       2200 {c |}{res}          3        0.26       66.24
-{txt}       2225 {c |}{res}          1        0.09       66.33
-{txt}       2375 {c |}{res}          1        0.09       66.41
-{txt}       2400 {c |}{res}          2        0.17       66.58
-{txt}       2430 {c |}{res}          1        0.09       66.67
-{txt}       2500 {c |}{res}         14        1.19       67.86
-{txt}       2600 {c |}{res}          1        0.09       67.95
-{txt}       2700 {c |}{res}          1        0.09       68.03
-{txt}       3000 {c |}{res}         33        2.81       70.84
-{txt}       3400 {c |}{res}          1        0.09       70.93
-{txt}       3500 {c |}{res}         27        2.30       73.23
-{txt}       3600 {c |}{res}          2        0.17       73.40
-{txt}       3700 {c |}{res}          2        0.17       73.57
-{txt}       3900 {c |}{res}          1        0.09       73.66
-{txt}       4000 {c |}{res}         24        2.05       75.70
-{txt}       4500 {c |}{res}         13        1.11       76.81
-{txt}       4700 {c |}{res}          1        0.09       76.90
-{txt}       4800 {c |}{res}          1        0.09       76.98
-{txt}       5000 {c |}{res}         47        4.01       80.99
-{txt}       5100 {c |}{res}          1        0.09       81.07
-{txt}       5300 {c |}{res}          1        0.09       81.16
-{txt}       5500 {c |}{res}          9        0.77       81.93
-{txt}       5600 {c |}{res}          1        0.09       82.01
-{txt}       5800 {c |}{res}          1        0.09       82.10
-{txt}       6000 {c |}{res}         19        1.62       83.72
-{txt}       6200 {c |}{res}          1        0.09       83.80
-{txt}       6500 {c |}{res}          5        0.43       84.23
-{txt}       6600 {c |}{res}          1        0.09       84.31
-{txt}       6700 {c |}{res}          1        0.09       84.40
-{txt}       7000 {c |}{res}         21        1.79       86.19
-{txt}       7500 {c |}{res}          8        0.68       86.87
-{txt}       8000 {c |}{res}         16        1.36       88.24
-{txt}       8500 {c |}{res}          4        0.34       88.58
-{txt}       8800 {c |}{res}          1        0.09       88.66
-{txt}       9000 {c |}{res}          9        0.77       89.43
-{txt}       9500 {c |}{res}          3        0.26       89.68
-{txt}      10000 {c |}{res}         20        1.71       91.39
-{txt}      10500 {c |}{res}          2        0.17       91.56
-{txt}      11000 {c |}{res}          8        0.68       92.24
-{txt}      12000 {c |}{res}          7        0.60       92.84
-{txt}      12700 {c |}{res}          1        0.09       92.92
-{txt}      13000 {c |}{res}          4        0.34       93.27
-{txt}      14000 {c |}{res}          5        0.43       93.69
-{txt}      14072 {c |}{res}          1        0.09       93.78
-{txt}      15000 {c |}{res}         11        0.94       94.71
-{txt}      15300 {c |}{res}          1        0.09       94.80
-{txt}      16000 {c |}{res}          6        0.51       95.31
-{txt}      17000 {c |}{res}          5        0.43       95.74
-{txt}      18000 {c |}{res}          4        0.34       96.08
-{txt}      19000 {c |}{res}          2        0.17       96.25
-{txt}      20000 {c |}{res}         13        1.11       97.36
-{txt}      21000 {c |}{res}          2        0.17       97.53
-{txt}      22000 {c |}{res}          3        0.26       97.78
-{txt}      24000 {c |}{res}          1        0.09       97.87
-{txt}      25000 {c |}{res}          5        0.43       98.29
-{txt}      26000 {c |}{res}          1        0.09       98.38
-{txt}      26700 {c |}{res}          1        0.09       98.47
-{txt}      27000 {c |}{res}          1        0.09       98.55
-{txt}      28000 {c |}{res}          2        0.17       98.72
-{txt}      30000 {c |}{res}          3        0.26       98.98
-{txt}      30900 {c |}{res}          1        0.09       99.06
-{txt}      33000 {c |}{res}          1        0.09       99.15
-{txt}      34000 {c |}{res}          1        0.09       99.23
-{txt}      35000 {c |}{res}          3        0.26       99.49
-{txt}      38000 {c |}{res}          1        0.09       99.57
-{txt}      40000 {c |}{res}          1        0.09       99.66
-{txt}      45000 {c |}{res}          1        0.09       99.74
-{txt}      48000 {c |}{res}          1        0.09       99.83
-{txt}      49000 {c |}{res}          1        0.09       99.91
-{txt}      80000 {c |}{res}          1        0.09      100.00
-{txt}{hline 12}{c +}{hline 35}
-      Total {c |}{res}      1,173      100.00
-
-{txt}{hline}
--> year = 10
-
-       loan {c |}      Freq.     Percent        Cum.
-{hline 12}{c +}{hline 35}
-          0 {c |}{res}        725       54.27       54.27
-{txt}        100 {c |}{res}          1        0.07       54.34
-{txt}        475 {c |}{res}          1        0.07       54.42
-{txt}        500 {c |}{res}          3        0.22       54.64
-{txt}        561 {c |}{res}          1        0.07       54.72
-{txt}        750 {c |}{res}          1        0.07       54.79
-{txt}        800 {c |}{res}          1        0.07       54.87
-{txt}        900 {c |}{res}          1        0.07       54.94
-{txt}       1000 {c |}{res}         12        0.90       55.84
-{txt}       1035 {c |}{res}          1        0.07       55.91
-{txt}       1060 {c |}{res}          1        0.07       55.99
-{txt}       1200 {c |}{res}          2        0.15       56.14
-{txt}       1250 {c |}{res}          2        0.15       56.29
-{txt}       1300 {c |}{res}          2        0.15       56.44
-{txt}       1400 {c |}{res}          2        0.15       56.59
-{txt}       1500 {c |}{res}         17        1.27       57.86
-{txt}       1600 {c |}{res}          1        0.07       57.93
-{txt}       1700 {c |}{res}          1        0.07       58.01
-{txt}       1750 {c |}{res}          1        0.07       58.08
-{txt}       1778 {c |}{res}          1        0.07       58.16
-{txt}       1800 {c |}{res}          3        0.22       58.38
-{txt}       1811 {c |}{res}          1        0.07       58.46
-{txt}       2000 {c |}{res}         27        2.02       60.48
-{txt}       2160 {c |}{res}          1        0.07       60.55
-{txt}       2200 {c |}{res}          2        0.15       60.70
-{txt}       2300 {c |}{res}          4        0.30       61.00
-{txt}       2400 {c |}{res}          2        0.15       61.15
-{txt}       2500 {c |}{res}         12        0.90       62.05
-{txt}       2700 {c |}{res}          3        0.22       62.28
-{txt}       2794 {c |}{res}          1        0.07       62.35
-{txt}       2800 {c |}{res}          2        0.15       62.50
-{txt}       2920 {c |}{res}          1        0.07       62.57
-{txt}       3000 {c |}{res}         34        2.54       65.12
-{txt}       3100 {c |}{res}          1        0.07       65.19
-{txt}       3200 {c |}{res}          3        0.22       65.42
-{txt}       3208 {c |}{res}          1        0.07       65.49
-{txt}       3300 {c |}{res}          2        0.15       65.64
-{txt}       3500 {c |}{res}         18        1.35       66.99
-{txt}       3700 {c |}{res}          1        0.07       67.07
-{txt}       3712 {c |}{res}          1        0.07       67.14
-{txt}       4000 {c |}{res}         24        1.80       68.94
-{txt}       4200 {c |}{res}          1        0.07       69.01
-{txt}       4300 {c |}{res}          2        0.15       69.16
-{txt}       4500 {c |}{res}         12        0.90       70.06
-{txt}       4600 {c |}{res}          1        0.07       70.13
-{txt}       4700 {c |}{res}          1        0.07       70.21
-{txt}       4727 {c |}{res}          1        0.07       70.28
-{txt}       4800 {c |}{res}          1        0.07       70.36
-{txt}       5000 {c |}{res}         63        4.72       75.07
-{txt}       5200 {c |}{res}          2        0.15       75.22
-{txt}       5300 {c |}{res}          1        0.07       75.30
-{txt}       5500 {c |}{res}         14        1.05       76.35
-{txt}       5700 {c |}{res}          1        0.07       76.42
-{txt}       6000 {c |}{res}         29        2.17       78.59
-{txt}       6150 {c |}{res}          1        0.07       78.67
-{txt}       6400 {c |}{res}          1        0.07       78.74
-{txt}       6500 {c |}{res}          6        0.45       79.19
-{txt}       6600 {c |}{res}          2        0.15       79.34
-{txt}       6800 {c |}{res}          3        0.22       79.57
-{txt}       7000 {c |}{res}         29        2.17       81.74
-{txt}       7250 {c |}{res}          1        0.07       81.81
-{txt}       7500 {c |}{res}         12        0.90       82.71
-{txt}       7971 {c |}{res}          1        0.07       82.78
-{txt}       8000 {c |}{res}         22        1.65       84.43
-{txt}       8300 {c |}{res}          1        0.07       84.51
-{txt}       8400 {c |}{res}          2        0.15       84.66
-{txt}       8500 {c |}{res}          5        0.37       85.03
-{txt}       8600 {c |}{res}          1        0.07       85.10
-{txt}       8840 {c |}{res}          1        0.07       85.18
-{txt}       9000 {c |}{res}         10        0.75       85.93
-{txt}       9300 {c |}{res}          1        0.07       86.00
-{txt}       9400 {c |}{res}          1        0.07       86.08
-{txt}       9500 {c |}{res}          8        0.60       86.68
-{txt}      10000 {c |}{res}         30        2.25       88.92
-{txt}      10500 {c |}{res}          2        0.15       89.07
-{txt}      11000 {c |}{res}         13        0.97       90.04
-{txt}      12000 {c |}{res}         16        1.20       91.24
-{txt}      12500 {c |}{res}          4        0.30       91.54
-{txt}      13000 {c |}{res}          5        0.37       91.92
-{txt}      13150 {c |}{res}          1        0.07       91.99
-{txt}      13632 {c |}{res}          1        0.07       92.07
-{txt}      14000 {c |}{res}          8        0.60       92.66
-{txt}      14457 {c |}{res}          1        0.07       92.74
-{txt}      15000 {c |}{res}         17        1.27       94.01
-{txt}      16000 {c |}{res}          5        0.37       94.39
-{txt}      17000 {c |}{res}          7        0.52       94.91
-{txt}      17500 {c |}{res}          1        0.07       94.99
-{txt}      17650 {c |}{res}          1        0.07       95.06
-{txt}      18000 {c |}{res}          9        0.67       95.73
-{txt}      19000 {c |}{res}          2        0.15       95.88
-{txt}      19400 {c |}{res}          1        0.07       95.96
-{txt}      20000 {c |}{res}         17        1.27       97.23
-{txt}      21000 {c |}{res}          1        0.07       97.31
-{txt}      21500 {c |}{res}          1        0.07       97.38
-{txt}      22000 {c |}{res}          6        0.45       97.83
-{txt}      23000 {c |}{res}          1        0.07       97.90
-{txt}      24000 {c |}{res}          1        0.07       97.98
-{txt}      25000 {c |}{res}          1        0.07       98.05
-{txt}      26000 {c |}{res}          2        0.15       98.20
-{txt}      30000 {c |}{res}          5        0.37       98.58
-{txt}      31000 {c |}{res}          1        0.07       98.65
-{txt}      32000 {c |}{res}          2        0.15       98.80
-{txt}      33000 {c |}{res}          1        0.07       98.88
-{txt}      35000 {c |}{res}          2        0.15       99.03
-{txt}      38000 {c |}{res}          1        0.07       99.10
-{txt}      40000 {c |}{res}          2        0.15       99.25
-{txt}      43000 {c |}{res}          1        0.07       99.33
-{txt}      45000 {c |}{res}          1        0.07       99.40
-{txt}      49000 {c |}{res}          1        0.07       99.48
-{txt}      53000 {c |}{res}          1        0.07       99.55
-{txt}      55000 {c |}{res}          1        0.07       99.63
-{txt}      60000 {c |}{res}          3        0.22       99.85
-{txt}      75000 {c |}{res}          1        0.07       99.93
-{txt}     400000 {c |}{res}          1        0.07      100.00
-{txt}{hline 12}{c +}{hline 35}
-      Total {c |}{res}      1,336      100.00
-
-
-{com}. 
-. 
-. 
-. 
-. 
-. set more off
-
-. by year: sum loan
-
-{txt}{hline}
--> year = 0
-
-    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
-{hline 13}{c +}{hline 56}
-{space 8}loan {c |}{res}       344    1397.055    2572.465          0      18000
-
-{txt}{hline}
--> year = 2
-
-    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
-{hline 13}{c +}{hline 56}
-{space 8}loan {c |}{res}       602    1591.251    3410.698          0      40000
-
-{txt}{hline}
--> year = 4
-
-    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
-{hline 13}{c +}{hline 56}
-{space 8}loan {c |}{res}       822    2263.876    5329.745          0      85000
-
-{txt}{hline}
--> year = 6
-
-    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
-{hline 13}{c +}{hline 56}
-{space 8}loan {c |}{res}       980    2297.609    4886.855          0      54000
-
-{txt}{hline}
--> year = 8
-
-    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
-{hline 13}{c +}{hline 56}
-{space 8}loan {c |}{res}      1173    3236.428     6566.66          0      80000
-
-{txt}{hline}
--> year = 10
-
-    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
-{hline 13}{c +}{hline 56}
-{space 8}loan {c |}{res}      1336    4216.573    13073.26          0     400000
-
-
-{com}. tabulate year loan
-{err}too many values
-{txt}{search r(134):r(134);}
-
-{com}. help tabulate
-
-. tabulate twoway year loan
-{err}variable twoway not found
-{txt}{search r(111):r(111);}
-
-{com}. tabulate
-{err}varlist required
-{txt}{search r(100):r(100);}
-
-{com}. help tabulate
-
-. tabulate year, summarize(loan)
-
-            {txt}{c |}           Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-          0 {c |}  {res} 1397.0552    2572.465         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173
-  {txt}       10 {c |}  {res} 4216.5726   13073.263        1336
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res} 2849.6774   8038.1165        5257
-
-{com}. tabulate year, summarize(loan) missing
-
-            {txt}{c |}           Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-          0 {c |}  {res} 1397.0552    2572.465         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173
-  {txt}       10 {c |}  {res} 4216.5726   13073.263        1336
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res} 2849.6774   8038.1165        5257
-
-{com}. tabulate year, summarize(loan) obs
-
-            {txt}{c |}                 Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.        Obs.
-{hline 12}{c +}{hline 48}
-          0 {c |}  {res} 1397.0552    2572.465         344         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173        1173
-  {txt}       10 {c |}  {res} 4216.5726   13073.263        1336        1336
-{txt}{hline 12}{c +}{hline 48}
-      Total {c |}  {res} 2849.6774   8038.1165        5257        5257
-
-{com}. count if !year
-{res} 3170
-
-{com}. tabulate year, summarize(loan) obs
-
-            {txt}{c |}                 Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.        Obs.
-{hline 12}{c +}{hline 48}
-          0 {c |}  {res} 1397.0552    2572.465         344         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173        1173
-  {txt}       10 {c |}  {res} 4216.5726   13073.263        1336        1336
-{txt}{hline 12}{c +}{hline 48}
-      Total {c |}  {res} 2849.6774   8038.1165        5257        5257
-
-{com}. help tabout
-
-. ssc tabout
-{txt}{err}ssc: tabout: invalid subcommand
-{txt}{search r(198):r(198);}
-
-{com}. scc tabout
-{err}unrecognized command:  scc
-{txt}{search r(199):r(199);}
-
-{com}. help ssc
-
-. ssc desc tabout
-{txt}
-{.-}
-{s6hlp}
-package ^tabout^ from http://fmwww.bc.edu/repec/bocode/t
-{smcl}
-{.-}
-{s6hlp}
-
-^TITLE^
-      'TABOUT': module to export publication quality cross-tabulations
-
-^DESCRIPTION/AUTHOR(S)^
-      
-       tabout is a table building program for oneway and twoway
-      tables of frequencies and percentages, and for summary tables. It
-      produces publication quality tables for export to a text file.
-      These tables can then be used with spreadsheets, word processors,
-      web browsers or compilers like LaTeX. The tables produced by
-      tabout allow multiple panels so that a number of variables can be
-      included in the one table. tabout also provides standard errors
-      and confidence intervals, as well as a range of table statistics
-      (chi2 etc). The output from tabout matches Stata's tabulate, most
-      of tabstat and some of table.
-      
-      KW: tables
-      KW: latex
-      KW: html
-      KW: delimited text
-      
-      Requires: Stata version 9.2
-      
-      Distribution-Date: 20150112
-      
-      Author: Ian Watson , Macquarie University, Australia
-      Support: email mail@@ianwatson.com.au
-      
-
-^INSTALLATION FILES^                               (type ^net install^ ^tabout^)
-      tabout.ado
-      tabstatout.ado
-      tabout.hlp
-      ../f/figout.ado
-      ../f/figout.hlp
-
-^ANCILLARY FILES^                                  (type ^net get^ ^tabout^)
-      tabout_tutorial.pdf
-      ../e/examples_tab.do
-      ../e/examples_tex.do
-      ../b/bot.tex
-      top.tex
-{smcl}
-{.-}
-(type -{cmd:ssc install tabout}- to install)
-
-{com}. ssc install tabout
-{txt}checking {hilite:tabout} consistency and verifying not already installed...
-installing into c:\ado\plus\...
-installation complete.
-
-{com}. help tabout
-
-. tabulate year, summarize(loan) obs
-
-            {txt}{c |}                 Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.        Obs.
-{hline 12}{c +}{hline 48}
-          0 {c |}  {res} 1397.0552    2572.465         344         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173        1173
-  {txt}       10 {c |}  {res} 4216.5726   13073.263        1336        1336
-{txt}{hline 12}{c +}{hline 48}
-      Total {c |}  {res} 2849.6774   8038.1165        5257        5257
-
-{com}. tabout year loan
-{err}using required
-{txt}{search r(100):r(100);}
-
-{com}. tabout year loan using testtab.tex
-{err}too many values
-{txt}{search r(134):r(134);}
-
-{com}. tabout year loan, using testtab.tex
-{err}using required
-{txt}{search r(100):r(100);}
-
-{com}. tabout year loan using(testtab.tex)
-{err}invalid 'testtab.tex' 
-{txt}{search r(198):r(198);}
-
-{com}. tabout year loan using(testtab), style(tex)
-{err}invalid 'testtab' 
-{txt}{search r(198):r(198);}
-
-{com}. tabout year loan using("testtab"), style(tex)
-{err}invalid '"testtab' 
-{txt}{search r(198):r(198);}
-
-{com}. tabout year loan using testtab.tex, style(tex)
-{err}too many values
-{txt}{search r(134):r(134);}
-
-{com}. tabout loan using testtab.tex, style(tex)
-{res}{txt}(note: file testtab.tex not found)
-
-Table output written to: testtab.tex
-
-{res}loan&No. \\
-\hline
-0&3,085.0 \\
-4&1.0 \\
-100&2.0 \\
-168&1.0 \\
-200&3.0 \\
-234&1.0 \\
-235&1.0 \\
-236&1.0 \\
-300&2.0 \\
-320&1.0 \\
-336&1.0 \\
-350&2.0 \\
-400&1.0 \\
-442&1.0 \\
-475&1.0 \\
-500&8.0 \\
-561&1.0 \\
-600&7.0 \\
-650&1.0 \\
-684&1.0 \\
-695&1.0 \\
-700&5.0 \\
-702&1.0 \\
-735&1.0 \\
-750&1.0 \\
-800&9.0 \\
-815&1.0 \\
-900&7.0 \\
-943&1.0 \\
-970&1.0 \\
-1000&60.0 \\
-1006&1.0 \\
-1035&1.0 \\
-1060&1.0 \\
-1100&3.0 \\
-1200&41.0 \\
-1250&4.0 \\
-1293&1.0 \\
-1300&25.0 \\
-1312&1.0 \\
-1313&1.0 \\
-1350&2.0 \\
-1400&10.0 \\
-1500&74.0 \\
-1550&1.0 \\
-1600&8.0 \\
-1612&1.0 \\
-1644&1.0 \\
-1650&1.0 \\
-1700&6.0 \\
-1750&8.0 \\
-1755&1.0 \\
-1778&1.0 \\
-1792&1.0 \\
-1800&8.0 \\
-1811&1.0 \\
-1900&4.0 \\
-2000&162.0 \\
-2025&1.0 \\
-2050&1.0 \\
-2063&1.0 \\
-2080&1.0 \\
-2100&6.0 \\
-2160&1.0 \\
-2163&1.0 \\
-2200&11.0 \\
-2225&1.0 \\
-2250&2.0 \\
-2300&9.0 \\
-2365&1.0 \\
-2375&2.0 \\
-2400&17.0 \\
-2430&1.0 \\
-2432&1.0 \\
-2500&71.0 \\
-2536&1.0 \\
-2543&1.0 \\
-2600&22.0 \\
-2625&5.0 \\
-2637&1.0 \\
-2650&2.0 \\
-2700&9.0 \\
-2750&3.0 \\
-2794&1.0 \\
-2800&5.0 \\
-2900&2.0 \\
-2920&1.0 \\
-3000&146.0 \\
-3062&1.0 \\
-3100&2.0 \\
-3125&1.0 \\
-3200&6.0 \\
-3208&1.0 \\
-3300&5.0 \\
-3313&1.0 \\
-3360&1.0 \\
-3400&2.0 \\
-3500&77.0 \\
-3600&10.0 \\
-3635&1.0 \\
-3700&5.0 \\
-3712&1.0 \\
-3900&2.0 \\
-4000&111.0 \\
-4050&1.0 \\
-4200&2.0 \\
-4250&2.0 \\
-4300&3.0 \\
-4400&4.0 \\
-4456&1.0 \\
-4500&34.0 \\
-4600&1.0 \\
-4625&1.0 \\
-4700&2.0 \\
-4727&1.0 \\
-4786&1.0 \\
-4800&3.0 \\
-4900&1.0 \\
-5000&188.0 \\
-5100&1.0 \\
-5200&3.0 \\
-5300&2.0 \\
-5335&1.0 \\
-5400&2.0 \\
-5500&50.0 \\
-5558&1.0 \\
-5600&1.0 \\
-5700&1.0 \\
-5800&1.0 \\
-6000&100.0 \\
-6150&1.0 \\
-6200&1.0 \\
-6265&1.0 \\
-6300&1.0 \\
-6400&1.0 \\
-6500&21.0 \\
-6600&6.0 \\
-6650&1.0 \\
-6700&2.0 \\
-6800&4.0 \\
-7000&67.0 \\
-7250&1.0 \\
-7400&1.0 \\
-7420&1.0 \\
-7500&25.0 \\
-7971&1.0 \\
-8000&65.0 \\
-8100&1.0 \\
-8175&1.0 \\
-8300&1.0 \\
-8400&2.0 \\
-8500&12.0 \\
-8600&2.0 \\
-8700&1.0 \\
-8800&1.0 \\
-8840&1.0 \\
-8900&1.0 \\
-9000&34.0 \\
-9300&2.0 \\
-9400&1.0 \\
-9500&15.0 \\
-10000&81.0 \\
-10470&1.0 \\
-10500&7.0 \\
-10560&1.0 \\
-10800&1.0 \\
-11000&32.0 \\
-12000&36.0 \\
-12500&7.0 \\
-12700&1.0 \\
-13000&14.0 \\
-13150&1.0 \\
-13600&1.0 \\
-13632&1.0 \\
-14000&21.0 \\
-14072&1.0 \\
-14457&1.0 \\
-15000&38.0 \\
-15300&1.0 \\
-15476&1.0 \\
-16000&17.0 \\
-17000&16.0 \\
-17500&1.0 \\
-17600&1.0 \\
-17650&1.0 \\
-18000&20.0 \\
-18500&2.0 \\
-19000&5.0 \\
-19400&1.0 \\
-20000&36.0 \\
-21000&4.0 \\
-21500&1.0 \\
-22000&12.0 \\
-23000&4.0 \\
-24000&3.0 \\
-25000&10.0 \\
-26000&3.0 \\
-26700&1.0 \\
-27000&2.0 \\
-28000&2.0 \\
-30000&13.0 \\
-30900&1.0 \\
-31000&1.0 \\
-32000&3.0 \\
-33000&2.0 \\
-34000&1.0 \\
-35000&6.0 \\
-36000&1.0 \\
-38000&2.0 \\
-40000&5.0 \\
-43000&1.0 \\
-45000&2.0 \\
-48000&1.0 \\
-49000&2.0 \\
-50000&1.0 \\
-53000&1.0 \\
-54000&1.0 \\
-55000&1.0 \\
-60000&3.0 \\
-75000&1.0 \\
-80000&1.0 \\
-85000&1.0 \\
-400000&1.0 \\
-Total&5,257.0 \\
-
-{com}. tabout loan using testtab.tex, style(tex) replace
-{res}
-{txt}Table output written to: testtab.tex
-
-{res}loan&No. \\
-\hline
-0&3,085.0 \\
-4&1.0 \\
-100&2.0 \\
-168&1.0 \\
-200&3.0 \\
-234&1.0 \\
-235&1.0 \\
-236&1.0 \\
-300&2.0 \\
-320&1.0 \\
-336&1.0 \\
-350&2.0 \\
-400&1.0 \\
-442&1.0 \\
-475&1.0 \\
-500&8.0 \\
-561&1.0 \\
-600&7.0 \\
-650&1.0 \\
-684&1.0 \\
-695&1.0 \\
-700&5.0 \\
-702&1.0 \\
-735&1.0 \\
-750&1.0 \\
-800&9.0 \\
-815&1.0 \\
-900&7.0 \\
-943&1.0 \\
-970&1.0 \\
-1000&60.0 \\
-1006&1.0 \\
-1035&1.0 \\
-1060&1.0 \\
-1100&3.0 \\
-1200&41.0 \\
-1250&4.0 \\
-1293&1.0 \\
-1300&25.0 \\
-1312&1.0 \\
-1313&1.0 \\
-1350&2.0 \\
-1400&10.0 \\
-1500&74.0 \\
-1550&1.0 \\
-1600&8.0 \\
-1612&1.0 \\
-1644&1.0 \\
-1650&1.0 \\
-1700&6.0 \\
-1750&8.0 \\
-1755&1.0 \\
-1778&1.0 \\
-1792&1.0 \\
-1800&8.0 \\
-1811&1.0 \\
-1900&4.0 \\
-2000&162.0 \\
-2025&1.0 \\
-2050&1.0 \\
-2063&1.0 \\
-2080&1.0 \\
-2100&6.0 \\
-2160&1.0 \\
-2163&1.0 \\
-2200&11.0 \\
-2225&1.0 \\
-2250&2.0 \\
-2300&9.0 \\
-2365&1.0 \\
-2375&2.0 \\
-2400&17.0 \\
-2430&1.0 \\
-2432&1.0 \\
-2500&71.0 \\
-2536&1.0 \\
-2543&1.0 \\
-2600&22.0 \\
-2625&5.0 \\
-2637&1.0 \\
-2650&2.0 \\
-2700&9.0 \\
-2750&3.0 \\
-2794&1.0 \\
-2800&5.0 \\
-2900&2.0 \\
-2920&1.0 \\
-3000&146.0 \\
-3062&1.0 \\
-3100&2.0 \\
-3125&1.0 \\
-3200&6.0 \\
-3208&1.0 \\
-3300&5.0 \\
-3313&1.0 \\
-3360&1.0 \\
-3400&2.0 \\
-3500&77.0 \\
-3600&10.0 \\
-3635&1.0 \\
-3700&5.0 \\
-3712&1.0 \\
-3900&2.0 \\
-4000&111.0 \\
-4050&1.0 \\
-4200&2.0 \\
-4250&2.0 \\
-4300&3.0 \\
-4400&4.0 \\
-4456&1.0 \\
-4500&34.0 \\
-4600&1.0 \\
-4625&1.0 \\
-4700&2.0 \\
-4727&1.0 \\
-4786&1.0 \\
-4800&3.0 \\
-4900&1.0 \\
-5000&188.0 \\
-5100&1.0 \\
-5200&3.0 \\
-5300&2.0 \\
-5335&1.0 \\
-5400&2.0 \\
-5500&50.0 \\
-5558&1.0 \\
-5600&1.0 \\
-5700&1.0 \\
-5800&1.0 \\
-6000&100.0 \\
-6150&1.0 \\
-6200&1.0 \\
-6265&1.0 \\
-6300&1.0 \\
-6400&1.0 \\
-6500&21.0 \\
-6600&6.0 \\
-6650&1.0 \\
-6700&2.0 \\
-6800&4.0 \\
-7000&67.0 \\
-7250&1.0 \\
-7400&1.0 \\
-7420&1.0 \\
-7500&25.0 \\
-7971&1.0 \\
-8000&65.0 \\
-8100&1.0 \\
-8175&1.0 \\
-8300&1.0 \\
-8400&2.0 \\
-8500&12.0 \\
-8600&2.0 \\
-8700&1.0 \\
-8800&1.0 \\
-8840&1.0 \\
-8900&1.0 \\
-9000&34.0 \\
-9300&2.0 \\
-9400&1.0 \\
-9500&15.0 \\
-10000&81.0 \\
-10470&1.0 \\
-10500&7.0 \\
-10560&1.0 \\
-10800&1.0 \\
-11000&32.0 \\
-12000&36.0 \\
-12500&7.0 \\
-12700&1.0 \\
-13000&14.0 \\
-13150&1.0 \\
-13600&1.0 \\
-13632&1.0 \\
-14000&21.0 \\
-14072&1.0 \\
-14457&1.0 \\
-15000&38.0 \\
-15300&1.0 \\
-15476&1.0 \\
-16000&17.0 \\
-17000&16.0 \\
-17500&1.0 \\
-17600&1.0 \\
-17650&1.0 \\
-18000&20.0 \\
-18500&2.0 \\
-19000&5.0 \\
-19400&1.0 \\
-20000&36.0 \\
-21000&4.0 \\
-21500&1.0 \\
-22000&12.0 \\
-23000&4.0 \\
-24000&3.0 \\
-25000&10.0 \\
-26000&3.0 \\
-26700&1.0 \\
-27000&2.0 \\
-28000&2.0 \\
-30000&13.0 \\
-30900&1.0 \\
-31000&1.0 \\
-32000&3.0 \\
-33000&2.0 \\
-34000&1.0 \\
-35000&6.0 \\
-36000&1.0 \\
-38000&2.0 \\
-40000&5.0 \\
-43000&1.0 \\
-45000&2.0 \\
-48000&1.0 \\
-49000&2.0 \\
-50000&1.0 \\
-53000&1.0 \\
-54000&1.0 \\
-55000&1.0 \\
-60000&3.0 \\
-75000&1.0 \\
-80000&1.0 \\
-85000&1.0 \\
-400000&1.0 \\
-Total&5,257.0 \\
-
-{com}. tabout year using testtab.tex, style(tex) replace
-{res}
-{txt}Table output written to: testtab.tex
-
-{res}year&No. \\
-\hline
-0&3,170.0 \\
-2&3,170.0 \\
-4&3,170.0 \\
-6&3,170.0 \\
-8&3,170.0 \\
-10&3,170.0 \\
-Total&19,020.0 \\
-
-{com}. tabout year loan using testtab.tex, style(tex) replace
-{err}too many values
-{txt}{search r(134):r(134);}
-
-{com}. tabout year loan using testtab.tex, style(tex) replace c(mean)
-
-{err}Invalid type of entry in cells option, or you may
-have forgotten to turn on the sum or svy option
-
-{com}{c TLC}{hline 22}{c TT}{hline 38}{c TT}{hline 22}{c TRC}
-{c |} {it:Type of table}        {c |}      {it:Allowable cell contents}         {c |}   {it:Available layout}   {c |}
-{c |} {it:}                     {c |}             {it:cells( )}                 {c |}     {it:layout( )}        {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:basic}                {c |} freq cell row col cum                {c |} col row  cb rb       {c |}
-{c |} {bf:}                     {c |} {bf:any number of above, in any order}    {c |}                      {c |}
-{c |} {bf:}                     {c |} {it:for example: cells(freq col)}         {c |}                      {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:basic with SE or CI}  {c |} freq cell row col se ci lb ub        {c |} col row cb rb        {c |}
-{c |} {bf:}                     {c |} {bf:only one of:} freq cell row col       {c |}                      {c |}
-{c |} {bf:}(turn on {it:svy} option) {c |} {it:(must come first in the cell)}        {c |}                      {c |}
-{c |} {bf:}                     {c |} {bf:and any number of:} se ci lb ub       {c |}                      {c |}
-{c |} {bf:}                     {c |} {it:for example: cells(col se lb ub)}     {c |}                      {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:summary}              {c |} {bf:any number of:} N mean var sd skewness{c |} no options (fixed)   {c |}
-{c |} {bf:}-as a oneway table   {c |} kurtosis sum uwsum min max count     {c |}                      {c |}
-{c |} {bf:}                     {c |} median iqr r9010 r9050 r7525 r1050   {c |}                      {c |}
-{c |} {bf:}(turn on {it:sum} option; {c |} p1 p5 p10 p25 p50 p75 p90 p95 p99    {c |}                      {c |}
-{c |} {bf:}also may need to turn{c |} {bf:with each followed by variable name}  {c |}                      {c |}
-{c |} {bf:}on {it:oneway} option)    {c |} {it:for example: cells(min wage mean age)}{c |}                      {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:summary}              {c |} {bf:only one of:} N mean var sd skewness  {c |} no options (fixed)   {c |}
-{c |} {bf:}-as a twoway table   {c |} kurtosis sum uwsum min max count     {c |}                      {c |}
-{c |} {bf:}                     {c |} median iqr r9010 r9050 r7525 r1050   {c |}                      {c |}
-{c |} {bf:}(turn on {it:sum} option) {c |} p1 p5 p10 p25 p50 p75 p90 p95 p99    {c |}                      {c |}
-{c |} {bf:}                     {c |} {bf:followed by one variable name}        {c |}                      {c |}
-{c |} {bf:}                     {c |} {it:for example: cells(sum income)}       {c |}                      {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:summary with SE or CI}{c |} mean {bf:followed by one variable name}   {c |} col row cb rb        {c |}
-{c |} {bf:}(turn on {it:sum} option  {c |} {bf:and any number of:} se ci lb ub       {c |}                      {c |}
-{c |} {bf:} and {it:svy} option)     {c |} {it:for example: cells(mean weight se ci)}{c |}                      {c |}
-{c BLC}{hline 22}{c BT}{hline 38}{c BT}{hline 22}{c BRC}
-
-. tabout year using testtab.tex, style(tex) replace c(mean) c(sum loan)
-{err}option {bf:c()} not allowed
-{txt}{search r(198):r(198);}
-
-{com}. tabout year using testtab.tex, style(tex) replace c(sum loan)
-
-{err}Invalid type of entry in cells option, or you may
-have forgotten to turn on the sum or svy option
-
-{com}{c TLC}{hline 22}{c TT}{hline 38}{c TT}{hline 22}{c TRC}
-{c |} {it:Type of table}        {c |}      {it:Allowable cell contents}         {c |}   {it:Available layout}   {c |}
-{c |} {it:}                     {c |}             {it:cells( )}                 {c |}     {it:layout( )}        {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:basic}                {c |} freq cell row col cum                {c |} col row  cb rb       {c |}
-{c |} {bf:}                     {c |} {bf:any number of above, in any order}    {c |}                      {c |}
-{c |} {bf:}                     {c |} {it:for example: cells(freq col)}         {c |}                      {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:basic with SE or CI}  {c |} freq cell row col se ci lb ub        {c |} col row cb rb        {c |}
-{c |} {bf:}                     {c |} {bf:only one of:} freq cell row col       {c |}                      {c |}
-{c |} {bf:}(turn on {it:svy} option) {c |} {it:(must come first in the cell)}        {c |}                      {c |}
-{c |} {bf:}                     {c |} {bf:and any number of:} se ci lb ub       {c |}                      {c |}
-{c |} {bf:}                     {c |} {it:for example: cells(col se lb ub)}     {c |}                      {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:summary}              {c |} {bf:any number of:} N mean var sd skewness{c |} no options (fixed)   {c |}
-{c |} {bf:}-as a oneway table   {c |} kurtosis sum uwsum min max count     {c |}                      {c |}
-{c |} {bf:}                     {c |} median iqr r9010 r9050 r7525 r1050   {c |}                      {c |}
-{c |} {bf:}(turn on {it:sum} option; {c |} p1 p5 p10 p25 p50 p75 p90 p95 p99    {c |}                      {c |}
-{c |} {bf:}also may need to turn{c |} {bf:with each followed by variable name}  {c |}                      {c |}
-{c |} {bf:}on {it:oneway} option)    {c |} {it:for example: cells(min wage mean age)}{c |}                      {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:summary}              {c |} {bf:only one of:} N mean var sd skewness  {c |} no options (fixed)   {c |}
-{c |} {bf:}-as a twoway table   {c |} kurtosis sum uwsum min max count     {c |}                      {c |}
-{c |} {bf:}                     {c |} median iqr r9010 r9050 r7525 r1050   {c |}                      {c |}
-{c |} {bf:}(turn on {it:sum} option) {c |} p1 p5 p10 p25 p50 p75 p90 p95 p99    {c |}                      {c |}
-{c |} {bf:}                     {c |} {bf:followed by one variable name}        {c |}                      {c |}
-{c |} {bf:}                     {c |} {it:for example: cells(sum income)}       {c |}                      {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:summary with SE or CI}{c |} mean {bf:followed by one variable name}   {c |} col row cb rb        {c |}
-{c |} {bf:}(turn on {it:sum} option  {c |} {bf:and any number of:} se ci lb ub       {c |}                      {c |}
-{c |} {bf:} and {it:svy} option)     {c |} {it:for example: cells(mean weight se ci)}{c |}                      {c |}
-{c BLC}{hline 22}{c BT}{hline 38}{c BT}{hline 22}{c BRC}
-
-. tabout year using testtab.tex, style(tex) replace sum c(sum loan)
-{res}
-{txt}Table output written to: testtab.tex
-
-{res}year&Sum \\
-&loan \\
-\hline
-0&480,587.0 \\
-2&957,933.0 \\
-4&1,860,906.0 \\
-6&2,251,657.0 \\
-8&3,796,330.0 \\
-10&5,633,341.0 \\
-Total&14,980,754.0 \\
-
-{com}. tabout year using testtab.tex, style(tex) replace sum c(mean loan)
-{res}
-{txt}Table output written to: testtab.tex
-
-{res}year&Mean \\
-&loan \\
-\hline
-0&1,397.1 \\
-2&1,591.3 \\
-4&2,263.9 \\
-6&2,297.6 \\
-8&3,236.4 \\
-10&4,216.6 \\
-Total&2,849.7 \\
-
-{com}. tabout year using testtab.tex, style(tex) replace sum c(mean loan count)
-{res}
-{txt}Table output written to: testtab.tex
-
-{res}year&Mean \\
-&loan \\
-\hline
-0&1,397.1 \\
-2&1,591.3 \\
-4&2,263.9 \\
-6&2,297.6 \\
-8&3,236.4 \\
-10&4,216.6 \\
-Total&2,849.7 \\
-
-{com}. tabout year using testtab.tex, style(tex) replace sum c(mean loan count loan)
-{res}
-{txt}Table output written to: testtab.tex
-
-{res}year&Mean&Count \\
-&loan&loan \\
-\hline
-0&1,397.1&344.0 \\
-2&1,591.3&602.0 \\
-4&2,263.9&822.0 \\
-6&2,297.6&980.0 \\
-8&3,236.4&1,173.0 \\
-10&4,216.6&1,336.0 \\
-Total&2,849.7&5,257.0 \\
-
-{com}. tabout year using testtab.tex, style(tex) replace sum c(mean count loan)
-
-{err}Invalid type of entry in cells option, or you may
-have forgotten to turn on the sum or svy option
-
-{com}{c TLC}{hline 22}{c TT}{hline 38}{c TT}{hline 22}{c TRC}
-{c |} {it:Type of table}        {c |}      {it:Allowable cell contents}         {c |}   {it:Available layout}   {c |}
-{c |} {it:}                     {c |}             {it:cells( )}                 {c |}     {it:layout( )}        {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:basic}                {c |} freq cell row col cum                {c |} col row  cb rb       {c |}
-{c |} {bf:}                     {c |} {bf:any number of above, in any order}    {c |}                      {c |}
-{c |} {bf:}                     {c |} {it:for example: cells(freq col)}         {c |}                      {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:basic with SE or CI}  {c |} freq cell row col se ci lb ub        {c |} col row cb rb        {c |}
-{c |} {bf:}                     {c |} {bf:only one of:} freq cell row col       {c |}                      {c |}
-{c |} {bf:}(turn on {it:svy} option) {c |} {it:(must come first in the cell)}        {c |}                      {c |}
-{c |} {bf:}                     {c |} {bf:and any number of:} se ci lb ub       {c |}                      {c |}
-{c |} {bf:}                     {c |} {it:for example: cells(col se lb ub)}     {c |}                      {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:summary}              {c |} {bf:any number of:} N mean var sd skewness{c |} no options (fixed)   {c |}
-{c |} {bf:}-as a oneway table   {c |} kurtosis sum uwsum min max count     {c |}                      {c |}
-{c |} {bf:}                     {c |} median iqr r9010 r9050 r7525 r1050   {c |}                      {c |}
-{c |} {bf:}(turn on {it:sum} option; {c |} p1 p5 p10 p25 p50 p75 p90 p95 p99    {c |}                      {c |}
-{c |} {bf:}also may need to turn{c |} {bf:with each followed by variable name}  {c |}                      {c |}
-{c |} {bf:}on {it:oneway} option)    {c |} {it:for example: cells(min wage mean age)}{c |}                      {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:summary}              {c |} {bf:only one of:} N mean var sd skewness  {c |} no options (fixed)   {c |}
-{c |} {bf:}-as a twoway table   {c |} kurtosis sum uwsum min max count     {c |}                      {c |}
-{c |} {bf:}                     {c |} median iqr r9010 r9050 r7525 r1050   {c |}                      {c |}
-{c |} {bf:}(turn on {it:sum} option) {c |} p1 p5 p10 p25 p50 p75 p90 p95 p99    {c |}                      {c |}
-{c |} {bf:}                     {c |} {bf:followed by one variable name}        {c |}                      {c |}
-{c |} {bf:}                     {c |} {it:for example: cells(sum income)}       {c |}                      {c |}
-{c LT}{hline 22}{c +}{hline 38}{c +}{hline 22}{c RT}
-{c |} {bf:summary with SE or CI}{c |} mean {bf:followed by one variable name}   {c |} col row cb rb        {c |}
-{c |} {bf:}(turn on {it:sum} option  {c |} {bf:and any number of:} se ci lb ub       {c |}                      {c |}
-{c |} {bf:} and {it:svy} option)     {c |} {it:for example: cells(mean weight se ci)}{c |}                      {c |}
-{c BLC}{hline 22}{c BT}{hline 38}{c BT}{hline 22}{c BRC}
-
-. tabout year using testtab.tex, style(tex) replace sum c(mean loan count loan)
-{res}
-{txt}Table output written to: testtab.tex
-
-{res}year&Mean&Count \\
-&loan&loan \\
-\hline
-0&1,397.1&344.0 \\
-2&1,591.3&602.0 \\
-4&2,263.9&822.0 \\
-6&2,297.6&980.0 \\
-8&3,236.4&1,173.0 \\
-10&4,216.6&1,336.0 \\
-Total&2,849.7&5,257.0 \\
-
-{com}. pwd
-{res}C:\Users\gmoor\Desktop\honors\NLSYChild79Data
-
-{com}. ls
-{txt}  <dir>  10/30/18 19:02  {res}.                 
-{txt}  <dir>  10/30/18 19:02  {res}..                
-{txt}  <dir>  10/09/18 19:06  {res}Download          
-{txt}   2.7k  10/16/18 19:12  {res}Import.do         
-{txt}   2.3k  10/02/18 12:42  {res}loan06all.pdf     
-{txt}   2.2k  10/02/18 12:42  {res}loan06sml.pdf     
-{txt}   2.5k  10/02/18 12:42  {res}loan08all.pdf     
-{txt}   2.2k  10/02/18 12:42  {res}loan08sml.pdf     
-{txt}  49.3k  10/30/18 18:55  {res}master.smcl       
-{txt}   0.2k  10/09/18 16:47  {res}RevisedReg.do     
-{txt}   0.0k  10/30/18 19:02  {res}testtab.aux       
-{txt}   4.0k  10/30/18 19:02  {res}testtab.log       
-{txt}  15.0k  10/30/18 19:02  {res}testtab.pdf       
-{txt}   1.6k  10/30/18 19:02  {res}testtab.synctex.gz
-{txt}   0.3k  10/30/18 19:02  {res}testtab.tex       
-
-{com}. cd ..
-{res}C:\Users\gmoor\Desktop\honors
-
-{com}. ls
-{txt}  <dir>  10/30/18 19:04  {res}.                 
-{txt}  <dir>  10/30/18 19:04  {res}..                
-{txt}  <dir>  10/04/18 14:42  {res}.git              
-{txt}   0.0k   8/14/18 18:12  {res}.gitignore        
-{txt}   0.6k   8/15/18 15:38  {res}Brainstorming.txt 
-{txt}  <dir>  10/30/18 17:57  {res}Master            
-{txt}   1.4k  10/24/18 11:55  {res}master.smcl       
-{txt}  <dir>  10/16/18 18:53  {res}NLSY79ParentData  
-{txt}  <dir>  10/30/18 19:05  {res}NLSYChild79Data   
-{txt}  <dir>   9/10/18 22:18  {res}Sources           
-{txt}  <dir>  10/30/18 19:05  {res}Tables            
-{txt}   0.9k  10/23/18 21:39  {res}test tobit iv.do  
-{txt}  10.4k  10/23/18 21:39  {res}test_tobit_iv_method.log
-
-{com}. cd Tables
-{res}C:\Users\gmoor\Desktop\honors\Tables
-
-{com}. ls
-{txt}  <dir>  10/30/18 19:05  {res}.                 
-{txt}  <dir>  10/30/18 19:05  {res}..                
-{txt}  <dir>  10/30/18 19:05  {res}Code              
-{txt}  <dir>  10/30/18 19:04  {res}Output            
-
-{com}. cd Code
+. cd ../Tables/Code
 {res}C:\Users\gmoor\Desktop\honors\Tables\Code
-
-{com}. ls
-{txt}  <dir>  10/30/18 19:05  {res}.                 
-{txt}  <dir>  10/30/18 19:05  {res}..                
-{txt}   0.2k  10/30/18 19:05  {res}tables.do         
-
+{txt}
 {com}. do tables
 {txt}
 {com}. /*
 > Makes tables
 > */
 . 
-. tabout year using ../Output/loanStats.tex, ///
->         style(tex) ///Forces tex output
->         sum c(mean loan count loan) ///Marks as summary table (two-way)
->         replace //Replaces previous version
-{res}
-{txt}Table output written to: ../Output/loanStats.tex
-
-{res}year&Mean&Count \\
-&loan&loan \\
-\hline
-0&1,397.1&344.0 \\
-2&1,591.3&602.0 \\
-4&2,263.9&822.0 \\
-6&2,297.6&980.0 \\
-8&3,236.4&1,173.0 \\
-10&4,216.6&1,336.0 \\
-Total&2,849.7&5,257.0 \\
-{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
-{txt}
-{com}. tabulate year, sum(loan)
-
-            {txt}{c |}           Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-          0 {c |}  {res} 1397.0552    2572.465         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173
-  {txt}       10 {c |}  {res} 4216.5726   13073.263        1336
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res} 2849.6774   8038.1165        5257
-{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoor\Desktop\honors\Tables\Code\tables.do"
-{txt}
-{com}. /*
-> Makes tables
-> */
-. 
+. //Creates table in Stata window
 . tabulate year, sum(loan)
 
             {txt}{c |}           Summary of loan
@@ -1904,79 +346,407 @@ Total&2,849.7&5,257.0 \\
 {txt}{hline 12}{c +}{hline 36}
       Total {c |}  {res} 2849.6774   8038.1165        5257
 {txt}
-{com}. quietly tabout year using ../Output/loanStats.tex, ///
+{com}. //Writes table to loanStats.tex
+. quietly tabout year using ../Output/loanStats.tex, ///
 >         style(tex) ///Forces tex output
 >         sum c(mean loan sd loan count loan) ///Marks as summary table (two-way)
 >         replace //Replaces previous version
 {txt}
 {com}. 
-{txt}end of do-file
+. //Creates table in Stata window
+. tabulate sex race
 
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
-{txt}
-{com}. tabulate year, sum(loan)
+           {txt}{c |}   RACE OF CHILD (FROM MOTHERS
+    SEX OF {c |}           SCREENER 79)
+     CHILD {c |}  HISPANIC      BLACK  NON-BLACK {c |}     Total
+{hline 11}{c +}{hline 33}{c +}{hline 10}
+      MALE {c |}{res}     1,710      2,184      4,248 {txt}{c |}{res}     8,142 
+{txt}    FEMALE {c |}{res}     2,094      3,876      4,908 {txt}{c |}{res}    10,878 
+{txt}{hline 11}{c +}{hline 33}{c +}{hline 10}
+     Total {c |}{res}     3,804      6,060      9,156 {txt}{c |}{res}    19,020 
 
-            {txt}{c |}           Summary of loan
-       year {c |}        Mean   Std. Dev.       Freq.
-{hline 12}{c +}{hline 36}
-          0 {c |}  {res} 1397.0552    2572.465         344
-  {txt}        2 {c |}  {res} 1591.2508   3410.6981         602
-  {txt}        4 {c |}  {res} 2263.8759   5329.7454         822
-  {txt}        6 {c |}  {res} 2297.6092   4886.8551         980
-  {txt}        8 {c |}  {res}  3236.428   6566.6597        1173
-  {txt}       10 {c |}  {res} 4216.5726   13073.263        1336
-{txt}{hline 12}{c +}{hline 36}
-      Total {c |}  {res} 2849.6774   8038.1165        5257
 {txt}
-{com}. quietly tabout year using ../Output/loanStats.tex, ///
->         style(tex) ///Forces tex output
->         sum c(mean loan sd loan count loan) ///Marks as summary table (two-way)
->         replace //Replaces previous version
+{com}. quietly tabout sex race using ../Output/raceStats.tex, ///
+>         sum c(mean recloan mean loan sd loan count loan) ///
+>         style(tex) replace
 {txt}
+{com}. 
+. //Distribution of income
+. hist parInc, freq
+{txt}(bin={res}41{txt}, start={res}0{txt}, width={res}11706.902{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncHist.eps, replace
+{txt}(file ../Output/parIncHist.eps written in EPS format)
+
+{com}. graph export ../Output/parIncHist.png, replace
+{txt}(file ../Output/parIncHist.png written in PNG format)
+
+{com}. 
+. //Student debt
+. hist loan if loan, freq
+{txt}(bin={res}33{txt}, start={res}4{txt}, width={res}12121.091{txt})
+{res}{txt}
+{com}. graph export ../Output/loanHist.eps, replace
+{txt}(file ../Output/loanHist.eps written in EPS format)
+
+{com}. graph export ../Output/loanHist.png, replace
+{txt}(file ../Output/loanHist.png written in PNG format)
+
+{com}. 
+. //Student debt
+. tabulate region
+
+       {txt}region {c |}      Freq.     Percent        Cum.
+{hline 14}{c +}{hline 35}
+    NORTHEAST {c |}{res}      1,845       12.74       12.74
+{txt}NORTH CENTRAL {c |}{res}      3,882       26.80       39.54
+{txt}        SOUTH {c |}{res}      5,983       41.31       80.85
+{txt}         WEST {c |}{res}      2,773       19.15      100.00
+{txt}{hline 14}{c +}{hline 35}
+        Total {c |}{res}     14,483      100.00
+{txt}
+{com}. quietly tabout region using ../Output/regionStats.tex, ///
+>         style(tex) replace 
+{txt}
+{com}. 
+. //Major frequency
+. graph pie, over(majType) plabel(_all sum)
+{res}{txt}
+{com}. graph export ../Output/majPie.png, replace
+{txt}(file ../Output/majPie.png written in PNG format)
+
+{com}. 
+. //Debt distribution by major
+. graph box loan if recloan, over(majType)
+{res}{txt}
+{com}. graph export ../Output/DebtbyMajType.png, replace
+{txt}(file ../Output/DebtbyMajType.png written in PNG format)
+
+{com}. graph box loan if recloan, over(majType) noout
+{res}{txt}
+{com}. graph export ../Output/DebtbyMajTypeNoOut.png, replace
+{txt}(file ../Output/DebtbyMajTypeNoOut.png written in PNG format)
+
 {com}. 
 {txt}end of do-file
 
-{com}. count if loan
-{res}15935
+{com}. 
+. cd ../../Regressions/Code
+{res}C:\Users\gmoor\Desktop\honors\Regressions\Code
+{txt}
+{com}. do regs
+{txt}
+{com}. //Works both with drop and without drop
+. //without drop is slightly stronger
+. drop if year == 10
+{txt}(3170 observations deleted)
 
-{com}. count if !missing(loan)
-{res} 5257
+{com}. 
+. //Calculates log of loans
+. gen lloan = ln(loan)
+{txt}(14289 missing values generated)
 
-{com}. pwd
-{res}C:\Users\gmoor\Desktop\honors\Tables\Code
+{com}. 
+. //Dummies for each major
+. gen busMaj = maj == 7
+{txt}
+{com}. gen artMaj = maj == 15
+{txt}
+{com}. gen eduMaj = maj == 12
+{txt}
+{com}. gen  csMaj = maj == 17
+{txt}
+{com}. 
+. //Add birth year as control
+. //Introduce second stage
+. 
+. //Linear estimator
+. reg loan year cohort parInc i.race i.sex i.region
 
-{com}. cd..
-{err}unrecognized command:  cd.. invalid command name
-{txt}{search r(199):r(199);}
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    3145
+{txt}{hline 13}{char +}{hline 30}           F(  9,  3135) ={res}   11.36
+    {txt}   Model {char |} {res} 2.7980e+09     9   310893209           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 8.5766e+10  3135    27357430           {txt}R-squared     = {res} 0.0316
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0288
+    {txt}   Total {char |} {res} 8.8564e+10  3144  28169078.3           {txt}Root MSE      = {res} 5230.4
 
-{com}. cd ../..
-{res}C:\Users\gmoor\Desktop\honors
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 20}year {c |}{col 26}{res}{space 2} 150.1164{col 38}{space 2} 54.12588{col 49}{space 1}    2.77{col 58}{space 3}0.006{col 66}{space 4} 43.99062{col 79}{space 3} 256.2421
+{txt}{space 18}cohort {c |}{col 26}{res}{space 2} 565.0713{col 38}{space 2} 302.6834{col 49}{space 1}    1.87{col 58}{space 3}0.062{col 66}{space 4}-28.40642{col 79}{space 3} 1158.549
+{txt}{space 18}parInc {c |}{col 26}{res}{space 2} .0021252{col 38}{space 2} .0014506{col 49}{space 1}    1.46{col 58}{space 3}0.143{col 66}{space 4}-.0007191{col 79}{space 3} .0049695
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 823.5849{col 38}{space 2} 281.7086{col 49}{space 1}    2.92{col 58}{space 3}0.003{col 66}{space 4}  271.233{col 79}{space 3} 1375.937
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 791.9652{col 38}{space 2} 262.8285{col 49}{space 1}    3.01{col 58}{space 3}0.003{col 66}{space 4} 276.6318{col 79}{space 3} 1307.299
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2}-15.22861{col 38}{space 2} 192.8794{col 49}{space 1}   -0.08{col 58}{space 3}0.937{col 66}{space 4}-393.4113{col 79}{space 3} 362.9541
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-537.4654{col 38}{space 2} 340.0582{col 49}{space 1}   -1.58{col 58}{space 3}0.114{col 66}{space 4}-1204.225{col 79}{space 3} 129.2937
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1623.935{col 38}{space 2} 323.9739{col 49}{space 1}   -5.01{col 58}{space 3}0.000{col 66}{space 4}-2259.158{col 79}{space 3}-988.7129
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-1259.494{col 38}{space 2}   358.91{col 49}{space 1}   -3.51{col 58}{space 3}0.000{col 66}{space 4}-1963.216{col 79}{space 3}-555.7715
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2}  1812.74{col 38}{space 2} 435.7105{col 49}{space 1}    4.16{col 58}{space 3}0.000{col 66}{space 4} 958.4335{col 79}{space 3} 2667.047
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg lloan year cohort parInc i.race i.sex i.region 
 
-{com}. ls
-{txt}  <dir>  10/30/18 19:04  {res}.                 
-{txt}  <dir>  10/30/18 19:04  {res}..                
-{txt}  <dir>  10/04/18 14:42  {res}.git              
-{txt}   0.0k   8/14/18 18:12  {res}.gitignore        
-{txt}   0.6k   8/15/18 15:38  {res}Brainstorming.txt 
-{txt}  <dir>  10/30/18 17:57  {res}Master            
-{txt}   1.4k  10/24/18 11:55  {res}master.smcl       
-{txt}  <dir>  10/16/18 18:53  {res}NLSY79ParentData  
-{txt}  <dir>  10/30/18 19:05  {res}NLSYChild79Data   
-{txt}  <dir>   9/10/18 22:18  {res}Sources           
-{txt}  <dir>  10/30/18 19:05  {res}Tables            
-{txt}   0.9k  10/23/18 21:39  {res}test tobit iv.do  
-{txt}  10.4k  10/23/18 21:39  {res}test_tobit_iv_method.log
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    1283
+{txt}{hline 13}{char +}{hline 30}           F(  9,  1273) ={res}   18.79
+    {txt}   Model {char |} {res} 126.959675     9  14.1066305           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 955.572071  1273  .750645775           {txt}R-squared     = {res} 0.1173
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1110
+    {txt}   Total {char |} {res} 1082.53175  1282  .844408538           {txt}Root MSE      = {res}  .8664
 
-{com}. cd Master
-{res}C:\Users\gmoor\Desktop\honors\Master
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                   lloan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 20}year {c |}{col 26}{res}{space 2}  .059212{col 38}{space 2}  .014394{col 49}{space 1}    4.11{col 58}{space 3}0.000{col 66}{space 4} .0309735{col 79}{space 3} .0874505
+{txt}{space 18}cohort {c |}{col 26}{res}{space 2} .0986194{col 38}{space 2} .0787235{col 49}{space 1}    1.25{col 58}{space 3}0.211{col 66}{space 4}-.0558226{col 79}{space 3} .2530614
+{txt}{space 18}parInc {c |}{col 26}{res}{space 2} 2.99e-06{col 38}{space 2} 4.55e-07{col 49}{space 1}    6.57{col 58}{space 3}0.000{col 66}{space 4} 2.10e-06{col 79}{space 3} 3.88e-06
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} .1347635{col 38}{space 2}  .076436{col 49}{space 1}    1.76{col 58}{space 3}0.078{col 66}{space 4}-.0151909{col 79}{space 3} .2847179
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} .1671058{col 38}{space 2} .0740756{col 49}{space 1}    2.26{col 58}{space 3}0.024{col 66}{space 4} .0217822{col 79}{space 3} .3124294
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2}-.0964505{col 38}{space 2} .0508782{col 49}{space 1}   -1.90{col 58}{space 3}0.058{col 66}{space 4}-.1962649{col 79}{space 3} .0033639
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-.1682234{col 38}{space 2} .0803906{col 49}{space 1}   -2.09{col 58}{space 3}0.037{col 66}{space 4} -.325936{col 79}{space 3}-.0105109
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-.3429995{col 38}{space 2} .0807359{col 49}{space 1}   -4.25{col 58}{space 3}0.000{col 66}{space 4}-.5013896{col 79}{space 3}-.1846094
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-.0210423{col 38}{space 2} .0948945{col 49}{space 1}   -0.22{col 58}{space 3}0.825{col 66}{space 4}-.2072091{col 79}{space 3} .1651245
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2}   7.8671{col 38}{space 2} .1177118{col 49}{space 1}   66.83{col 58}{space 3}0.000{col 66}{space 4} 7.636169{col 79}{space 3}  8.09803
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. ivprobit busMaj year i.race i.sex i.region recloan (loan = year cohort parInc i.race i.sex i.region) if !missing(recloan)
 
-{com}. ls
-{txt}  <dir>  10/30/18 17:57  {res}.                 
-{txt}  <dir>  10/30/18 17:57  {res}..                
-{txt}   1.5k  10/24/18 22:45  {res}Master.do         
-{txt}  39.2k  10/30/18 17:58  {res}master.smcl       
+{txt}Fitting exogenous probit model
 
-{com}. do "C:\Users\gmoor\AppData\Local\Temp\STD01000000.tmp"
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-1666.8613}  
+Iteration 1:{space 3}log likelihood = {res:  -1651.29}  
+Iteration 2:{space 3}log likelihood = {res:-1651.2688}  
+Iteration 3:{space 3}log likelihood = {res:-1651.2688}  
+{res}
+{txt}Fitting full model
+{res}
+{txt}Iteration 0:{space 3}log likelihood = {res:-32119.423}  (not concave)
+Iteration 1:{space 3}log likelihood = {res:-32118.609}  (backed up)
+Iteration 2:{space 3}log likelihood = {res:-32118.131}  
+Iteration 3:{space 3}log likelihood = {res:-32118.131}  
+Iteration 4:{space 3}log likelihood = {res:-32118.131}  
+{res}
+{txt}Probit model with endogenous regressors{col 51}Number of obs{col 67}= {res}      3145
+{txt}{col 51}Wald chi2({res}9{txt}){col 67}= {res}     29.76
+{txt}Log likelihood = {res}-32118.131{txt}{col 51}Prob > chi2{col 67}= {res}    0.0005
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      z{col 58}   P>|z|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 20}loan {c |}{col 26}{res}{space 2} 2.37e-06{col 38}{space 2} .0000793{col 49}{space 1}    0.03{col 58}{space 3}0.976{col 66}{space 4} -.000153{col 79}{space 3} .0001578
+{txt}{space 20}year {c |}{col 26}{res}{space 2}  .025138{col 38}{space 2} .0194687{col 49}{space 1}    1.29{col 58}{space 3}0.197{col 66}{space 4}-.0130198{col 79}{space 3} .0632959
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} .1186813{col 38}{space 2} .0832277{col 49}{space 1}    1.43{col 58}{space 3}0.154{col 66}{space 4} -.044442{col 79}{space 3} .2818046
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2}-.0307923{col 38}{space 2} .0884669{col 49}{space 1}   -0.35{col 58}{space 3}0.728{col 66}{space 4}-.2041843{col 79}{space 3} .1425996
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2}-.2103028{col 38}{space 2} .0611512{col 49}{space 1}   -3.44{col 58}{space 3}0.001{col 66}{space 4}-.3301569{col 79}{space 3}-.0904487
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-.1812183{col 38}{space 2} .1113407{col 49}{space 1}   -1.63{col 58}{space 3}0.104{col 66}{space 4}-.3994421{col 79}{space 3} .0370056
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-.1176064{col 38}{space 2} .1175848{col 49}{space 1}   -1.00{col 58}{space 3}0.317{col 66}{space 4}-.3480683{col 79}{space 3} .1128555
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-.2274668{col 38}{space 2} .1065283{col 49}{space 1}   -2.14{col 58}{space 3}0.033{col 66}{space 4}-.4362584{col 79}{space 3}-.0186751
+{txt}{space 24} {c |}
+{space 17}recloan {c |}{col 26}{res}{space 2}-.0652084{col 38}{space 2} .4725155{col 49}{space 1}   -0.14{col 58}{space 3}0.890{col 66}{space 4}-.9913218{col 79}{space 3}  .860905
+{txt}{space 19}_cons {c |}{col 26}{res}{space 2}-.9192035{col 38}{space 2} .1292694{col 49}{space 1}   -7.11{col 58}{space 3}0.000{col 66}{space 4}-1.172567{col 79}{space 3}-.6658402
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                 /athrho {c |}{col 26}{res}{space 2}-.0144157{col 38}{space 2} .3467458{col 49}{space 1}   -0.04{col 58}{space 3}0.967{col 66}{space 4} -.694025{col 79}{space 3} .6651935
+{txt}                /lnsigma {c |}{col 26}{res}{space 2} 8.379867{col 38}{space 2} .0126088{col 49}{space 1}  664.60{col 58}{space 3}0.000{col 66}{space 4} 8.355154{col 79}{space 3} 8.404579
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                     rho{col 26}{c |}{res}{space 2}-.0144147{col 38}{space 2} .3466737{col 66}{space 4}-.6005615{col 79}{space 3} .5818093
+{col 1}{txt}                   sigma{col 26}{c |}{res}{space 2} 4358.427{col 38}{space 2} 54.95466{col 66}{space 4} 4252.038{col 79}{space 3} 4467.478
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 15 42}Instrumented:{space 2}loan{p_end}
+{p 0 15 42}Instruments:{space 3}year 2.race 3.race 2.sex 2.region 3.region 4.region recloan cohort parInc{p_end}
+{hline 90}
+Wald test of exogeneity (/athrho = 0): chi2({res}1{txt}) = {res}    0.00{txt}{col 59}Prob > chi2 = {res}0.9668
+{txt}
+{com}. 
+. //Tobit estimator
+. tobit loan year cohort parInc i.race i.sex i.region if !missing(recloan), ll
+{res}
+{txt}Tobit regression{col 51}Number of obs{col 67}= {res}      3145
+{txt}{col 51}LR chi2({res}9{txt}){col 67}= {res}    113.67
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0000
+{txt}Log likelihood = {res}-14658.797{txt}{col 51}Pseudo R2{col 67}= {res}    0.0039
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 20}year {c |}{col 26}{res}{space 2} 281.2354{col 38}{space 2} 120.8614{col 49}{space 1}    2.33{col 58}{space 3}0.020{col 66}{space 4} 44.25995{col 79}{space 3} 518.2109
+{txt}{space 18}cohort {c |}{col 26}{res}{space 2} 920.2015{col 38}{space 2}  664.815{col 49}{space 1}    1.38{col 58}{space 3}0.166{col 66}{space 4} -383.315{col 79}{space 3} 2223.718
+{txt}{space 18}parInc {c |}{col 26}{res}{space 2} -.003318{col 38}{space 2} .0033398{col 49}{space 1}   -0.99{col 58}{space 3}0.321{col 66}{space 4}-.0098663{col 79}{space 3} .0032304
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 2496.237{col 38}{space 2} 633.3165{col 49}{space 1}    3.94{col 58}{space 3}0.000{col 66}{space 4}  1254.48{col 79}{space 3} 3737.993
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2011.988{col 38}{space 2} 597.2117{col 49}{space 1}    3.37{col 58}{space 3}0.001{col 66}{space 4} 841.0228{col 79}{space 3} 3182.953
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2}  464.768{col 38}{space 2} 426.6227{col 49}{space 1}    1.09{col 58}{space 3}0.276{col 66}{space 4}  -371.72{col 79}{space 3} 1301.256
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} -447.974{col 38}{space 2} 715.9442{col 49}{space 1}   -0.63{col 58}{space 3}0.532{col 66}{space 4}-1851.741{col 79}{space 3} 955.7927
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-3426.814{col 38}{space 2} 695.4348{col 49}{space 1}   -4.93{col 58}{space 3}0.000{col 66}{space 4}-4790.368{col 79}{space 3}-2063.261
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-3626.961{col 38}{space 2} 788.9543{col 49}{space 1}   -4.60{col 58}{space 3}0.000{col 66}{space 4} -5173.88{col 79}{space 3}-2080.042
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2}-4254.088{col 38}{space 2} 977.6596{col 49}{space 1}   -4.35{col 58}{space 3}0.000{col 66}{space 4}-6171.005{col 79}{space 3} -2337.17
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                  /sigma {c |}{col 26}{res}{space 2} 9865.395{col 38}{space 2} 215.4328{col 66}{space 4} 9442.991{col 79}{space 3}  10287.8
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+  Obs. summary:{col 18}{res}     1862{col 28}{txt} left-censored observations at loan<={res}0
+{txt}{col 18}{res}     1283{col 28}{txt}    uncensored observations
+{col 18}{res}        0{col 28}{txt}right-censored observations
+
+{com}. //Get predicted tobit values
+. predict loanHat if !missing(recloan) & !missing(loan), ystar(0, .)
+{txt}(12705 missing values generated)
+
+{com}. 
+. reg loan year cohort parInc i.race i.sex i.region
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    3145
+{txt}{hline 13}{char +}{hline 30}           F(  9,  3135) ={res}   11.36
+    {txt}   Model {char |} {res} 2.7980e+09     9   310893209           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 8.5766e+10  3135    27357430           {txt}R-squared     = {res} 0.0316
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0288
+    {txt}   Total {char |} {res} 8.8564e+10  3144  28169078.3           {txt}Root MSE      = {res} 5230.4
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 20}year {c |}{col 26}{res}{space 2} 150.1164{col 38}{space 2} 54.12588{col 49}{space 1}    2.77{col 58}{space 3}0.006{col 66}{space 4} 43.99062{col 79}{space 3} 256.2421
+{txt}{space 18}cohort {c |}{col 26}{res}{space 2} 565.0713{col 38}{space 2} 302.6834{col 49}{space 1}    1.87{col 58}{space 3}0.062{col 66}{space 4}-28.40642{col 79}{space 3} 1158.549
+{txt}{space 18}parInc {c |}{col 26}{res}{space 2} .0021252{col 38}{space 2} .0014506{col 49}{space 1}    1.46{col 58}{space 3}0.143{col 66}{space 4}-.0007191{col 79}{space 3} .0049695
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 823.5849{col 38}{space 2} 281.7086{col 49}{space 1}    2.92{col 58}{space 3}0.003{col 66}{space 4}  271.233{col 79}{space 3} 1375.937
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 791.9652{col 38}{space 2} 262.8285{col 49}{space 1}    3.01{col 58}{space 3}0.003{col 66}{space 4} 276.6318{col 79}{space 3} 1307.299
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2}-15.22861{col 38}{space 2} 192.8794{col 49}{space 1}   -0.08{col 58}{space 3}0.937{col 66}{space 4}-393.4113{col 79}{space 3} 362.9541
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-537.4654{col 38}{space 2} 340.0582{col 49}{space 1}   -1.58{col 58}{space 3}0.114{col 66}{space 4}-1204.225{col 79}{space 3} 129.2937
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1623.935{col 38}{space 2} 323.9739{col 49}{space 1}   -5.01{col 58}{space 3}0.000{col 66}{space 4}-2259.158{col 79}{space 3}-988.7129
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-1259.494{col 38}{space 2}   358.91{col 49}{space 1}   -3.51{col 58}{space 3}0.000{col 66}{space 4}-1963.216{col 79}{space 3}-555.7715
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2}  1812.74{col 38}{space 2} 435.7105{col 49}{space 1}    4.16{col 58}{space 3}0.000{col 66}{space 4} 958.4335{col 79}{space 3} 2667.047
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. //Use fitted tobit values as an instrument
+. ivprobit busMaj year i.race i.sex i.region (loan = loanHat) if !missing(recloan)
+
+{txt}Fitting exogenous probit model
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-1666.8613}  
+Iteration 1:{space 3}log likelihood = {res:-1651.5415}  
+Iteration 2:{space 3}log likelihood = {res:-1651.5198}  
+Iteration 3:{space 3}log likelihood = {res:-1651.5198}  
+{res}
+{txt}Fitting full model
+{res}
+{txt}Iteration 0:{space 3}log likelihood = {res:-32689.956}  (not concave)
+Iteration 1:{space 3}log likelihood = {res:-32689.122}  (backed up)
+Iteration 2:{space 3}log likelihood = {res:-32688.596}  (not concave)
+Iteration 3:{space 3}log likelihood = {res: -32688.59}  
+Iteration 4:{space 3}log likelihood = {res:-32688.519}  
+Iteration 5:{space 3}log likelihood = {res:-32688.359}  
+Iteration 6:{space 3}log likelihood = {res:-32688.302}  
+Iteration 7:{space 3}log likelihood = {res:-32688.201}  (not concave)
+Iteration 8:{space 3}log likelihood = {res:-32688.188}  (not concave)
+Iteration 9:{space 3}log likelihood = {res:-32688.187}  
+Iteration 10:{space 2}log likelihood = {res:-32688.155}  
+Iteration 11:{space 2}log likelihood = {res:-32688.125}  
+Iteration 12:{space 2}log likelihood = {res:-32688.095}  
+Iteration 13:{space 2}log likelihood = {res:-32688.088}  
+Iteration 14:{space 2}log likelihood = {res:-32688.085}  
+Iteration 15:{space 2}log likelihood = {res:-32688.085}  
+Iteration 16:{space 2}log likelihood = {res:-32688.084}  
+Iteration 17:{space 2}log likelihood = {res:-32688.084}  
+{res}
+{txt}Probit model with endogenous regressors{col 51}Number of obs{col 67}= {res}      3145
+{txt}{col 51}Wald chi2({res}8{txt}){col 67}= {res}     99.97
+{txt}Log likelihood = {res}-32688.084{txt}{col 51}Prob > chi2{col 67}= {res}    0.0000
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      z{col 58}   P>|z|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 20}loan {c |}{col 26}{res}{space 2}-.0001442{col 38}{space 2} .0000721{col 49}{space 1}   -2.00{col 58}{space 3}0.046{col 66}{space 4}-.0002856{col 79}{space 3}-2.88e-06
+{txt}{space 20}year {c |}{col 26}{res}{space 2} .0506455{col 38}{space 2} .0108581{col 49}{space 1}    4.66{col 58}{space 3}0.000{col 66}{space 4}  .029364{col 79}{space 3} .0719269
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2}  .191361{col 38}{space 2} .0686831{col 49}{space 1}    2.79{col 58}{space 3}0.005{col 66}{space 4} .0567445{col 79}{space 3} .3259774
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} .1010162{col 38}{space 2} .0982749{col 49}{space 1}    1.03{col 58}{space 3}0.304{col 66}{space 4} -.091599{col 79}{space 3} .2936314
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2}-.1481891{col 38}{space 2} .0994658{col 49}{space 1}   -1.49{col 58}{space 3}0.136{col 66}{space 4}-.3431384{col 79}{space 3} .0467602
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-.2009947{col 38}{space 2} .0903083{col 49}{space 1}   -2.23{col 58}{space 3}0.026{col 66}{space 4}-.3779956{col 79}{space 3}-.0239938
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-.3086934{col 38}{space 2} .1024421{col 49}{space 1}   -3.01{col 58}{space 3}0.003{col 66}{space 4}-.5094762{col 79}{space 3}-.1079106
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-.3269812{col 38}{space 2}  .086407{col 49}{space 1}   -3.78{col 58}{space 3}0.000{col 66}{space 4}-.4963358{col 79}{space 3}-.1576266
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2} -.385712{col 38}{space 2} .5306474{col 49}{space 1}   -0.73{col 58}{space 3}0.467{col 66}{space 4}-1.425762{col 79}{space 3} .6543378
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                 /athrho {c |}{col 26}{res}{space 2} .9555556{col 38}{space 2} .8550146{col 49}{space 1}    1.12{col 58}{space 3}0.264{col 66}{space 4}-.7202422{col 79}{space 3} 2.631353
+{txt}                /lnsigma {c |}{col 26}{res}{space 2} 8.561204{col 38}{space 2} .0126088{col 49}{space 1}  678.99{col 58}{space 3}0.000{col 66}{space 4} 8.536491{col 79}{space 3} 8.585917
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                     rho{col 26}{c |}{res}{space 2} .7422879{col 38}{space 2}  .383909{col 66}{space 4}-.6170593{col 79}{space 3} .9896909
+{col 1}{txt}                   sigma{col 26}{c |}{res}{space 2} 5224.969{col 38}{space 2} 65.88071{col 66}{space 4} 5097.428{col 79}{space 3} 5355.702
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 15 42}Instrumented:{space 2}loan{p_end}
+{p 0 15 42}Instruments:{space 3}year 2.race 3.race 2.sex 2.region 3.region 4.region loanHat{p_end}
+{hline 90}
+Wald test of exogeneity (/athrho = 0): chi2({res}1{txt}) = {res}    1.25{txt}{col 59}Prob > chi2 = {res}0.2637
+{txt}
+{com}. /*
+> probit artMaj year loanHat i.race i.sex i.region if !missing(recloan)
+> probit eduMaj year loanHat i.race i.sex i.region if !missing(recloan)
+> probit  csMaj year loanHat i.race i.sex i.region if !missing(recloan)
+> */
+. 
+{txt}end of do-file
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoor\Desktop\honors\Regressions\Code\regs.do"
+{txt}
+{com}. //Works both with drop and without drop
+. //without drop is slightly stronger
+. drop if year == 10
+{txt}(0 observations deleted)
+
+{com}. 
+. //Calculates log of loans
+. gen lloan = ln(loan)
+{err}lloan already defined
+{txt}{search r(110):r(110);}
+
+end of do-file
+
+{search r(110):r(110);}
+
+{com}. do "C:\Users\gmoor\Desktop\honors\Master\Master.do"
 {txt}
 {com}. capture log close
 {smcl}
