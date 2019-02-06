@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.5)  5 FEB 2019 22:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.5)  5 FEB 2019 23:41
 entering extended mode
 **./Honors.tex
 (Honors.tex
@@ -695,38 +695,48 @@ LaTeX Warning: Citation 'aisch2017' on page 4 undefined on input line 66.
 
 LaTeX Warning: Citation 'eckel2007' on page 5 undefined on input line 68.
 
-[5]
-<Images/Lucca6a.png, id=23, 538.51187pt x 383.4325pt>
+[5] [6]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 83.
+
+("C:\Users\gmoore\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\omscmr.fd"
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 83.
+
+[7] [8]
+<Images/Lucca6a.png, id=38, 538.51187pt x 383.4325pt>
 File: Images/Lucca6a.png Graphic file (type png)
 <use Images/Lucca6a.png>
-Package pdftex.def Info: Images/Lucca6a.png  used on input line 87.
+Package pdftex.def Info: Images/Lucca6a.png  used on input line 111.
 (pdftex.def)             Requested size: 210.70462pt x 150.02368pt.
-<Images/Lucca6b.png, id=25, 520.94624pt x 377.41pt>
+<Images/Lucca6b.png, id=40, 520.94624pt x 377.41pt>
 File: Images/Lucca6b.png Graphic file (type png)
 <use Images/Lucca6b.png>
-Package pdftex.def Info: Images/Lucca6b.png  used on input line 93.
+Package pdftex.def Info: Images/Lucca6b.png  used on input line 117.
 (pdftex.def)             Requested size: 210.70462pt x 152.64865pt.
- [6]
-
-LaTeX Warning: Reference `incDist' on page 7 undefined on input line 101.
-
-[7 <./Images/Lucca6a.png> <./Images/Lucca6b.png>]
-
-LaTeX Warning: Reference `loanDist' on page 8 undefined on input line 103.
-
-[8] [9]
-
-LaTeX Warning: Reference `majDist' on page 10 undefined on input line 117.
 
 
-LaTeX Warning: Reference `firstStage' on page 10 undefined on input line 125.
+LaTeX Warning: Reference `incDist' on page 9 undefined on input line 125.
+
+[9 <./Images/Lucca6a.png> <./Images/Lucca6b.png>]
+
+LaTeX Warning: Reference `loanDist' on page 10 undefined on input line 127.
 
 [10] [11]
+
+LaTeX Warning: Reference `majDist' on page 12 undefined on input line 141.
+
+[12]
+
+LaTeX Warning: Reference `firstStage' on page 13 undefined on input line 149.
+
+[13] [14]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [12] [13] (Honors.aux)
+ [15] [16] (Honors.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -740,11 +750,11 @@ Package logreq Info: Writing requests to 'Honors.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 12627 strings out of 492946
- 221550 string characters out of 3125823
- 518383 words of memory out of 3000000
- 16262 multiletter control sequences out of 15000+200000
- 15517 words of font info for 102 fonts, out of 3000000 for 9000
+ 12653 strings out of 492946
+ 221970 string characters out of 3125823
+ 517383 words of memory out of 3000000
+ 16281 multiletter control sequences out of 15000+200000
+ 15676 words of font info for 104 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,11n,70p,1334b,1445s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/gmoore/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
@@ -766,9 +776,9 @@ onts/cm/cmsy7.pfb><C:/Users/gmoore/AppData/Local/Programs/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmti10.pfb><C:/Users/gmoore/AppData/Local/Programs/MiKTeX 
 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/gmoore/AppData/Local/Pr
 ograms/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Honors.pdf (13 pages, 261808 bytes).
+Output written on Honors.pdf (16 pages, 271809 bytes).
 PDF statistics:
- 114 PDF objects out of 1000 (max. 8388607)
+ 123 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  16395 words of extra memory for PDF output out of 17280 (max. 10000000)
 

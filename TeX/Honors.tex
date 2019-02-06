@@ -66,7 +66,31 @@
 	The current central paper of the literature is \textcite{rothstein2011}, which examines the impact of a ``no loans'' policy at prestigious private college ``Anon U''--implied to be Princeton University. The authors use a function of expected family contribution as an instrument for the impact of the policy, discovering that an additional \$10,000 of student debt leads students to reduce employment in the non-profit and education sectors by 5.2\% and reduce employment in low-wage sectors generally by 5.7\%. This is further corroborated by an expected \$2,000 bump in wages per \$10,000 of debt. The authors also suggest reduced debt nudges students towards more ``employable'' majors over what they describe as ``consumption'' majors. The main shortfall of this paper which I hope to correct is that Princeton students are not representative of the general population -- as of 2017, nearly 60\% of students at Princeton came from families in the top 10\% of Americans by income \parencite{aisch2017}. Other papers have examined similar phenomena in more specialized and similarly wealthy fields, finding that increased debt leads both dentists and lawyers to accept higher-paying jobs in disproportionately private practices \parencite{nicholson2015, field2009}.
 	
 	One suggestion for this form of behavior is a phenomenon called ``debt aversion,'' where borrowers are less inclined to take and carry debt than a traditional model would indicate. \textcite{burdman2005} finds many non-income factors can influence whether students choose to borrow to attend school. One of the most influential factors she found was parental attitudes towards loans, suggesting that students whose parents were debt averse were more likely to be debt averse themselves. \textcite{callender2005} find that low-income and minority students are significantly less likely to borrow, regardless of their field of study. However, \textcite{eckel2007} find that students who are debt averse are not significantly less likely to have borrowed to attend school, suggesting that we can expect to see debt aversion in our sample. 
+
+	\section{Structural Model}
 	
+	Consider a two-stage consumption model. Individuals consume in period one entirely through borrowing against period two earnings, labeled as $B$. In period one agents choose to pursue a higher-paying career path $H$ or a lower-paying career path $L$. Consumption in period two is composed of two parts, less the quantity borrowed in period one. First, $C$, non-monetary utility from the chosen career path; consider the value of altruism for working in a non-profit or the value of expression for working as an artist. The second consumption parameter in time two is monetary salary, denoted $H$ and $L$ for the higher- and lower-paying careers respectively. However, when taking career $L$, there is a risk $p$ of defaulting on your loan, in which case your monetary compensation for the period is reduced to zero, leaving only non-monetary compensation $C$. We assume that \emph{ceteris paribus} larger loans are more difficult to repay; thus, $p$ is a function increasing in $B$. Finally, there is some discount rate $r$ for the money borrowed in period one. This $r$ will favor the present, as we are examining interest-free loans for our students. This yields the following two utility functions: 
+	\begin{align}
+	\mathbb{E}\left[U_H(B)\right] &= B + H - (1 - r)B \label{highu}\\
+	\mathbb{E}\left[U_L(B)\right] &= B + C + p(B) \times L - (1 - r)B \label{lowu}
+	\end{align}
+	
+	Note that students choosing career $L$ over career $H$ suggests that equation \ref{highu} is greater than equation \ref{lowu}. Some algebra yields the following equivalence relationship: 
+	$$U_L(B) - U_H(B) > 0 \iff p(B) > \frac{H - C}{L} \label{choicecon}$$ 
+	Thus, there are five factors that could shift students from $H$ to $L$:
+	\begin{itemize}
+		\singlespacing
+		\item A decrease in $H$
+		\item An increase in $C$
+		\item An increase in $L$
+		\item A change in the definition of $p$
+		\item An increase in $B$, as $p'(B) < 0$
+	\end{itemize}
+
+	The above model is deterministic for any given student; given a fixed $H, C, L, p,$ and $B$ they will always choose the same career. Moreover, for simplicity, we allow $H, L$, and $p$ to be constant across all students, representing access to similar credit and labor markets. However, there exists idiosyncratic variation in $C$ between students; student $i$ may derive great utility from career $L$, while student $j$ may not care for $L$ at all.
+
+	Note that for each student there exists some $B^*$ such that they are indifferent between $H$ and $L$. Suppose there exists some global upper bound on borrowing $\bar{B}$ which is binding for both those on career paths $H$ and $L$. When $\bar{B}$ is increased, as shown above, this will cause some--but not all--students to shift career from $L$ to $H$ as $\bar{B}$ may shift to be greater than $B^*$ for some subset of students.
+
 	\section{HERA and Subsidized Student Loans}
 	
 	I borrow my identification strategy from \textcite{lucca2018} who examine how increased Federal subsidized credit lines impact university tuition. In 2006, the Higher Education Reconciliation Act (HERA) increased subsidized borrowing caps for the first time in fourteen years. Freshmen received boosts from \$2,625 to \$3,500 per year, while sophomores received a greater boost from \$3,500 to \$4,500 per year. Caps for older students remained static at \$5,500. While HERA also increased the availability of unsubsidized credit, Lucca and his coauthors make a compelling argument that the increase in unsubsidized loan caps had a middling effect at best on uptake for unsubsidized loans. Students who increase unsubsidized borrowing under the program shift would have to meet two criteria: first, the students would have to be well off enough to not qualify for a wholly subsidized program, and second, the students still chose to take advantage of their whole program allowance. The authors find that fewer than 1\% of the students in their sample met both of these criteria.
