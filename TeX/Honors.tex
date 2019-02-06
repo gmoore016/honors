@@ -5,7 +5,7 @@
 \author{Gideon Moore}
 
 %Bibliography info
-\usepackage[style = authoryear]{biblatex}
+\usepackage[style = authoryear, backend = bibtex]{biblatex}
 \addbibresource{Sources.bib}
 
 %Graphics info
@@ -45,33 +45,27 @@
 	
 	\section{Introduction}
 	
-	From 2000 to 2015, total undergraduate enrollment rose by 30\% from 13.2 to 17 million students \parencite{mcfarland2017}. Meanwhile, the real quantity of outstanding student debt tripled from \$340 billion to more than \$1.3 trillion over the same period \parencite{feiveson2018} with the number of students receiving loans rising from [X] to [Y].
+	From 2000 to 2015, total undergraduate enrollment rose by 30\% from 13.2 to 17 million students \parencite{mcfarland2017}. Meanwhile, the real quantity of outstanding student debt tripled from \$340 billion to more than \$1.3 trillion over the same period \parencite{feiveson2018}.
 	
 	Traditional models of investment would suggest financing methodology would not change consumer behavior--for a given student, whether they finance their education with debt or existing capital would not change their consumption decisions. However, empirically this is not the case. A survey by Nellie Mae suggests that one in six loan recipients have changed their career plans due to their debt obligation \parencite{baum2003}. This survey contained only those who had not yet defaulted on their debt--thus, as these borrowers were likely the most effected by debt, the true number is likely greater. \textcite{minicozzi2005} finds that men who take on more undergraduate debt take jobs with higher initial wages but lower year-over-year wage growth, again suggesting a real impact of what should be a purely accounting-based change. 
-	
-	CHITEJI FROM R+R P 1
 	
 	A debt subsidy could theoretically create an income effect, however even an extremely generous program promising zero interest on student debt would only increase students' income by around \$50 per year per thousand dollars borrowed--a fraction of the expected lifetime earnings of a college attendee. Thus, it is unlikely the income effect from this subsidy would be able to explain any of the behavior outlined above.
 	
 	An alternate explanation as to why debt would change students' behavior is that students may be ``debt averse,'' meaning that the act of holding debt has a negative impact on students' utility independent of any impact that debt may have on consumption. This would cause students to pay off debt more quickly than would be efficient, ``consuming'' through paying off debt ahead of schedule. Students who are minorities, low-income, or first generation are especially susceptible to this phenomenon \parencite{burdman2005, field2009, callender2005}. 
 	
+	One frequent explanation for this phenomenon is risk aversion. Given student debt is uniquely difficult to disperse, the consequences for default can be catastrophic. Thus, as students take on more debt, they risk failing to pay back their loans. It is rational, then, to gravitate to higher paying, more stable careers which could bring a higher risk of insolvency. 
+	
 	The most relevant study on debt aversion is by \textcite{field2009}. In her trial, New York University law students were randomly assigned either loan- or grant-based aid. The students assigned loans were told that their debt would be forgiven upon entry into a public service sector. Similarly, students given grants were told that, if they did \emph{not} enter the public service sector, they would be obligated to repay their grants. The two programs were designed to be financially identical--they differed only in the framing of whether the student was ``in debt.'' However, the author found that the students who were given the debt-based aid were significantly more likely to choose the high-wage, non-public-service position than their counterparts receiving grant-based aid. Given the aid packages are financially identical, the authors conclude this likely derives from some negative socio-psychological impact of carrying debt.
 	
-	COLLEGE AND CAPITAL MARKETS  
-	
-	CAN ALSO DISCUSS LACK OF ACCESS TO CREDIT FOR MANY AMERICANS IF PAPER GOES THAT ROUTE--SEE P. 150 IN ROTHSTEIN AND ROUSE
-	
 	The focus of this paper is to determine whether increases in debt lead students to change their fields of study and eventually career choices. While prior work in the literature has largely focused on policy changes within a single institution, I hope to create a more representative picture of the nation as a whole using data from the National Longitudinal Survey of Youth. In 2006, the United States raised the cap for Stafford Loans for freshmen and sophomores, creating a natural experiment wherein the students before the policy change were more limited in their access to debt than the students after the shift.
-	
-	POLICY MOTIVATION?
 	
 	[RESULTS RESULTS RESULTS]
 	
 	\section{Literature Review}
 	
-	The current central paper of the literature is \textcite{rothstein2011}, which examines the impact of a ``no loans'' policy at prestigious private college ``Anon U''--implied to be Princeton University. The authors use a function of expected family contribution as an instrument for the impact of the policy, discovering that an additional \$10,000 of student debt leads students to reduce employment in the non-profit and education sectors by 5.2\% and reduce employment in low-wage sectors generally by 5.7\%. This is further corroborated by an expected \$2,000 bump in wages per \$10,000 of debt. The authors also suggest reduced debt nudges students towards more ``employable'' majors over what they describe as ``consumption'' majors. The main shortfall of this paper which I hope to correct is that Princeton students are not representative of the general population --[CAN DISCUSS PARENTAL INCOME AND SAT SCORE HERE. HOW DO I CITE THIS DATA? https://www.nytimes.com/interactive/2017/01/18/upshot/some-colleges-have-more-students-from-the-top-1-percent-than-the-bottom-60.html]. 
+	The current central paper of the literature is \textcite{rothstein2011}, which examines the impact of a ``no loans'' policy at prestigious private college ``Anon U''--implied to be Princeton University. The authors use a function of expected family contribution as an instrument for the impact of the policy, discovering that an additional \$10,000 of student debt leads students to reduce employment in the non-profit and education sectors by 5.2\% and reduce employment in low-wage sectors generally by 5.7\%. This is further corroborated by an expected \$2,000 bump in wages per \$10,000 of debt. The authors also suggest reduced debt nudges students towards more ``employable'' majors over what they describe as ``consumption'' majors. The main shortfall of this paper which I hope to correct is that Princeton students are not representative of the general population -- as of 2017, nearly 60\% of students at Princeton came from families in the top 10\% of Americans by income \parencite{aisch2017}. Other papers have examined similar phenomena in more specialized and similarly wealthy fields, finding that increased debt leads both dentists and lawyers to accept higher-paying jobs in disproportionately private practices \parencite{nicholson2015, field2009}.
 	
-	[CAN ALSO DISCUSS MANSKI ARTICLE MEASURING EXPECTATIONS IF THAT ENDS UP BEING CORE OF THE PAPER]
+	One suggestion for this form of behavior is a phenomenon called ``debt aversion,'' where borrowers are less inclined to take and carry debt than a traditional model would indicate. \textcite{burdman2005} finds many non-income factors can influence whether students choose to borrow to attend school. One of the most influential factors she found was parental attitudes towards loans, suggesting that students whose parents were debt averse were more likely to be debt averse themselves. \textcite{callender2005} find that low-income and minority students are significantly less likely to borrow, regardless of their field of study. However, \textcite{eckel2007} find that students who are debt averse are not significantly less likely to have borrowed to attend school, suggesting that we can expect to see debt aversion in our sample. 
 	
 	\section{HERA and Subsidized Student Loans}
 	
@@ -104,9 +98,9 @@
 	
 	For my paper I use data from the National Longitudinal Survey of Youth '79 Children and Young Adults (NLSY79 CYA). A follow-up to the original National Longitudinal Survey of Youth '79, the CYA surveys the original respondents' children semiyearly from birth until the present day. Thus, we have respondents across the entire age spectrum during the implementation of the policy, allowing us to observe time-varying trends in debt acquisition and career choice. 
 	
-	The benefits of the CYA data over the Princeton data from \textcite{rothstein2011} are several. First, the NLSY is designed to focus on lower income households rather than Anon U's much wealthier sample. Second, the students in this survey attend a much broader range of colleges than those in the Rothstein data set. As the students who are accepted into prestigious universities such as Anon U are by definition selected, they \emph{cannot} be representative of the general American college-bound population. Third, the CYA surveys students both about their finances and about their career aspirations at each step of the process. Thus, not only can I track student outcomes after graduation, I am able to plot students' intentions over time, tracking variables such as intended major during their time at school. This provides a more interesting, nuanced panel as we can see how students' intentions evolve as their access to credit changes. Finally, with data from several different colleges, we can examine how college traits interact with student debt and career outcomes. 
+	The benefits of the CYA data over the Princeton data from \textcite{rothstein2011} are several. First, the NLSY is designed to focus on lower income households rather than Anon U's much wealthier sample. As visible in figure \ref{incDist}, 20\% of students come from households below the federal poverty line, as opposed to 10\% nationally. Second, the students in this survey attend a much broader range of colleges than those in the Rothstein data set. As the students who are accepted into prestigious universities such as Anon U are by definition selected, they \emph{cannot} be representative of the general American college-bound population. Third, the CYA surveys students both about their finances and about their career aspirations at each step of the process. Thus, not only can I track student outcomes after graduation, I am able to plot students' intentions over time, tracking variables such as intended major during their time at school. This provides a more interesting, nuanced panel as we can see how students' intentions evolve as their access to credit changes. Finally, with data from several different colleges, we can examine how college traits interact with student debt and career outcomes. 
 	
-	One drawback of the CYA data set is that, as a survey, many of the figures are less precise than those in other sets. For example, when asked about their level of debt, the vast majority of responses are rounded numbers. While useful for qualitative analysis, this makes it difficult to assess data granularly as done by \textcite{lucca2018} in figure \ref{luc}. Fortunately, because they have a nationally representative dataset, there is no reason to believe their results would differ with our sample. Indeed, as our sample is of lower income relative to the general population, I would argue that subjects are bound more strongly by the policy as for many students federal loans may be their only option for college financing.
+	One drawback of the CYA data set is that, as a survey, many of the figures are less precise than those in other sets. For example, when asked about their level of debt, the vast majority of responses are rounded numbers. While useful for qualitative analysis, this makes it difficult to assess data granularly as done by \textcite{lucca2018} in figure \ref{luc}. Fortunately, because they have a nationally representative dataset, there is no reason to believe their results would differ with our sample. Indeed, as our sample is of lower income relative to the general population, I would argue that subjects are bound more strongly by the policy as for many students federal loans may be their only option for college financing. In addition, as visible in figure \ref{loanDist}, we can see that 85\% of students received \$10,000 or less in debt, suggesting an additional \$1,000 would be meaningful relative to their overall quantity. 
 	
 	Because of the connection between the CYA and original NLSY79, we can import very rich background information for each of our participants. Specifically, for each student we can identify parental income for the year in question among other background traits inherited from parents.
 	
@@ -114,21 +108,21 @@
 	
 	Our data set is a balanced panel of students surveyed every other year over the years 2000-2010. We conduct a two-stage least squares regression, using exposure to the increased student loan caps as an instrument for total student debt. Note, however, that debt is inherently censored below--students can only have positive values of debt, and those who would receive ``negative'' values are instead observed as 0. Due to this idiosyncrasy, I approach my first stage regression with two strategies.
 	
-	First, I attempt to use a Tobit model to forecast values for debt. Thus, I would like my first stage model to be $$\ln(debt)_{it} = \delta_0 + \delta_1 treatment_{it} + \delta_2 year_t + \vec{\gamma}^T \vec{\mbox{demographics}}_i + \mu_{it}$$ However, projected values from the Tobit using this model would fail, as errors are only guaranteed to be uncorrelated with fitted values under Ordinary Least Squares. Therefore I use a method suggested by \textcite{angrist2009} whereby the fitted Tobit values are used as an instrument for debt themselves. Thus, we calculate a pre-first stage such that $$\ln(\widehat{debt}')_{it} = \alpha_0 + \alpha_1 \widehat{debt}_{it} + \alpha_2 year_t + \vec{\upsilon}^T \vec{\mbox{demographics}}_i + \mu_{it}$$ These projected values are then used as the values for debt in the second stage. 
-	
-	[JUSTIFY USE OF CONTROLS]
-	
-	An alternative specification is that outlined in [PAPER HANDLING WITH DUMMY]. Here, we run our first stage only on students who \emph{have} debt. 
-	
-	%our first stage equation for students who have debt $> 0$ is $$\ln(\mbox{debt})_{it} = \delta_0 + \delta_1 \mbox{year}_t + \delta_2 \mbox{year $\times$ cohort} + \vec{\gamma}^T \vec{\mbox{demographics}}_i + \mu_{it}$$ In this regression, demographics include traits such as sex, race, parental income, and region of the country where the student lives. 
+	First, I attempt to use a Tobit model to forecast values for debt. Thus, I would like my first stage model to be $$\ln(debt)_{it} = \delta_0 + \delta_1 treatment_{it} + \delta_2 year_t + \delta_3 parentIncome_{it} + \vec{\gamma}^T \vec{\mbox{demographics}}_i + \mu_{it}$$ However, projected values from the Tobit using this model would fail, as errors are only guaranteed to be uncorrelated with fitted values under Ordinary Least Squares. Therefore I use a method suggested by \textcite{angrist2009} whereby the fitted Tobit values are used as an instrument for debt themselves. Thus, we calculate a pre-first stage such that $$\ln(\widehat{debt}')_{it} = \alpha_0 + \alpha_1 \widehat{debt}_{it} + \alpha_2 year_t + \alpha_3 parentIncome_{it} + \vec{\upsilon}^T \vec{\mbox{demographics}}_i + \mu_{it}$$ These projected values are then used as the values for debt in the second stage. 
 	
 	Using these estimates, we can then produce a second stage regression estimating a variety of career outcomes. For example, we estimate the probability of graduationg with various majors for each student. 
 	
-	In this example, the model would be $$\mathbb{P}(\mbox{major}_i) = \beta_0 + \beta_1 \widehat{\ln(\mbox{debt})}_{it} + \beta_2 \mbox{hasDebt}_{it} \times \widehat{\ln(\mbox{debt})}_{it} + \vec{\xi}^T \vec{\mbox{demographics}}_i + \epsilon_{it}$$ Note we must have a dummy for whether a student has debt interacted with debt itself due to the bottom censorship of the variable. 
+	In this example, the model would be $$Y = \beta_0 + \beta_1 \widehat{\ln(\mbox{debt})}_{it} + \beta_2 \mbox{hasDebt}_{it} \times \widehat{\ln(\mbox{debt})}_{it} + \vec{\xi}^T \vec{\mbox{demographics}}_i + \epsilon_{it}$$ where $Y$ is some outcome variable. There exist a selection of potential outcome variables worth examining.
 	
-	[ALSO CAN ADD EXPECTED EARNINGS ON LEFT SIDE ONCE I ADD THAT DATA]
+	Our first model will place major choice on the left hand side. I believe this to be the most novel outcome of interest, as datasets have this level of resolution on their observations. Here I can use a random variable logit model to place students into one of six bins: humanities, STEM, Social Science, Professional, Business, and Pre-Grad. The specifications of these bins can be found in the appendix, and we will adjust these bins later as a form of robustness testing. The distribution of students broken down by major is visible in figure \ref{majDist}.
+	
+	Our second model will be examining students' career outcomes.
+	
+	Our final model will be directly examining students' final incomes.
 	
 	\section{Results}
+	
+	For testing of the first stage, we find that there exists a significant positive impact on debt of being in the treated cohort, as visible in table \ref{firstStage}. This sample was calculated using the observations from 2006--2010. While the result is only significant at the 6\% level, I feel confident with this instrument both because \textcite{lucca2018} find it it do be significant and because the survey-based nature of our data would be expected to widen the standard errors.
 	
 	\blindtext
 	

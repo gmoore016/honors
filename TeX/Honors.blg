@@ -1,18 +1,8 @@
-[0] Config.pm:354> INFO - This is Biber 2.7
-[0] Config.pm:357> INFO - Logfile is 'Honors.blg'
-[44] biber-MSWIN64:303> INFO - === 
-[73] Biber.pm:359> INFO - Reading 'Honors.bcf'
-[193] Biber.pm:835> INFO - Found 10 citekeys in bib section 0
-[210] Biber.pm:3670> INFO - Processing section 0
-[232] Biber.pm:3840> INFO - Looking for bibtex format file 'Sources.bib' for section 0
-[251] bibtex.pm:1435> INFO - Decoding LaTeX character macros into UTF-8
-[260] bibtex.pm:1292> INFO - Found BibTeX data source 'Sources.bib'
-[319] Utils.pm:164> WARN - ISBN '978-0-691-12034-8 978-0-691-12035-5' in entry 'angrist2009' is invalid - run biber with '--validate_datamodel' for details.
-[373] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[373] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[374] Biber.pm:3499> INFO - Sorting list 'nyt/global/' of type 'entry' with scheme 'nyt' and locale 'en-US'
-[374] Biber.pm:3505> INFO - No sort tailoring available for locale 'en-US'
-[390] bbl.pm:608> INFO - Writing 'Honors.bbl' with encoding 'ascii'
-[394] Utils.pm:164> WARN - The entry 'angrist2009' has characters which cannot be encoded in 'ascii'. Recoding problematic characters into macros.
-[398] bbl.pm:712> INFO - Output to Honors.bbl
-[399] Biber.pm:109> INFO - WARNINGS: 2
+This is BibTeX, Version 0.99dThe top-level auxiliary file: Honors.aux
+The style file: biblatex.bst
+Database file #1: Honors-blx.bib
+Database file #2: Sources.bib
+Warning--I didn't find a database entry for "aisch2017"
+Warning--I didn't find a database entry for "eckel2007"
+Biblatex version: 3.11
+(There were 2 warnings)

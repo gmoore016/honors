@@ -1,10 +1,10 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 2.8 $
+% $ biblatex bbl format version 3.0 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
-% This file may safely be deleted. It will be recreated by
-% biber as required.
+% This file may safely be deleted. It will be recreated as
+% required.
 %
 \begingroup
 \makeatletter
@@ -16,443 +16,576 @@
   {}
 \endgroup
 
+\datalist[entry]{nyt/global//global/global}
+  \entry{angrist2009}{book}{}
+    \name{author}{2}{}{%
+      {{hash=AJD}{%
+         family={Angrist},
+         familyi={A\bibinitperiod},
+         given={Joshua\bibnamedelima David},
+         giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=PJS}{%
+         family={Pischke},
+         familyi={P\bibinitperiod},
+         given={J\"orn-Steffen},
+         giveni={J\bibinithyphendelim S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {{Princeton University Press}}%
+    }
+    \keyw{Econometrics,Regression analysis}
+    \strng{namehash}{AJDPJS1}
+    \strng{fullhash}{AJDPJS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{shorttitle}
+    \field{labelyear}{2009}
+    \field{labeldatesource}{year}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{isbn}{978-0-691-12034-8 978-0-691-12035-5}
+    \field{note}{OCLC: ocn231586808}
+    \field{pagetotal}{373}
+    \field{shorttitle}{Mostly Harmless Econometrics}
+    \field{title}{Mostly Harmless Econometrics: An Empiricist's Companion}
+    \list{location}{1}{%
+      {{Princeton}}%
+    }
+    \field{year}{2009}
+  \endentry
 
-\refsection{0}
-  \sortlist[entry]{nyt/global/}
-    \entry{angrist2009}{book}{}
-      \name{author}{2}{}{%
-        {{uniquename=0,hash=f5ec0d3fc432a434d9adc3d886d9b074}{%
-           family={Angrist},
-           familyi={A\bibinitperiod},
-           given={Joshua\bibnamedelima David},
-           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
-        {{uniquename=0,hash=a371aa94a6e25bcbee7d55da6003fbe6}{%
-           family={Pischke},
-           familyi={P\bibinitperiod},
-           given={J\"{o}rn-Steffen},
-           giveni={J\bibinithyphendelim S\bibinitperiod}}}%
-      }
-      \list{location}{1}{%
-        {Princeton}%
-      }
-      \list{publisher}{1}{%
-        {Princeton University Press}%
-      }
-      \strng{namehash}{5920c0438c66c358f00cf689a5133a83}
-      \strng{fullhash}{5920c0438c66c358f00cf689a5133a83}
-      \strng{authornamehash}{5920c0438c66c358f00cf689a5133a83}
-      \strng{authorfullhash}{5920c0438c66c358f00cf689a5133a83}
-      \field{sortinit}{A}
-      \field{sortinithash}{3248043b5fe8d0a34dab5ab6b8d4309b}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{isbn}{978-0-691-12034-8 978-0-691-12035-5}
-      \field{note}{OCLC: ocn231586808}
-      \field{pagetotal}{373}
-      \field{shorttitle}{Mostly Harmless Econometrics}
-      \field{title}{Mostly Harmless Econometrics: An Empiricist's Companion}
-      \field{year}{2009}
-      \field{dateera}{ce}
-      \keyw{Econometrics,Regression analysis}
-    \endentry
-    \entry{baum2003}{article}{}
-      \name{author}{2}{}{%
-        {{uniquename=0,hash=f3f300f4c4e659d40d784e40d93bc962}{%
-           family={Baum},
-           familyi={B\bibinitperiod},
-           given={Sandy},
-           giveni={S\bibinitperiod}}}%
-        {{uniquename=0,hash=c75ddaed5629fca5b5f841333f6d72bb}{%
-           family={O'Malley},
-           familyi={O\bibinitperiod},
-           given={Marie},
-           giveni={M\bibinitperiod}}}%
-      }
-      \strng{namehash}{531c33fa60e9b0b499b464c1e64bc434}
-      \strng{fullhash}{531c33fa60e9b0b499b464c1e64bc434}
-      \strng{authornamehash}{531c33fa60e9b0b499b464c1e64bc434}
-      \strng{authorfullhash}{531c33fa60e9b0b499b464c1e64bc434}
-      \field{sortinit}{B}
-      \field{sortinithash}{5f6fa000f686ee5b41be67ba6ff7962d}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{langid}{english}
-      \field{number}{3}
-      \field{title}{College on {{Credit}}: {{How Borrowers Perceive Their Education Debt}}}
-      \field{volume}{33}
-      \field{year}{2003}
-      \field{dateera}{ce}
-      \field{pages}{14}
-      \range{pages}{1}
-      \verb{file}
-      \verb C:\\Users\\gmoor\\Zotero\\storage\\RSESDMRR\\Baum and O'Malley - 2003 - College on Credit How Borrowers Perceive Their Ed.pdf
-      \endverb
-    \endentry
-    \entry{burdman2005}{report}{}
-      \name{author}{1}{}{%
-        {{uniquename=0,hash=567cd31fec525ffa3c3f90a40ecd9e2e}{%
-           family={Burdman},
-           familyi={B\bibinitperiod},
-           given={Pamela},
-           giveni={P\bibinitperiod}}}%
-      }
-      \list{institution}{1}{%
-        {U. C. Berkeley Center for Studies in Higher Education}%
-      }
-      \strng{namehash}{567cd31fec525ffa3c3f90a40ecd9e2e}
-      \strng{fullhash}{567cd31fec525ffa3c3f90a40ecd9e2e}
-      \strng{authornamehash}{567cd31fec525ffa3c3f90a40ecd9e2e}
-      \strng{authorfullhash}{567cd31fec525ffa3c3f90a40ecd9e2e}
-      \field{sortinit}{B}
-      \field{sortinithash}{5f6fa000f686ee5b41be67ba6ff7962d}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{month}{10}
-      \field{number}{CSHE.13.05}
-      \field{series}{Research \& Occasional Paper Series}
-      \field{title}{The {{Student Debt Dilemma}}: {{Debt Aversion}} as a {{Barrier}} to {{College Access}}}
-      \field{year}{2005}
-      \field{dateera}{ce}
-      \verb{file}
-      \verb C:\\Users\\gmoor\\Zotero\\storage\\4XUYTMZK\\rop.burdman.13.05.pdf
-      \endverb
-    \endentry
-    \entry{callender2005}{article}{}
-      \name{author}{2}{}{%
-        {{uniquename=0,hash=42619ab3c4bb78a67d1aff828ebd04e9}{%
-           family={Callender},
-           familyi={C\bibinitperiod},
-           given={Claire},
-           giveni={C\bibinitperiod}}}%
-        {{uniquename=0,hash=b04935a3e28a824f1f0b916b33c8f377}{%
-           family={Jackson},
-           familyi={J\bibinitperiod},
-           given={Jonathan},
-           giveni={J\bibinitperiod}}}%
-      }
-      \strng{namehash}{4efdbfea7d6edafb8f8f59e7c86c872a}
-      \strng{fullhash}{4efdbfea7d6edafb8f8f59e7c86c872a}
-      \strng{authornamehash}{4efdbfea7d6edafb8f8f59e7c86c872a}
-      \strng{authorfullhash}{4efdbfea7d6edafb8f8f59e7c86c872a}
-      \field{sortinit}{C}
-      \field{sortinithash}{095692fd22cc3c74d7fe223d02314dbd}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Journal of Social Policy}
-      \field{month}{10}
-      \field{number}{4}
-      \field{title}{Does the {{Fear}} of {{Debt Deter Students}} from {{Higher Education}}?}
-      \field{volume}{34}
-      \field{year}{2005}
-      \field{dateera}{ce}
-      \field{pages}{509\bibrangedash 540}
-      \range{pages}{32}
-      \verb{file}
-      \verb C:\\Users\\gmoor\\Zotero\\storage\\I3G8V7L4\\out.pdf
-      \endverb
-    \endentry
-    \entry{feiveson2018}{article}{}
-      \name{author}{3}{}{%
-        {{uniquename=0,hash=8612420c178b4ea2e2618d7f217cd3ac}{%
-           family={Feiveson},
-           familyi={F\bibinitperiod},
-           given={Laura},
-           giveni={L\bibinitperiod}}}%
-        {{uniquename=0,hash=b0a070ce4d46ce401634958db3155733}{%
-           family={Mezza},
-           familyi={M\bibinitperiod},
-           given={Alvaro},
-           giveni={A\bibinitperiod}}}%
-        {{uniquename=0,hash=3d68445bb8fa8038e822cd10e7541178}{%
-           family={Sommer},
-           familyi={S\bibinitperiod},
-           given={Kamila},
-           giveni={K\bibinitperiod}}}%
-      }
-      \strng{namehash}{3130d2687426f49d4a63a0cf95f6f73a}
-      \strng{fullhash}{3130d2687426f49d4a63a0cf95f6f73a}
-      \strng{authornamehash}{3130d2687426f49d4a63a0cf95f6f73a}
-      \strng{authorfullhash}{3130d2687426f49d4a63a0cf95f6f73a}
-      \field{sortinit}{F}
-      \field{sortinithash}{276475738cc058478c1677046f857703}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{issn}{2380-7172}
-      \field{journaltitle}{FEDS Notes}
-      \field{month}{2}
-      \field{number}{2127}
-      \field{title}{Student {{Loan Debt}} and {{Aggregate Consumption Growth}}}
-      \field{volume}{2018}
-      \field{year}{2018}
-      \field{dateera}{ce}
-      \verb{doi}
-      \verb 10.17016/2380-7172.2127
-      \endverb
-    \endentry
-    \entry{field2009}{article}{}
-      \name{author}{1}{}{%
-        {{uniquename=0,hash=629d59402293ffebc27d2ed4dcee4f8a}{%
-           family={Field},
-           familyi={F\bibinitperiod},
-           given={Erica},
-           giveni={E\bibinitperiod}}}%
-      }
-      \strng{namehash}{629d59402293ffebc27d2ed4dcee4f8a}
-      \strng{fullhash}{629d59402293ffebc27d2ed4dcee4f8a}
-      \strng{authornamehash}{629d59402293ffebc27d2ed4dcee4f8a}
-      \strng{authorfullhash}{629d59402293ffebc27d2ed4dcee4f8a}
-      \field{sortinit}{F}
-      \field{sortinithash}{276475738cc058478c1677046f857703}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{American Economic Journal: Applied Economics}
-      \field{number}{1}
-      \field{title}{Educational {{Debt Burden}} and {{Career Choice}}: {{Evidence}} from a {{Financial Aid Experiment}} at {{NYU Law School}}}
-      \field{urlday}{21}
-      \field{urlmonth}{11}
-      \field{urlyear}{2018}
-      \field{volume}{1}
-      \field{year}{2009}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \field{pages}{1\bibrangedash 21}
-      \range{pages}{21}
-      \verb{file}
-      \verb C:\\Users\\gmoor\\Zotero\\storage\\4N7AKRLR\\25760145.pdf
-      \endverb
-      \verb{url}
-      \verb https://www-jstor-org.ezproxy.bowdoin.edu/stable/pdf/25760145.pdf?refreqid=excelsior%3Ae250b6ff7cc574a78cf7a242d247a794
-      \endverb
-    \endentry
-    \entry{lucca2018}{article}{}
-      \name{author}{3}{}{%
-        {{uniquename=0,hash=8d513c4b6b7bc29373b7ad09cc2127fd}{%
-           family={Lucca},
-           familyi={L\bibinitperiod},
-           given={David\bibnamedelima O},
-           giveni={D\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
-        {{uniquename=0,hash=90c6dd1711d430af628a30e9e8b7d308}{%
-           family={Nadauld},
-           familyi={N\bibinitperiod},
-           given={Taylor},
-           giveni={T\bibinitperiod}}}%
-        {{uniquename=0,hash=612ce1fdced28ac6ddecedd2b0fa6793}{%
-           family={Shen},
-           familyi={S\bibinitperiod},
-           given={Karen},
-           giveni={K\bibinitperiod}}}%
-      }
-      \strng{namehash}{1f3d79a031ba44f9474447af7410a8a5}
-      \strng{fullhash}{1f3d79a031ba44f9474447af7410a8a5}
-      \strng{authornamehash}{1f3d79a031ba44f9474447af7410a8a5}
-      \strng{authorfullhash}{1f3d79a031ba44f9474447af7410a8a5}
-      \field{sortinit}{L}
-      \field{sortinithash}{7bba64db83423e3c29ad597f3b682cf3}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{day}{21}
-      \field{issn}{0893-9454, 1465-7368}
-      \field{journaltitle}{The Review of Financial Studies}
-      \field{langid}{english}
-      \field{month}{6}
-      \field{shorttitle}{Credit {{Supply}} and the {{Rise}} in {{College Tuition}}}
-      \field{title}{Credit {{Supply}} and the {{Rise}} in {{College Tuition}}: {{Evidence}} from the {{Expansion}} in {{Federal Student Aid Programs}}}
-      \field{year}{2018}
-      \field{dateera}{ce}
-      \verb{doi}
-      \verb 10.1093/rfs/hhy069
-      \endverb
-      \verb{file}
-      \verb C:\\Users\\gmoor\\Zotero\\storage\\NMWFKF3M\\Lucca et al. - 2018 - Credit Supply and the Rise in College Tuition Evi.pdf
-      \endverb
-    \endentry
-    \entry{mcfarland2017}{report}{useprefix=true}
-      \name{author}{15}{}{%
-        {{uniquename=0,hash=304d5e36e6267ff4a65f1dafff75a6d7}{%
-           family={McFarland},
-           familyi={M\bibinitperiod},
-           given={Joel},
-           giveni={J\bibinitperiod}}}%
-        {{uniquename=0,hash=fe2895dc77cf3f6f6ebb28ec72d3cec2}{%
-           family={Hussar},
-           familyi={H\bibinitperiod},
-           given={Bill},
-           giveni={B\bibinitperiod}}}%
-        {{uniquename=0,hash=1497beb3e7f87a615e65be157af765f4}{%
-           family={Brey},
-           familyi={B\bibinitperiod},
-           given={Cristobal},
-           giveni={C\bibinitperiod},
-           prefix={de},
-           prefixi={d\bibinitperiod}}}%
-        {{uniquename=0,hash=212fcf9c0a2987ef649c9d75e4fd1291}{%
-           family={Snyder},
-           familyi={S\bibinitperiod},
-           given={Tom},
-           giveni={T\bibinitperiod}}}%
-        {{uniquename=0,hash=66a2746de95223ec2e9e78a901ee1cf8}{%
-           family={Wang},
-           familyi={W\bibinitperiod},
-           given={Xiaolei},
-           giveni={X\bibinitperiod}}}%
-        {{uniquename=0,hash=5189689afbe9b03d110fd877546675a3}{%
-           family={Wilkinson-Flicker},
-           familyi={W\bibinithyphendelim F\bibinitperiod},
-           given={Sidney},
-           giveni={S\bibinitperiod}}}%
-        {{uniquename=0,hash=498ebdfc9b0a58e239a42f6f65d9d545}{%
-           family={Gebrekristos},
-           familyi={G\bibinitperiod},
-           given={Semhar},
-           giveni={S\bibinitperiod}}}%
-        {{uniquename=0,hash=23d6ab0bbbd57fbed45efd5ae334c718}{%
-           family={Zhang},
-           familyi={Z\bibinitperiod},
-           given={Jijun},
-           giveni={J\bibinitperiod}}}%
-        {{uniquename=0,hash=e591545c723da5a2a6ec72e6a34dbef6}{%
-           family={Rathbun},
-           familyi={R\bibinitperiod},
-           given={Amy},
-           giveni={A\bibinitperiod}}}%
-        {{uniquename=0,hash=2770a10e6e3fb6e8fbdeabefbac4cbe5}{%
-           family={Barmer},
-           familyi={B\bibinitperiod},
-           given={Amy},
-           giveni={A\bibinitperiod}}}%
-        {{uniquename=0,hash=8756c1a54896a4cd69fcb495fd10bfd3}{%
-           family={Mann},
-           familyi={M\bibinitperiod},
-           given={Farrah\bibnamedelima Bullock},
-           giveni={F\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
-        {{uniquename=0,hash=12b32279b3809faa71824bb21bfc670a}{%
-           family={Hinz},
-           familyi={H\bibinitperiod},
-           given={Serena},
-           giveni={S\bibinitperiod}}}%
-        {{uniquename=0,hash=b7ecd0b7e0d84cce0e961056c001723d}{%
-           family={Nachazel},
-           familyi={N\bibinitperiod},
-           given={Thomas},
-           giveni={T\bibinitperiod}}}%
-        {{uniquename=0,hash=21b5e2950cd16826a4dccc647cb88f26}{%
-           family={Smith},
-           familyi={S\bibinitperiod},
-           given={Wyatt},
-           giveni={W\bibinitperiod}}}%
-        {{uniquename=0,hash=d1c18f20626373e4998d975bf558e295}{%
-           family={Ossolinski},
-           familyi={O\bibinitperiod},
-           given={Mark},
-           giveni={M\bibinitperiod}}}%
-      }
-      \strng{namehash}{03e01f100c4c1d4484c2e95a1012b04a}
-      \strng{fullhash}{f03a9e5117c5aa9f03f9b66632acdb86}
-      \strng{authornamehash}{03e01f100c4c1d4484c2e95a1012b04a}
-      \strng{authorfullhash}{f03a9e5117c5aa9f03f9b66632acdb86}
-      \field{sortinit}{M}
-      \field{sortinithash}{c26a05ef03e4429073ed5c825140fac3}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{langid}{english}
-      \field{number}{NCES 2017-144}
-      \field{series}{The Condition of Education}
-      \field{title}{The {{Condition}} of {{Education}}}
-      \field{year}{2017}
-      \field{dateera}{ce}
-      \field{pages}{116\bibrangedash 121}
-      \range{pages}{6}
-      \verb{file}
-      \verb C:\\Users\\gmoor\\Zotero\\storage\\ET975KTQ\\McFarland et al. - The Condition of Education 2017.pdf
-      \endverb
-    \endentry
-    \entry{minicozzi2005}{article}{}
-      \name{author}{1}{}{%
-        {{uniquename=0,hash=8d49731e872e22d5b464ea1a71e5f887}{%
-           family={Minicozzi},
-           familyi={M\bibinitperiod},
-           given={Alexandra},
-           giveni={A\bibinitperiod}}}%
-      }
-      \strng{namehash}{8d49731e872e22d5b464ea1a71e5f887}
-      \strng{fullhash}{8d49731e872e22d5b464ea1a71e5f887}
-      \strng{authornamehash}{8d49731e872e22d5b464ea1a71e5f887}
-      \strng{authorfullhash}{8d49731e872e22d5b464ea1a71e5f887}
-      \field{sortinit}{M}
-      \field{sortinithash}{c26a05ef03e4429073ed5c825140fac3}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{This paper studies the effect of educational debt on a college attendee's future wage and wage growth. I hypothesize that those who took larger loans to pay for college are subject to higher borrowing interest rates and thus prefer income profiles with higher initial earnings, sacrificing future income growth, relative to those who did not take on large educational debt. Using data for men in the 1987 National Postsecondary Student Aid Survey, I find that higher educational debt is associated with higher initial wage rate the year after finishing school and lower wage growth over the next 4 years.}
-      \field{issn}{02727757}
-      \field{journaltitle}{Economics of Education Review}
-      \field{langid}{english}
-      \field{month}{8}
-      \field{number}{4}
-      \field{title}{The Short Term Effect of Educational Debt on Job Decisions}
-      \field{volume}{24}
-      \field{year}{2005}
-      \field{dateera}{ce}
-      \field{pages}{417\bibrangedash 430}
-      \range{pages}{14}
-      \verb{doi}
-      \verb 10.1016/j.econedurev.2004.05.008
-      \endverb
-      \verb{file}
-      \verb C:\\Users\\gmoor\\Zotero\\storage\\NM82BG77\\Minicozzi - 2005 - The short term effect of educational debt on job d.pdf
-      \endverb
-    \endentry
-    \entry{rothstein2011}{article}{}
-      \name{author}{2}{}{%
-        {{uniquename=0,hash=19192fe53caa301de3ea1ecacca56af9}{%
-           family={Rothstein},
-           familyi={R\bibinitperiod},
-           given={Jesse},
-           giveni={J\bibinitperiod}}}%
-        {{uniquename=0,hash=e874efd1490f44516c5e810399cfcbf6}{%
-           family={Rouse},
-           familyi={R\bibinitperiod},
-           given={Cecilia\bibnamedelima Elena},
-           giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
-      }
-      \strng{namehash}{eb8662ef873f0a14d16981d0feb0195a}
-      \strng{fullhash}{eb8662ef873f0a14d16981d0feb0195a}
-      \strng{authornamehash}{eb8662ef873f0a14d16981d0feb0195a}
-      \strng{authorfullhash}{eb8662ef873f0a14d16981d0feb0195a}
-      \field{sortinit}{R}
-      \field{sortinithash}{c15bc8eb6936bc6b3c8baa9e8575af53}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{abstract}{In the early 2000s, a highly selective university introduced a ``no-loans'' policy under which the loan component of financial aid awards was replaced with grants. We use this natural experiment to identify the causal effect of student debt on employment outcomes. In the standard life-cycle model, young people make optimal educational investment decisions if they are able to finance these investments by borrowing against future earnings; the presence of debt has only income effects on investment decisions. We find that debt causes graduates to choose substantially higher-salary jobs and reduces the probability that students choose low-paid ``public interest'' jobs. We also find some evidence that debt affects students' academic decisions during college. Our estimates suggest that recent college graduates are not life-cycle agents. Two potential explanations are that young workers are credit constrained or that they are averse to holding debt. We find suggestive evidence that debt reduces students' donations to the institution in the years after they graduate and increases the likelihood that a graduate will default on a pledge made during her senior year; we argue this result is more likely consistent with credit constraints than with debt aversion.}
-      \field{issn}{00472727}
-      \field{journaltitle}{Journal of Public Economics}
-      \field{langid}{english}
-      \field{month}{2}
-      \field{number}{1-2}
-      \field{shorttitle}{Constrained after College}
-      \field{title}{Constrained after College: {{Student}} Loans and Early-Career Occupational Choices}
-      \field{volume}{95}
-      \field{year}{2011}
-      \field{dateera}{ce}
-      \field{pages}{149\bibrangedash 163}
-      \range{pages}{15}
-      \verb{doi}
-      \verb 10.1016/j.jpubeco.2010.09.015
-      \endverb
-      \verb{file}
-      \verb C:\\Users\\gmoor\\Zotero\\storage\\6RBVTIHL\\Rothstein and Rouse - 2011 - Constrained after college Student loans and early.pdf;C:\\Users\\gmoor\\Zotero\\storage\\967WEGVR\\Rothstein and Rouse - 2011 - Constrained after college Student loans and early.pdf;C:\\Users\\gmoor\\Zotero\\storage\\GP4S3T9T\\Rothstein and Rouse - 2011 - Constrained after college Student loans and early.pdf
-      \endverb
-    \endentry
-  \endsortlist
-\endrefsection
+  \entry{baum2003}{article}{}
+    \name{author}{2}{}{%
+      {{hash=BS}{%
+         family={Baum},
+         familyi={B\bibinitperiod},
+         given={Sandy},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=OM}{%
+         family={O'Malley},
+         familyi={O\bibinitperiod},
+         given={Marie},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BSOM1}
+    \strng{fullhash}{BSOM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2003}
+    \field{labeldatesource}{year}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{number}{3}
+    \field{pages}{14}
+    \field{title}{College on {{Credit}}: {{How Borrowers Perceive Their
+  Education Debt}}}
+    \field{volume}{33}
+    \field{langid}{english}
+    \verb{file}
+    \verb C:\\Users\\gmoor\\Zotero\\storage\\RSESDMRR\\Baum and O'Malley - 2003
+    \verb  - College on Credit How Borrowers Perceive Their Ed.pdf
+    \endverb
+    \field{year}{2003}
+  \endentry
+
+  \entry{burdman2005}{report}{}
+    \name{author}{1}{}{%
+      {{hash=BP}{%
+         family={Burdman},
+         familyi={B\bibinitperiod},
+         given={Pamela},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BP1}
+    \strng{fullhash}{BP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2005}
+    \field{labeldatesource}{year}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{number}{CSHE.13.05}
+    \field{series}{Research \& Occasional Paper Series}
+    \field{title}{The {{Student Debt Dilemma}}: {{Debt Aversion}} as a
+  {{Barrier}} to {{College Access}}}
+    \list{institution}{1}{%
+      {{U. C. Berkeley Center for Studies in Higher Education}}%
+    }
+    \verb{file}
+    \verb C:\\Users\\gmoor\\Zotero\\storage\\4XUYTMZK\\rop.burdman.13.05.pdf
+    \endverb
+    \field{month}{10}
+    \field{year}{2005}
+  \endentry
+
+  \entry{callender2005}{article}{}
+    \name{author}{2}{}{%
+      {{hash=CC}{%
+         family={Callender},
+         familyi={C\bibinitperiod},
+         given={Claire},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=JJ}{%
+         family={Jackson},
+         familyi={J\bibinitperiod},
+         given={Jonathan},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CCJJ1}
+    \strng{fullhash}{CCJJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2005}
+    \field{labeldatesource}{year}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{number}{4}
+    \field{pages}{509\bibrangedash 540}
+    \field{title}{Does the {{Fear}} of {{Debt Deter Students}} from {{Higher
+  Education}}?}
+    \field{volume}{34}
+    \verb{file}
+    \verb C:\\Users\\gmoor\\Zotero\\storage\\I3G8V7L4\\out.pdf
+    \endverb
+    \field{journaltitle}{Journal of Social Policy}
+    \field{month}{10}
+    \field{year}{2005}
+  \endentry
+
+  \entry{feiveson2018}{article}{}
+    \name{author}{3}{}{%
+      {{hash=FL}{%
+         family={Feiveson},
+         familyi={F\bibinitperiod},
+         given={Laura},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=MA}{%
+         family={Mezza},
+         familyi={M\bibinitperiod},
+         given={Alvaro},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SK}{%
+         family={Sommer},
+         familyi={S\bibinitperiod},
+         given={Kamila},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FLMASK1}
+    \strng{fullhash}{FLMASK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2018}
+    \field{labeldatesource}{year}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \verb{doi}
+    \verb 10.17016/2380-7172.2127
+    \endverb
+    \field{issn}{2380-7172}
+    \field{number}{2127}
+    \field{title}{Student {{Loan Debt}} and {{Aggregate Consumption Growth}}}
+    \field{volume}{2018}
+    \field{journaltitle}{FEDS Notes}
+    \field{month}{02}
+    \field{year}{2018}
+  \endentry
+
+  \entry{field2009}{article}{}
+    \name{author}{1}{}{%
+      {{hash=FE}{%
+         family={Field},
+         familyi={F\bibinitperiod},
+         given={Erica},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FE1}
+    \strng{fullhash}{FE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2009}
+    \field{labeldatesource}{year}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \field{number}{1}
+    \field{pages}{1\bibrangedash 21}
+    \field{title}{Educational {{Debt Burden}} and {{Career Choice}}:
+  {{Evidence}} from a {{Financial Aid Experiment}} at {{NYU Law School}}}
+    \verb{url}
+    \verb https://www-jstor-org.ezproxy.bowdoin.edu/stable/pdf/25760145.pdf?ref
+    \verb reqid=excelsior%3Ae250b6ff7cc574a78cf7a242d247a794
+    \endverb
+    \field{volume}{1}
+    \verb{file}
+    \verb C:\\Users\\gmoor\\Zotero\\storage\\4N7AKRLR\\25760145.pdf
+    \endverb
+    \field{journaltitle}{American Economic Journal: Applied Economics}
+    \field{year}{2009}
+    \field{urlday}{21}
+    \field{urlmonth}{11}
+    \field{urlyear}{2018}
+  \endentry
+
+  \entry{lucca2018}{article}{}
+    \name{author}{3}{}{%
+      {{hash=LDO}{%
+         family={Lucca},
+         familyi={L\bibinitperiod},
+         given={David\bibnamedelima O},
+         giveni={D\bibinitperiod\bibinitdelim O\bibinitperiod},
+      }}%
+      {{hash=NT}{%
+         family={Nadauld},
+         familyi={N\bibinitperiod},
+         given={Taylor},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=SK}{%
+         family={Shen},
+         familyi={S\bibinitperiod},
+         given={Karen},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LDONTSK1}
+    \strng{fullhash}{LDONTSK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{shorttitle}
+    \field{labelyear}{2018}
+    \field{labeldatesource}{year}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \verb{doi}
+    \verb 10.1093/rfs/hhy069
+    \endverb
+    \field{issn}{0893-9454, 1465-7368}
+    \field{shorttitle}{Credit {{Supply}} and the {{Rise}} in {{College
+  Tuition}}}
+    \field{title}{Credit {{Supply}} and the {{Rise}} in {{College Tuition}}:
+  {{Evidence}} from the {{Expansion}} in {{Federal Student Aid Programs}}}
+    \field{langid}{english}
+    \verb{file}
+    \verb C:\\Users\\gmoor\\Zotero\\storage\\NMWFKF3M\\Lucca et al. - 2018 - Cr
+    \verb edit Supply and the Rise in College Tuition Evi.pdf
+    \endverb
+    \field{journaltitle}{The Review of Financial Studies}
+    \field{day}{21}
+    \field{month}{06}
+    \field{year}{2018}
+  \endentry
+
+  \entry{mcfarland2017}{report}{useprefix}
+    \name{author}{15}{}{%
+      {{hash=MJ}{%
+         family={McFarland},
+         familyi={M\bibinitperiod},
+         given={Joel},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=HB}{%
+         family={Hussar},
+         familyi={H\bibinitperiod},
+         given={Bill},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=dBC}{%
+         prefix={de},
+         prefixi={d\bibinitperiod},
+         family={Brey},
+         familyi={B\bibinitperiod},
+         given={Cristobal},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=ST}{%
+         family={Snyder},
+         familyi={S\bibinitperiod},
+         given={Tom},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=WX}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Xiaolei},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=WFS}{%
+         family={Wilkinson-Flicker},
+         familyi={W\bibinithyphendelim F\bibinitperiod},
+         given={Sidney},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=GS}{%
+         family={Gebrekristos},
+         familyi={G\bibinitperiod},
+         given={Semhar},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=ZJ}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Jijun},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=RA}{%
+         family={Rathbun},
+         familyi={R\bibinitperiod},
+         given={Amy},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=BA}{%
+         family={Barmer},
+         familyi={B\bibinitperiod},
+         given={Amy},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MFB}{%
+         family={Mann},
+         familyi={M\bibinitperiod},
+         given={Farrah\bibnamedelima Bullock},
+         giveni={F\bibinitperiod\bibinitdelim B\bibinitperiod},
+      }}%
+      {{hash=HS}{%
+         family={Hinz},
+         familyi={H\bibinitperiod},
+         given={Serena},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=NT}{%
+         family={Nachazel},
+         familyi={N\bibinitperiod},
+         given={Thomas},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=SW}{%
+         family={Smith},
+         familyi={S\bibinitperiod},
+         given={Wyatt},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=OM}{%
+         family={Ossolinski},
+         familyi={O\bibinitperiod},
+         given={Mark},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MJ+1}
+    \strng{fullhash}{MJHBdBCSTWXWFSGSZJRABAMFBHSNTSWOM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2017}
+    \field{labeldatesource}{year}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{number}{NCES 2017-144}
+    \field{pages}{116\bibrangedash 121}
+    \field{series}{The Condition of Education}
+    \field{title}{The {{Condition}} of {{Education}}}
+    \field{langid}{english}
+    \verb{file}
+    \verb C:\\Users\\gmoor\\Zotero\\storage\\ET975KTQ\\McFarland et al. - The C
+    \verb ondition of Education 2017.pdf
+    \endverb
+    \field{year}{2017}
+  \endentry
+
+  \entry{minicozzi2005}{article}{}
+    \name{author}{1}{}{%
+      {{hash=MA}{%
+         family={Minicozzi},
+         familyi={M\bibinitperiod},
+         given={Alexandra},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MA1}
+    \strng{fullhash}{MA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2005}
+    \field{labeldatesource}{year}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{abstract}{%
+    This paper studies the effect of educational debt on a college attendee's
+  future wage and wage growth. I hypothesize that those who took larger loans
+  to pay for college are subject to higher borrowing interest rates and thus
+  prefer income profiles with higher initial earnings, sacrificing future
+  income growth, relative to those who did not take on large educational debt.
+  Using data for men in the 1987 National Postsecondary Student Aid Survey, I
+  find that higher educational debt is associated with higher initial wage rate
+  the year after finishing school and lower wage growth over the next 4 years.%
+    }
+    \verb{doi}
+    \verb 10.1016/j.econedurev.2004.05.008
+    \endverb
+    \field{issn}{02727757}
+    \field{number}{4}
+    \field{pages}{417\bibrangedash 430}
+    \field{title}{The Short Term Effect of Educational Debt on Job Decisions}
+    \field{volume}{24}
+    \field{langid}{english}
+    \verb{file}
+    \verb C:\\Users\\gmoor\\Zotero\\storage\\NM82BG77\\Minicozzi - 2005 - The s
+    \verb hort term effect of educational debt on job d.pdf
+    \endverb
+    \field{journaltitle}{Economics of Education Review}
+    \field{month}{08}
+    \field{year}{2005}
+  \endentry
+
+  \entry{nicholson2015}{article}{}
+    \name{author}{5}{}{%
+      {{hash=NS}{%
+         family={Nicholson},
+         familyi={N\bibinitperiod},
+         given={Sean},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=VM}{%
+         family={Vujicic},
+         familyi={V\bibinitperiod},
+         given={Marko},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=WT}{%
+         family={Wanchek},
+         familyi={W\bibinitperiod},
+         given={Tanya},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=ZA}{%
+         family={Ziebert},
+         familyi={Z\bibinitperiod},
+         given={Anthony},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MA}{%
+         family={Menezes},
+         familyi={M\bibinitperiod},
+         given={Adriana},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{NS+1}
+    \strng{fullhash}{NSVMWTZAMA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2015}
+    \field{labeldatesource}{year}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{abstract}{%
+    Background. The purpose of the study was to determine whether there is an
+  association between the amount of education debt on completing dental school
+  (initial debt) and certain career decisions. Methods. The authors surveyed
+  1,842 practicing dentists who completed dental school between 1996 and 2011
+  to ascertain their initial education debt, the balance on their debt in 2013,
+  and a variety of specialization and practice decisions made during their
+  careers. Data also included demographic characteristics and parental income
+  and education levels. Results. Dentists with higher initial debt were less
+  likely to specialize and more likely to enter private practice, accept
+  high-paying jobs on graduation, and work longer hours. Choice of employment
+  setting, practice ownership, and whether to provide Medicaid and charity care
+  were associated with dentists' sexes and races but not debt. Conclusions.
+  High debt levels influenced some career decisions, but the magnitude of these
+  effects was small compared with the effects of demographic characteristics,
+  including race and sex, on career choices. Practical Implications. Policy
+  makers concerned about the influence of student debt on the professional
+  decisions of dental school graduates should recognize that students'
+  demographic characteristics may be more powerful in driving career choices.%
+    }
+    \verb{doi}
+    \verb 10.1016/j.adaj.2015.05.015
+    \endverb
+    \field{issn}{00028177}
+    \field{number}{11}
+    \field{pages}{800\bibrangedash 807}
+    \field{title}{The Effect of Education Debt on Dentists' Career Decisions}
+    \field{volume}{146}
+    \field{langid}{english}
+    \verb{file}
+    \verb C:\\Users\\gmoor\\Zotero\\storage\\XXYSGM9I\\Nicholson et al. - 2015
+    \verb - The effect of education debt on dentists’ career d.pdf
+    \endverb
+    \field{journaltitle}{The Journal of the American Dental Association}
+    \field{month}{11}
+    \field{year}{2015}
+  \endentry
+
+  \entry{rothstein2011}{article}{}
+    \name{author}{2}{}{%
+      {{hash=RJ}{%
+         family={Rothstein},
+         familyi={R\bibinitperiod},
+         given={Jesse},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=RCE}{%
+         family={Rouse},
+         familyi={R\bibinitperiod},
+         given={Cecilia\bibnamedelima Elena},
+         giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{RJRCE1}
+    \strng{fullhash}{RJRCE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{shorttitle}
+    \field{labelyear}{2011}
+    \field{labeldatesource}{year}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{abstract}{%
+    In the early 2000s, a highly selective university introduced a ``no-loans''
+  policy under which the loan component of financial aid awards was replaced
+  with grants. We use this natural experiment to identify the causal effect of
+  student debt on employment outcomes. In the standard life-cycle model, young
+  people make optimal educational investment decisions if they are able to
+  finance these investments by borrowing against future earnings; the presence
+  of debt has only income effects on investment decisions. We find that debt
+  causes graduates to choose substantially higher-salary jobs and reduces the
+  probability that students choose low-paid ``public interest'' jobs. We also
+  find some evidence that debt affects students' academic decisions during
+  college. Our estimates suggest that recent college graduates are not
+  life-cycle agents. Two potential explanations are that young workers are
+  credit constrained or that they are averse to holding debt. We find
+  suggestive evidence that debt reduces students' donations to the institution
+  in the years after they graduate and increases the likelihood that a graduate
+  will default on a pledge made during her senior year; we argue this result is
+  more likely consistent with credit constraints than with debt aversion.%
+    }
+    \verb{doi}
+    \verb 10.1016/j.jpubeco.2010.09.015
+    \endverb
+    \field{issn}{00472727}
+    \field{number}{1-2}
+    \field{pages}{149\bibrangedash 163}
+    \field{shorttitle}{Constrained after College}
+    \field{title}{Constrained after College: {{Student}} Loans and Early-Career
+  Occupational Choices}
+    \field{volume}{95}
+    \field{langid}{english}
+    \verb{file}
+    \verb C:\\Users\\gmoor\\Zotero\\storage\\6RBVTIHL\\Rothstein and Rouse - 20
+    \verb 11 - Constrained after college Student loans and early.pdf;C:\\Users\
+    \verb \gmoor\\Zotero\\storage\\967WEGVR\\Rothstein and Rouse - 2011 - Const
+    \verb rained after college Student loans and early.pdf;C:\\Users\\gmoor\\Zo
+    \verb tero\\storage\\GP4S3T9T\\Rothstein and Rouse - 2011 - Constrained aft
+    \verb er college Student loans and early.pdf
+    \endverb
+    \field{journaltitle}{Journal of Public Economics}
+    \field{month}{02}
+    \field{year}{2011}
+  \endentry
+\enddatalist
 \endinput
-
