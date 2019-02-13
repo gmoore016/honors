@@ -112,13 +112,19 @@ label values cohort cohLab
 //Freshmen received an increase of 3500-2625=875
 //Sophomores received an increase of 4500-3500=1000
 gen polImpact = 0
-if year == 8{
-	polImpact = 1875 if grade == 13
-	polImpact = 
-}
+//Students who are sophomores in the 2007-2008 school year receive only sophomore package
+replace polImpact = 1000 if  ((grade == 14 & inrange(intDate, date("15aug2007", "DMY"), date("15aug2008", "DMY"))) | ///
+	 (grade == 15 & inrange(intDate, date("15aug2008", "DMY"), date("15aug2009", "DMY"))) | ///
+	 (grade == 16 & inrange(intDate, date("15aug2009", "DMY"), date("15aug2010", "DMY"))) | ///
+	 (grade == 17 & inrange(intDate, date("15aug2010", "DMY"), date("15aug2011", "DMY"))))
 
-
-
+//Students who enter school after the policy change get full impact
+replace polImpact = 1875 if  ((grade == 13 & intDate > date("15aug2007", "DMY")) | ///
+	 (grade == 14 & intDate > date("15aug2008", "DMY")) | ///
+	 (grade == 15 & intDate > date("15aug2009", "DMY")) | ///
+	 (grade == 16 & intDate > date("15aug2010", "DMY")) | ///
+	 (grade == 17 & intDate > date("15aug2011", "DMY")))
+	
 
 //Places majors into bins
 gen majType = .
