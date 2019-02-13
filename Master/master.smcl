@@ -1787,4 +1787,1807 @@ Number of obs.                 {res}    3170   {txt}->{res}   19020
 
 {com}. br if inlist(grade, 12, 13, 14, 15) & year == 6
 
+. count if year == 8
+{res} 3170
+
+{com}. help date
+
+. do "C:\Users\gmoore\Desktop\honors\NLSYChild79Data\Import.do"
+{txt}
+{com}. clear all
+{txt}
+{com}. 
+. infile using Download/child.dct
+
+{txt}infile dictionary {c -(}
+  C0000100 "ID CODE OF CHILD"
+  C0000200 "ID CODE OF MOTHER OF CHILD"
+  C0005300 "RACE OF CHILD (FROM MOTHERS SCREENER 79)"
+  C0005400 "SEX OF CHILD"
+  C0005700 "DATE OF BIRTH OF CHILD - YEAR"
+  Y1012100 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2000"
+  Y1025600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2000"
+  Y1026600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
+  Y1026700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
+  Y1180500 "DATE OF CAPI INTERVIEW 2000"
+  Y1180501 "DATE OF CAPI INTERVIEW 2000"
+  Y1180502 "DATE OF CAPI INTERVIEW 2000"
+  Y1193000 "REGION OF RESIDENCE 2000"
+  Y1254300 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2002"
+  Y1270800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2002"
+  Y1271800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
+  Y1271900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
+  Y1421100 "DATE OF CAPI INTERVIEW 2002"
+  Y1421101 "DATE OF CAPI INTERVIEW 2002"
+  Y1421102 "DATE OF CAPI INTERVIEW 2002"
+  Y1435200 "REGION OF RESIDENCE 2002"
+  Y1450200 "DATE OF CAPI INTERVIEW-DAY 2004"
+  Y1450201 "DATE OF CAPI INTERVIEW-MONTH 2004"
+  Y1450202 "DATE OF CAPI INTERVIEW-YEAR 2004"
+  Y1488000 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2004"
+  Y1504800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2004"
+  Y1505800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
+  Y1505900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
+  Y1673400 "REGION OF RESIDENCE 2004"
+  Y1695600 "DATE OF CAPI INTERVIEW-DAY 2006"
+  Y1695601 "DATE OF CAPI INTERVIEW-MONTH 2006"
+  Y1695602 "DATE OF CAPI INTERVIEW-YEAR 2006"
+  Y1737800 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2006"
+  Y1755100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2006"
+  Y1756100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
+  Y1756200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
+  Y1949200 "REGION OF RESIDENCE 2006"
+  Y1981600 "DATE OF CAPI INTERVIEW-DAY 2008"
+  Y1981601 "DATE OF CAPI INTERVIEW-MONTH 2008"
+  Y1981602 "DATE OF CAPI INTERVIEW-YEAR 2008"
+  Y2018600 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2008"
+  Y2036100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2008"
+  Y2037100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
+  Y2037200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
+  Y2267000 "VERSION_R26 CHILD/YOUNG ADULT XRND"
+  Y2267800 "REGION OF RESIDENCE 2008"
+  Y2300400 "DATE OF CAPI INTERVIEW-DAY 2010"
+  Y2300401 "DATE OF CAPI INTERVIEW-MONTH 2010"
+  Y2300402 "DATE OF CAPI INTERVIEW-YEAR 2010"
+  Y2343700 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2010"
+  Y2360600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2010"
+  Y2361600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
+  Y2361700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
+  Y2616700 "REGION OF RESIDENCE 2010"
+{c )-}
+
+(11521 observations read)
+
+{com}. 
+. //Unneeded documentation parameter
+. drop Y2267000
+{txt}
+{com}. 
+. //Define labels
+. label define raceLab   1 "HISPANIC"  2 "BLACK"  3 "NON-BLACK, NON-HISPANIC"
+{txt}
+{com}. label define sexLab  1 "MALE"  2 "FEMALE"
+{txt}
+{com}. label define majLab  0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  6 "BIOLOGICAL SCIENCES"  7 "BUSINESS"  8 "COMMUNICATIONS"  9 "COMPUTER/INFORMATION SCIENCE"  10 "CRIMINOLOGY"  11 "ECONOMICS"  12 "EDUCATION"  13 "ENGINEERING"  14 "ENGLISH"  15 "FINE AND APPLIED ARTS"  16 "FOREIGN LANGUAGES"  17 "HISTORY"  18 "HOME ECONOMICS"  19 "INTERDISCIPLINARY STUDIES"  20 "MATHEMATICS"  21 "NURSING"  22 "OTHER HEALTH PROFESSIONS"  23 "PHILOSOPHY"  24 "PHYSICAL SCIENCES"  25 "POLITICAL SCIENCE AND GOVERNMENT"  26 "PRE-DENTAL"  27 "PRE-LAW"  28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
+{txt}
+{com}. label define ynLab  1 "Yes"  0 "No"
+{txt}
+{com}. label define regionLab 1 "NORTHEAST" 2 "NORTH CENTRAL" 3 "SOUTH" 4 "WEST"
+{txt}
+{com}. label define majTypeLab 0 "Humanities" 1 "STEM" 2 "Social Science" 3 "Professions" 4 "Business"
+{txt}
+{com}. label define gradeLab 1 "1ST GRADE"  2 "2ND GRADE"  3 "3RD GRADE"  4 "4TH GRADE"  5 "5TH GRADE"  6 "6TH GRADE"  7 "7TH GRADE"  8 "8TH GRADE"  9 "9TH GRADE"  10 "10TH GRADE"  11 "11TH GRADE"  12 "12TH GRADE"  13 "1ST YEAR COLLEGE"  14 "2ND YEAR COLLEGE"  15 "3RD YEAR COLLEGE"  16 "4TH YEAR COLLEGE"  17 "5TH YEAR COLLEGE"  18 "6TH YEAR COLLEGE"  19 "7TH YEAR COLLEGE"  20 "8TH YEAR COLLEGE OR MORE"  95 "UNGRADED"  0 "None"
+{txt}
+{com}. 
+. //ID Numbers
+. rename C0000100 cid
+{res}{txt}
+{com}. rename C0000200 mid
+{res}{txt}
+{com}. 
+. //Demographics
+. rename C0005300 race
+{res}{txt}
+{com}. label values race raceLab
+{txt}
+{com}. rename C0005400 sex
+{res}{txt}
+{com}. label values sex sexLab
+{txt}
+{com}. rename C0005700 dob
+{res}{txt}
+{com}. 
+. //Year of study
+. rename Y1012100 grade0
+{res}{txt}
+{com}. rename Y1254300 grade2
+{res}{txt}
+{com}. rename Y1488000 grade4
+{res}{txt}
+{com}. rename Y1737800 grade6
+{res}{txt}
+{com}. rename Y2018600 grade8
+{res}{txt}
+{com}. rename Y2343700 grade10
+{res}{txt}
+{com}. 
+. label values grade* gradeLab
+{txt}
+{com}. 
+. //Fields of study
+. rename Y1025600 maj0
+{res}{txt}
+{com}. rename Y1270800 maj2
+{res}{txt}
+{com}. rename Y1504800 maj4
+{res}{txt}
+{com}. rename Y1755100 maj6
+{res}{txt}
+{com}. rename Y2036100 maj8
+{res}{txt}
+{com}. rename Y2360600 maj10
+{res}{txt}
+{com}. 
+. label values maj* majLab
+{txt}
+{com}. 
+. //Receive loan?
+. rename Y1026600 recloan0
+{res}{txt}
+{com}. rename Y1271800 recloan2
+{res}{txt}
+{com}. rename Y1505800 recloan4
+{res}{txt}
+{com}. rename Y1756100 recloan6
+{res}{txt}
+{com}. rename Y2037100 recloan8
+{res}{txt}
+{com}. rename Y2361600 recloan10
+{res}{txt}
+{com}. 
+. label values recloan* ynLab
+{txt}
+{com}. 
+. //Region
+. rename Y1193000 region0
+{res}{txt}
+{com}. rename Y1435200 region2
+{res}{txt}
+{com}. rename Y1673400 region4
+{res}{txt}
+{com}. rename Y1949200 region6
+{res}{txt}
+{com}. rename Y2267800 region8
+{res}{txt}
+{com}. rename Y2616700 region10
+{res}{txt}
+{com}. 
+. label values region* regionLab
+{txt}
+{com}. 
+. //Loan quantities
+. rename Y1026700 loan0
+{res}{txt}
+{com}. rename Y1271900 loan2
+{res}{txt}
+{com}. rename Y1505900 loan4
+{res}{txt}
+{com}. rename Y1756200 loan6
+{res}{txt}
+{com}. rename Y2037200 loan8
+{res}{txt}
+{com}. rename Y2361700 loan10
+{res}{txt}
+{com}. 
+. forval i = 0(2)10{c -(}
+{txt}  2{com}.         replace recloan`i' = . if recloan`i' < 0
+{txt}  3{com}. {c )-}
+{txt}(11153 real changes made, 11153 to missing)
+(10886 real changes made, 10886 to missing)
+(10637 real changes made, 10637 to missing)
+(10479 real changes made, 10479 to missing)
+(10267 real changes made, 10267 to missing)
+(10088 real changes made, 10088 to missing)
+
+{com}. 
+. //Interview dates
+. gen intDate0 = mdy(Y1180501, Y1180500, Y1180502)
+{txt}(8496 missing values generated)
+
+{com}. gen intDate2 = mdy(Y1421101, Y1421100, Y1421102)
+{txt}(7283 missing values generated)
+
+{com}. gen intDate4 = mdy(Y1450201, Y1450200, Y1450202)
+{txt}(6497 missing values generated)
+
+{com}. gen intDate6 = mdy(Y1695601, Y1695600, Y1695602)
+{txt}(5677 missing values generated)
+
+{com}. gen intDate8 = mdy(Y1981601, Y1981600, Y1981602)
+{txt}(5216 missing values generated)
+
+{com}. gen intDate10 = mdy(Y2300401, Y2300400, Y2300402)
+{txt}(5419 missing values generated)
+
+{com}. format intDate* %td
+{txt}
+{com}. 
+. //Get only observations with data on receiving loans
+. drop if missing(recloan0) & missing(recloan2) ///
+>         & missing(recloan4) & missing(recloan6) ///
+>         & missing(recloan8) & missing(recloan10)
+{txt}(8351 observations deleted)
+
+{com}.         
+. //Change to long data
+. reshape long maj recloan loan region grade, i(cid) j(year)
+{txt}(note: j = 0 2 4 6 8 10)
+
+Data{col 36}wide{col 43}->{col 48}long
+{hline 77}
+Number of obs.                 {res}    3170   {txt}->{res}   19020
+{txt}Number of variables            {res}      59   {txt}->{res}      35
+{txt}j variable (6 values)                     ->   {res}year
+{txt}xij variables:
+                    {res}maj0 maj2 ... maj10   {txt}->   {res}maj
+        recloan0 recloan2 ... recloan10   {txt}->   {res}recloan
+                 loan0 loan2 ... loan10   {txt}->   {res}loan
+           region0 region2 ... region10   {txt}->   {res}region
+              grade0 grade2 ... grade10   {txt}->   {res}grade
+{txt}{hline 77}
+
+{com}. 
+. //Code to Stata missings
+. replace maj = . if maj < 0
+{txt}(11736 real changes made, 11736 to missing)
+
+{com}. replace loan = 0 if !recloan & !missing(recloan)
+{txt}(3083 real changes made)
+
+{com}. replace loan = . if loan < 0
+{txt}(13763 real changes made, 13763 to missing)
+
+{com}. replace region = . if region < 0
+{txt}(4537 real changes made, 4537 to missing)
+
+{com}. replace recloan = . if recloan < 0
+{txt}(0 real changes made)
+
+{com}. replace grade = . if grade < 0
+{txt}(9562 real changes made, 9562 to missing)
+
+{com}. 
+. //Generates dummy for after policy change
+. gen cohort = (year >= 8)
+{txt}
+{com}. label define cohLab 0 "control" 1 "test"
+{txt}
+{com}. label values cohort cohLab
+{txt}
+{com}. 
+. //Creates value of treatment
+. //Freshmen received an increase of 3500-2625=875
+. //Sophomores received an increase of 4500-3500=1000
+. gen polImpact = 0
+{txt}
+{com}. if year == 8{c -(}
+.         polImpact = 1875 if grade == 13
+.         polImpact = 
+. {c )-}
+{txt}
+{com}. 
 . 
+. 
+. 
+. //Places majors into bins
+. gen majType = .
+{txt}(19020 missing values generated)
+
+{com}. //Humanities: Area Studies (5) English (14) Art (15) Language (16) History (17)
+. //              Interdisciplinary Studies (19) Philosophy (23) Theology (33)
+. replace majType = 0 if inlist(maj, 5, 14, 15, 16, 17, 19, 23, 33)
+{txt}(415 real changes made)
+
+{com}. //STEM: Agriculture (1) Architecture (4) Biology (6) CS(9) Engineering (13) 
+. //              Math (20) Physics (24)
+. replace majType = 1 if inlist(maj, 1, 4, 6, 9, 13, 20, 24)
+{txt}(1178 real changes made)
+
+{com}. //Social Science: Anthropology(2) Archaeology (3) Economics (11) Home Ec (18)
+. //              Political Science (25) Psychology (30) Sociology (31)
+. replace majType = 2 if inlist(maj, 2, 3, 11, 18, 25, 30, 31)
+{txt}(562 real changes made)
+
+{com}. //Professional: Communications (8) Criminology (10) Education (12)
+. //              Nursing (21) Other Health (22) Pre-Dental/Law/Med/Vet (26-29)
+. //              Social Work (32)
+. replace majType = 3 if inlist(maj, 7, 8, 10, 12, 21, 22, 26, 27, 28, 29, 32)
+{txt}(3550 real changes made)
+
+{com}. //Business: Business (7)
+. replace majType = 4 if maj == 7
+{txt}(1126 real changes made)
+
+{com}. 
+. assert missing(majType) == missing(maj) | maj == 0 | maj == 99
+{txt}
+{com}. 
+. label values majType majTypeLab
+{txt}
+{com}. 
+. 
+. 
+{txt}end of do-file
+
+{com}. ls
+{txt}  <dir>   2/12/19 21:56  {res}.                 
+{txt}  <dir>   2/12/19 21:56  {res}..                
+{txt}  <dir>   2/12/19 21:47  {res}Download          
+{txt}   4.9k   2/12/19 21:56  {res}Import.do         
+{txt}  36.0k   2/05/19 21:38  {res}master.smcl       
+{txt}   0.1k   2/05/19 21:38  {res}RevisedReg.do     
+
+{com}. do Import
+{txt}
+{com}. clear all
+{txt}
+{com}. 
+. infile using Download/child.dct
+
+{txt}infile dictionary {c -(}
+  C0000100 "ID CODE OF CHILD"
+  C0000200 "ID CODE OF MOTHER OF CHILD"
+  C0005300 "RACE OF CHILD (FROM MOTHERS SCREENER 79)"
+  C0005400 "SEX OF CHILD"
+  C0005700 "DATE OF BIRTH OF CHILD - YEAR"
+  Y1012100 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2000"
+  Y1025600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2000"
+  Y1026600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
+  Y1026700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
+  Y1180500 "DATE OF CAPI INTERVIEW 2000"
+  Y1180501 "DATE OF CAPI INTERVIEW 2000"
+  Y1180502 "DATE OF CAPI INTERVIEW 2000"
+  Y1193000 "REGION OF RESIDENCE 2000"
+  Y1254300 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2002"
+  Y1270800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2002"
+  Y1271800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
+  Y1271900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
+  Y1421100 "DATE OF CAPI INTERVIEW 2002"
+  Y1421101 "DATE OF CAPI INTERVIEW 2002"
+  Y1421102 "DATE OF CAPI INTERVIEW 2002"
+  Y1435200 "REGION OF RESIDENCE 2002"
+  Y1450200 "DATE OF CAPI INTERVIEW-DAY 2004"
+  Y1450201 "DATE OF CAPI INTERVIEW-MONTH 2004"
+  Y1450202 "DATE OF CAPI INTERVIEW-YEAR 2004"
+  Y1488000 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2004"
+  Y1504800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2004"
+  Y1505800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
+  Y1505900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
+  Y1673400 "REGION OF RESIDENCE 2004"
+  Y1695600 "DATE OF CAPI INTERVIEW-DAY 2006"
+  Y1695601 "DATE OF CAPI INTERVIEW-MONTH 2006"
+  Y1695602 "DATE OF CAPI INTERVIEW-YEAR 2006"
+  Y1737800 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2006"
+  Y1755100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2006"
+  Y1756100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
+  Y1756200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
+  Y1949200 "REGION OF RESIDENCE 2006"
+  Y1981600 "DATE OF CAPI INTERVIEW-DAY 2008"
+  Y1981601 "DATE OF CAPI INTERVIEW-MONTH 2008"
+  Y1981602 "DATE OF CAPI INTERVIEW-YEAR 2008"
+  Y2018600 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2008"
+  Y2036100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2008"
+  Y2037100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
+  Y2037200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
+  Y2267000 "VERSION_R26 CHILD/YOUNG ADULT XRND"
+  Y2267800 "REGION OF RESIDENCE 2008"
+  Y2300400 "DATE OF CAPI INTERVIEW-DAY 2010"
+  Y2300401 "DATE OF CAPI INTERVIEW-MONTH 2010"
+  Y2300402 "DATE OF CAPI INTERVIEW-YEAR 2010"
+  Y2343700 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2010"
+  Y2360600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2010"
+  Y2361600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
+  Y2361700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
+  Y2616700 "REGION OF RESIDENCE 2010"
+{c )-}
+
+(11521 observations read)
+
+{com}. 
+. //Unneeded documentation parameter
+. drop Y2267000
+{txt}
+{com}. 
+. //Define labels
+. label define raceLab   1 "HISPANIC"  2 "BLACK"  3 "NON-BLACK, NON-HISPANIC"
+{txt}
+{com}. label define sexLab  1 "MALE"  2 "FEMALE"
+{txt}
+{com}. label define majLab  0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  6 "BIOLOGICAL SCIENCES"  7 "BUSINESS"  8 "COMMUNICATIONS"  9 "COMPUTER/INFORMATION SCIENCE"  10 "CRIMINOLOGY"  11 "ECONOMICS"  12 "EDUCATION"  13 "ENGINEERING"  14 "ENGLISH"  15 "FINE AND APPLIED ARTS"  16 "FOREIGN LANGUAGES"  17 "HISTORY"  18 "HOME ECONOMICS"  19 "INTERDISCIPLINARY STUDIES"  20 "MATHEMATICS"  21 "NURSING"  22 "OTHER HEALTH PROFESSIONS"  23 "PHILOSOPHY"  24 "PHYSICAL SCIENCES"  25 "POLITICAL SCIENCE AND GOVERNMENT"  26 "PRE-DENTAL"  27 "PRE-LAW"  28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
+{txt}
+{com}. label define ynLab  1 "Yes"  0 "No"
+{txt}
+{com}. label define regionLab 1 "NORTHEAST" 2 "NORTH CENTRAL" 3 "SOUTH" 4 "WEST"
+{txt}
+{com}. label define majTypeLab 0 "Humanities" 1 "STEM" 2 "Social Science" 3 "Professions" 4 "Business"
+{txt}
+{com}. label define gradeLab 1 "1ST GRADE"  2 "2ND GRADE"  3 "3RD GRADE"  4 "4TH GRADE"  5 "5TH GRADE"  6 "6TH GRADE"  7 "7TH GRADE"  8 "8TH GRADE"  9 "9TH GRADE"  10 "10TH GRADE"  11 "11TH GRADE"  12 "12TH GRADE"  13 "1ST YEAR COLLEGE"  14 "2ND YEAR COLLEGE"  15 "3RD YEAR COLLEGE"  16 "4TH YEAR COLLEGE"  17 "5TH YEAR COLLEGE"  18 "6TH YEAR COLLEGE"  19 "7TH YEAR COLLEGE"  20 "8TH YEAR COLLEGE OR MORE"  95 "UNGRADED"  0 "None"
+{txt}
+{com}. 
+. //ID Numbers
+. rename C0000100 cid
+{res}{txt}
+{com}. rename C0000200 mid
+{res}{txt}
+{com}. 
+. //Demographics
+. rename C0005300 race
+{res}{txt}
+{com}. label values race raceLab
+{txt}
+{com}. rename C0005400 sex
+{res}{txt}
+{com}. label values sex sexLab
+{txt}
+{com}. rename C0005700 dob
+{res}{txt}
+{com}. 
+. //Year of study
+. rename Y1012100 grade0
+{res}{txt}
+{com}. rename Y1254300 grade2
+{res}{txt}
+{com}. rename Y1488000 grade4
+{res}{txt}
+{com}. rename Y1737800 grade6
+{res}{txt}
+{com}. rename Y2018600 grade8
+{res}{txt}
+{com}. rename Y2343700 grade10
+{res}{txt}
+{com}. 
+. label values grade* gradeLab
+{txt}
+{com}. 
+. //Fields of study
+. rename Y1025600 maj0
+{res}{txt}
+{com}. rename Y1270800 maj2
+{res}{txt}
+{com}. rename Y1504800 maj4
+{res}{txt}
+{com}. rename Y1755100 maj6
+{res}{txt}
+{com}. rename Y2036100 maj8
+{res}{txt}
+{com}. rename Y2360600 maj10
+{res}{txt}
+{com}. 
+. label values maj* majLab
+{txt}
+{com}. 
+. //Receive loan?
+. rename Y1026600 recloan0
+{res}{txt}
+{com}. rename Y1271800 recloan2
+{res}{txt}
+{com}. rename Y1505800 recloan4
+{res}{txt}
+{com}. rename Y1756100 recloan6
+{res}{txt}
+{com}. rename Y2037100 recloan8
+{res}{txt}
+{com}. rename Y2361600 recloan10
+{res}{txt}
+{com}. 
+. label values recloan* ynLab
+{txt}
+{com}. 
+. //Region
+. rename Y1193000 region0
+{res}{txt}
+{com}. rename Y1435200 region2
+{res}{txt}
+{com}. rename Y1673400 region4
+{res}{txt}
+{com}. rename Y1949200 region6
+{res}{txt}
+{com}. rename Y2267800 region8
+{res}{txt}
+{com}. rename Y2616700 region10
+{res}{txt}
+{com}. 
+. label values region* regionLab
+{txt}
+{com}. 
+. //Loan quantities
+. rename Y1026700 loan0
+{res}{txt}
+{com}. rename Y1271900 loan2
+{res}{txt}
+{com}. rename Y1505900 loan4
+{res}{txt}
+{com}. rename Y1756200 loan6
+{res}{txt}
+{com}. rename Y2037200 loan8
+{res}{txt}
+{com}. rename Y2361700 loan10
+{res}{txt}
+{com}. 
+. forval i = 0(2)10{c -(}
+{txt}  2{com}.         replace recloan`i' = . if recloan`i' < 0
+{txt}  3{com}. {c )-}
+{txt}(11153 real changes made, 11153 to missing)
+(10886 real changes made, 10886 to missing)
+(10637 real changes made, 10637 to missing)
+(10479 real changes made, 10479 to missing)
+(10267 real changes made, 10267 to missing)
+(10088 real changes made, 10088 to missing)
+
+{com}. 
+. //Interview dates
+. gen intDate0 = mdy(Y1180501, Y1180500, Y1180502)
+{txt}(8496 missing values generated)
+
+{com}. gen intDate2 = mdy(Y1421101, Y1421100, Y1421102)
+{txt}(7283 missing values generated)
+
+{com}. gen intDate4 = mdy(Y1450201, Y1450200, Y1450202)
+{txt}(6497 missing values generated)
+
+{com}. gen intDate6 = mdy(Y1695601, Y1695600, Y1695602)
+{txt}(5677 missing values generated)
+
+{com}. gen intDate8 = mdy(Y1981601, Y1981600, Y1981602)
+{txt}(5216 missing values generated)
+
+{com}. gen intDate10 = mdy(Y2300401, Y2300400, Y2300402)
+{txt}(5419 missing values generated)
+
+{com}. format intDate* %td
+{txt}
+{com}. 
+. //Get only observations with data on receiving loans
+. drop if missing(recloan0) & missing(recloan2) ///
+>         & missing(recloan4) & missing(recloan6) ///
+>         & missing(recloan8) & missing(recloan10)
+{txt}(8351 observations deleted)
+
+{com}.         
+. //Change to long data
+. reshape long maj recloan loan region grade, i(cid) j(year)
+{txt}(note: j = 0 2 4 6 8 10)
+
+Data{col 36}wide{col 43}->{col 48}long
+{hline 77}
+Number of obs.                 {res}    3170   {txt}->{res}   19020
+{txt}Number of variables            {res}      59   {txt}->{res}      35
+{txt}j variable (6 values)                     ->   {res}year
+{txt}xij variables:
+                    {res}maj0 maj2 ... maj10   {txt}->   {res}maj
+        recloan0 recloan2 ... recloan10   {txt}->   {res}recloan
+                 loan0 loan2 ... loan10   {txt}->   {res}loan
+           region0 region2 ... region10   {txt}->   {res}region
+              grade0 grade2 ... grade10   {txt}->   {res}grade
+{txt}{hline 77}
+
+{com}. 
+. //Code to Stata missings
+. replace maj = . if maj < 0
+{txt}(11736 real changes made, 11736 to missing)
+
+{com}. replace loan = 0 if !recloan & !missing(recloan)
+{txt}(3083 real changes made)
+
+{com}. replace loan = . if loan < 0
+{txt}(13763 real changes made, 13763 to missing)
+
+{com}. replace region = . if region < 0
+{txt}(4537 real changes made, 4537 to missing)
+
+{com}. replace recloan = . if recloan < 0
+{txt}(0 real changes made)
+
+{com}. replace grade = . if grade < 0
+{txt}(9562 real changes made, 9562 to missing)
+
+{com}. 
+. //Generates dummy for after policy change
+. gen cohort = (year >= 8)
+{txt}
+{com}. label define cohLab 0 "control" 1 "test"
+{txt}
+{com}. label values cohort cohLab
+{txt}
+{com}. 
+. //Creates value of treatment
+. //Freshmen received an increase of 3500-2625=875
+. //Sophomores received an increase of 4500-3500=1000
+. gen polImpact = 0
+{txt}
+{com}. if year == 8{c -(}
+.         polImpact = 1875 if grade == 13
+.         polImpact = 
+. {c )-}
+{txt}
+{com}. 
+. 
+. 
+. 
+. //Places majors into bins
+. gen majType = .
+{txt}(19020 missing values generated)
+
+{com}. //Humanities: Area Studies (5) English (14) Art (15) Language (16) History (17)
+. //              Interdisciplinary Studies (19) Philosophy (23) Theology (33)
+. replace majType = 0 if inlist(maj, 5, 14, 15, 16, 17, 19, 23, 33)
+{txt}(415 real changes made)
+
+{com}. //STEM: Agriculture (1) Architecture (4) Biology (6) CS(9) Engineering (13) 
+. //              Math (20) Physics (24)
+. replace majType = 1 if inlist(maj, 1, 4, 6, 9, 13, 20, 24)
+{txt}(1178 real changes made)
+
+{com}. //Social Science: Anthropology(2) Archaeology (3) Economics (11) Home Ec (18)
+. //              Political Science (25) Psychology (30) Sociology (31)
+. replace majType = 2 if inlist(maj, 2, 3, 11, 18, 25, 30, 31)
+{txt}(562 real changes made)
+
+{com}. //Professional: Communications (8) Criminology (10) Education (12)
+. //              Nursing (21) Other Health (22) Pre-Dental/Law/Med/Vet (26-29)
+. //              Social Work (32)
+. replace majType = 3 if inlist(maj, 7, 8, 10, 12, 21, 22, 26, 27, 28, 29, 32)
+{txt}(3550 real changes made)
+
+{com}. //Business: Business (7)
+. replace majType = 4 if maj == 7
+{txt}(1126 real changes made)
+
+{com}. 
+. assert missing(majType) == missing(maj) | maj == 0 | maj == 99
+{txt}
+{com}. 
+. label values majType majTypeLab
+{txt}
+{com}. 
+. 
+. 
+{txt}end of do-file
+
+{com}. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. do "C:\Users\gmoore\Desktop\honors\NLSYChild79Data\Import.do"
+{txt}
+{com}. clear all
+{txt}
+{com}. 
+. infile using Download/child.dct
+
+{txt}infile dictionary {c -(}
+  C0000100 "ID CODE OF CHILD"
+  C0000200 "ID CODE OF MOTHER OF CHILD"
+  C0005300 "RACE OF CHILD (FROM MOTHERS SCREENER 79)"
+  C0005400 "SEX OF CHILD"
+  C0005700 "DATE OF BIRTH OF CHILD - YEAR"
+  Y1012100 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2000"
+  Y1025600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2000"
+  Y1026600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
+  Y1026700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
+  Y1180500 "DATE OF CAPI INTERVIEW 2000"
+  Y1180501 "DATE OF CAPI INTERVIEW 2000"
+  Y1180502 "DATE OF CAPI INTERVIEW 2000"
+  Y1193000 "REGION OF RESIDENCE 2000"
+  Y1254300 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2002"
+  Y1270800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2002"
+  Y1271800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
+  Y1271900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
+  Y1421100 "DATE OF CAPI INTERVIEW 2002"
+  Y1421101 "DATE OF CAPI INTERVIEW 2002"
+  Y1421102 "DATE OF CAPI INTERVIEW 2002"
+  Y1435200 "REGION OF RESIDENCE 2002"
+  Y1450200 "DATE OF CAPI INTERVIEW-DAY 2004"
+  Y1450201 "DATE OF CAPI INTERVIEW-MONTH 2004"
+  Y1450202 "DATE OF CAPI INTERVIEW-YEAR 2004"
+  Y1488000 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2004"
+  Y1504800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2004"
+  Y1505800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
+  Y1505900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
+  Y1673400 "REGION OF RESIDENCE 2004"
+  Y1695600 "DATE OF CAPI INTERVIEW-DAY 2006"
+  Y1695601 "DATE OF CAPI INTERVIEW-MONTH 2006"
+  Y1695602 "DATE OF CAPI INTERVIEW-YEAR 2006"
+  Y1737800 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2006"
+  Y1755100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2006"
+  Y1756100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
+  Y1756200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
+  Y1949200 "REGION OF RESIDENCE 2006"
+  Y1981600 "DATE OF CAPI INTERVIEW-DAY 2008"
+  Y1981601 "DATE OF CAPI INTERVIEW-MONTH 2008"
+  Y1981602 "DATE OF CAPI INTERVIEW-YEAR 2008"
+  Y2018600 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2008"
+  Y2036100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2008"
+  Y2037100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
+  Y2037200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
+  Y2267000 "VERSION_R26 CHILD/YOUNG ADULT XRND"
+  Y2267800 "REGION OF RESIDENCE 2008"
+  Y2300400 "DATE OF CAPI INTERVIEW-DAY 2010"
+  Y2300401 "DATE OF CAPI INTERVIEW-MONTH 2010"
+  Y2300402 "DATE OF CAPI INTERVIEW-YEAR 2010"
+  Y2343700 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2010"
+  Y2360600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2010"
+  Y2361600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
+  Y2361700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
+  Y2616700 "REGION OF RESIDENCE 2010"
+{c )-}
+
+(11521 observations read)
+
+{com}. 
+. //Unneeded documentation parameter
+. drop Y2267000
+{txt}
+{com}. 
+. //Define labels
+. label define raceLab   1 "HISPANIC"  2 "BLACK"  3 "NON-BLACK, NON-HISPANIC"
+{txt}
+{com}. label define sexLab  1 "MALE"  2 "FEMALE"
+{txt}
+{com}. label define majLab  0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  6 "BIOLOGICAL SCIENCES"  7 "BUSINESS"  8 "COMMUNICATIONS"  9 "COMPUTER/INFORMATION SCIENCE"  10 "CRIMINOLOGY"  11 "ECONOMICS"  12 "EDUCATION"  13 "ENGINEERING"  14 "ENGLISH"  15 "FINE AND APPLIED ARTS"  16 "FOREIGN LANGUAGES"  17 "HISTORY"  18 "HOME ECONOMICS"  19 "INTERDISCIPLINARY STUDIES"  20 "MATHEMATICS"  21 "NURSING"  22 "OTHER HEALTH PROFESSIONS"  23 "PHILOSOPHY"  24 "PHYSICAL SCIENCES"  25 "POLITICAL SCIENCE AND GOVERNMENT"  26 "PRE-DENTAL"  27 "PRE-LAW"  28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
+{txt}
+{com}. label define ynLab  1 "Yes"  0 "No"
+{txt}
+{com}. label define regionLab 1 "NORTHEAST" 2 "NORTH CENTRAL" 3 "SOUTH" 4 "WEST"
+{txt}
+{com}. label define majTypeLab 0 "Humanities" 1 "STEM" 2 "Social Science" 3 "Professions" 4 "Business"
+{txt}
+{com}. label define gradeLab 1 "1ST GRADE"  2 "2ND GRADE"  3 "3RD GRADE"  4 "4TH GRADE"  5 "5TH GRADE"  6 "6TH GRADE"  7 "7TH GRADE"  8 "8TH GRADE"  9 "9TH GRADE"  10 "10TH GRADE"  11 "11TH GRADE"  12 "12TH GRADE"  13 "1ST YEAR COLLEGE"  14 "2ND YEAR COLLEGE"  15 "3RD YEAR COLLEGE"  16 "4TH YEAR COLLEGE"  17 "5TH YEAR COLLEGE"  18 "6TH YEAR COLLEGE"  19 "7TH YEAR COLLEGE"  20 "8TH YEAR COLLEGE OR MORE"  95 "UNGRADED"  0 "None"
+{txt}
+{com}. 
+. //ID Numbers
+. rename C0000100 cid
+{res}{txt}
+{com}. rename C0000200 mid
+{res}{txt}
+{com}. 
+. //Demographics
+. rename C0005300 race
+{res}{txt}
+{com}. label values race raceLab
+{txt}
+{com}. rename C0005400 sex
+{res}{txt}
+{com}. label values sex sexLab
+{txt}
+{com}. rename C0005700 dob
+{res}{txt}
+{com}. 
+. //Year of study
+. rename Y1012100 grade0
+{res}{txt}
+{com}. rename Y1254300 grade2
+{res}{txt}
+{com}. rename Y1488000 grade4
+{res}{txt}
+{com}. rename Y1737800 grade6
+{res}{txt}
+{com}. rename Y2018600 grade8
+{res}{txt}
+{com}. rename Y2343700 grade10
+{res}{txt}
+{com}. 
+. label values grade* gradeLab
+{txt}
+{com}. 
+. //Fields of study
+. rename Y1025600 maj0
+{res}{txt}
+{com}. rename Y1270800 maj2
+{res}{txt}
+{com}. rename Y1504800 maj4
+{res}{txt}
+{com}. rename Y1755100 maj6
+{res}{txt}
+{com}. rename Y2036100 maj8
+{res}{txt}
+{com}. rename Y2360600 maj10
+{res}{txt}
+{com}. 
+. label values maj* majLab
+{txt}
+{com}. 
+. //Receive loan?
+. rename Y1026600 recloan0
+{res}{txt}
+{com}. rename Y1271800 recloan2
+{res}{txt}
+{com}. rename Y1505800 recloan4
+{res}{txt}
+{com}. rename Y1756100 recloan6
+{res}{txt}
+{com}. rename Y2037100 recloan8
+{res}{txt}
+{com}. rename Y2361600 recloan10
+{res}{txt}
+{com}. 
+. label values recloan* ynLab
+{txt}
+{com}. 
+. //Region
+. rename Y1193000 region0
+{res}{txt}
+{com}. rename Y1435200 region2
+{res}{txt}
+{com}. rename Y1673400 region4
+{res}{txt}
+{com}. rename Y1949200 region6
+{res}{txt}
+{com}. rename Y2267800 region8
+{res}{txt}
+{com}. rename Y2616700 region10
+{res}{txt}
+{com}. 
+. label values region* regionLab
+{txt}
+{com}. 
+. //Loan quantities
+. rename Y1026700 loan0
+{res}{txt}
+{com}. rename Y1271900 loan2
+{res}{txt}
+{com}. rename Y1505900 loan4
+{res}{txt}
+{com}. rename Y1756200 loan6
+{res}{txt}
+{com}. rename Y2037200 loan8
+{res}{txt}
+{com}. rename Y2361700 loan10
+{res}{txt}
+{com}. 
+. forval i = 0(2)10{c -(}
+{txt}  2{com}.         replace recloan`i' = . if recloan`i' < 0
+{txt}  3{com}. {c )-}
+{txt}(11153 real changes made, 11153 to missing)
+(10886 real changes made, 10886 to missing)
+(10637 real changes made, 10637 to missing)
+(10479 real changes made, 10479 to missing)
+(10267 real changes made, 10267 to missing)
+(10088 real changes made, 10088 to missing)
+
+{com}. 
+. //Interview dates
+. gen intDate0 = mdy(Y1180501, Y1180500, Y1180502)
+{txt}(8496 missing values generated)
+
+{com}. gen intDate2 = mdy(Y1421101, Y1421100, Y1421102)
+{txt}(7283 missing values generated)
+
+{com}. gen intDate4 = mdy(Y1450201, Y1450200, Y1450202)
+{txt}(6497 missing values generated)
+
+{com}. gen intDate6 = mdy(Y1695601, Y1695600, Y1695602)
+{txt}(5677 missing values generated)
+
+{com}. gen intDate8 = mdy(Y1981601, Y1981600, Y1981602)
+{txt}(5216 missing values generated)
+
+{com}. gen intDate10 = mdy(Y2300401, Y2300400, Y2300402)
+{txt}(5419 missing values generated)
+
+{com}. format intDate* %td
+{txt}
+{com}. 
+. kill
+{err}unrecognized command:  kill
+{txt}{search r(199):r(199);}
+
+end of do-file
+
+{search r(199):r(199);}
+
+{com}. br *4 if !missing(intDate4)
+
+. br *4 if missing(intDate4)
+
+. do "C:\Users\gmoore\Desktop\honors\NLSYChild79Data\Import.do"
+{txt}
+{com}. clear all
+{txt}
+{com}. 
+. infile using Download/child.dct
+
+{txt}infile dictionary {c -(}
+  C0000100 "ID CODE OF CHILD"
+  C0000200 "ID CODE OF MOTHER OF CHILD"
+  C0005300 "RACE OF CHILD (FROM MOTHERS SCREENER 79)"
+  C0005400 "SEX OF CHILD"
+  C0005700 "DATE OF BIRTH OF CHILD - YEAR"
+  Y1012100 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2000"
+  Y1025600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2000"
+  Y1026600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
+  Y1026700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
+  Y1180500 "DATE OF CAPI INTERVIEW 2000"
+  Y1180501 "DATE OF CAPI INTERVIEW 2000"
+  Y1180502 "DATE OF CAPI INTERVIEW 2000"
+  Y1193000 "REGION OF RESIDENCE 2000"
+  Y1254300 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2002"
+  Y1270800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2002"
+  Y1271800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
+  Y1271900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
+  Y1421100 "DATE OF CAPI INTERVIEW 2002"
+  Y1421101 "DATE OF CAPI INTERVIEW 2002"
+  Y1421102 "DATE OF CAPI INTERVIEW 2002"
+  Y1435200 "REGION OF RESIDENCE 2002"
+  Y1450200 "DATE OF CAPI INTERVIEW-DAY 2004"
+  Y1450201 "DATE OF CAPI INTERVIEW-MONTH 2004"
+  Y1450202 "DATE OF CAPI INTERVIEW-YEAR 2004"
+  Y1488000 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2004"
+  Y1504800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2004"
+  Y1505800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
+  Y1505900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
+  Y1673400 "REGION OF RESIDENCE 2004"
+  Y1695600 "DATE OF CAPI INTERVIEW-DAY 2006"
+  Y1695601 "DATE OF CAPI INTERVIEW-MONTH 2006"
+  Y1695602 "DATE OF CAPI INTERVIEW-YEAR 2006"
+  Y1737800 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2006"
+  Y1755100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2006"
+  Y1756100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
+  Y1756200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
+  Y1949200 "REGION OF RESIDENCE 2006"
+  Y1981600 "DATE OF CAPI INTERVIEW-DAY 2008"
+  Y1981601 "DATE OF CAPI INTERVIEW-MONTH 2008"
+  Y1981602 "DATE OF CAPI INTERVIEW-YEAR 2008"
+  Y2018600 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2008"
+  Y2036100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2008"
+  Y2037100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
+  Y2037200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
+  Y2267000 "VERSION_R26 CHILD/YOUNG ADULT XRND"
+  Y2267800 "REGION OF RESIDENCE 2008"
+  Y2300400 "DATE OF CAPI INTERVIEW-DAY 2010"
+  Y2300401 "DATE OF CAPI INTERVIEW-MONTH 2010"
+  Y2300402 "DATE OF CAPI INTERVIEW-YEAR 2010"
+  Y2343700 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2010"
+  Y2360600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2010"
+  Y2361600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
+  Y2361700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
+  Y2616700 "REGION OF RESIDENCE 2010"
+{c )-}
+
+(11521 observations read)
+
+{com}. 
+. //Unneeded documentation parameter
+. drop Y2267000
+{txt}
+{com}. 
+. //Define labels
+. label define raceLab   1 "HISPANIC"  2 "BLACK"  3 "NON-BLACK, NON-HISPANIC"
+{txt}
+{com}. label define sexLab  1 "MALE"  2 "FEMALE"
+{txt}
+{com}. label define majLab  0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  6 "BIOLOGICAL SCIENCES"  7 "BUSINESS"  8 "COMMUNICATIONS"  9 "COMPUTER/INFORMATION SCIENCE"  10 "CRIMINOLOGY"  11 "ECONOMICS"  12 "EDUCATION"  13 "ENGINEERING"  14 "ENGLISH"  15 "FINE AND APPLIED ARTS"  16 "FOREIGN LANGUAGES"  17 "HISTORY"  18 "HOME ECONOMICS"  19 "INTERDISCIPLINARY STUDIES"  20 "MATHEMATICS"  21 "NURSING"  22 "OTHER HEALTH PROFESSIONS"  23 "PHILOSOPHY"  24 "PHYSICAL SCIENCES"  25 "POLITICAL SCIENCE AND GOVERNMENT"  26 "PRE-DENTAL"  27 "PRE-LAW"  28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
+{txt}
+{com}. label define ynLab  1 "Yes"  0 "No"
+{txt}
+{com}. label define regionLab 1 "NORTHEAST" 2 "NORTH CENTRAL" 3 "SOUTH" 4 "WEST"
+{txt}
+{com}. label define majTypeLab 0 "Humanities" 1 "STEM" 2 "Social Science" 3 "Professions" 4 "Business"
+{txt}
+{com}. label define gradeLab 1 "1ST GRADE"  2 "2ND GRADE"  3 "3RD GRADE"  4 "4TH GRADE"  5 "5TH GRADE"  6 "6TH GRADE"  7 "7TH GRADE"  8 "8TH GRADE"  9 "9TH GRADE"  10 "10TH GRADE"  11 "11TH GRADE"  12 "12TH GRADE"  13 "1ST YEAR COLLEGE"  14 "2ND YEAR COLLEGE"  15 "3RD YEAR COLLEGE"  16 "4TH YEAR COLLEGE"  17 "5TH YEAR COLLEGE"  18 "6TH YEAR COLLEGE"  19 "7TH YEAR COLLEGE"  20 "8TH YEAR COLLEGE OR MORE"  95 "UNGRADED"  0 "None"
+{txt}
+{com}. 
+. //ID Numbers
+. rename C0000100 cid
+{res}{txt}
+{com}. rename C0000200 mid
+{res}{txt}
+{com}. 
+. //Demographics
+. rename C0005300 race
+{res}{txt}
+{com}. label values race raceLab
+{txt}
+{com}. rename C0005400 sex
+{res}{txt}
+{com}. label values sex sexLab
+{txt}
+{com}. rename C0005700 dob
+{res}{txt}
+{com}. 
+. //Year of study
+. rename Y1012100 grade0
+{res}{txt}
+{com}. rename Y1254300 grade2
+{res}{txt}
+{com}. rename Y1488000 grade4
+{res}{txt}
+{com}. rename Y1737800 grade6
+{res}{txt}
+{com}. rename Y2018600 grade8
+{res}{txt}
+{com}. rename Y2343700 grade10
+{res}{txt}
+{com}. 
+. label values grade* gradeLab
+{txt}
+{com}. 
+. //Fields of study
+. rename Y1025600 maj0
+{res}{txt}
+{com}. rename Y1270800 maj2
+{res}{txt}
+{com}. rename Y1504800 maj4
+{res}{txt}
+{com}. rename Y1755100 maj6
+{res}{txt}
+{com}. rename Y2036100 maj8
+{res}{txt}
+{com}. rename Y2360600 maj10
+{res}{txt}
+{com}. 
+. label values maj* majLab
+{txt}
+{com}. 
+. //Receive loan?
+. rename Y1026600 recloan0
+{res}{txt}
+{com}. rename Y1271800 recloan2
+{res}{txt}
+{com}. rename Y1505800 recloan4
+{res}{txt}
+{com}. rename Y1756100 recloan6
+{res}{txt}
+{com}. rename Y2037100 recloan8
+{res}{txt}
+{com}. rename Y2361600 recloan10
+{res}{txt}
+{com}. 
+. label values recloan* ynLab
+{txt}
+{com}. 
+. //Region
+. rename Y1193000 region0
+{res}{txt}
+{com}. rename Y1435200 region2
+{res}{txt}
+{com}. rename Y1673400 region4
+{res}{txt}
+{com}. rename Y1949200 region6
+{res}{txt}
+{com}. rename Y2267800 region8
+{res}{txt}
+{com}. rename Y2616700 region10
+{res}{txt}
+{com}. 
+. label values region* regionLab
+{txt}
+{com}. 
+. //Loan quantities
+. rename Y1026700 loan0
+{res}{txt}
+{com}. rename Y1271900 loan2
+{res}{txt}
+{com}. rename Y1505900 loan4
+{res}{txt}
+{com}. rename Y1756200 loan6
+{res}{txt}
+{com}. rename Y2037200 loan8
+{res}{txt}
+{com}. rename Y2361700 loan10
+{res}{txt}
+{com}. 
+. forval i = 0(2)10{c -(}
+{txt}  2{com}.         replace recloan`i' = . if recloan`i' < 0
+{txt}  3{com}. {c )-}
+{txt}(11153 real changes made, 11153 to missing)
+(10886 real changes made, 10886 to missing)
+(10637 real changes made, 10637 to missing)
+(10479 real changes made, 10479 to missing)
+(10267 real changes made, 10267 to missing)
+(10088 real changes made, 10088 to missing)
+
+{com}. 
+. //Interview dates
+. gen intDate0 = mdy(Y1180501, Y1180500, Y1180502)
+{txt}(8496 missing values generated)
+
+{com}. gen intDate2 = mdy(Y1421101, Y1421100, Y1421102)
+{txt}(7283 missing values generated)
+
+{com}. gen intDate4 = mdy(Y1450201, Y1450200, Y1450202)
+{txt}(6497 missing values generated)
+
+{com}. gen intDate6 = mdy(Y1695601, Y1695600, Y1695602)
+{txt}(5677 missing values generated)
+
+{com}. gen intDate8 = mdy(Y1981601, Y1981600, Y1981602)
+{txt}(5216 missing values generated)
+
+{com}. gen intDate10 = mdy(Y2300401, Y2300400, Y2300402)
+{txt}(5419 missing values generated)
+
+{com}. format intDate* %td
+{txt}
+{com}. 
+. kill
+{err}unrecognized command:  kill
+{txt}{search r(199):r(199);}
+
+end of do-file
+
+{search r(199):r(199);}
+
+{com}. set more off
+
+. do Import
+{txt}
+{com}. clear all
+{txt}
+{com}. 
+. infile using Download/child.dct
+
+{txt}infile dictionary {c -(}
+  C0000100 "ID CODE OF CHILD"
+  C0000200 "ID CODE OF MOTHER OF CHILD"
+  C0005300 "RACE OF CHILD (FROM MOTHERS SCREENER 79)"
+  C0005400 "SEX OF CHILD"
+  C0005700 "DATE OF BIRTH OF CHILD - YEAR"
+  Y1012100 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2000"
+  Y1025600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2000"
+  Y1026600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
+  Y1026700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
+  Y1180500 "DATE OF CAPI INTERVIEW 2000"
+  Y1180501 "DATE OF CAPI INTERVIEW 2000"
+  Y1180502 "DATE OF CAPI INTERVIEW 2000"
+  Y1193000 "REGION OF RESIDENCE 2000"
+  Y1254300 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2002"
+  Y1270800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2002"
+  Y1271800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
+  Y1271900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
+  Y1421100 "DATE OF CAPI INTERVIEW 2002"
+  Y1421101 "DATE OF CAPI INTERVIEW 2002"
+  Y1421102 "DATE OF CAPI INTERVIEW 2002"
+  Y1435200 "REGION OF RESIDENCE 2002"
+  Y1450200 "DATE OF CAPI INTERVIEW-DAY 2004"
+  Y1450201 "DATE OF CAPI INTERVIEW-MONTH 2004"
+  Y1450202 "DATE OF CAPI INTERVIEW-YEAR 2004"
+  Y1488000 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2004"
+  Y1504800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2004"
+  Y1505800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
+  Y1505900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
+  Y1673400 "REGION OF RESIDENCE 2004"
+  Y1695600 "DATE OF CAPI INTERVIEW-DAY 2006"
+  Y1695601 "DATE OF CAPI INTERVIEW-MONTH 2006"
+  Y1695602 "DATE OF CAPI INTERVIEW-YEAR 2006"
+  Y1737800 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2006"
+  Y1755100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2006"
+  Y1756100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
+  Y1756200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
+  Y1949200 "REGION OF RESIDENCE 2006"
+  Y1981600 "DATE OF CAPI INTERVIEW-DAY 2008"
+  Y1981601 "DATE OF CAPI INTERVIEW-MONTH 2008"
+  Y1981602 "DATE OF CAPI INTERVIEW-YEAR 2008"
+  Y2018600 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2008"
+  Y2036100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2008"
+  Y2037100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
+  Y2037200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
+  Y2267000 "VERSION_R26 CHILD/YOUNG ADULT XRND"
+  Y2267800 "REGION OF RESIDENCE 2008"
+  Y2300400 "DATE OF CAPI INTERVIEW-DAY 2010"
+  Y2300401 "DATE OF CAPI INTERVIEW-MONTH 2010"
+  Y2300402 "DATE OF CAPI INTERVIEW-YEAR 2010"
+  Y2343700 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2010"
+  Y2360600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2010"
+  Y2361600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
+  Y2361700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
+  Y2616700 "REGION OF RESIDENCE 2010"
+{c )-}
+
+(11521 observations read)
+
+{com}. 
+. //Unneeded documentation parameter
+. drop Y2267000
+{txt}
+{com}. 
+. //Define labels
+. label define raceLab   1 "HISPANIC"  2 "BLACK"  3 "NON-BLACK, NON-HISPANIC"
+{txt}
+{com}. label define sexLab  1 "MALE"  2 "FEMALE"
+{txt}
+{com}. label define majLab  0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  6 "BIOLOGICAL SCIENCES"  7 "BUSINESS"  8 "COMMUNICATIONS"  9 "COMPUTER/INFORMATION SCIENCE"  10 "CRIMINOLOGY"  11 "ECONOMICS"  12 "EDUCATION"  13 "ENGINEERING"  14 "ENGLISH"  15 "FINE AND APPLIED ARTS"  16 "FOREIGN LANGUAGES"  17 "HISTORY"  18 "HOME ECONOMICS"  19 "INTERDISCIPLINARY STUDIES"  20 "MATHEMATICS"  21 "NURSING"  22 "OTHER HEALTH PROFESSIONS"  23 "PHILOSOPHY"  24 "PHYSICAL SCIENCES"  25 "POLITICAL SCIENCE AND GOVERNMENT"  26 "PRE-DENTAL"  27 "PRE-LAW"  28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
+{txt}
+{com}. label define ynLab  1 "Yes"  0 "No"
+{txt}
+{com}. label define regionLab 1 "NORTHEAST" 2 "NORTH CENTRAL" 3 "SOUTH" 4 "WEST"
+{txt}
+{com}. label define majTypeLab 0 "Humanities" 1 "STEM" 2 "Social Science" 3 "Professions" 4 "Business"
+{txt}
+{com}. label define gradeLab 1 "1ST GRADE"  2 "2ND GRADE"  3 "3RD GRADE"  4 "4TH GRADE"  5 "5TH GRADE"  6 "6TH GRADE"  7 "7TH GRADE"  8 "8TH GRADE"  9 "9TH GRADE"  10 "10TH GRADE"  11 "11TH GRADE"  12 "12TH GRADE"  13 "1ST YEAR COLLEGE"  14 "2ND YEAR COLLEGE"  15 "3RD YEAR COLLEGE"  16 "4TH YEAR COLLEGE"  17 "5TH YEAR COLLEGE"  18 "6TH YEAR COLLEGE"  19 "7TH YEAR COLLEGE"  20 "8TH YEAR COLLEGE OR MORE"  95 "UNGRADED"  0 "None"
+{txt}
+{com}. 
+. //ID Numbers
+. rename C0000100 cid
+{res}{txt}
+{com}. rename C0000200 mid
+{res}{txt}
+{com}. 
+. //Demographics
+. rename C0005300 race
+{res}{txt}
+{com}. label values race raceLab
+{txt}
+{com}. rename C0005400 sex
+{res}{txt}
+{com}. label values sex sexLab
+{txt}
+{com}. rename C0005700 dob
+{res}{txt}
+{com}. 
+. //Year of study
+. rename Y1012100 grade0
+{res}{txt}
+{com}. rename Y1254300 grade2
+{res}{txt}
+{com}. rename Y1488000 grade4
+{res}{txt}
+{com}. rename Y1737800 grade6
+{res}{txt}
+{com}. rename Y2018600 grade8
+{res}{txt}
+{com}. rename Y2343700 grade10
+{res}{txt}
+{com}. 
+. label values grade* gradeLab
+{txt}
+{com}. 
+. //Fields of study
+. rename Y1025600 maj0
+{res}{txt}
+{com}. rename Y1270800 maj2
+{res}{txt}
+{com}. rename Y1504800 maj4
+{res}{txt}
+{com}. rename Y1755100 maj6
+{res}{txt}
+{com}. rename Y2036100 maj8
+{res}{txt}
+{com}. rename Y2360600 maj10
+{res}{txt}
+{com}. 
+. label values maj* majLab
+{txt}
+{com}. 
+. //Receive loan?
+. rename Y1026600 recloan0
+{res}{txt}
+{com}. rename Y1271800 recloan2
+{res}{txt}
+{com}. rename Y1505800 recloan4
+{res}{txt}
+{com}. rename Y1756100 recloan6
+{res}{txt}
+{com}. rename Y2037100 recloan8
+{res}{txt}
+{com}. rename Y2361600 recloan10
+{res}{txt}
+{com}. 
+. label values recloan* ynLab
+{txt}
+{com}. 
+. //Region
+. rename Y1193000 region0
+{res}{txt}
+{com}. rename Y1435200 region2
+{res}{txt}
+{com}. rename Y1673400 region4
+{res}{txt}
+{com}. rename Y1949200 region6
+{res}{txt}
+{com}. rename Y2267800 region8
+{res}{txt}
+{com}. rename Y2616700 region10
+{res}{txt}
+{com}. 
+. label values region* regionLab
+{txt}
+{com}. 
+. //Loan quantities
+. rename Y1026700 loan0
+{res}{txt}
+{com}. rename Y1271900 loan2
+{res}{txt}
+{com}. rename Y1505900 loan4
+{res}{txt}
+{com}. rename Y1756200 loan6
+{res}{txt}
+{com}. rename Y2037200 loan8
+{res}{txt}
+{com}. rename Y2361700 loan10
+{res}{txt}
+{com}. 
+. forval i = 0(2)10{c -(}
+{txt}  2{com}.         replace recloan`i' = . if recloan`i' < 0
+{txt}  3{com}. {c )-}
+{txt}(11153 real changes made, 11153 to missing)
+(10886 real changes made, 10886 to missing)
+(10637 real changes made, 10637 to missing)
+(10479 real changes made, 10479 to missing)
+(10267 real changes made, 10267 to missing)
+(10088 real changes made, 10088 to missing)
+
+{com}. 
+. //Interview dates
+. gen intDate0 = mdy(Y1180501, Y1180500, Y1180502)
+{txt}(8496 missing values generated)
+
+{com}. gen intDate2 = mdy(Y1421101, Y1421100, Y1421102)
+{txt}(7283 missing values generated)
+
+{com}. gen intDate4 = mdy(Y1450201, Y1450200, Y1450202)
+{txt}(6497 missing values generated)
+
+{com}. gen intDate6 = mdy(Y1695601, Y1695600, Y1695602)
+{txt}(5677 missing values generated)
+
+{com}. gen intDate8 = mdy(Y1981601, Y1981600, Y1981602)
+{txt}(5216 missing values generated)
+
+{com}. gen intDate10 = mdy(Y2300401, Y2300400, Y2300402)
+{txt}(5419 missing values generated)
+
+{com}. format intDate* %td
+{txt}
+{com}. 
+. //Get only observations with data on receiving loans
+. drop if missing(recloan0) & missing(recloan2) ///
+>         & missing(recloan4) & missing(recloan6) ///
+>         & missing(recloan8) & missing(recloan10)
+{txt}(8351 observations deleted)
+
+{com}.         
+. //Change to long data
+. reshape long maj recloan loan region grade intDate, i(cid) j(year)
+{txt}(note: j = 0 2 4 6 8 10)
+
+Data{col 36}wide{col 43}->{col 48}long
+{hline 77}
+Number of obs.                 {res}    3170   {txt}->{res}   19020
+{txt}Number of variables            {res}      59   {txt}->{res}      30
+{txt}j variable (6 values)                     ->   {res}year
+{txt}xij variables:
+                    {res}maj0 maj2 ... maj10   {txt}->   {res}maj
+        recloan0 recloan2 ... recloan10   {txt}->   {res}recloan
+                 loan0 loan2 ... loan10   {txt}->   {res}loan
+           region0 region2 ... region10   {txt}->   {res}region
+              grade0 grade2 ... grade10   {txt}->   {res}grade
+        intDate0 intDate2 ... intDate10   {txt}->   {res}intDate
+{txt}{hline 77}
+
+{com}. 
+. //Code to Stata missings
+. replace maj = . if maj < 0
+{txt}(11736 real changes made, 11736 to missing)
+
+{com}. replace loan = 0 if !recloan & !missing(recloan)
+{txt}(3083 real changes made)
+
+{com}. replace loan = . if loan < 0
+{txt}(13763 real changes made, 13763 to missing)
+
+{com}. replace region = . if region < 0
+{txt}(4537 real changes made, 4537 to missing)
+
+{com}. replace recloan = . if recloan < 0
+{txt}(0 real changes made)
+
+{com}. replace grade = . if grade < 0
+{txt}(9562 real changes made, 9562 to missing)
+
+{com}. 
+. //Generates dummy for after policy change
+. gen cohort = (year >= 8)
+{txt}
+{com}. label define cohLab 0 "control" 1 "test"
+{txt}
+{com}. label values cohort cohLab
+{txt}
+{com}. 
+. //Creates value of treatment
+. //Freshmen received an increase of 3500-2625=875
+. //Sophomores received an increase of 4500-3500=1000
+. gen polImpact = 0
+{txt}
+{com}. if year == 8{c -(}
+.         polImpact = 1875 if grade == 13
+.         polImpact = 
+. {c )-}
+{txt}
+{com}. 
+. 
+. 
+. 
+. //Places majors into bins
+. gen majType = .
+{txt}(19020 missing values generated)
+
+{com}. //Humanities: Area Studies (5) English (14) Art (15) Language (16) History (17)
+. //              Interdisciplinary Studies (19) Philosophy (23) Theology (33)
+. replace majType = 0 if inlist(maj, 5, 14, 15, 16, 17, 19, 23, 33)
+{txt}(415 real changes made)
+
+{com}. //STEM: Agriculture (1) Architecture (4) Biology (6) CS(9) Engineering (13) 
+. //              Math (20) Physics (24)
+. replace majType = 1 if inlist(maj, 1, 4, 6, 9, 13, 20, 24)
+{txt}(1178 real changes made)
+
+{com}. //Social Science: Anthropology(2) Archaeology (3) Economics (11) Home Ec (18)
+. //              Political Science (25) Psychology (30) Sociology (31)
+. replace majType = 2 if inlist(maj, 2, 3, 11, 18, 25, 30, 31)
+{txt}(562 real changes made)
+
+{com}. //Professional: Communications (8) Criminology (10) Education (12)
+. //              Nursing (21) Other Health (22) Pre-Dental/Law/Med/Vet (26-29)
+. //              Social Work (32)
+. replace majType = 3 if inlist(maj, 7, 8, 10, 12, 21, 22, 26, 27, 28, 29, 32)
+{txt}(3550 real changes made)
+
+{com}. //Business: Business (7)
+. replace majType = 4 if maj == 7
+{txt}(1126 real changes made)
+
+{com}. 
+. assert missing(majType) == missing(maj) | maj == 0 | maj == 99
+{txt}
+{com}. 
+. label values majType majTypeLab
+{txt}
+{com}. 
+. 
+. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\Desktop\honors\NLSYChild79Data\Import.do"
+{txt}
+{com}. clear all
+{txt}
+{com}. 
+. infile using Download/child.dct
+
+{txt}infile dictionary {c -(}
+  C0000100 "ID CODE OF CHILD"
+  C0000200 "ID CODE OF MOTHER OF CHILD"
+  C0005300 "RACE OF CHILD (FROM MOTHERS SCREENER 79)"
+  C0005400 "SEX OF CHILD"
+  C0005700 "DATE OF BIRTH OF CHILD - YEAR"
+  Y1012100 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2000"
+  Y1025600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2000"
+  Y1026600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
+  Y1026700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
+  Y1180500 "DATE OF CAPI INTERVIEW 2000"
+  Y1180501 "DATE OF CAPI INTERVIEW 2000"
+  Y1180502 "DATE OF CAPI INTERVIEW 2000"
+  Y1193000 "REGION OF RESIDENCE 2000"
+  Y1254300 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2002"
+  Y1270800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2002"
+  Y1271800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
+  Y1271900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
+  Y1421100 "DATE OF CAPI INTERVIEW 2002"
+  Y1421101 "DATE OF CAPI INTERVIEW 2002"
+  Y1421102 "DATE OF CAPI INTERVIEW 2002"
+  Y1435200 "REGION OF RESIDENCE 2002"
+  Y1450200 "DATE OF CAPI INTERVIEW-DAY 2004"
+  Y1450201 "DATE OF CAPI INTERVIEW-MONTH 2004"
+  Y1450202 "DATE OF CAPI INTERVIEW-YEAR 2004"
+  Y1488000 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2004"
+  Y1504800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2004"
+  Y1505800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
+  Y1505900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
+  Y1673400 "REGION OF RESIDENCE 2004"
+  Y1695600 "DATE OF CAPI INTERVIEW-DAY 2006"
+  Y1695601 "DATE OF CAPI INTERVIEW-MONTH 2006"
+  Y1695602 "DATE OF CAPI INTERVIEW-YEAR 2006"
+  Y1737800 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2006"
+  Y1755100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2006"
+  Y1756100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
+  Y1756200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
+  Y1949200 "REGION OF RESIDENCE 2006"
+  Y1981600 "DATE OF CAPI INTERVIEW-DAY 2008"
+  Y1981601 "DATE OF CAPI INTERVIEW-MONTH 2008"
+  Y1981602 "DATE OF CAPI INTERVIEW-YEAR 2008"
+  Y2018600 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2008"
+  Y2036100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2008"
+  Y2037100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
+  Y2037200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
+  Y2267000 "VERSION_R26 CHILD/YOUNG ADULT XRND"
+  Y2267800 "REGION OF RESIDENCE 2008"
+  Y2300400 "DATE OF CAPI INTERVIEW-DAY 2010"
+  Y2300401 "DATE OF CAPI INTERVIEW-MONTH 2010"
+  Y2300402 "DATE OF CAPI INTERVIEW-YEAR 2010"
+  Y2343700 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2010"
+  Y2360600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2010"
+  Y2361600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
+  Y2361700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
+  Y2616700 "REGION OF RESIDENCE 2010"
+{c )-}
+
+(11521 observations read)
+
+{com}. 
+. //Unneeded documentation parameter
+. drop Y2267000
+{txt}
+{com}. 
+. //Define labels
+. label define raceLab   1 "HISPANIC"  2 "BLACK"  3 "NON-BLACK, NON-HISPANIC"
+{txt}
+{com}. label define sexLab  1 "MALE"  2 "FEMALE"
+{txt}
+{com}. label define majLab  0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  6 "BIOLOGICAL SCIENCES"  7 "BUSINESS"  8 "COMMUNICATIONS"  9 "COMPUTER/INFORMATION SCIENCE"  10 "CRIMINOLOGY"  11 "ECONOMICS"  12 "EDUCATION"  13 "ENGINEERING"  14 "ENGLISH"  15 "FINE AND APPLIED ARTS"  16 "FOREIGN LANGUAGES"  17 "HISTORY"  18 "HOME ECONOMICS"  19 "INTERDISCIPLINARY STUDIES"  20 "MATHEMATICS"  21 "NURSING"  22 "OTHER HEALTH PROFESSIONS"  23 "PHILOSOPHY"  24 "PHYSICAL SCIENCES"  25 "POLITICAL SCIENCE AND GOVERNMENT"  26 "PRE-DENTAL"  27 "PRE-LAW"  28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
+{txt}
+{com}. label define ynLab  1 "Yes"  0 "No"
+{txt}
+{com}. label define regionLab 1 "NORTHEAST" 2 "NORTH CENTRAL" 3 "SOUTH" 4 "WEST"
+{txt}
+{com}. label define majTypeLab 0 "Humanities" 1 "STEM" 2 "Social Science" 3 "Professions" 4 "Business"
+{txt}
+{com}. label define gradeLab 1 "1ST GRADE"  2 "2ND GRADE"  3 "3RD GRADE"  4 "4TH GRADE"  5 "5TH GRADE"  6 "6TH GRADE"  7 "7TH GRADE"  8 "8TH GRADE"  9 "9TH GRADE"  10 "10TH GRADE"  11 "11TH GRADE"  12 "12TH GRADE"  13 "1ST YEAR COLLEGE"  14 "2ND YEAR COLLEGE"  15 "3RD YEAR COLLEGE"  16 "4TH YEAR COLLEGE"  17 "5TH YEAR COLLEGE"  18 "6TH YEAR COLLEGE"  19 "7TH YEAR COLLEGE"  20 "8TH YEAR COLLEGE OR MORE"  95 "UNGRADED"  0 "None"
+{txt}
+{com}. 
+. //ID Numbers
+. rename C0000100 cid
+{res}{txt}
+{com}. rename C0000200 mid
+{res}{txt}
+{com}. 
+. //Demographics
+. rename C0005300 race
+{res}{txt}
+{com}. label values race raceLab
+{txt}
+{com}. rename C0005400 sex
+{res}{txt}
+{com}. label values sex sexLab
+{txt}
+{com}. rename C0005700 dob
+{res}{txt}
+{com}. 
+. //Year of study
+. rename Y1012100 grade0
+{res}{txt}
+{com}. rename Y1254300 grade2
+{res}{txt}
+{com}. rename Y1488000 grade4
+{res}{txt}
+{com}. rename Y1737800 grade6
+{res}{txt}
+{com}. rename Y2018600 grade8
+{res}{txt}
+{com}. rename Y2343700 grade10
+{res}{txt}
+{com}. 
+. label values grade* gradeLab
+{txt}
+{com}. 
+. //Fields of study
+. rename Y1025600 maj0
+{res}{txt}
+{com}. rename Y1270800 maj2
+{res}{txt}
+{com}. rename Y1504800 maj4
+{res}{txt}
+{com}. rename Y1755100 maj6
+{res}{txt}
+{com}. rename Y2036100 maj8
+{res}{txt}
+{com}. rename Y2360600 maj10
+{res}{txt}
+{com}. 
+. label values maj* majLab
+{txt}
+{com}. 
+. //Receive loan?
+. rename Y1026600 recloan0
+{res}{txt}
+{com}. rename Y1271800 recloan2
+{res}{txt}
+{com}. rename Y1505800 recloan4
+{res}{txt}
+{com}. rename Y1756100 recloan6
+{res}{txt}
+{com}. rename Y2037100 recloan8
+{res}{txt}
+{com}. rename Y2361600 recloan10
+{res}{txt}
+{com}. 
+. label values recloan* ynLab
+{txt}
+{com}. 
+. //Region
+. rename Y1193000 region0
+{res}{txt}
+{com}. rename Y1435200 region2
+{res}{txt}
+{com}. rename Y1673400 region4
+{res}{txt}
+{com}. rename Y1949200 region6
+{res}{txt}
+{com}. rename Y2267800 region8
+{res}{txt}
+{com}. rename Y2616700 region10
+{res}{txt}
+{com}. 
+. label values region* regionLab
+{txt}
+{com}. 
+. //Loan quantities
+. rename Y1026700 loan0
+{res}{txt}
+{com}. rename Y1271900 loan2
+{res}{txt}
+{com}. rename Y1505900 loan4
+{res}{txt}
+{com}. rename Y1756200 loan6
+{res}{txt}
+{com}. rename Y2037200 loan8
+{res}{txt}
+{com}. rename Y2361700 loan10
+{res}{txt}
+{com}. 
+. forval i = 0(2)10{c -(}
+{txt}  2{com}.         replace recloan`i' = . if recloan`i' < 0
+{txt}  3{com}. {c )-}
+{txt}(11153 real changes made, 11153 to missing)
+(10886 real changes made, 10886 to missing)
+(10637 real changes made, 10637 to missing)
+(10479 real changes made, 10479 to missing)
+(10267 real changes made, 10267 to missing)
+(10088 real changes made, 10088 to missing)
+
+{com}. 
+. //Interview dates
+. gen intDate0 = mdy(Y1180501, Y1180500, Y1180502)
+{txt}(8496 missing values generated)
+
+{com}. gen intDate2 = mdy(Y1421101, Y1421100, Y1421102)
+{txt}(7283 missing values generated)
+
+{com}. gen intDate4 = mdy(Y1450201, Y1450200, Y1450202)
+{txt}(6497 missing values generated)
+
+{com}. gen intDate6 = mdy(Y1695601, Y1695600, Y1695602)
+{txt}(5677 missing values generated)
+
+{com}. gen intDate8 = mdy(Y1981601, Y1981600, Y1981602)
+{txt}(5216 missing values generated)
+
+{com}. gen intDate10 = mdy(Y2300401, Y2300400, Y2300402)
+{txt}(5419 missing values generated)
+
+{com}. format intDate* %td
+{txt}
+{com}. drop Y1* Y2*
+{txt}
+{com}. 
+. //Get only observations with data on receiving loans
+. drop if missing(recloan0) & missing(recloan2) ///
+>         & missing(recloan4) & missing(recloan6) ///
+>         & missing(recloan8) & missing(recloan10)
+{txt}(8351 observations deleted)
+
+{com}.         
+. //Change to long data
+. reshape long maj recloan loan region grade intDate, i(cid) j(year)
+{txt}(note: j = 0 2 4 6 8 10)
+
+Data{col 36}wide{col 43}->{col 48}long
+{hline 77}
+Number of obs.                 {res}    3170   {txt}->{res}   19020
+{txt}Number of variables            {res}      41   {txt}->{res}      12
+{txt}j variable (6 values)                     ->   {res}year
+{txt}xij variables:
+                    {res}maj0 maj2 ... maj10   {txt}->   {res}maj
+        recloan0 recloan2 ... recloan10   {txt}->   {res}recloan
+                 loan0 loan2 ... loan10   {txt}->   {res}loan
+           region0 region2 ... region10   {txt}->   {res}region
+              grade0 grade2 ... grade10   {txt}->   {res}grade
+        intDate0 intDate2 ... intDate10   {txt}->   {res}intDate
+{txt}{hline 77}
+
+{com}. 
+. //Code to Stata missings
+. replace maj = . if maj < 0
+{txt}(11736 real changes made, 11736 to missing)
+
+{com}. replace loan = 0 if !recloan & !missing(recloan)
+{txt}(3083 real changes made)
+
+{com}. replace loan = . if loan < 0
+{txt}(13763 real changes made, 13763 to missing)
+
+{com}. replace region = . if region < 0
+{txt}(4537 real changes made, 4537 to missing)
+
+{com}. replace recloan = . if recloan < 0
+{txt}(0 real changes made)
+
+{com}. replace grade = . if grade < 0
+{txt}(9562 real changes made, 9562 to missing)
+
+{com}. 
+. //Generates dummy for after policy change
+. gen cohort = (year >= 8)
+{txt}
+{com}. label define cohLab 0 "control" 1 "test"
+{txt}
+{com}. label values cohort cohLab
+{txt}
+{com}. 
+. //Creates value of treatment
+. //Freshmen received an increase of 3500-2625=875
+. //Sophomores received an increase of 4500-3500=1000
+. gen polImpact = 0
+{txt}
+{com}. if year == 8{c -(}
+.         polImpact = 1875 if grade == 13
+.         polImpact = 
+. {c )-}
+{txt}
+{com}. 
+. 
+. 
+. 
+. //Places majors into bins
+. gen majType = .
+{txt}(19020 missing values generated)
+
+{com}. //Humanities: Area Studies (5) English (14) Art (15) Language (16) History (17)
+. //              Interdisciplinary Studies (19) Philosophy (23) Theology (33)
+. replace majType = 0 if inlist(maj, 5, 14, 15, 16, 17, 19, 23, 33)
+{txt}(415 real changes made)
+
+{com}. //STEM: Agriculture (1) Architecture (4) Biology (6) CS(9) Engineering (13) 
+. //              Math (20) Physics (24)
+. replace majType = 1 if inlist(maj, 1, 4, 6, 9, 13, 20, 24)
+{txt}(1178 real changes made)
+
+{com}. //Social Science: Anthropology(2) Archaeology (3) Economics (11) Home Ec (18)
+. //              Political Science (25) Psychology (30) Sociology (31)
+. replace majType = 2 if inlist(maj, 2, 3, 11, 18, 25, 30, 31)
+{txt}(562 real changes made)
+
+{com}. //Professional: Communications (8) Criminology (10) Education (12)
+. //              Nursing (21) Other Health (22) Pre-Dental/Law/Med/Vet (26-29)
+. //              Social Work (32)
+. replace majType = 3 if inlist(maj, 7, 8, 10, 12, 21, 22, 26, 27, 28, 29, 32)
+{txt}(3550 real changes made)
+
+{com}. //Business: Business (7)
+. replace majType = 4 if maj == 7
+{txt}(1126 real changes made)
+
+{com}. 
+. assert missing(majType) == missing(maj) | maj == 0 | maj == 99
+{txt}
+{com}. 
+. label values majType majTypeLab
+{txt}
+{com}. 
+. 
+. 
+{txt}end of do-file
+
+{com}. 

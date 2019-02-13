@@ -77,13 +77,23 @@ forval i = 0(2)10{
 	replace recloan`i' = . if recloan`i' < 0
 }
 
+//Interview dates
+gen intDate0 = mdy(Y1180501, Y1180500, Y1180502)
+gen intDate2 = mdy(Y1421101, Y1421100, Y1421102)
+gen intDate4 = mdy(Y1450201, Y1450200, Y1450202)
+gen intDate6 = mdy(Y1695601, Y1695600, Y1695602)
+gen intDate8 = mdy(Y1981601, Y1981600, Y1981602)
+gen intDate10 = mdy(Y2300401, Y2300400, Y2300402)
+format intDate* %td
+drop Y1* Y2*
+
 //Get only observations with data on receiving loans
 drop if missing(recloan0) & missing(recloan2) ///
 	& missing(recloan4) & missing(recloan6) ///
 	& missing(recloan8) & missing(recloan10)
 	
 //Change to long data
-reshape long maj recloan loan region grade, i(cid) j(year)
+reshape long maj recloan loan region grade intDate, i(cid) j(year)
 
 //Code to Stata missings
 replace maj = . if maj < 0
@@ -97,6 +107,16 @@ replace grade = . if grade < 0
 gen cohort = (year >= 8)
 label define cohLab 0 "control" 1 "test"
 label values cohort cohLab
+
+//Creates value of treatment
+//Freshmen received an increase of 3500-2625=875
+//Sophomores received an increase of 4500-3500=1000
+gen polImpact = 0
+if year == 8{
+	polImpact = 1875 if grade == 13
+	polImpact = 
+}
+
 
 
 
