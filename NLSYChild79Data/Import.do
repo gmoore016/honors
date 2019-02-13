@@ -12,6 +12,7 @@ label define majLab  0 "NONE, NO MAJOR DECLARED YET"  1 "AGRICULTURE / NATURAL R
 label define ynLab  1 "Yes"  0 "No"
 label define regionLab 1 "NORTHEAST" 2 "NORTH CENTRAL" 3 "SOUTH" 4 "WEST"
 label define majTypeLab 0 "Humanities" 1 "STEM" 2 "Social Science" 3 "Professions" 4 "Business"
+label define gradeLab 1 "1ST GRADE"  2 "2ND GRADE"  3 "3RD GRADE"  4 "4TH GRADE"  5 "5TH GRADE"  6 "6TH GRADE"  7 "7TH GRADE"  8 "8TH GRADE"  9 "9TH GRADE"  10 "10TH GRADE"  11 "11TH GRADE"  12 "12TH GRADE"  13 "1ST YEAR COLLEGE"  14 "2ND YEAR COLLEGE"  15 "3RD YEAR COLLEGE"  16 "4TH YEAR COLLEGE"  17 "5TH YEAR COLLEGE"  18 "6TH YEAR COLLEGE"  19 "7TH YEAR COLLEGE"  20 "8TH YEAR COLLEGE OR MORE"  95 "UNGRADED"  0 "None"
 
 //ID Numbers
 rename C0000100 cid
@@ -23,6 +24,16 @@ label values race raceLab
 rename C0005400 sex
 label values sex sexLab
 rename C0005700 dob
+
+//Year of study
+rename Y1012100 grade0
+rename Y1254300 grade2
+rename Y1488000 grade4
+rename Y1737800 grade6
+rename Y2018600 grade8
+rename Y2343700 grade10
+
+label values grade* gradeLab
 
 //Fields of study
 rename Y1025600 maj0
@@ -72,7 +83,7 @@ drop if missing(recloan0) & missing(recloan2) ///
 	& missing(recloan8) & missing(recloan10)
 	
 //Change to long data
-reshape long maj recloan loan region, i(cid) j(year)
+reshape long maj recloan loan region grade, i(cid) j(year)
 
 //Code to Stata missings
 replace maj = . if maj < 0
@@ -80,6 +91,7 @@ replace loan = 0 if !recloan & !missing(recloan)
 replace loan = . if loan < 0
 replace region = . if region < 0
 replace recloan = . if recloan < 0
+replace grade = . if grade < 0
 
 //Generates dummy for after policy change
 gen cohort = (year >= 8)
