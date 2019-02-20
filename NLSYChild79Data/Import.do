@@ -32,6 +32,8 @@ rename Y1488000 grade4
 rename Y1737800 grade6
 rename Y2018600 grade8
 rename Y2343700 grade10
+rename Y2673200 grade12
+rename Y3029600 grade14
 
 label values grade* gradeLab
 
@@ -42,6 +44,8 @@ rename Y1504800 maj4
 rename Y1755100 maj6
 rename Y2036100 maj8
 rename Y2360600 maj10
+rename Y2691100 maj12
+rename Y3046600 maj14
 
 label values maj* majLab
 
@@ -52,6 +56,8 @@ rename Y1505800 recloan4
 rename Y1756100 recloan6
 rename Y2037100 recloan8
 rename Y2361600 recloan10
+rename Y2692100 recloan12
+rename Y3047600 recloan14
 
 label values recloan* ynLab
 
@@ -62,6 +68,8 @@ rename Y1673400 region4
 rename Y1949200 region6
 rename Y2267800 region8
 rename Y2616700 region10
+rename Y2967200 region12
+rename Y3332700 region14
 
 label values region* regionLab
 
@@ -72,19 +80,30 @@ rename Y1505900 loan4
 rename Y1756200 loan6
 rename Y2037200 loan8
 rename Y2361700 loan10
+rename Y2692200 loan12
+rename Y3047700 loan14
 
 forval i = 0(2)10{
 	replace recloan`i' = . if recloan`i' < 0
 }
 
 //Interview dates
-gen intDate0 = mdy(Y1180501, Y1180500, Y1180502)
-gen intDate2 = mdy(Y1421101, Y1421100, Y1421102)
-gen intDate4 = mdy(Y1450201, Y1450200, Y1450202)
-gen intDate6 = mdy(Y1695601, Y1695600, Y1695602)
-gen intDate8 = mdy(Y1981601, Y1981600, Y1981602)
-gen intDate10 = mdy(Y2300401, Y2300400, Y2300402)
-format intDate* %td
+//gen intDate0 = mdy(Y1180501, Y1180500, Y1180502)
+gen intDate0 = ym(Y1180502, Y1180501)
+//gen intDate2 = mdy(Y1421101, Y1421100, Y1421102)
+gen intDate2 = ym(Y1421102, Y1421101)
+//gen intDate4 = mdy(Y1450201, Y1450200, Y1450202)
+gen intDate4 = ym(Y1450202, Y1450201)
+//gen intDate6 = mdy(Y1695601, Y1695600, Y1695602)
+gen intDate6 = ym(Y1695602, Y1695601)
+//gen intDate8 = mdy(Y1981601, Y1981600, Y1981602)
+gen intDate8 = ym(Y1981602, Y1981601) 
+//gen intDate10 = mdy(Y2300401, Y2300400, Y2300402)
+gen intDate10 = ym(Y2300402, Y2300401)
+
+gen intDate12 = ym(Y2633102, Y2633101)
+gen intDate14 = ym(Y2990502, Y2990501)
+format intDate* %tm
 drop Y1* Y2*
 
 //Get only observations with data on receiving loans
@@ -113,17 +132,17 @@ label values cohort cohLab
 //Sophomores received an increase of 4500-3500=1000
 gen polImpact = 0
 //Students who are sophomores in the 2007-2008 school year receive only sophomore package
-replace polImpact = 1000 if  ((grade == 14 & inrange(intDate, date("15aug2007", "DMY"), date("15aug2008", "DMY"))) | ///
-	 (grade == 15 & inrange(intDate, date("15aug2008", "DMY"), date("15aug2009", "DMY"))) | ///
-	 (grade == 16 & inrange(intDate, date("15aug2009", "DMY"), date("15aug2010", "DMY"))) | ///
-	 (grade == 17 & inrange(intDate, date("15aug2010", "DMY"), date("15aug2011", "DMY"))))
+replace polImpact = 1000 if  ((grade == 14 & inrange(intDate, ym(2007, 8), ym(2008, 8))) | ///
+	 (grade == 15 & inrange(intDate, ym(2008, 8), ym(2009, 8))) | ///
+	 (grade == 16 & inrange(intDate, ym(2009, 8), ym(2010, 8))) | ///
+	 (grade == 17 & inrange(intDate, ym(2010, 8), ym(2011, 8))))
 
 //Students who enter school after the policy change get full impact
-replace polImpact = 1875 if  ((grade == 13 & intDate > date("15aug2007", "DMY")) | ///
-	 (grade == 14 & intDate > date("15aug2008", "DMY")) | ///
-	 (grade == 15 & intDate > date("15aug2009", "DMY")) | ///
-	 (grade == 16 & intDate > date("15aug2010", "DMY")) | ///
-	 (grade == 17 & intDate > date("15aug2011", "DMY")))
+replace polImpact = 1875 if  ((grade == 13 & intDate > ym(2007, 8)) | ///
+	 (grade == 14 & intDate > ym(2008, 8)) | ///
+	 (grade == 15 & intDate > ym(2009, 8)) | ///
+	 (grade == 16 & intDate > ym(2010, 8)) | ///
+	 (grade == 17 & intDate > ym(2011, 8)))
 	
 
 //Places majors into bins

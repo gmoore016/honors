@@ -25,6 +25,11 @@ tobit loan year cohort parInc i.race i.sex i.region if !missing(recloan), ll
 predict loanHat if !missing(recloan) & !missing(loan), ystar(0, .)
 
 
+//Tobit with tailored impact
+tobit loan intDate polImpact parInc i.race i.sex i.region if !missing(recloan), ll
+
+
+
 //Creates dummies for each type of major
 gen humMajType = majType == 0
 gen stemMajType = majType == 1
