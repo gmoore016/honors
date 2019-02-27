@@ -19,8 +19,6 @@ merge m:1 mid year using `parInc', assert(match using) nogen keep(match)
 
 //keep if parInc < 50000
 
-cd ../NeedCalc/Code
-do NeedCalc
 
 cd ../Tables/Code
 do tables

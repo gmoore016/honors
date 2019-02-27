@@ -86,6 +86,30 @@ rename Y2361700 loan10
 rename Y2692200 loan12
 rename Y3047700 loan14
 
+//Tuition
+rename Y1026400 fulltuition0
+rename Y1026500 partialtuition0
+rename Y1271600 fulltuition2
+rename Y1271700 partialtuition2
+rename Y1505600 fulltuition4
+rename Y1505700 partialtuition4
+rename Y1755900 fulltuition6
+rename Y1756000 partialtuition6
+rename Y2036900 fulltuition8
+rename Y2037000 partialtuition8
+rename Y2361400 fulltuition10
+rename Y2361500 partialtuition10
+rename Y2691900 fulltuition12
+rename Y2692000 partialtuition12
+
+rename Y3047500 tuition14
+
+forvalues i = 0(2)12{
+	assert fulltuition`i' < 0 | partialtuition`i' < 0
+	gen tuition`i' = max(fulltuition`i', partialtuition`i')
+}
+
+
 forval i = 0(2)10{
 	replace recloan`i' = . if recloan`i' < 0
 }
@@ -109,13 +133,15 @@ gen intDate14 = ym(Y2990502, Y2990501)
 format intDate* %tm
 drop Y1* Y2*
 
+kill
+
 //Get only observations with data on receiving loans
 drop if missing(recloan0) & missing(recloan2) ///
 	& missing(recloan4) & missing(recloan6) ///
 	& missing(recloan8) & missing(recloan10)
 	
 //Change to long data
-reshape long maj recloan loan region grade intDate, i(cid) j(year)
+reshape long maj recloan loan region grade intDate tuition fulltuition partialtuition, i(cid) j(year)
 
 //Code to Stata missings
 replace maj = . if maj < 0
@@ -124,6 +150,10 @@ replace loan = . if loan < 0
 replace region = . if region < 0
 replace recloan = . if recloan < 0
 replace grade = . if grade < 0
+replace partialtuition = . if partialtuition < 0
+replace fulltuition = . if fulltuition < 0
+replace tuition = . if tuition < 0
+
 
 //Generates dummy for after policy change
 gen cohort = (year >= 8)
@@ -165,6 +195,10 @@ replace majType = 2 if inlist(maj, 2, 3, 11, 18, 25, 30, 31)
 replace majType = 3 if inlist(maj, 7, 8, 10, 12, 21, 22, 26, 27, 28, 29, 32)
 //Business: Business (7)
 replace majType = 4 if maj == 7
+
+
+//Tests if siblings are in college
+
 
 
 
