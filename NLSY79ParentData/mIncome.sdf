@@ -1,9 +1,0 @@
-
-
-Reference
-Number     Year  Variable Description                                             Question Name  
----------------------------------------------------------------------------------------------------
-R00001.00  1979  IDENTIFICATION CODE                                              CASEID         
-T09878.00  2006  TOTAL NET FAMILY INCOME IN PAST CALENDAR YEAR *KEY* (TRUNCATED)  TNFI_TRUNC     
-T22100.00  2008  TOTAL NET FAMILY INCOME IN PAST CALENDAR YEAR *KEY* (TRUNCATED)  TNFI_TRUNC     
-T31078.00  2010  TOTAL NET FAMILY INCOME IN PAST CALENDAR YEAR *KEY* (TRUNCATED)  TNFI_TRUNC     

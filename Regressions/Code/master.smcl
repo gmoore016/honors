@@ -1,9 +1,9 @@
 {smcl}
 {com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}C:\Users\gmoor\Desktop\honors\Regressions\Code\master.smcl
+       {txt}log:  {res}C:\Users\gmoore\Desktop\honors\Regressions\Code\master.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res} 4 Dec 2018, 19:51:06
+ {txt}opened on:  {res}20 Feb 2019, 10:10:30
 {txt}
 {com}. 
 . set more off
@@ -17,28 +17,11 @@ end of do-file
 
 {search r(170):r(170);}
 
-{com}. ls
-{txt}  <dir>  12/04/18 19:51  {res}.                 
-{txt}  <dir>  12/04/18 19:51  {res}..                
-{txt}   0.0k  12/04/18 19:51  {res}master.smcl       
-{txt}   1.3k  12/04/18 19:50  {res}regs.do           
+{com}. cd ../..
+{res}C:\Users\gmoore\Desktop\honors
 
-{com}. cd..
-{err}unrecognized command:  cd.. invalid command name
-{txt}{search r(199):r(199);}
-
-{com}. cd .
-{res}C:\Users\gmoor\Desktop\honors\Regressions\Code
-
-{com}. 
-. cd ..
-{res}C:\Users\gmoor\Desktop\honors\Regressions
-
-{com}. cd ..
-{res}C:\Users\gmoor\Desktop\honors
-
-{com}. cd Master
-{res}C:\Users\gmoor\Desktop\honors\Master
+{com}. cd master
+{res}C:\Users\gmoore\Desktop\honors\master
 
 {com}. do Master
 {txt}

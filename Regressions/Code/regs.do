@@ -1,7 +1,3 @@
-//Works both with drop and without drop
-//without drop is slightly stronger
-keep if 4 <= year & year <=8
-
 //Calculates log of loans
 gen lloan = ln(loan)
 
@@ -11,16 +7,19 @@ gen artMaj = maj == 15
 gen eduMaj = maj == 12
 gen  csMaj = maj == 17
 
-//Add birth year as control
-//Introduce second stage
+
 
 //Linear estimator
 reg loan year cohort parInc i.race i.sex i.region
 reg lloan year cohort parInc i.race i.sex i.region 
 
 
-//Tobit estimator
-tobit loan year cohort parInc i.race i.sex i.region if !missing(recloan), ll
+gen year2 = year * year
+gen parInc2 = parInc * parInc
+
+//First stage
+tobit loan polImpact i.year fallSemester parInc parInc2 i.race i.sex i.region if !missing(recloan) & year >= 6, ll
+
 //Get predicted tobit values
 predict loanHat if !missing(recloan) & !missing(loan), ystar(0, .)
 
