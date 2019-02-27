@@ -25,9 +25,22 @@ gen assets10 = assets8
 rename T4045802 assets12
 gen assets14 = assets12
 
-keep parInc* assets* mid
+//Names family home value
+//Bases missing years on last recorded value
+//Top values topcoded
+rename R6944402 homeVal0
+gen homeVal2 = homeVal0
+rename R8379601 homeVal4
+gen homeVal6 = homeVal4
+rename T2143900 homeVal8
+gen homeVal10 = homeVal8
+rename T4047100 homeVal12
+gen homeVal14 = homeVal12
 
-reshape long parInc assets, i(mid) j(year)
+keep parInc* assets* homeVal* mid
+
+reshape long parInc assets homeVal, i(mid) j(year)
 replace parInc = . if parInc < 0
 replace assets = . if inlist(assets, -1, -2, -3, -4, -5)
+replace homeVal = . if homeVal < 0
 sort mid year

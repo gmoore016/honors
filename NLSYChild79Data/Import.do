@@ -133,7 +133,8 @@ gen intDate14 = ym(Y2990502, Y2990501)
 format intDate* %tm
 drop Y1* Y2*
 
-kill
+//Calculates how many siblings total
+duplicates tag mid, generate(siblings)
 
 //Get only observations with data on receiving loans
 drop if missing(recloan0) & missing(recloan2) ///
@@ -142,6 +143,10 @@ drop if missing(recloan0) & missing(recloan2) ///
 	
 //Change to long data
 reshape long maj recloan loan region grade intDate tuition fulltuition partialtuition, i(cid) j(year)
+
+//Dummy for student in college; used to find concurrent siblings
+gen inCollege = grade >= 13
+duplicates tag year mid inCollege if inCollege > 0, generate(sibsInCollege)
 
 //Code to Stata missings
 replace maj = . if maj < 0

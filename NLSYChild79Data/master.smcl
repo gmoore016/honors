@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}C:\Users\gmoore\Desktop\honors\NLSYChild79Data\master.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}19 Feb 2019, 21:35:10
+ {txt}opened on:  {res}27 Feb 2019, 00:44:38
 {txt}
 {com}. 
 . set more off
@@ -15,10 +15,10 @@
 {com}. do ParImport
 {txt}
 {com}. import delimited parInc.csv, clear case(preserve)
-{res}{text}(7 vars, 12686 obs)
+{res}{text}(16 vars, 12686 obs)
 {com}. 
 . 
-. //Code Stata missings
+. //Names family income variables
 . rename R7006500 parInc0
 {res}{txt}
 {com}. rename R7703700 parInc2
@@ -31,24 +31,55 @@
 {res}{txt}
 {com}. rename T3107800 parInc10
 {res}{txt}
-{com}. rename R0000100 mid
+{com}. rename T4112300 parInc12 
+{res}{txt}
+{com}. rename T5022600 parInc14 
 {res}{txt}
 {com}. 
-. 
-. reshape long parInc, i(mid) j(year)
-{txt}(note: j = 0 2 4 6 8 10)
+. rename R0000100 mid
+{res}{txt}
+{com}. 
+. //Names family variable assets
+. //Bases missing years on last recorded assets
+. //Top 2% of values topcoded each year by average of obscured values
+. rename R6940103 assets0
+{res}{txt}
+{com}. gen assets2 = assets0
+{txt}
+{com}. rename R8378703 assets4
+{res}{txt}
+{com}. gen assets6 = assets4
+{txt}
+{com}. rename T2142702 assets8
+{res}{txt}
+{com}. gen assets10 = assets8
+{txt}
+{com}. rename T4045802 assets12
+{res}{txt}
+{com}. gen assets14 = assets12
+{txt}
+{com}. 
+. keep parInc* assets* mid
+{txt}
+{com}. 
+. reshape long parInc assets, i(mid) j(year)
+{txt}(note: j = 0 2 4 6 8 10 12 14)
 
 Data{col 36}wide{col 43}->{col 48}long
 {hline 77}
-Number of obs.                 {res}   12686   {txt}->{res}   76116
-{txt}Number of variables            {res}       7   {txt}->{res}       3
-{txt}j variable (6 values)                     ->   {res}year
+Number of obs.                 {res}   12686   {txt}->{res}  101488
+{txt}Number of variables            {res}      17   {txt}->{res}       4
+{txt}j variable (8 values)                     ->   {res}year
 {txt}xij variables:
-           {res}parInc0 parInc2 ... parInc10   {txt}->   {res}parInc
+           {res}parInc0 parInc2 ... parInc14   {txt}->   {res}parInc
+           assets0 assets2 ... assets14   {txt}->   {res}assets
 {txt}{hline 77}
 
 {com}. replace parInc = . if parInc < 0
-{txt}(36089 real changes made, 36089 to missing)
+{txt}(49007 real changes made, 49007 to missing)
+
+{com}. replace assets = . if inlist(assets, -1, -2, -3, -4, -5)
+{txt}(49616 real changes made, 49616 to missing)
 
 {com}. sort mid year
 {txt}
@@ -80,6 +111,8 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
   C0005700 "DATE OF BIRTH OF CHILD - YEAR"
   Y1012100 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2000"
   Y1025600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2000"
+  Y1026400 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED PT) 2000"
+  Y1026500 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED FT) 2000"
   Y1026600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
   Y1026700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2000"
   Y1180501 "DATE OF CAPI INTERVIEW 2000"
@@ -87,6 +120,8 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
   Y1193000 "REGION OF RESIDENCE 2000"
   Y1254300 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2002"
   Y1270800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2002"
+  Y1271600 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED PT) 2002"
+  Y1271700 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED FT) 2002"
   Y1271800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
   Y1271900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2002"
   Y1421101 "DATE OF CAPI INTERVIEW 2002"
@@ -96,6 +131,8 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
   Y1450202 "DATE OF CAPI INTERVIEW-YEAR 2004"
   Y1488000 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2004"
   Y1504800 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2004"
+  Y1505600 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED PT) 2004"
+  Y1505700 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED FT) 2004"
   Y1505800 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
   Y1505900 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2004"
   Y1673400 "REGION OF RESIDENCE 2004"
@@ -103,6 +140,8 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
   Y1695602 "DATE OF CAPI INTERVIEW-YEAR 2006"
   Y1737800 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2006"
   Y1755100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2006"
+  Y1755900 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED PT) 2006"
+  Y1756000 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED FT) 2006"
   Y1756100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
   Y1756200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2006"
   Y1949200 "REGION OF RESIDENCE 2006"
@@ -110,6 +149,8 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
   Y1981602 "DATE OF CAPI INTERVIEW-YEAR 2008"
   Y2018600 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2008"
   Y2036100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2008"
+  Y2036900 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED PT) 2008"
+  Y2037000 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED FT) 2008"
   Y2037100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
   Y2037200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2008"
   Y2267000 "VERSION_R26 CHILD/YOUNG ADULT XRND"
@@ -118,6 +159,8 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
   Y2300402 "DATE OF CAPI INTERVIEW-YEAR 2010"
   Y2343700 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2010"
   Y2360600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2010"
+  Y2361400 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED PT) 2010"
+  Y2361500 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED FT) 2010"
   Y2361600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
   Y2361700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2010"
   Y2616700 "REGION OF RESIDENCE 2010"
@@ -125,6 +168,8 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
   Y2633102 "DATE OF CAPI INTERVIEW-YEAR 2012"
   Y2673200 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2012"
   Y2691100 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2012"
+  Y2691900 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED PT) 2012"
+  Y2692000 "AMT FULL-TIME COLLEGE TUITION & FEES (ENROLLED FT) 2012"
   Y2692100 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2012"
   Y2692200 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2012"
   Y2967200 "REGION OF RESIDENCE 2012"
@@ -132,6 +177,7 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
   Y2990502 "DATE OF CAPI INTERVIEW-YEAR 2014"
   Y3029600 "GRADE OR YR OF SCHOOL R IS CURRENTLY ENROLLED IN 2014"
   Y3046600 "FIELD OF STUDY CURR/MOST REC COLL -- NUMERIC CODE 2014"
+  Y3047500 "AMOUNT OF FULL-TIME COLLEGE TUITION & FEES 2014"
   Y3047600 "REC LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2014"
   Y3047700 "AMT LOAN TO COVER COST OF YEAR*S COLLEGE EXPENSES 2014"
   Y3332700 "REGION OF RESIDENCE 2014"
@@ -285,6 +331,46 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
 {com}. rename Y3047700 loan14
 {res}{txt}
 {com}. 
+. //Tuition
+. rename Y1026400 fulltuition0
+{res}{txt}
+{com}. rename Y1026500 partialtuition0
+{res}{txt}
+{com}. rename Y1271600 fulltuition2
+{res}{txt}
+{com}. rename Y1271700 partialtuition2
+{res}{txt}
+{com}. rename Y1505600 fulltuition4
+{res}{txt}
+{com}. rename Y1505700 partialtuition4
+{res}{txt}
+{com}. rename Y1755900 fulltuition6
+{res}{txt}
+{com}. rename Y1756000 partialtuition6
+{res}{txt}
+{com}. rename Y2036900 fulltuition8
+{res}{txt}
+{com}. rename Y2037000 partialtuition8
+{res}{txt}
+{com}. rename Y2361400 fulltuition10
+{res}{txt}
+{com}. rename Y2361500 partialtuition10
+{res}{txt}
+{com}. rename Y2691900 fulltuition12
+{res}{txt}
+{com}. rename Y2692000 partialtuition12
+{res}{txt}
+{com}. 
+. rename Y3047500 tuition14
+{res}{txt}
+{com}. 
+. forvalues i = 0(2)12{c -(}
+{txt}  2{com}.         assert fulltuition`i' < 0 | partialtuition`i' < 0
+{txt}  3{com}.         gen tuition`i' = max(fulltuition`i', partialtuition`i')
+{txt}  4{com}. {c )-}
+{txt}
+{com}. 
+. 
 . forval i = 0(2)10{c -(}
 {txt}  2{com}.         replace recloan`i' = . if recloan`i' < 0
 {txt}  3{com}. {c )-}
@@ -333,6 +419,12 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
 {com}. drop Y1* Y2*
 {txt}
 {com}. 
+. //Calculates how many siblings total
+. duplicates tag mid, generate(siblings)
+
+{p 0 4}{txt}Duplicates in terms of {res} mid{p_end}
+{txt}
+{com}. 
 . //Get only observations with data on receiving loans
 . drop if missing(recloan0) & missing(recloan2) ///
 >         & missing(recloan4) & missing(recloan6) ///
@@ -341,13 +433,15 @@ Number of obs.                 {res}   12686   {txt}->{res}   76116
 
 {com}.         
 . //Change to long data
-. reshape long maj recloan loan region grade intDate, i(cid) j(year)
+. reshape long maj recloan loan region grade intDate tuition fulltuition partialtuition, i(cid) j(year)
 {txt}(note: j = 0 2 4 6 8 10 12 14)
+(note: fulltuition14 not found)
+(note: partialtuition14 not found)
 
 Data{col 36}wide{col 43}->{col 48}long
 {hline 77}
 Number of obs.                 {res}    3170   {txt}->{res}   25360
-{txt}Number of variables            {res}      53   {txt}->{res}      12
+{txt}Number of variables            {res}      76   {txt}->{res}      16
 {txt}j variable (8 values)                     ->   {res}year
 {txt}xij variables:
                     {res}maj0 maj2 ... maj14   {txt}->   {res}maj
@@ -356,8 +450,19 @@ Number of obs.                 {res}    3170   {txt}->{res}   25360
            region0 region2 ... region14   {txt}->   {res}region
               grade0 grade2 ... grade14   {txt}->   {res}grade
         intDate0 intDate2 ... intDate14   {txt}->   {res}intDate
+        tuition0 tuition2 ... tuition14   {txt}->   {res}tuition
+fulltuition0 fulltuition2 ... fulltuition14{txt}->  {res}fulltuition
+partialtuition0 partialtuition2 ... partialtuition14{txt}->{res}partialtuition
 {txt}{hline 77}
 
+{com}. 
+. //Dummy for student in college; used to find concurrent siblings
+. gen inCollege = grade >= 13
+{txt}
+{com}. duplicates tag year mid inCollege if inCollege > 0, generate(sibsInCollege)
+
+{p 0 4}{txt}Duplicates in terms of {res} year mid inCollege{p_end}
+{txt}
 {com}. 
 . //Code to Stata missings
 . replace maj = . if maj < 0
@@ -378,7 +483,17 @@ Number of obs.                 {res}    3170   {txt}->{res}   25360
 {com}. replace grade = . if grade < 0
 {txt}(14783 real changes made, 14783 to missing)
 
+{com}. replace partialtuition = . if partialtuition < 0
+{txt}(17757 real changes made, 17757 to missing)
+
+{com}. replace fulltuition = . if fulltuition < 0
+{txt}(21278 real changes made, 21278 to missing)
+
+{com}. replace tuition = . if tuition < 0
+{txt}(19683 real changes made, 19683 to missing)
+
 {com}. 
+. 
 . //Generates dummy for after policy change
 . gen cohort = (year >= 8)
 {txt}
@@ -441,11 +556,23 @@ Number of obs.                 {res}    3170   {txt}->{res}   25360
 
 {com}. 
 . 
+. //Tests if siblings are in college
+. 
+. 
+. 
 . 
 . //assert missing(majType) == missing(maj) | maj == 0 | maj == 99
 . 
 . label values majType majTypeLab
 {txt}
+{com}. 
+. gen fallSemester = halfyear(dofm(intDate)) - 1
+{txt}(6257 missing values generated)
+
+{com}. 
+. keep if grade == 16
+{txt}(24410 observations deleted)
+
 {com}. 
 . 
 . 
@@ -455,35 +582,59 @@ Number of obs.                 {res}    3170   {txt}->{res}   25360
 . //Need many:one due to siblings
 . //Assertion guarantees all children have parental incomes
 . //Drop those women without children in college
-. merge m:1 mid year using `parInc', assert(match using)
-{res}{err}{p 0 4 2}
-merge:  after merge, not all observations
-from using
-{res}{err}or matched
-{p_end}
-{col 9}(merged result left in memory)
-{txt}{search r(9):r(9);}
+. merge m:1 mid year using `parInc', assert(match using) nogen keep(match)
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}               0
+{txt}{col 5}matched{col 30}{res}             950{txt}  
+{col 5}{hline 41}
+
+{com}. 
+. //keep if parInc < 50000
+. cd ../NeedCalc/Code
+{res}C:\Users\gmoore\Desktop\honors\NeedCalc\Code
+{txt}
+{com}. do NeedCalc
+{txt}
+{com}. //Available Income Calc
+. tempvar availInc
+{txt}
+{com}. gen `availInc' = parInc + 0.12 * assets
+{txt}(332 missing values generated)
+
+{com}. gen efc = `availInc' / sibsInCollege
+{txt}(745 missing values generated)
+
+{com}. 
+. //Need
+. gen need = tuition - efc
+{txt}(760 missing values generated)
+
+{com}. 
+{txt}end of do-file
+
+{com}. 
+. kill
+{err}unrecognized command:  kill
+{txt}{search r(199):r(199);}
 
 end of do-file
 
-{search r(9):r(9);}
+{search r(199):r(199);}
 
-{com}. br if _merge == 2
-
-. br if _merge == 1
-
-. ls
-{txt}  <dir>   2/19/19 21:35  {res}.                 
-{txt}  <dir>   2/19/19 21:35  {res}..                
-{txt}  <dir>   2/19/19 20:24  {res}Download          
-{txt}   8.0k   2/19/19 21:33  {res}Import.do         
-{txt}   0.0k   2/19/19 21:35  {res}master.smcl       
-{txt}   0.1k   2/05/19 21:38  {res}RevisedReg.do     
+{com}. hist need
+{txt}(bin={res}13{txt}, start={res}-833016.94{txt}, width={res}65628.288{txt})
+{res}
+{com}. ls
+{txt}  <dir>   2/27/19  0:45  {res}.                 
+{txt}  <dir>   2/27/19  0:45  {res}..                
+{txt}   0.2k   2/27/19  0:45  {res}NeedCalc.do       
 
 {com}. cd ..
-{res}C:\Users\gmoore\Desktop\honors
+{res}C:\Users\gmoore\Desktop\honors\NeedCalc
 
-{com}. cd Master
+{com}. cd ../Master
 {res}C:\Users\gmoore\Desktop\honors\Master
 
 {com}. do Master
