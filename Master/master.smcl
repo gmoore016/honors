@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}C:\Users\gmoore\Desktop\honors\master\master.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}27 Feb 2019, 01:31:30
+ {txt}opened on:  {res}28 Feb 2019, 15:02:59
 {txt}
 {com}. 
 . set more off
@@ -15,7 +15,7 @@
 {com}. do ParImport
 {txt}
 {com}. import delimited parInc.csv, clear case(preserve)
-{res}{text}(20 vars, 12686 obs)
+{res}{text}(28 vars, 12686 obs)
 {com}. 
 . 
 . //Names family income variables
@@ -79,21 +79,40 @@
 {com}. gen homeVal14 = homeVal12
 {txt}
 {com}. 
-. keep parInc* assets* homeVal* mid
+. //Renames marriage
+. rename R6917500 married0
+{res}{txt}
+{com}. rename R7616100 married2
+{res}{txt}
+{com}. rename R8324800 married4
+{res}{txt}
+{com}. rename T0919900 married6
+{res}{txt}
+{com}. rename T2084600 married8
+{res}{txt}
+{com}. rename T3055100 married10
+{res}{txt}
+{com}. rename T3986700 married12
+{res}{txt}
+{com}. rename T4924000 married14
+{res}{txt}
+{com}. 
+. keep parInc* assets* homeVal* married* mid
 {txt}
 {com}. 
-. reshape long parInc assets homeVal, i(mid) j(year)
+. reshape long parInc assets homeVal married, i(mid) j(year)
 {txt}(note: j = 0 2 4 6 8 10 12 14)
 
 Data{col 36}wide{col 43}->{col 48}long
 {hline 77}
 Number of obs.                 {res}   12686   {txt}->{res}  101488
-{txt}Number of variables            {res}      25   {txt}->{res}       5
+{txt}Number of variables            {res}      33   {txt}->{res}       6
 {txt}j variable (8 values)                     ->   {res}year
 {txt}xij variables:
            {res}parInc0 parInc2 ... parInc14   {txt}->   {res}parInc
            assets0 assets2 ... assets14   {txt}->   {res}assets
         homeVal0 homeVal2 ... homeVal14   {txt}->   {res}homeVal
+        married0 married2 ... married14   {txt}->   {res}married
 {txt}{hline 77}
 
 {com}. replace parInc = . if parInc < 0
@@ -105,7 +124,11 @@ Number of obs.                 {res}   12686   {txt}->{res}  101488
 {com}. replace homeVal = . if homeVal < 0
 {txt}(40388 real changes made, 40388 to missing)
 
-{com}. sort mid year
+{com}. replace married = . if married < 0
+{txt}(40772 real changes made, 40772 to missing)
+
+{com}. 
+. sort mid year
 {txt}
 {com}. 
 {txt}end of do-file
@@ -622,16 +645,40 @@ partialtuition0 partialtuition2 ... partialtuition14{txt}->{res}partialtuition
 {com}. do NeedCalc
 {txt}
 {com}. //Available Income Calc
-. tempvar availInc
-{txt}
-{com}. tempvar availAssets
+. tempvar availInc availAssets grossCont
 {txt}
 {com}. gen `availAssets' = max(0, 0.12 * (assets - homeVal))
 {txt}
 {com}. gen `availInc' = parInc + `availAssets'
 {txt}(195 missing values generated)
 
-{com}. gen efc = `availInc' / sibsInCollege
+{com}. 
+. gen `grossCont' = .
+{txt}(950 missing values generated)
+
+{com}. replace `grossCont' = -750 if `availInc' < -3409
+{txt}(0 real changes made)
+
+{com}. replace `grossCont' = .22 * `availInc' if inrange(`availInc', -3409, 13400)
+{txt}(57 real changes made)
+
+{com}. replace `grossCont' = 2948 + .25 * (`availInc' - 13400) if inrange(`availInc', 13401, 16800)
+{txt}(8 real changes made)
+
+{com}. replace `grossCont' = 3798 + .29 * (`availInc' - 16800) if inrange(`availInc', 16801, 20200)
+{txt}(18 real changes made)
+
+{com}. replace `grossCont' = 4784 + .34 * (`availInc' - 20200) if inrange(`availInc', 20201, 23700)
+{txt}(19 real changes made)
+
+{com}. replace `grossCont' = 5974 + .40 * (`availInc' - 23700) if inrange(`availInc', 23701, 27100)
+{txt}(20 real changes made)
+
+{com}. replace `grossCont' = 7334 + .47 * (`availInc' - 27100) if `availInc' >= 27101
+{txt}(633 real changes made)
+
+{com}. 
+. gen efc = `grossCont' / sibsInCollege
 {txt}(700 missing values generated)
 
 {com}. 
@@ -646,7 +693,7 @@ partialtuition0 partialtuition2 ... partialtuition14{txt}->{res}partialtuition
 {txt}(719 missing values generated)
 
 {com}. replace atCap = 1 if year >= 8 & need >= 5500 & !missing(need)
-{txt}(1 real change made)
+{txt}(9 real changes made)
 
 {com}. replace atCap = 0 if year < 8 & need >= 4500 & !missing(need)
 {txt}(0 real changes made)
@@ -976,682 +1023,22 @@ Iteration 3:{space 3}log likelihood = {res: -292.0572}
 Iteration 1:{space 3}log likelihood = {res:-7524.4306}  
 Iteration 2:{space 3}log likelihood = {res:-7524.0955}  
 Iteration 3:{space 3}log likelihood = {res:-7524.0539}  
-Iteration 4:{space 3}log likelihood = {res:-7524.0529}  
-Iteration 5:{space 3}log likelihood = {res:-7524.0529}  
-{res}
-{txt}Probit model with endogenous regressors{col 51}Number of obs{col 67}= {res}       704
-{txt}{col 51}Wald chi2({res}9{txt}){col 67}= {res}     13.12
-{txt}Log likelihood = {res}-7524.0529{txt}{col 51}Prob > chi2{col 67}= {res}    0.1574
+{res}{err}{hline 2}Break{hline 2}
+{txt}{search r(1):r(1);}
 
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      z{col 58}   P>|z|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 20}loan {c |}{col 26}{res}{space 2}-.0000562{col 38}{space 2}   .00004{col 49}{space 1}   -1.41{col 58}{space 3}0.160{col 66}{space 4}-.0001346{col 79}{space 3} .0000222
-{txt}{space 20}year {c |}{col 26}{res}{space 2} .0061982{col 38}{space 2} .0215329{col 49}{space 1}    0.29{col 58}{space 3}0.773{col 66}{space 4}-.0360055{col 79}{space 3} .0484019
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} .2475053{col 38}{space 2}  .191534{col 49}{space 1}    1.29{col 58}{space 3}0.196{col 66}{space 4}-.1278943{col 79}{space 3}  .622905
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} .1390048{col 38}{space 2} .1696579{col 49}{space 1}    0.82{col 58}{space 3}0.413{col 66}{space 4}-.1935185{col 79}{space 3} .4715282
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2}-.1467366{col 38}{space 2} .1256649{col 49}{space 1}   -1.17{col 58}{space 3}0.243{col 66}{space 4}-.3930353{col 79}{space 3} .0995621
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-.2980136{col 38}{space 2} .1957909{col 49}{space 1}   -1.52{col 58}{space 3}0.128{col 66}{space 4}-.6817568{col 79}{space 3} .0857295
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2} -.100706{col 38}{space 2} .1764903{col 49}{space 1}   -0.57{col 58}{space 3}0.568{col 66}{space 4}-.4466206{col 79}{space 3} .2452086
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-.1016006{col 38}{space 2} .2057526{col 49}{space 1}   -0.49{col 58}{space 3}0.621{col 66}{space 4}-.5048682{col 79}{space 3}  .301667
-{txt}{space 24} {c |}
-{space 18}parInc {c |}{col 26}{res}{space 2}-5.86e-07{col 38}{space 2} 7.46e-07{col 49}{space 1}   -0.79{col 58}{space 3}0.432{col 66}{space 4}-2.05e-06{col 79}{space 3} 8.76e-07
-{txt}{space 19}_cons {c |}{col 26}{res}{space 2}-.6303001{col 38}{space 2} .3139747{col 49}{space 1}   -2.01{col 58}{space 3}0.045{col 66}{space 4}-1.245679{col 79}{space 3}-.0149209
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                 /athrho {c |}{col 26}{res}{space 2} .4624777{col 38}{space 2} .3426635{col 49}{space 1}    1.35{col 58}{space 3}0.177{col 66}{space 4}-.2091304{col 79}{space 3} 1.134086
-{txt}                /lnsigma {c |}{col 26}{res}{space 2} 8.855231{col 38}{space 2} .0266501{col 49}{space 1}  332.28{col 58}{space 3}0.000{col 66}{space 4} 8.802998{col 79}{space 3} 8.907465
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                     rho{col 26}{c |}{res}{space 2} .4321015{col 38}{space 2} .2786842{col 66}{space 4} -.206134{col 79}{space 3}  .812413
-{col 1}{txt}                   sigma{col 26}{c |}{res}{space 2} 7010.971{col 38}{space 2}  186.843{col 66}{space 4} 6654.165{col 79}{space 3} 7386.909
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{p 0 15 40}Instrumented:{space 2}loan{p_end}
-{p 0 15 40}Instruments:{space 3}year 2.race 3.race 2.sex 2.region 3.region 4.region parInc loanHat{p_end}
-{hline 90}
-Wald test of exogeneity (/athrho = 0): chi2({res}1{txt}) = {res}    1.82{txt}{col 59}Prob > chi2 = {res}0.1771
-{txt}
-{com}. ivprobit stemMajType year i.race i.sex i.region parInc (loan = loanHat) if !missing(recloan)
+end of do-file
+{err}{hline 2}Break{hline 2}
+{txt}{search r(1):r(1);}
 
-{txt}Fitting exogenous probit model
+end of do-file
 
-{res}{txt}Iteration 0:{space 3}log likelihood = {res:-339.73461}  
-Iteration 1:{space 3}log likelihood = {res:-323.21295}  
-Iteration 2:{space 3}log likelihood = {res:-323.11466}  
-Iteration 3:{space 3}log likelihood = {res:-323.11464}  
-{res}
-{txt}Fitting full model
-{res}
-{txt}Iteration 0:{space 3}log likelihood = {res:-7556.1304}  
-Iteration 1:{space 3}log likelihood = {res:-7555.8167}  
-Iteration 2:{space 3}log likelihood = {res:-7555.5562}  
-Iteration 3:{space 3}log likelihood = {res:-7555.5558}  
-Iteration 4:{space 3}log likelihood = {res:-7555.5558}  
-{res}
-{txt}Probit model with endogenous regressors{col 51}Number of obs{col 67}= {res}       704
-{txt}{col 51}Wald chi2({res}9{txt}){col 67}= {res}     35.10
-{txt}Log likelihood = {res}-7555.5558{txt}{col 51}Prob > chi2{col 67}= {res}    0.0001
+{err}{hline 2}Break{hline 2}
+{txt}{search r(1):r(1);}
 
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      z{col 58}   P>|z|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 20}loan {c |}{col 26}{res}{space 2}-.0000352{col 38}{space 2} .0000399{col 49}{space 1}   -0.88{col 58}{space 3}0.378{col 66}{space 4}-.0001134{col 79}{space 3}  .000043
-{txt}{space 20}year {c |}{col 26}{res}{space 2}-.0159608{col 38}{space 2} .0221668{col 49}{space 1}   -0.72{col 58}{space 3}0.472{col 66}{space 4} -.059407{col 79}{space 3} .0274854
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2}-.3520158{col 38}{space 2}  .192314{col 49}{space 1}   -1.83{col 58}{space 3}0.067{col 66}{space 4}-.7289443{col 79}{space 3} .0249127
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2}-.0993978{col 38}{space 2} .1577729{col 49}{space 1}   -0.63{col 58}{space 3}0.529{col 66}{space 4}-.4086269{col 79}{space 3} .2098314
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2}-.4359084{col 38}{space 2} .1311996{col 49}{space 1}   -3.32{col 58}{space 3}0.001{col 66}{space 4}-.6930548{col 79}{space 3} -.178762
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} .1879156{col 38}{space 2} .1918848{col 49}{space 1}    0.98{col 58}{space 3}0.327{col 66}{space 4}-.1881716{col 79}{space 3} .5640029
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2} .0581456{col 38}{space 2}  .187214{col 49}{space 1}    0.31{col 58}{space 3}0.756{col 66}{space 4}-.3087871{col 79}{space 3} .4250784
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-.1447217{col 38}{space 2} .2147877{col 49}{space 1}   -0.67{col 58}{space 3}0.500{col 66}{space 4}-.5656979{col 79}{space 3} .2762544
-{txt}{space 24} {c |}
-{space 18}parInc {c |}{col 26}{res}{space 2}-5.92e-07{col 38}{space 2} 7.62e-07{col 49}{space 1}   -0.78{col 58}{space 3}0.437{col 66}{space 4}-2.09e-06{col 79}{space 3} 9.01e-07
-{txt}{space 19}_cons {c |}{col 26}{res}{space 2}-.2098981{col 38}{space 2} .2703053{col 49}{space 1}   -0.78{col 58}{space 3}0.437{col 66}{space 4}-.7396867{col 79}{space 3} .3198906
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                 /athrho {c |}{col 26}{res}{space 2} .3194333{col 38}{space 2} .3071012{col 49}{space 1}    1.04{col 58}{space 3}0.298{col 66}{space 4} -.282474{col 79}{space 3} .9213406
-{txt}                /lnsigma {c |}{col 26}{res}{space 2} 8.855232{col 38}{space 2} .0266501{col 49}{space 1}  332.28{col 58}{space 3}0.000{col 66}{space 4} 8.802998{col 79}{space 3} 8.907465
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                     rho{col 26}{c |}{res}{space 2} .3089944{col 38}{space 2} .2777799{col 66}{space 4}-.2751933{col 79}{space 3}  .726531
-{col 1}{txt}                   sigma{col 26}{c |}{res}{space 2} 7010.971{col 38}{space 2}  186.843{col 66}{space 4} 6654.165{col 79}{space 3}  7386.91
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{p 0 15 40}Instrumented:{space 2}loan{p_end}
-{p 0 15 40}Instruments:{space 3}year 2.race 3.race 2.sex 2.region 3.region 4.region parInc loanHat{p_end}
-{hline 90}
-Wald test of exogeneity (/athrho = 0): chi2({res}1{txt}) = {res}    1.08{txt}{col 59}Prob > chi2 = {res}0.2983
-{txt}
-{com}. ivprobit ssMajType year i.race i.sex i.region parInc (loan = loanHat) if !missing(recloan)
-
-{txt}Fitting exogenous probit model
-
-{res}{txt}Iteration 0:{space 3}log likelihood = {res:-265.24619}  
-Iteration 1:{space 3}log likelihood = {res:-256.34078}  
-Iteration 2:{space 3}log likelihood = {res:-256.28862}  
-Iteration 3:{space 3}log likelihood = {res:-256.28861}  
+{com}. hist need
+{txt}(bin={res}15{txt}, start={res}-235888.61{txt}, width={res}18111.635{txt})
 {res}
-{txt}Fitting full model
-{res}
-{txt}Iteration 0:{space 3}log likelihood = {res:-7489.3043}  
-Iteration 1:{space 3}log likelihood = {res: -7489.304}  
-Iteration 2:{space 3}log likelihood = {res: -7489.304}  
-{res}
-{txt}Probit model with endogenous regressors{col 51}Number of obs{col 67}= {res}       704
-{txt}{col 51}Wald chi2({res}9{txt}){col 67}= {res}     17.63
-{txt}Log likelihood = {res} -7489.304{txt}{col 51}Prob > chi2{col 67}= {res}    0.0397
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      z{col 58}   P>|z|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 20}loan {c |}{col 26}{res}{space 2} 1.87e-06{col 38}{space 2} .0000402{col 49}{space 1}    0.05{col 58}{space 3}0.963{col 66}{space 4}-.0000769{col 79}{space 3} .0000806
-{txt}{space 20}year {c |}{col 26}{res}{space 2}-.0119812{col 38}{space 2} .0231888{col 49}{space 1}   -0.52{col 58}{space 3}0.605{col 66}{space 4}-.0574304{col 79}{space 3} .0334681
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} .3884165{col 38}{space 2}  .210069{col 49}{space 1}    1.85{col 58}{space 3}0.064{col 66}{space 4}-.0233112{col 79}{space 3} .8001442
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} .0868162{col 38}{space 2} .1882637{col 49}{space 1}    0.46{col 58}{space 3}0.645{col 66}{space 4}-.2821738{col 79}{space 3} .4558062
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} .1933691{col 38}{space 2} .1323578{col 49}{space 1}    1.46{col 58}{space 3}0.144{col 66}{space 4}-.0660473{col 79}{space 3} .4527855
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-.4937093{col 38}{space 2} .1981844{col 49}{space 1}   -2.49{col 58}{space 3}0.013{col 66}{space 4}-.8821436{col 79}{space 3} -.105275
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-.5573777{col 38}{space 2} .1865746{col 49}{space 1}   -2.99{col 58}{space 3}0.003{col 66}{space 4}-.9230572{col 79}{space 3}-.1916983
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-.2378602{col 38}{space 2} .2135083{col 49}{space 1}   -1.11{col 58}{space 3}0.265{col 66}{space 4}-.6563288{col 79}{space 3} .1806084
-{txt}{space 24} {c |}
-{space 18}parInc {c |}{col 26}{res}{space 2} 9.32e-07{col 38}{space 2} 7.85e-07{col 49}{space 1}    1.19{col 58}{space 3}0.235{col 66}{space 4}-6.06e-07{col 79}{space 3} 2.47e-06
-{txt}{space 19}_cons {c |}{col 26}{res}{space 2}-1.027119{col 38}{space 2} .2861522{col 49}{space 1}   -3.59{col 58}{space 3}0.000{col 66}{space 4}-1.587967{col 79}{space 3}-.4662707
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                 /athrho {c |}{col 26}{res}{space 2}-.0072457{col 38}{space 2} .2902251{col 49}{space 1}   -0.02{col 58}{space 3}0.980{col 66}{space 4}-.5760765{col 79}{space 3}  .561585
-{txt}                /lnsigma {c |}{col 26}{res}{space 2} 8.855232{col 38}{space 2} .0266501{col 49}{space 1}  332.28{col 58}{space 3}0.000{col 66}{space 4} 8.802999{col 79}{space 3} 8.907465
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                     rho{col 26}{c |}{res}{space 2}-.0072456{col 38}{space 2} .2902099{col 66}{space 4}-.5198079{col 79}{space 3} .5091525
-{col 1}{txt}                   sigma{col 26}{c |}{res}{space 2} 7010.973{col 38}{space 2} 186.8431{col 66}{space 4} 6654.167{col 79}{space 3} 7386.911
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{p 0 15 40}Instrumented:{space 2}loan{p_end}
-{p 0 15 40}Instruments:{space 3}year 2.race 3.race 2.sex 2.region 3.region 4.region parInc loanHat{p_end}
-{hline 90}
-Wald test of exogeneity (/athrho = 0): chi2({res}1{txt}) = {res}    0.00{txt}{col 59}Prob > chi2 = {res}0.9801
-{txt}
-{com}. ivprobit profMajType year i.race i.sex i.region parInc (loan = loanHat) if !missing(recloan)
-
-{txt}Fitting exogenous probit model
-
-{res}{txt}Iteration 0:{space 3}log likelihood = {res:-428.16801}  
-Iteration 1:{space 3}log likelihood = {res: -403.1393}  
-Iteration 2:{space 3}log likelihood = {res:-402.97174}  
-Iteration 3:{space 3}log likelihood = {res:-402.97174}  
-{res}
-{txt}Fitting full model
-{res}
-{txt}Iteration 0:{space 3}log likelihood = {res:-7635.9874}  
-Iteration 1:{space 3}log likelihood = {res:-7635.8769}  
-Iteration 2:{space 3}log likelihood = {res:-7635.8729}  
-Iteration 3:{space 3}log likelihood = {res:-7635.8729}  
-{res}
-{txt}Probit model with endogenous regressors{col 51}Number of obs{col 67}= {res}       704
-{txt}{col 51}Wald chi2({res}9{txt}){col 67}= {res}     47.74
-{txt}Log likelihood = {res}-7635.8729{txt}{col 51}Prob > chi2{col 67}= {res}    0.0000
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      z{col 58}   P>|z|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 20}loan {c |}{col 26}{res}{space 2}-.0000285{col 38}{space 2} .0000338{col 49}{space 1}   -0.84{col 58}{space 3}0.399{col 66}{space 4}-.0000948{col 79}{space 3} .0000378
-{txt}{space 20}year {c |}{col 26}{res}{space 2} .0047549{col 38}{space 2} .0193757{col 49}{space 1}    0.25{col 58}{space 3}0.806{col 66}{space 4}-.0332208{col 79}{space 3} .0427305
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} -.157483{col 38}{space 2} .1692171{col 49}{space 1}   -0.93{col 58}{space 3}0.352{col 66}{space 4}-.4891425{col 79}{space 3} .1741765
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2}-.3059307{col 38}{space 2} .1515022{col 49}{space 1}   -2.02{col 58}{space 3}0.043{col 66}{space 4}-.6028696{col 79}{space 3}-.0089917
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} .6127014{col 38}{space 2} .1075458{col 49}{space 1}    5.70{col 58}{space 3}0.000{col 66}{space 4} .4019156{col 79}{space 3} .8234873
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} .4328778{col 38}{space 2} .1809511{col 49}{space 1}    2.39{col 58}{space 3}0.017{col 66}{space 4} .0782202{col 79}{space 3} .7875355
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2} .2606667{col 38}{space 2} .1742475{col 49}{space 1}    1.50{col 58}{space 3}0.135{col 66}{space 4}-.0808522{col 79}{space 3} .6021855
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-.0751156{col 38}{space 2} .2045785{col 49}{space 1}   -0.37{col 58}{space 3}0.713{col 66}{space 4}-.4760821{col 79}{space 3} .3258509
-{txt}{space 24} {c |}
-{space 18}parInc {c |}{col 26}{res}{space 2} 1.93e-07{col 38}{space 2} 6.61e-07{col 49}{space 1}    0.29{col 58}{space 3}0.770{col 66}{space 4}-1.10e-06{col 79}{space 3} 1.49e-06
-{txt}{space 19}_cons {c |}{col 26}{res}{space 2} -.854114{col 38}{space 2} .2572951{col 49}{space 1}   -3.32{col 58}{space 3}0.001{col 66}{space 4}-1.358403{col 79}{space 3}-.3498249
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                 /athrho {c |}{col 26}{res}{space 2} .1189722{col 38}{space 2} .2510462{col 49}{space 1}    0.47{col 58}{space 3}0.636{col 66}{space 4}-.3730693{col 79}{space 3} .6110137
-{txt}                /lnsigma {c |}{col 26}{res}{space 2} 8.855232{col 38}{space 2} .0266501{col 49}{space 1}  332.28{col 58}{space 3}0.000{col 66}{space 4} 8.802999{col 79}{space 3} 8.907465
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                     rho{col 26}{c |}{res}{space 2}  .118414{col 38}{space 2} .2475261{col 66}{space 4}-.3566735{col 79}{space 3} .5448403
-{col 1}{txt}                   sigma{col 26}{c |}{res}{space 2} 7010.973{col 38}{space 2} 186.8431{col 66}{space 4} 6654.167{col 79}{space 3} 7386.911
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{p 0 15 40}Instrumented:{space 2}loan{p_end}
-{p 0 15 40}Instruments:{space 3}year 2.race 3.race 2.sex 2.region 3.region 4.region parInc loanHat{p_end}
-{hline 90}
-Wald test of exogeneity (/athrho = 0): chi2({res}1{txt}) = {res}    0.22{txt}{col 59}Prob > chi2 = {res}0.6356
-{txt}
-{com}. ivprobit humMajType year i.race i.sex i.region parInc (loan = loanHat) if !missing(recloan)
-
-{txt}Fitting exogenous probit model
-
-{res}{txt}Iteration 0:{space 3}log likelihood = {res:-182.97899}  
-Iteration 1:{space 3}log likelihood = {res:-177.09535}  
-Iteration 2:{space 3}log likelihood = {res:-176.98329}  
-Iteration 3:{space 3}log likelihood = {res:-176.98316}  
-Iteration 4:{space 3}log likelihood = {res:-176.98316}  
-{res}
-{txt}Fitting full model
-{res}
-{txt}Iteration 0:{space 3}log likelihood = {res:-7409.9989}  
-Iteration 1:{space 3}log likelihood = {res:-7409.9791}  
-Iteration 2:{space 3}log likelihood = {res:-7409.9783}  
-Iteration 3:{space 3}log likelihood = {res:-7409.9783}  
-{res}
-{txt}Probit model with endogenous regressors{col 51}Number of obs{col 67}= {res}       704
-{txt}{col 51}Wald chi2({res}9{txt}){col 67}= {res}     10.93
-{txt}Log likelihood = {res}-7409.9783{txt}{col 51}Prob > chi2{col 67}= {res}    0.2807
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      z{col 58}   P>|z|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 20}loan {c |}{col 26}{res}{space 2}-.0000169{col 38}{space 2} .0000461{col 49}{space 1}   -0.37{col 58}{space 3}0.714{col 66}{space 4}-.0001072{col 79}{space 3} .0000735
-{txt}{space 20}year {c |}{col 26}{res}{space 2} .0401989{col 38}{space 2} .0278354{col 49}{space 1}    1.44{col 58}{space 3}0.149{col 66}{space 4}-.0143574{col 79}{space 3} .0947553
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2}-.2206571{col 38}{space 2}  .264312{col 49}{space 1}   -0.83{col 58}{space 3}0.404{col 66}{space 4}-.7386992{col 79}{space 3} .2973849
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2}  .056033{col 38}{space 2} .2102467{col 49}{space 1}    0.27{col 58}{space 3}0.790{col 66}{space 4}-.3560429{col 79}{space 3} .4681089
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2}-.2376983{col 38}{space 2}  .150038{col 49}{space 1}   -1.58{col 58}{space 3}0.113{col 66}{space 4}-.5317675{col 79}{space 3} .0563709
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} .0547298{col 38}{space 2} .2376826{col 49}{space 1}    0.23{col 58}{space 3}0.818{col 66}{space 4}-.4111196{col 79}{space 3} .5205792
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-.1720502{col 38}{space 2} .2369692{col 49}{space 1}   -0.73{col 58}{space 3}0.468{col 66}{space 4}-.6365014{col 79}{space 3} .2924009
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2} .0102107{col 38}{space 2} .2628127{col 49}{space 1}    0.04{col 58}{space 3}0.969{col 66}{space 4}-.5048927{col 79}{space 3} .5253141
-{txt}{space 24} {c |}
-{space 18}parInc {c |}{col 26}{res}{space 2}-3.39e-07{col 38}{space 2} 9.76e-07{col 49}{space 1}   -0.35{col 58}{space 3}0.729{col 66}{space 4}-2.25e-06{col 79}{space 3} 1.57e-06
-{txt}{space 19}_cons {c |}{col 26}{res}{space 2}-1.506904{col 38}{space 2} .3515259{col 49}{space 1}   -4.29{col 58}{space 3}0.000{col 66}{space 4}-2.195882{col 79}{space 3}-.8179263
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                 /athrho {c |}{col 26}{res}{space 2} .0659689{col 38}{space 2} .3278622{col 49}{space 1}    0.20{col 58}{space 3}0.841{col 66}{space 4}-.5766291{col 79}{space 3}  .708567
-{txt}                /lnsigma {c |}{col 26}{res}{space 2} 8.855232{col 38}{space 2} .0266501{col 49}{space 1}  332.28{col 58}{space 3}0.000{col 66}{space 4} 8.802999{col 79}{space 3} 8.907465
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                     rho{col 26}{c |}{res}{space 2} .0658734{col 38}{space 2} .3264395{col 66}{space 4}-.5202111{col 79}{space 3} .6097774
-{col 1}{txt}                   sigma{col 26}{c |}{res}{space 2} 7010.973{col 38}{space 2} 186.8431{col 66}{space 4} 6654.167{col 79}{space 3} 7386.911
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{p 0 15 40}Instrumented:{space 2}loan{p_end}
-{p 0 15 40}Instruments:{space 3}year 2.race 3.race 2.sex 2.region 3.region 4.region parInc loanHat{p_end}
-{hline 90}
-Wald test of exogeneity (/athrho = 0): chi2({res}1{txt}) = {res}    0.04{txt}{col 59}Prob > chi2 = {res}0.8405
-{txt}
-{com}. 
-{txt}end of do-file
+{com}. count if need > -10000
+{res}  801
 
 {com}. 
-{txt}end of do-file
-
-{com}. reg loan need
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     219
-{txt}{hline 13}{char +}{hline 30}           F(  1,   217) ={res}    4.25
-    {txt}   Model {char |} {res}  137184920     1   137184920           {txt}Prob > F      = {res} 0.0404
-    {txt}Residual {char |} {res} 7.0029e+09   217  32271633.2           {txt}R-squared     = {res} 0.0192
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0147
-    {txt}   Total {char |} {res} 7.1401e+09   218  32752886.8           {txt}Root MSE      = {res} 5680.8
-
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}        loan{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 8}need {c |}{col 14}{res}{space 2} .0086405{col 26}{space 2} .0041908{col 37}{space 1}    2.06{col 46}{space 3}0.040{col 54}{space 4} .0003806{col 67}{space 3} .0169004
-{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 4473.702{col 26}{space 2} 528.9885{col 37}{space 1}    8.46{col 46}{space 3}0.000{col 54}{space 4} 3431.089{col 67}{space 3} 5516.315
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. regn need loan
-{err}unrecognized command:  regn
-{txt}{search r(199):r(199);}
-
-{com}. reg need loan
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     219
-{txt}{hline 13}{char +}{hline 30}           F(  1,   217) ={res}    4.25
-    {txt}   Model {char |} {res} 3.5304e+10     1  3.5304e+10           {txt}Prob > F      = {res} 0.0404
-    {txt}Residual {char |} {res} 1.8022e+12   217  8.3050e+09           {txt}R-squared     = {res} 0.0192
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0147
-    {txt}   Total {char |} {res} 1.8375e+12   218  8.4289e+09           {txt}Root MSE      = {res}  91132
-
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}        need{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 8}loan {c |}{col 14}{res}{space 2} 2.223615{col 26}{space 2} 1.078492{col 37}{space 1}    2.06{col 46}{space 3}0.040{col 54}{space 4} .0979546{col 67}{space 3} 4.349275
-{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-95127.26{col 26}{space 2}  7351.66{col 37}{space 1}  -12.94{col 46}{space 3}0.000{col 54}{space 4}-109617.1{col 67}{space 3}-80637.46
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. reg loan need#polImpact
-{err}need:  factor variables may not contain negative values
-{txt}{search r(452):r(452);}
-
-{com}. reg loan need#c.polImpact
-{err}need:  factor variables may not contain negative values
-{txt}{search r(452):r(452);}
-
-{com}. reg loan c.need#c.polImpact
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     219
-{txt}{hline 13}{char +}{hline 30}           F(  1,   217) ={res}    0.00
-    {txt}   Model {char |} {res} 80081.3383     1  80081.3383           {txt}Prob > F      = {res} 0.9607
-    {txt}Residual {char |} {res} 7.1400e+09   217  32903452.7           {txt}R-squared     = {res} 0.0000
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res}-0.0046
-    {txt}   Total {char |} {res} 7.1401e+09   218  32752886.8           {txt}Root MSE      = {res} 5736.2
-
-{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}              loan{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
-{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-c.need#c.polImpact {c |}{col 20}{res}{space 2} 1.88e-07{col 32}{space 2} 3.80e-06{col 43}{space 1}    0.05{col 52}{space 3}0.961{col 60}{space 4}-7.31e-06{col 73}{space 3} 7.68e-06
-{txt}{space 18} {c |}
-{space 13}_cons {c |}{col 20}{res}{space 2} 3732.111{col 32}{space 2} 426.8888{col 43}{space 1}    8.74{col 52}{space 3}0.000{col 60}{space 4} 2890.732{col 73}{space 3} 4573.491
-{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. reg loan need polImpact
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     219
-{txt}{hline 13}{char +}{hline 30}           F(  2,   216) ={res}    3.91
-    {txt}   Model {char |} {res}  249538363     2   124769182           {txt}Prob > F      = {res} 0.0215
-    {txt}Residual {char |} {res} 6.8906e+09   216  31900884.1           {txt}R-squared     = {res} 0.0349
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0260
-    {txt}   Total {char |} {res} 7.1401e+09   218  32752886.8           {txt}Root MSE      = {res} 5648.1
-
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}        loan{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 8}need {c |}{col 14}{res}{space 2} .0087463{col 26}{space 2}  .004167{col 37}{space 1}    2.10{col 46}{space 3}0.037{col 54}{space 4}  .000533{col 67}{space 3} .0169596
-{txt}{space 3}polImpact {c |}{col 14}{res}{space 2} 1.057616{col 26}{space 2} .5635551{col 37}{space 1}    1.88{col 46}{space 3}0.062{col 54}{space 4}-.0531548{col 67}{space 3} 2.168388
-{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 3920.272{col 26}{space 2} 602.9745{col 37}{space 1}    6.50{col 46}{space 3}0.000{col 54}{space 4} 2731.805{col 67}{space 3}  5108.74
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. tobit loan polImpact i.year fallSemester parInc parInc2 i.race i.sex i.region if !missing(recloan) & year >= 6, ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       555
-{txt}{col 51}LR chi2({res}14{txt}){col 67}= {res}     55.92
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0000
-{txt}Log likelihood = {res}-3465.4711{txt}{col 51}Pseudo R2{col 67}= {res}    0.0080
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 15}polImpact {c |}{col 26}{res}{space 2}-7.069325{col 38}{space 2} 6.919998{col 49}{space 1}   -1.02{col 58}{space 3}0.307{col 66}{space 4}-20.66268{col 79}{space 3} 6.524033
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 22}8  {c |}{col 26}{res}{space 2} 1335.742{col 38}{space 2} 1766.521{col 49}{space 1}    0.76{col 58}{space 3}0.450{col 66}{space 4}-2134.339{col 79}{space 3} 4805.824
-{txt}{space 21}10  {c |}{col 26}{res}{space 2} 8738.307{col 38}{space 2} 7297.443{col 49}{space 1}    1.20{col 58}{space 3}0.232{col 66}{space 4}-5596.488{col 79}{space 3}  23073.1
-{txt}{space 21}12  {c |}{col 26}{res}{space 2} 17981.91{col 38}{space 2}  12972.5{col 49}{space 1}    1.39{col 58}{space 3}0.166{col 66}{space 4}-7500.725{col 79}{space 3} 43464.54
-{txt}{space 21}14  {c |}{col 26}{res}{space 2}  33495.7{col 38}{space 2} 13370.15{col 49}{space 1}    2.51{col 58}{space 3}0.013{col 66}{space 4} 7231.935{col 79}{space 3} 59759.47
-{txt}{space 24} {c |}
-{space 12}fallSemester {c |}{col 26}{res}{space 2}-2491.289{col 38}{space 2} 1435.862{col 49}{space 1}   -1.74{col 58}{space 3}0.083{col 66}{space 4}-5311.837{col 79}{space 3} 329.2599
-{txt}{space 18}parInc {c |}{col 26}{res}{space 2}-.0322252{col 38}{space 2} .0169354{col 49}{space 1}   -1.90{col 58}{space 3}0.058{col 66}{space 4}-.0654924{col 79}{space 3}  .001042
-{txt}{space 17}parInc2 {c |}{col 26}{res}{space 2} 9.24e-09{col 38}{space 2} 3.82e-08{col 49}{space 1}    0.24{col 58}{space 3}0.809{col 66}{space 4}-6.57e-08{col 79}{space 3} 8.42e-08
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 3294.835{col 38}{space 2} 1903.106{col 49}{space 1}    1.73{col 58}{space 3}0.084{col 66}{space 4}-443.5483{col 79}{space 3} 7033.218
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 1941.416{col 38}{space 2} 1677.671{col 49}{space 1}    1.16{col 58}{space 3}0.248{col 66}{space 4}-1354.131{col 79}{space 3} 5236.963
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 2138.481{col 38}{space 2} 1136.035{col 49}{space 1}    1.88{col 58}{space 3}0.060{col 66}{space 4}-93.09929{col 79}{space 3} 4370.061
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-269.3083{col 38}{space 2} 1819.951{col 49}{space 1}   -0.15{col 58}{space 3}0.882{col 66}{space 4}-3844.345{col 79}{space 3} 3305.729
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1817.161{col 38}{space 2} 1795.276{col 49}{space 1}   -1.01{col 58}{space 3}0.312{col 66}{space 4}-5343.727{col 79}{space 3} 1709.405
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-3611.967{col 38}{space 2} 2110.554{col 49}{space 1}   -1.71{col 58}{space 3}0.088{col 66}{space 4}-7757.851{col 79}{space 3}  533.918
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2}-116.0793{col 38}{space 2} 2698.967{col 49}{space 1}   -0.04{col 58}{space 3}0.966{col 66}{space 4}-5417.819{col 79}{space 3} 5185.661
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2}  11792.9{col 38}{space 2} 514.9891{col 66}{space 4} 10781.28{col 79}{space 3} 12804.53
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}      249{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}      306{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan polImpact i.year fallSemester need parInc2 i.race i.sex i.region if !missing(recloan) & year >= 6, ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       165
-{txt}{col 51}LR chi2({res}-2{txt}){col 67}= {res}     39.73
-{txt}{col 51}Prob > chi2{col 67}= {res}         .
-{txt}Log likelihood = {res}-939.78814{txt}{col 51}Pseudo R2{col 67}= {res}    0.0207
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 15}polImpact {c |}{col 26}{res}{space 2}-63.52193{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 22}8  {c |}{col 26}{res}{space 2}-2370.028{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 21}10  {c |}{col 26}{res}{space 2} 65508.95{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 21}12  {c |}{col 26}{res}{space 2}   119570{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 21}14  {c |}{col 26}{res}{space 2} 140234.1{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 24} {c |}
-{space 12}fallSemester {c |}{col 26}{res}{space 2} 487.0256{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 20}need {c |}{col 26}{res}{space 2} .0661551{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 17}parInc2 {c |}{col 26}{res}{space 2} 7.06e-08{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 1675.437{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 3417.991{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1454.079{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 948.4282{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2} 81.43739{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-4815.377{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2} 1255.784{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 8899.631{col 38}{space 2}        .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}       80{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}       85{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan polImpact i.year fallSemester need parInc2 i.race i.sex i.region if !missing(recloan) & inlist(year, 6, 8), ll
-{txt}note: polImpact omitted because of collinearity
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}        73
-{txt}{col 51}LR chi2({res}10{txt}){col 67}= {res}     32.44
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0003
-{txt}Log likelihood = {res}-351.18732{txt}{col 51}Pseudo R2{col 67}= {res}    0.0441
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 15}polImpact {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (omitted)
-{space 18}8.year {c |}{col 26}{res}{space 2} -727.528{col 38}{space 2} 1860.974{col 49}{space 1}   -0.39{col 58}{space 3}0.697{col 66}{space 4}-4446.387{col 79}{space 3} 2991.331
-{txt}{space 12}fallSemester {c |}{col 26}{res}{space 2} 1332.017{col 38}{space 2} 2287.112{col 49}{space 1}    0.58{col 58}{space 3}0.562{col 66}{space 4}-3238.411{col 79}{space 3} 5902.445
-{txt}{space 20}need {c |}{col 26}{res}{space 2} .1017339{col 38}{space 2} .0243092{col 49}{space 1}    4.19{col 58}{space 3}0.000{col 66}{space 4} .0531559{col 79}{space 3} .1503119
-{txt}{space 17}parInc2 {c |}{col 26}{res}{space 2} 1.94e-07{col 38}{space 2} 5.10e-08{col 49}{space 1}    3.80{col 58}{space 3}0.000{col 66}{space 4} 9.19e-08{col 79}{space 3} 2.96e-07
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 2161.952{col 38}{space 2}  2884.65{col 49}{space 1}    0.75{col 58}{space 3}0.456{col 66}{space 4}-3602.561{col 79}{space 3} 7926.464
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 3614.546{col 38}{space 2} 2600.832{col 49}{space 1}    1.39{col 58}{space 3}0.169{col 66}{space 4}-1582.803{col 79}{space 3} 8811.894
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1074.239{col 38}{space 2} 1779.689{col 49}{space 1}    0.60{col 58}{space 3}0.548{col 66}{space 4}-2482.185{col 79}{space 3} 4630.663
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 7021.349{col 38}{space 2} 2917.094{col 49}{space 1}    2.41{col 58}{space 3}0.019{col 66}{space 4} 1192.001{col 79}{space 3}  12850.7
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2} 3225.098{col 38}{space 2} 2746.336{col 49}{space 1}    1.17{col 58}{space 3}0.245{col 66}{space 4}-2263.016{col 79}{space 3} 8713.211
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2} 2441.505{col 38}{space 2} 3267.957{col 49}{space 1}    0.75{col 58}{space 3}0.458{col 66}{space 4}-4088.986{col 79}{space 3} 8971.996
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2}-1201.928{col 38}{space 2} 3442.738{col 49}{space 1}   -0.35{col 58}{space 3}0.728{col 66}{space 4} -8081.69{col 79}{space 3} 5677.834
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 5690.376{col 38}{space 2} 772.0414{col 66}{space 4} 4147.575{col 79}{space 3} 7233.178
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}       40{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}       33{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan polImpact i.year fallSemester need parInc2 i.race i.sex i.region if !missing(recloan), ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       219
-{txt}{col 51}LR chi2({res}-2{txt}){col 67}= {res}     46.96
-{txt}{col 51}Prob > chi2{col 67}= {res}         .
-{txt}Log likelihood = {res}-1291.8739{txt}{col 51}Pseudo R2{col 67}= {res}    0.0179
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 15}polImpact {c |}{col 26}{res}{space 2}-59.08355{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 22}2  {c |}{col 26}{res}{space 2} 1213.599{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 22}4  {c |}{col 26}{res}{space 2} 5939.547{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 22}6  {c |}{col 26}{res}{space 2} 4060.588{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 22}8  {c |}{col 26}{res}{space 2} 2147.956{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 21}10  {c |}{col 26}{res}{space 2} 65194.04{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 21}12  {c |}{col 26}{res}{space 2} 115127.4{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 21}14  {c |}{col 26}{res}{space 2} 136838.3{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 24} {c |}
-{space 12}fallSemester {c |}{col 26}{res}{space 2} 497.9151{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 20}need {c |}{col 26}{res}{space 2} .0608186{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 17}parInc2 {c |}{col 26}{res}{space 2} 6.84e-08{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 1635.701{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 1965.521{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1002.249{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 2187.336{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2} 350.7211{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-1997.186{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2}-2673.913{col 38}{space 2}        .{col 49}{space 1}       .{col 58}{space 3}    .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 8144.708{col 38}{space 2}        .{col 66}{space 4}        .{col 79}{space 3}        .
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}      101{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}      118{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan c.polImpact#c.need need i.year fallSemester parInc2 i.race i.sex i.region if !missing(recloan), ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       219
-{txt}{col 51}LR chi2({res}17{txt}){col 67}= {res}     45.68
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0002
-{txt}Log likelihood = {res}-1292.5159{txt}{col 51}Pseudo R2{col 67}= {res}    0.0174
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 6}c.polImpact#c.need {c |}{col 26}{res}{space 2} 9.82e-06{col 38}{space 2} .0000136{col 49}{space 1}    0.72{col 58}{space 3}0.470{col 66}{space 4}-.0000169{col 79}{space 3} .0000366
-{txt}{space 24} {c |}
-{space 20}need {c |}{col 26}{res}{space 2} .0548413{col 38}{space 2} .0180524{col 49}{space 1}    3.04{col 58}{space 3}0.003{col 66}{space 4} .0192461{col 79}{space 3} .0904366
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 22}2  {c |}{col 26}{res}{space 2} 983.2346{col 38}{space 2} 4329.008{col 49}{space 1}    0.23{col 58}{space 3}0.821{col 66}{space 4}-7552.605{col 79}{space 3} 9519.074
-{txt}{space 22}4  {c |}{col 26}{res}{space 2} 5694.706{col 38}{space 2} 3464.837{col 49}{space 1}    1.64{col 58}{space 3}0.102{col 66}{space 4}-1137.181{col 79}{space 3} 12526.59
-{txt}{space 22}6  {c |}{col 26}{res}{space 2} 3762.047{col 38}{space 2} 3519.892{col 49}{space 1}    1.07{col 58}{space 3}0.286{col 66}{space 4}-3178.396{col 79}{space 3} 10702.49
-{txt}{space 22}8  {c |}{col 26}{res}{space 2} 1646.484{col 38}{space 2} 3617.894{col 49}{space 1}    0.46{col 58}{space 3}0.650{col 66}{space 4}-5487.199{col 79}{space 3} 8780.166
-{txt}{space 21}10  {c |}{col 26}{res}{space 2} 6376.423{col 38}{space 2} 3428.892{col 49}{space 1}    1.86{col 58}{space 3}0.064{col 66}{space 4}-384.5898{col 79}{space 3} 13137.44
-{txt}{space 21}12  {c |}{col 26}{res}{space 2} 5389.181{col 38}{space 2} 3916.601{col 49}{space 1}    1.38{col 58}{space 3}0.170{col 66}{space 4}-2333.485{col 79}{space 3} 13111.85
-{txt}{space 21}14  {c |}{col 26}{res}{space 2} 27965.53{col 38}{space 2} 7455.488{col 49}{space 1}    3.75{col 58}{space 3}0.000{col 66}{space 4} 13264.97{col 79}{space 3} 42666.09
-{txt}{space 24} {c |}
-{space 12}fallSemester {c |}{col 26}{res}{space 2} 318.8762{col 38}{space 2} 1564.214{col 49}{space 1}    0.20{col 58}{space 3}0.839{col 66}{space 4}-2765.405{col 79}{space 3} 3403.157
-{txt}{space 17}parInc2 {c |}{col 26}{res}{space 2} 6.59e-08{col 38}{space 2} 3.81e-08{col 49}{space 1}    1.73{col 58}{space 3}0.085{col 66}{space 4}-9.22e-09{col 79}{space 3} 1.41e-07
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 1512.455{col 38}{space 2} 2138.161{col 49}{space 1}    0.71{col 58}{space 3}0.480{col 66}{space 4}-2703.524{col 79}{space 3} 5728.433
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 1627.397{col 38}{space 2}  1904.48{col 49}{space 1}    0.85{col 58}{space 3}0.394{col 66}{space 4}-2127.812{col 79}{space 3} 5382.607
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 851.2251{col 38}{space 2} 1287.266{col 49}{space 1}    0.66{col 58}{space 3}0.509{col 66}{space 4}-1686.977{col 79}{space 3} 3389.427
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 2251.412{col 38}{space 2} 2031.823{col 49}{space 1}    1.11{col 58}{space 3}0.269{col 66}{space 4}-1754.891{col 79}{space 3} 6257.715
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2} 380.6623{col 38}{space 2} 1906.909{col 49}{space 1}    0.20{col 58}{space 3}0.842{col 66}{space 4}-3379.337{col 79}{space 3} 4140.662
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-2386.626{col 38}{space 2} 2292.299{col 49}{space 1}   -1.04{col 58}{space 3}0.299{col 66}{space 4}-6906.529{col 79}{space 3} 2133.276
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2}-2363.286{col 38}{space 2}  4188.78{col 49}{space 1}   -0.56{col 58}{space 3}0.573{col 66}{space 4}-10622.63{col 79}{space 3} 5896.056
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 8155.726{col 38}{space 2}   577.86{col 66}{space 4} 7016.314{col 79}{space 3} 9295.137
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}      101{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}      118{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan c.polImpact#c.need need i.year fallSemester parInc2 i.race i.sex i.region if !missing(recloan) & inlist(year, 6, 8), ll
-{txt}note: c.polImpact#c.need omitted because of collinearity
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}        73
-{txt}{col 51}LR chi2({res}10{txt}){col 67}= {res}     32.44
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0003
-{txt}Log likelihood = {res}-351.18732{txt}{col 51}Pseudo R2{col 67}= {res}    0.0441
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 6}c.polImpact#c.need {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (omitted)
-{space 24} {c |}
-{space 20}need {c |}{col 26}{res}{space 2} .1017339{col 38}{space 2} .0243092{col 49}{space 1}    4.19{col 58}{space 3}0.000{col 66}{space 4} .0531559{col 79}{space 3} .1503119
-{txt}{space 18}8.year {c |}{col 26}{res}{space 2} -727.528{col 38}{space 2} 1860.974{col 49}{space 1}   -0.39{col 58}{space 3}0.697{col 66}{space 4}-4446.387{col 79}{space 3} 2991.331
-{txt}{space 12}fallSemester {c |}{col 26}{res}{space 2} 1332.017{col 38}{space 2} 2287.112{col 49}{space 1}    0.58{col 58}{space 3}0.562{col 66}{space 4}-3238.411{col 79}{space 3} 5902.445
-{txt}{space 17}parInc2 {c |}{col 26}{res}{space 2} 1.94e-07{col 38}{space 2} 5.10e-08{col 49}{space 1}    3.80{col 58}{space 3}0.000{col 66}{space 4} 9.19e-08{col 79}{space 3} 2.96e-07
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 2161.952{col 38}{space 2}  2884.65{col 49}{space 1}    0.75{col 58}{space 3}0.456{col 66}{space 4}-3602.561{col 79}{space 3} 7926.464
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 3614.546{col 38}{space 2} 2600.832{col 49}{space 1}    1.39{col 58}{space 3}0.169{col 66}{space 4}-1582.803{col 79}{space 3} 8811.894
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1074.239{col 38}{space 2} 1779.689{col 49}{space 1}    0.60{col 58}{space 3}0.548{col 66}{space 4}-2482.185{col 79}{space 3} 4630.663
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 7021.349{col 38}{space 2} 2917.094{col 49}{space 1}    2.41{col 58}{space 3}0.019{col 66}{space 4} 1192.001{col 79}{space 3}  12850.7
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2} 3225.098{col 38}{space 2} 2746.336{col 49}{space 1}    1.17{col 58}{space 3}0.245{col 66}{space 4}-2263.016{col 79}{space 3} 8713.211
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2} 2441.505{col 38}{space 2} 3267.957{col 49}{space 1}    0.75{col 58}{space 3}0.458{col 66}{space 4}-4088.986{col 79}{space 3} 8971.996
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2}-1201.928{col 38}{space 2} 3442.738{col 49}{space 1}   -0.35{col 58}{space 3}0.728{col 66}{space 4} -8081.69{col 79}{space 3} 5677.834
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 5690.376{col 38}{space 2} 772.0414{col 66}{space 4} 4147.575{col 79}{space 3} 7233.178
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}       40{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}       33{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan c.polImpact#c.need need i.year fallSemester parInc2 i.race i.sex i.region if !missing(recloan) & inlist(year, 6, 8, 10), ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       138
-{txt}{col 51}LR chi2({res}12{txt}){col 67}= {res}     24.13
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0195
-{txt}Log likelihood = {res}-774.85288{txt}{col 51}Pseudo R2{col 67}= {res}    0.0153
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 6}c.polImpact#c.need {c |}{col 26}{res}{space 2}-6.14e-07{col 38}{space 2} .0000218{col 49}{space 1}   -0.03{col 58}{space 3}0.978{col 66}{space 4}-.0000437{col 79}{space 3} .0000425
-{txt}{space 24} {c |}
-{space 20}need {c |}{col 26}{res}{space 2} .0543282{col 38}{space 2}  .022489{col 49}{space 1}    2.42{col 58}{space 3}0.017{col 66}{space 4} .0098232{col 79}{space 3} .0988332
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 22}8  {c |}{col 26}{res}{space 2}-2793.584{col 38}{space 2} 2627.284{col 49}{space 1}   -1.06{col 58}{space 3}0.290{col 66}{space 4}-7992.903{col 79}{space 3} 2405.735
-{txt}{space 21}10  {c |}{col 26}{res}{space 2}  1758.88{col 38}{space 2} 2710.835{col 49}{space 1}    0.65{col 58}{space 3}0.518{col 66}{space 4}-3605.782{col 79}{space 3} 7123.543
-{txt}{space 24} {c |}
-{space 12}fallSemester {c |}{col 26}{res}{space 2} -326.483{col 38}{space 2} 2180.307{col 49}{space 1}   -0.15{col 58}{space 3}0.881{col 66}{space 4}-4641.246{col 79}{space 3}  3988.28
-{txt}{space 17}parInc2 {c |}{col 26}{res}{space 2} 5.49e-08{col 38}{space 2} 4.56e-08{col 49}{space 1}    1.20{col 58}{space 3}0.231{col 66}{space 4}-3.54e-08{col 79}{space 3} 1.45e-07
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 406.5525{col 38}{space 2} 2920.596{col 49}{space 1}    0.14{col 58}{space 3}0.890{col 66}{space 4}-5373.222{col 79}{space 3} 6186.327
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 1611.829{col 38}{space 2} 2575.403{col 49}{space 1}    0.63{col 58}{space 3}0.533{col 66}{space 4}-3484.818{col 79}{space 3} 6708.476
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2}  1670.06{col 38}{space 2} 1788.792{col 49}{space 1}    0.93{col 58}{space 3}0.352{col 66}{space 4}-1869.907{col 79}{space 3} 5210.028
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 2322.702{col 38}{space 2} 2742.787{col 49}{space 1}    0.85{col 58}{space 3}0.399{col 66}{space 4}-3105.193{col 79}{space 3} 7750.597
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2} 530.5507{col 38}{space 2}  2652.78{col 49}{space 1}    0.20{col 58}{space 3}0.842{col 66}{space 4}-4719.223{col 79}{space 3} 5780.325
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-4575.455{col 38}{space 2} 3206.375{col 49}{space 1}   -1.43{col 58}{space 3}0.156{col 66}{space 4}-10920.78{col 79}{space 3} 1769.866
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2} 1527.844{col 38}{space 2} 3735.204{col 49}{space 1}    0.41{col 58}{space 3}0.683{col 66}{space 4}-5864.015{col 79}{space 3} 8919.703
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 8801.929{col 38}{space 2} 816.5893{col 66}{space 4} 7185.923{col 79}{space 3} 10417.93
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}       68{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}       70{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan c.polImpact#c.need need i.year fallSemester parInc2 i.race i.sex i.region if !missing(recloan) & inlist(year, 4, 6, 8, 10), ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       172
-{txt}{col 51}LR chi2({res}13{txt}){col 67}= {res}     28.41
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0079
-{txt}Log likelihood = {res}-1036.8129{txt}{col 51}Pseudo R2{col 67}= {res}    0.0135
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 6}c.polImpact#c.need {c |}{col 26}{res}{space 2}-5.03e-06{col 38}{space 2} .0000187{col 49}{space 1}   -0.27{col 58}{space 3}0.788{col 66}{space 4}-.0000419{col 79}{space 3} .0000319
-{txt}{space 24} {c |}
-{space 20}need {c |}{col 26}{res}{space 2} .0547847{col 38}{space 2} .0185735{col 49}{space 1}    2.95{col 58}{space 3}0.004{col 66}{space 4} .0181021{col 79}{space 3} .0914673
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 22}6  {c |}{col 26}{res}{space 2}-1775.525{col 38}{space 2} 2182.422{col 49}{space 1}   -0.81{col 58}{space 3}0.417{col 66}{space 4}-6085.801{col 79}{space 3} 2534.751
-{txt}{space 22}8  {c |}{col 26}{res}{space 2}-4123.732{col 38}{space 2}  2263.16{col 49}{space 1}   -1.82{col 58}{space 3}0.070{col 66}{space 4}-8593.465{col 79}{space 3} 346.0003
-{txt}{space 21}10  {c |}{col 26}{res}{space 2}-441.5447{col 38}{space 2} 2265.632{col 49}{space 1}   -0.19{col 58}{space 3}0.846{col 66}{space 4}-4916.159{col 79}{space 3}  4033.07
-{txt}{space 24} {c |}
-{space 12}fallSemester {c |}{col 26}{res}{space 2}-3.606483{col 38}{space 2} 1740.967{col 49}{space 1}   -0.00{col 58}{space 3}0.998{col 66}{space 4}-3442.009{col 79}{space 3} 3434.796
-{txt}{space 17}parInc2 {c |}{col 26}{res}{space 2} 5.59e-08{col 38}{space 2} 3.91e-08{col 49}{space 1}    1.43{col 58}{space 3}0.155{col 66}{space 4}-2.13e-08{col 79}{space 3} 1.33e-07
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 285.7952{col 38}{space 2} 2358.769{col 49}{space 1}    0.12{col 58}{space 3}0.904{col 66}{space 4}-4372.764{col 79}{space 3} 4944.354
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 602.6962{col 38}{space 2} 2074.908{col 49}{space 1}    0.29{col 58}{space 3}0.772{col 66}{space 4} -3495.24{col 79}{space 3} 4700.633
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 740.7121{col 38}{space 2}  1443.95{col 49}{space 1}    0.51{col 58}{space 3}0.609{col 66}{space 4}-2111.085{col 79}{space 3} 3592.509
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 3092.335{col 38}{space 2} 2248.728{col 49}{space 1}    1.38{col 58}{space 3}0.171{col 66}{space 4}-1348.894{col 79}{space 3} 7533.563
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}  946.976{col 38}{space 2} 2091.853{col 49}{space 1}    0.45{col 58}{space 3}0.651{col 66}{space 4}-3184.426{col 79}{space 3} 5078.378
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-2340.807{col 38}{space 2} 2583.096{col 49}{space 1}   -0.91{col 58}{space 3}0.366{col 66}{space 4}-7442.411{col 79}{space 3} 2760.797
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2} 4052.766{col 38}{space 2} 3060.333{col 49}{space 1}    1.32{col 58}{space 3}0.187{col 66}{space 4}-1991.381{col 79}{space 3} 10096.91
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 8020.459{col 38}{space 2} 633.4441{col 66}{space 4}  6769.41{col 79}{space 3} 9271.509
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}       77{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}       95{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. 
-. 
-. hist need
-{txt}(bin={res}15{txt}, start={res}-530243.38{txt}, width={res}37211.958{txt})
-{res}
-{com}. count if need > 0 & !missing(need)
-{res}    8
-
-{com}. br if need > 0 & !missing(need)
-
-. binscatter need parInc
-{res}
-{com}. 
-. 

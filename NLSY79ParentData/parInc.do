@@ -10,30 +10,44 @@ label define vlR6944402   0 "0"
 label values R6944402 vlR6944402
 label define vlR7006500   0 "0"
 label values R7006500 vlR7006500
+label define vlR7616100   0 "0: 0  CONDITION DOES NOT APPLY"  1 "1: 1  CONDITION APPLIES"
+label values R7616100 vlR7616100
 label define vlR7703700   0 "0"
 label values R7703700 vlR7703700
+label define vlR8324800   0 "0: 0  CONDITION DOES NOT APPLY"  1 "1: 1  CONDITION APPLIES"
+label values R8324800 vlR8324800
 label define vlR8378703   0 "0"
 label values R8378703 vlR8378703
 label define vlR8379601   0 "0"
 label values R8379601 vlR8379601
 label define vlR8496100   0 "0"
 label values R8496100 vlR8496100
+label define vlT0919900   0 "0: 0  CONDITION DOES NOT APPLY"  1 "1: 1  CONDITION APPLIES"
+label values T0919900 vlT0919900
 label define vlT0987800   0 "0"
 label values T0987800 vlT0987800
+label define vlT2084600   0 "0: 0  CONDITION DOES NOT APPLY"  1 "1: 1  CONDITION APPLIES"
+label values T2084600 vlT2084600
 label define vlT2142702   0 "0"
 label values T2142702 vlT2142702
 label define vlT2143900   0 "0"
 label values T2143900 vlT2143900
 label define vlT2210000   0 "0"
 label values T2210000 vlT2210000
+label define vlT3055100   0 "0: 0  CONDITION DOES NOT APPLY"  1 "1: 1  CONDITION APPLIES"
+label values T3055100 vlT3055100
 label define vlT3107800   0 "0"
 label values T3107800 vlT3107800
+label define vlT3986700   0 "0: 0  CONDITION DOES NOT APPLY"  1 "1: 1  CONDITION APPLIES"
+label values T3986700 vlT3986700
 label define vlT4045802   0 "0"
 label values T4045802 vlT4045802
 label define vlT4047100   0 "0"
 label values T4047100 vlT4047100
 label define vlT4112300   0 "0"
 label values T4112300 vlT4112300
+label define vlT4924000   0 "0: 0  CONDITION DOES NOT APPLY"  1 "1: 1  CONDITION APPLIES"
+label values T4924000 vlT4924000
 label define vlT5022600   0 "0"
 label values T5022600 vlT5022600
 /* Crosswalk for Reference number & Question name
@@ -46,21 +60,29 @@ label values T5022600 vlT5022600
   rename R0173600 SAMPLE_ID_1979 
   rename R0214700 SAMPLE_RACE_78SCRN 
   rename R0214800 SAMPLE_SEX_1979 
+  rename R6917500 Q13_10_2000   // Q13-10
   rename R6940103 TNFW_TRUNC_2000 
   rename R6944402 RESIDENCE_IMPUTED_TRUNC_2000 
   rename R7006500 TNFI_TRUNC_2000 
+  rename R7616100 Q13_10_2002   // Q13-10
   rename R7703700 TNFI_TRUNC_2002 
+  rename R8324800 Q13_10_2004   // Q13-10
   rename R8378703 TNFW_TRUNC_2004 
   rename R8379601 RESIDENCE_IMPUTED_TRUNC_2004 
   rename R8496100 TNFI_TRUNC_2004 
+  rename T0919900 Q13_10_2006   // Q13-10
   rename T0987800 TNFI_TRUNC_2006 
+  rename T2084600 Q13_10_2008   // Q13-10
   rename T2142702 TNFW_TRUNC_2008 
   rename T2143900 RESIDENCE_IMPUTED_TRUNC_2008 
   rename T2210000 TNFI_TRUNC_2008 
+  rename T3055100 Q13_10_2010   // Q13-10
   rename T3107800 TNFI_TRUNC_2010 
+  rename T3986700 Q13_10_2012   // Q13-10
   rename T4045802 TNFW_TRUNC_2012 
   rename T4047100 RESIDENCE_IMPUTED_TRUNC_2012 
   rename T4112300 TNFI_TRUNC_2012 
+  rename T4924000 Q13_10_2014   // Q13-10
   rename T5022600 TNFI_TRUNC_2014 
 */
   /* *end* */  

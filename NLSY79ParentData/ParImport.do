@@ -37,10 +37,22 @@ gen homeVal10 = homeVal8
 rename T4047100 homeVal12
 gen homeVal14 = homeVal12
 
-keep parInc* assets* homeVal* mid
+//Renames marriage
+rename R6917500 married0
+rename R7616100 married2
+rename R8324800 married4
+rename T0919900 married6
+rename T2084600 married8
+rename T3055100 married10
+rename T3986700 married12
+rename T4924000 married14
 
-reshape long parInc assets homeVal, i(mid) j(year)
+keep parInc* assets* homeVal* married* mid
+
+reshape long parInc assets homeVal married, i(mid) j(year)
 replace parInc = . if parInc < 0
 replace assets = . if inlist(assets, -1, -2, -3, -4, -5)
 replace homeVal = . if homeVal < 0
+replace married = . if married < 0
+
 sort mid year
