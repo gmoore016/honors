@@ -1,4 +1,4 @@
-import delimited parInc.csv, clear case(preserve)
+import delimited ../Input/parInc.csv, clear case(preserve)
 
 
 //Names family income variables
@@ -58,3 +58,5 @@ replace married = . if married < 0
 rename married momMarried
 
 sort mid year
+
+save ../Output/ParData.dta, replace

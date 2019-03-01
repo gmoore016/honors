@@ -1,6 +1,6 @@
 clear all
 
-infile using Download/child.dct
+infile using ../Input/child.dct
 
 //Unneeded documentation parameter
 drop Y2267000
@@ -214,5 +214,7 @@ label values majType majTypeLab
 gen fallSemester = halfyear(dofm(intDate)) - 1
 
 keep if grade == 16
+
+save ../Output/ChildData.dta, replace
 
 

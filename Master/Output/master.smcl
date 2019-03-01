@@ -1,20 +1,20 @@
 {smcl}
 {com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}C:\Users\gmoore\Desktop\honors\master\master.smcl
+       {txt}log:  {res}C:\Users\gmoore\Desktop\honors\master\code\../Output/master.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}28 Feb 2019, 16:57:26
+ {txt}opened on:  {res}28 Feb 2019, 22:46:45
 {txt}
 {com}. 
 . set more off
 {txt}
 {com}. 
-. cd ../NLSY79ParentData
-{res}C:\Users\gmoore\Desktop\honors\NLSY79ParentData
+. cd ../../NLSY79ParentData/Code
+{res}C:\Users\gmoore\Desktop\honors\NLSY79ParentData\Code
 {txt}
 {com}. do ParImport
 {txt}
-{com}. import delimited parInc.csv, clear case(preserve)
+{com}. import delimited ../Input/parInc.csv, clear case(preserve)
 {res}{text}(28 vars, 12686 obs)
 {com}. 
 . 
@@ -134,24 +134,22 @@ Number of obs.                 {res}   12686   {txt}->{res}  101488
 . sort mid year
 {txt}
 {com}. 
+. save ../Output/ParData.dta, replace
+{txt}file ../Output/ParData.dta saved
+
+{com}. 
 {txt}end of do-file
 
 {com}. 
-. tempfile parInc
-{txt}
-{com}. save `parInc'
-{txt}file C:\Users\gmoore\AppData\Local\Temp\ST_00000001.tmp saved
-
-{com}. 
-. cd ../NLSYChild79Data
-{res}C:\Users\gmoore\Desktop\honors\NLSYChild79Data
+. cd ../../NLSYChild79Data/Code
+{res}C:\Users\gmoore\Desktop\honors\NLSYChild79Data\Code
 {txt}
 {com}. do Import
 {txt}
 {com}. clear all
 {txt}
 {com}. 
-. infile using Download/child.dct
+. infile using ../Input/child.dct
 
 {txt}infile dictionary {c -(}
   C0000100 "ID CODE OF CHILD"
@@ -624,6 +622,10 @@ partialtuition0 partialtuition2 ... partialtuition14{txt}->{res}partialtuition
 {txt}(24410 observations deleted)
 
 {com}. 
+. save ../Output/ChildData.dta, replace
+{txt}file ../Output/ChildData.dta saved
+
+{com}. 
 . 
 . 
 {txt}end of do-file
@@ -632,7 +634,7 @@ partialtuition0 partialtuition2 ... partialtuition14{txt}->{res}partialtuition
 . //Need many:one due to siblings
 . //Assertion guarantees all children have parental incomes
 . //Drop those women without children in college
-. merge m:1 mid year using `parInc', assert(match using) nogen keep(match)
+. merge m:1 mid year using ../../NLSY79ParentData/Output/ParData.dta, assert(match using) nogen keep(match)
 {res}
 {txt}{col 5}Result{col 38}# of obs.
 {col 5}{hline 41}
@@ -640,12 +642,17 @@ partialtuition0 partialtuition2 ... partialtuition14{txt}->{res}partialtuition
 {txt}{col 5}matched{col 30}{res}             950{txt}  
 {col 5}{hline 41}
 
-{com}. 
-. //keep if parInc < 50000
-. cd ../NeedCalc/Code
+{com}. //keep if parInc < 50000
+. cd ../../NeedCalc/Code
 {res}C:\Users\gmoore\Desktop\honors\NeedCalc\Code
 {txt}
+{com}. save ../Input/Merged.dta, replace
+{txt}(note: file ../Input/Merged.dta not found)
+file ../Input/Merged.dta saved
+
 {com}. do NeedCalc
+{txt}
+{com}. use ../Input/Merged.dta, clear
 {txt}
 {com}. //Available Income Calc
 . 
@@ -823,8 +830,13 @@ partialtuition0 partialtuition2 ... partialtuition14{txt}->{res}partialtuition
 . gen atCap = 0 if !missing(need)
 {txt}(612 missing values generated)
 
-{com}. replace atCap = 1 if need >= 4500 & !missing(need)
-{txt}(124 real changes made)
+{com}. replace atCap = 1 if need >= 5500 & !missing(need)
+{txt}(107 real changes made)
+
+{com}. 
+. save ../Output/Need.dta, replace
+{txt}(note: file ../Output/Need.dta not found)
+file ../Output/Need.dta saved
 
 {com}. 
 {txt}end of do-file
@@ -1152,6 +1164,58 @@ Iteration 2:{space 3}log likelihood = {res:-7524.0955}
 Iteration 3:{space 3}log likelihood = {res:-7524.0539}  
 Iteration 4:{space 3}log likelihood = {res:-7524.0529}  
 Iteration 5:{space 3}log likelihood = {res:-7524.0529}  
+{res}
+{txt}Probit model with endogenous regressors{col 51}Number of obs{col 67}= {res}       704
+{txt}{col 51}Wald chi2({res}9{txt}){col 67}= {res}     13.12
+{txt}Log likelihood = {res}-7524.0529{txt}{col 51}Prob > chi2{col 67}= {res}    0.1574
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      z{col 58}   P>|z|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 20}loan {c |}{col 26}{res}{space 2}-.0000562{col 38}{space 2}   .00004{col 49}{space 1}   -1.41{col 58}{space 3}0.160{col 66}{space 4}-.0001346{col 79}{space 3} .0000222
+{txt}{space 20}year {c |}{col 26}{res}{space 2} .0061982{col 38}{space 2} .0215329{col 49}{space 1}    0.29{col 58}{space 3}0.773{col 66}{space 4}-.0360055{col 79}{space 3} .0484019
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} .2475053{col 38}{space 2}  .191534{col 49}{space 1}    1.29{col 58}{space 3}0.196{col 66}{space 4}-.1278943{col 79}{space 3}  .622905
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} .1390048{col 38}{space 2} .1696579{col 49}{space 1}    0.82{col 58}{space 3}0.413{col 66}{space 4}-.1935185{col 79}{space 3} .4715282
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2}-.1467366{col 38}{space 2} .1256649{col 49}{space 1}   -1.17{col 58}{space 3}0.243{col 66}{space 4}-.3930353{col 79}{space 3} .0995621
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-.2980136{col 38}{space 2} .1957909{col 49}{space 1}   -1.52{col 58}{space 3}0.128{col 66}{space 4}-.6817568{col 79}{space 3} .0857295
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2} -.100706{col 38}{space 2} .1764903{col 49}{space 1}   -0.57{col 58}{space 3}0.568{col 66}{space 4}-.4466206{col 79}{space 3} .2452086
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-.1016006{col 38}{space 2} .2057526{col 49}{space 1}   -0.49{col 58}{space 3}0.621{col 66}{space 4}-.5048682{col 79}{space 3}  .301667
+{txt}{space 24} {c |}
+{space 18}parInc {c |}{col 26}{res}{space 2}-5.86e-07{col 38}{space 2} 7.46e-07{col 49}{space 1}   -0.79{col 58}{space 3}0.432{col 66}{space 4}-2.05e-06{col 79}{space 3} 8.76e-07
+{txt}{space 19}_cons {c |}{col 26}{res}{space 2}-.6303001{col 38}{space 2} .3139747{col 49}{space 1}   -2.01{col 58}{space 3}0.045{col 66}{space 4}-1.245679{col 79}{space 3}-.0149209
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                 /athrho {c |}{col 26}{res}{space 2} .4624777{col 38}{space 2} .3426635{col 49}{space 1}    1.35{col 58}{space 3}0.177{col 66}{space 4}-.2091304{col 79}{space 3} 1.134086
+{txt}                /lnsigma {c |}{col 26}{res}{space 2} 8.855231{col 38}{space 2} .0266501{col 49}{space 1}  332.28{col 58}{space 3}0.000{col 66}{space 4} 8.802998{col 79}{space 3} 8.907465
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                     rho{col 26}{c |}{res}{space 2} .4321015{col 38}{space 2} .2786842{col 66}{space 4} -.206134{col 79}{space 3}  .812413
+{col 1}{txt}                   sigma{col 26}{c |}{res}{space 2} 7010.971{col 38}{space 2}  186.843{col 66}{space 4} 6654.165{col 79}{space 3} 7386.909
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 15 40}Instrumented:{space 2}loan{p_end}
+{p 0 15 40}Instruments:{space 3}year 2.race 3.race 2.sex 2.region 3.region 4.region parInc loanHat{p_end}
+{hline 90}
+Wald test of exogeneity (/athrho = 0): chi2({res}1{txt}) = {res}    1.82{txt}{col 59}Prob > chi2 = {res}0.1771
+{txt}
+{com}. ivprobit stemMajType year i.race i.sex i.region parInc (loan = loanHat) if !missing(recloan)
+
+{txt}Fitting exogenous probit model
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-339.73461}  
+Iteration 1:{space 3}log likelihood = {res:-323.21295}  
+Iteration 2:{space 3}log likelihood = {res:-323.11466}  
+Iteration 3:{space 3}log likelihood = {res:-323.11464}  
+{res}
+{txt}Fitting full model
+{res}
+{txt}Iteration 0:{space 3}log likelihood = {res:-7556.1304}  
+Iteration 1:{space 3}log likelihood = {res:-7555.8167}  
+Iteration 2:{space 3}log likelihood = {res:-7555.5562}  
+Iteration 3:{space 3}log likelihood = {res:-7555.5558}  
 {res}{err}{hline 2}Break{hline 2}
 {txt}{search r(1):r(1);}
 
@@ -1163,486 +1227,5 @@ end of do-file
 
 {err}{hline 2}Break{hline 2}
 {txt}{search r(1):r(1);}
-
-{com}. reg loan polImpact##atCap
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
-{txt}{hline 13}{char +}{hline 30}           F(  5,   317) ={res}    3.81
-    {txt}   Model {char |} {res}  581092356     5   116218471           {txt}Prob > F      = {res} 0.0023
-    {txt}Residual {char |} {res} 9.6762e+09   317    30524328           {txt}R-squared     = {res} 0.0567
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0418
-    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5524.9
-
-{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}           loan{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
-{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 6}polImpact {c |}
-{space 10}1000  {c |}{col 17}{res}{space 2} 1228.225{col 29}{space 2} 915.5764{col 40}{space 1}    1.34{col 49}{space 3}0.181{col 57}{space 4}-573.1491{col 70}{space 3} 3029.599
-{txt}{space 10}1875  {c |}{col 17}{res}{space 2} 1416.594{col 29}{space 2} 1246.972{col 40}{space 1}    1.14{col 49}{space 3}0.257{col 57}{space 4}-1036.793{col 70}{space 3}  3869.98
-{txt}{space 15} {c |}
-{space 8}1.atCap {c |}{col 17}{res}{space 2} 2449.297{col 29}{space 2} 853.3418{col 40}{space 1}    2.87{col 49}{space 3}0.004{col 57}{space 4} 770.3672{col 70}{space 3} 4128.226
-{txt}{space 15} {c |}
-polImpact#atCap {c |}
-{space 8}1000 1  {c |}{col 17}{res}{space 2} -890.713{col 29}{space 2} 1495.478{col 40}{space 1}   -0.60{col 49}{space 3}0.552{col 57}{space 4}-3833.029{col 70}{space 3} 2051.603
-{txt}{space 8}1875 1  {c |}{col 17}{res}{space 2} 509.7138{col 29}{space 2}   1873.2{col 40}{space 1}    0.27{col 49}{space 3}0.786{col 57}{space 4}-3175.761{col 70}{space 3} 4195.188
-{txt}{space 15} {c |}
-{space 10}_cons {c |}{col 17}{res}{space 2} 2472.015{col 29}{space 2} 477.2772{col 40}{space 1}    5.18{col 49}{space 3}0.000{col 57}{space 4} 1532.984{col 70}{space 3} 3411.046
-{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. reg loan c.polImpact##atCap
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
-{txt}{hline 13}{char +}{hline 30}           F(  3,   319) ={res}    6.19
-    {txt}   Model {char |} {res}  564290317     3   188096772           {txt}Prob > F      = {res} 0.0004
-    {txt}Residual {char |} {res} 9.6930e+09   319  30385623.9           {txt}R-squared     = {res} 0.0550
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0461
-    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5512.3
-
-{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}             loan{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
-{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 8}polImpact {c |}{col 19}{res}{space 2} .9016688{col 31}{space 2} .5844213{col 42}{space 1}    1.54{col 51}{space 3}0.124{col 59}{space 4}-.2481382{col 72}{space 3} 2.051476
-{txt}{space 10}1.atCap {c |}{col 19}{res}{space 2} 2287.436{col 31}{space 2} 822.0824{col 42}{space 1}    2.78{col 51}{space 3}0.006{col 59}{space 4} 670.0481{col 72}{space 3} 3904.824
-{txt}{space 17} {c |}
-atCap#c.polImpact {c |}
-{space 15}1  {c |}{col 19}{res}{space 2}-.0146394{col 31}{space 2} .9144971{col 42}{space 1}   -0.02{col 51}{space 3}0.987{col 59}{space 4}-1.813847{col 72}{space 3} 1.784568
-{txt}{space 17} {c |}
-{space 12}_cons {c |}{col 19}{res}{space 2} 2520.445{col 31}{space 2} 464.6685{col 42}{space 1}    5.42{col 51}{space 3}0.000{col 59}{space 4} 1606.243{col 72}{space 3} 3434.647
-{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. replace atCap = (need > 5500)
-{txt}(631 real changes made)
-
-{com}. reg loan c.polImpact##atCap
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     894
-{txt}{hline 13}{char +}{hline 30}           F(  3,   890) ={res}    6.62
-    {txt}   Model {char |} {res}  993396392     3   331132131           {txt}Prob > F      = {res} 0.0002
-    {txt}Residual {char |} {res} 4.4538e+10   890  50043033.2           {txt}R-squared     = {res} 0.0218
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0185
-    {txt}   Total {char |} {res} 4.5532e+10   893  50987341.5           {txt}Root MSE      = {res} 7074.1
-
-{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}             loan{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
-{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 8}polImpact {c |}{col 19}{res}{space 2} .8657464{col 31}{space 2} .7253029{col 42}{space 1}    1.19{col 51}{space 3}0.233{col 59}{space 4}-.5577571{col 72}{space 3}  2.28925
-{txt}{space 10}1.atCap {c |}{col 19}{res}{space 2} 1100.264{col 31}{space 2} 678.8284{col 42}{space 1}    1.62{col 51}{space 3}0.105{col 59}{space 4}-232.0268{col 72}{space 3} 2432.555
-{txt}{space 17} {c |}
-atCap#c.polImpact {c |}
-{space 15}1  {c |}{col 19}{res}{space 2}  .223539{col 31}{space 2}  .798823{col 42}{space 1}    0.28{col 51}{space 3}0.780{col 59}{space 4}-1.344258{col 72}{space 3} 1.791335
-{txt}{space 17} {c |}
-{space 12}_cons {c |}{col 19}{res}{space 2} 2574.449{col 31}{space 2} 569.5838{col 42}{space 1}    4.52{col 51}{space 3}0.000{col 59}{space 4} 1456.564{col 72}{space 3} 3692.333
-{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. reg loan c.polImpact##atCap i.year
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     894
-{txt}{hline 13}{char +}{hline 30}           F( 10,   883) ={res}    8.68
-    {txt}   Model {char |} {res} 4.0744e+09    10   407435494           {txt}Prob > F      = {res} 0.0000
-    {txt}Residual {char |} {res} 4.1457e+10   883    46950556           {txt}R-squared     = {res} 0.0895
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0792
-    {txt}   Total {char |} {res} 4.5532e+10   893  50987341.5           {txt}Root MSE      = {res}   6852
-
-{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}             loan{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
-{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 8}polImpact {c |}{col 19}{res}{space 2}-3.509316{col 31}{space 2} 2.329629{col 42}{space 1}   -1.51{col 51}{space 3}0.132{col 59}{space 4}-8.081572{col 72}{space 3}  1.06294
-{txt}{space 10}1.atCap {c |}{col 19}{res}{space 2} 1116.458{col 31}{space 2} 658.0497{col 42}{space 1}    1.70{col 51}{space 3}0.090{col 59}{space 4} -175.066{col 72}{space 3} 2407.982
-{txt}{space 17} {c |}
-atCap#c.polImpact {c |}
-{space 15}1  {c |}{col 19}{res}{space 2} .1747495{col 31}{space 2} .7875984{col 42}{space 1}    0.22{col 51}{space 3}0.824{col 59}{space 4}-1.371034{col 72}{space 3} 1.720533
-{txt}{space 17} {c |}
-{space 13}year {c |}
-{space 15}2  {c |}{col 19}{res}{space 2}-320.5674{col 31}{space 2} 1425.306{col 42}{space 1}   -0.22{col 51}{space 3}0.822{col 59}{space 4} -3117.95{col 72}{space 3} 2476.815
-{txt}{space 15}4  {c |}{col 19}{res}{space 2} 1177.105{col 31}{space 2} 1265.407{col 42}{space 1}    0.93{col 51}{space 3}0.353{col 59}{space 4}-1306.451{col 72}{space 3} 3660.662
-{txt}{space 15}6  {c |}{col 19}{res}{space 2} 961.1719{col 31}{space 2} 1229.635{col 42}{space 1}    0.78{col 51}{space 3}0.435{col 59}{space 4}-1452.177{col 72}{space 3} 3374.521
-{txt}{space 15}8  {c |}{col 19}{res}{space 2} 2421.594{col 31}{space 2}  1195.73{col 42}{space 1}    2.03{col 51}{space 3}0.043{col 59}{space 4} 74.79035{col 72}{space 3} 4768.399
-{txt}{space 14}10  {c |}{col 19}{res}{space 2} 5497.892{col 31}{space 2} 2604.596{col 42}{space 1}    2.11{col 51}{space 3}0.035{col 59}{space 4} 385.9712{col 72}{space 3} 10609.81
-{txt}{space 14}12  {c |}{col 19}{res}{space 2} 8790.958{col 31}{space 2} 4253.436{col 42}{space 1}    2.07{col 51}{space 3}0.039{col 59}{space 4} 442.9328{col 72}{space 3} 17138.98
-{txt}{space 14}14  {c |}{col 19}{res}{space 2} 20567.59{col 31}{space 2} 4505.745{col 42}{space 1}    4.56{col 51}{space 3}0.000{col 59}{space 4} 11724.37{col 72}{space 3} 29410.81
-{txt}{space 17} {c |}
-{space 12}_cons {c |}{col 19}{res}{space 2} 1312.541{col 31}{space 2} 1160.645{col 42}{space 1}    1.13{col 51}{space 3}0.258{col 59}{space 4}-965.4029{col 72}{space 3} 3590.485
-{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. reg loan c.polImpact##atCap i.year if inrange(year, 10, 14)
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     404
-{txt}{hline 13}{char +}{hline 30}           F(  5,   398) ={res}    9.33
-    {txt}   Model {char |} {res} 2.9522e+09     5   590432477           {txt}Prob > F      = {res} 0.0000
-    {txt}Residual {char |} {res} 2.5191e+10   398  63294377.9           {txt}R-squared     = {res} 0.1049
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0937
-    {txt}   Total {char |} {res} 2.8143e+10   403  69834552.8           {txt}Root MSE      = {res} 7955.8
-
-{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}             loan{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
-{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 8}polImpact {c |}{col 19}{res}{space 2}-4.874197{col 31}{space 2} 3.278613{col 42}{space 1}   -1.49{col 51}{space 3}0.138{col 59}{space 4}-11.31976{col 72}{space 3} 1.571368
-{txt}{space 10}1.atCap {c |}{col 19}{res}{space 2}-1303.783{col 31}{space 2} 3373.117{col 42}{space 1}   -0.39{col 51}{space 3}0.699{col 59}{space 4}-7935.138{col 72}{space 3} 5327.571
-{txt}{space 17} {c |}
-atCap#c.polImpact {c |}
-{space 15}1  {c |}{col 19}{res}{space 2} 1.850202{col 31}{space 2} 2.451359{col 42}{space 1}    0.75{col 51}{space 3}0.451{col 59}{space 4}-2.969029{col 72}{space 3} 6.669433
-{txt}{space 17} {c |}
-{space 13}year {c |}
-{space 14}12  {c |}{col 19}{res}{space 2} 3323.419{col 31}{space 2} 2206.448{col 42}{space 1}    1.51{col 51}{space 3}0.133{col 59}{space 4}-1014.331{col 72}{space 3} 7661.169
-{txt}{space 14}14  {c |}{col 19}{res}{space 2}  15094.1{col 31}{space 2} 2802.803{col 42}{space 1}    5.39{col 51}{space 3}0.000{col 59}{space 4} 9583.949{col 72}{space 3} 20604.25
-{txt}{space 17} {c |}
-{space 12}_cons {c |}{col 19}{res}{space 2}  8699.87{col 31}{space 2} 3811.893{col 42}{space 1}    2.28{col 51}{space 3}0.023{col 59}{space 4} 1205.908{col 72}{space 3} 16193.83
-{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. reg loan c.polImpact##atCap i.year i.race i.sex i.region if inrange(year, 10, 14)
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     402
-{txt}{hline 13}{char +}{hline 30}           F( 11,   390) ={res}    5.31
-    {txt}   Model {char |} {res} 3.6585e+09    11   332586371           {txt}Prob > F      = {res} 0.0000
-    {txt}Residual {char |} {res} 2.4435e+10   390  62654274.2           {txt}R-squared     = {res} 0.1302
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1057
-    {txt}   Total {char |} {res} 2.8094e+10   401  70058895.3           {txt}Root MSE      = {res} 7915.4
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 15}polImpact {c |}{col 26}{res}{space 2}-4.958034{col 38}{space 2} 3.289808{col 49}{space 1}   -1.51{col 58}{space 3}0.133{col 66}{space 4}-11.42601{col 79}{space 3} 1.509945
-{txt}{space 17}1.atCap {c |}{col 26}{res}{space 2}-1745.292{col 38}{space 2} 3375.015{col 49}{space 1}   -0.52{col 58}{space 3}0.605{col 66}{space 4}-8380.792{col 79}{space 3} 4890.208
-{txt}{space 24} {c |}
-{space 7}atCap#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2} 2.222142{col 38}{space 2} 2.455543{col 49}{space 1}    0.90{col 58}{space 3}0.366{col 66}{space 4}-2.605616{col 79}{space 3} 7.049901
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 21}12  {c |}{col 26}{res}{space 2} 2945.534{col 38}{space 2} 2222.683{col 49}{space 1}    1.33{col 58}{space 3}0.186{col 66}{space 4}-1424.407{col 79}{space 3} 7315.475
-{txt}{space 21}14  {c |}{col 26}{res}{space 2} 14960.05{col 38}{space 2} 2812.109{col 49}{space 1}    5.32{col 58}{space 3}0.000{col 66}{space 4} 9431.256{col 79}{space 3} 20488.84
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2}-185.3063{col 38}{space 2} 1354.591{col 49}{space 1}   -0.14{col 58}{space 3}0.891{col 66}{space 4}-2848.521{col 79}{space 3} 2477.909
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2}-206.1645{col 38}{space 2} 1167.744{col 49}{space 1}   -0.18{col 58}{space 3}0.860{col 66}{space 4}-2502.025{col 79}{space 3} 2089.696
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 2298.978{col 38}{space 2} 808.7309{col 49}{space 1}    2.84{col 58}{space 3}0.005{col 66}{space 4} 708.9599{col 79}{space 3} 3888.996
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 725.3963{col 38}{space 2} 1232.492{col 49}{space 1}    0.59{col 58}{space 3}0.556{col 66}{space 4}-1697.763{col 79}{space 3} 3148.555
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-628.8347{col 38}{space 2} 1211.712{col 49}{space 1}   -0.52{col 58}{space 3}0.604{col 66}{space 4}-3011.139{col 79}{space 3}  1753.47
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-1368.795{col 38}{space 2} 1413.907{col 49}{space 1}   -0.97{col 58}{space 3}0.334{col 66}{space 4} -4148.63{col 79}{space 3} 1411.039
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2} 8040.997{col 38}{space 2}  4030.33{col 49}{space 1}    2.00{col 58}{space 3}0.047{col 66}{space 4} 117.1043{col 79}{space 3} 15964.89
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. tobit loan c.polImpact##atCap i.year i.race i.sex i.region if inrange(year, 10, 14), ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       402
-{txt}{col 51}LR chi2({res}11{txt}){col 67}= {res}     44.67
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0000
-{txt}Log likelihood = {res}-2473.5985{txt}{col 51}Pseudo R2{col 67}= {res}    0.0089
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 15}polImpact {c |}{col 26}{res}{space 2}-15.07246{col 38}{space 2} 6.551839{col 49}{space 1}   -2.30{col 58}{space 3}0.022{col 66}{space 4} -27.9537{col 79}{space 3} -2.19122
-{txt}{space 17}1.atCap {c |}{col 26}{res}{space 2}-4258.573{col 38}{space 2} 5840.257{col 49}{space 1}   -0.73{col 58}{space 3}0.466{col 66}{space 4}-15740.81{col 79}{space 3} 7223.662
-{txt}{space 24} {c |}
-{space 7}atCap#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2} 4.805961{col 38}{space 2} 4.281519{col 49}{space 1}    1.12{col 58}{space 3}0.262{col 66}{space 4}-3.611718{col 79}{space 3} 13.22364
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 21}12  {c |}{col 26}{res}{space 2}    10337{col 38}{space 2}  4672.18{col 49}{space 1}    2.21{col 58}{space 3}0.028{col 66}{space 4}  1151.26{col 79}{space 3} 19522.74
-{txt}{space 21}14  {c |}{col 26}{res}{space 2} 24894.73{col 38}{space 2} 5439.714{col 49}{space 1}    4.58{col 58}{space 3}0.000{col 66}{space 4} 14199.99{col 79}{space 3} 35589.48
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 1924.955{col 38}{space 2} 2313.584{col 49}{space 1}    0.83{col 58}{space 3}0.406{col 66}{space 4}-2623.665{col 79}{space 3} 6473.575
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2}-351.8403{col 38}{space 2} 2034.967{col 49}{space 1}   -0.17{col 58}{space 3}0.863{col 66}{space 4}-4352.686{col 79}{space 3} 3649.006
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 3680.737{col 38}{space 2} 1380.621{col 49}{space 1}    2.67{col 58}{space 3}0.008{col 66}{space 4} 966.3688{col 79}{space 3} 6395.106
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 847.4183{col 38}{space 2}  2042.46{col 49}{space 1}    0.41{col 58}{space 3}0.678{col 66}{space 4} -3168.16{col 79}{space 3} 4862.997
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1833.224{col 38}{space 2} 2044.903{col 49}{space 1}   -0.90{col 58}{space 3}0.371{col 66}{space 4}-5853.604{col 79}{space 3} 2187.157
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-3803.713{col 38}{space 2} 2429.672{col 49}{space 1}   -1.57{col 58}{space 3}0.118{col 66}{space 4}-8580.569{col 79}{space 3}  973.144
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2} 12886.54{col 38}{space 2} 7635.679{col 49}{space 1}    1.69{col 58}{space 3}0.092{col 66}{space 4}-2125.587{col 79}{space 3} 27898.66
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 12202.27{col 38}{space 2}  635.374{col 66}{space 4} 10953.09{col 79}{space 3} 13451.45
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}      185{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}      217{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan c.polImpact##atCap i.year i.race i.sex i.region if inrange(year, 8, 14), ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       565
-{txt}{col 51}LR chi2({res}12{txt}){col 67}= {res}     45.54
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0000
-{txt}Log likelihood = {res}-3446.8746{txt}{col 51}Pseudo R2{col 67}= {res}    0.0066
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 15}polImpact {c |}{col 26}{res}{space 2}-10.61036{col 38}{space 2}  5.94003{col 49}{space 1}   -1.79{col 58}{space 3}0.075{col 66}{space 4}-22.27814{col 79}{space 3} 1.057425
-{txt}{space 17}1.atCap {c |}{col 26}{res}{space 2} 4602.931{col 38}{space 2} 2332.689{col 49}{space 1}    1.97{col 58}{space 3}0.049{col 66}{space 4}  20.9158{col 79}{space 3} 9184.946
-{txt}{space 24} {c |}
-{space 7}atCap#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2}-1.296483{col 38}{space 2} 2.103054{col 49}{space 1}   -0.62{col 58}{space 3}0.538{col 66}{space 4}-5.427436{col 79}{space 3} 2.834469
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 21}10  {c |}{col 26}{res}{space 2} 11647.83{col 38}{space 2} 6011.133{col 49}{space 1}    1.94{col 58}{space 3}0.053{col 66}{space 4}-159.6154{col 79}{space 3} 23455.28
-{txt}{space 21}12  {c |}{col 26}{res}{space 2} 22537.41{col 38}{space 2}  10553.1{col 49}{space 1}    2.14{col 58}{space 3}0.033{col 66}{space 4} 1808.346{col 79}{space 3} 43266.48
-{txt}{space 21}14  {c |}{col 26}{res}{space 2}  36890.7{col 38}{space 2} 10935.44{col 49}{space 1}    3.37{col 58}{space 3}0.001{col 66}{space 4} 15410.63{col 79}{space 3} 58370.77
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 2341.762{col 38}{space 2} 1999.097{col 49}{space 1}    1.17{col 58}{space 3}0.242{col 66}{space 4}-1584.989{col 79}{space 3} 6268.514
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} -.845983{col 38}{space 2}  1785.14{col 49}{space 1}   -0.00{col 58}{space 3}1.000{col 66}{space 4} -3507.33{col 79}{space 3} 3505.638
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 2083.637{col 38}{space 2} 1221.263{col 49}{space 1}    1.71{col 58}{space 3}0.089{col 66}{space 4}-315.2445{col 79}{space 3} 4482.519
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 791.9476{col 38}{space 2} 1902.283{col 49}{space 1}    0.42{col 58}{space 3}0.677{col 66}{space 4}-2944.637{col 79}{space 3} 4528.532
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-748.5563{col 38}{space 2} 1869.951{col 49}{space 1}   -0.40{col 58}{space 3}0.689{col 66}{space 4}-4421.631{col 79}{space 3} 2924.518
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-3405.803{col 38}{space 2} 2262.925{col 49}{space 1}   -1.51{col 58}{space 3}0.133{col 66}{space 4}-7850.783{col 79}{space 3} 1039.178
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2}-5319.993{col 38}{space 2} 3118.466{col 49}{space 1}   -1.71{col 58}{space 3}0.089{col 66}{space 4}-11445.48{col 79}{space 3} 805.4946
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 12747.41{col 38}{space 2} 563.2446{col 66}{space 4} 11641.05{col 79}{space 3} 13853.77
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}      264{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}      301{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan c.polImpact##atCap i.year i.race i.sex i.region if inrange(year, 10, 14), ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       402
-{txt}{col 51}LR chi2({res}11{txt}){col 67}= {res}     44.67
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0000
-{txt}Log likelihood = {res}-2473.5985{txt}{col 51}Pseudo R2{col 67}= {res}    0.0089
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 15}polImpact {c |}{col 26}{res}{space 2}-15.07246{col 38}{space 2} 6.551839{col 49}{space 1}   -2.30{col 58}{space 3}0.022{col 66}{space 4} -27.9537{col 79}{space 3} -2.19122
-{txt}{space 17}1.atCap {c |}{col 26}{res}{space 2}-4258.573{col 38}{space 2} 5840.257{col 49}{space 1}   -0.73{col 58}{space 3}0.466{col 66}{space 4}-15740.81{col 79}{space 3} 7223.662
-{txt}{space 24} {c |}
-{space 7}atCap#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2} 4.805961{col 38}{space 2} 4.281519{col 49}{space 1}    1.12{col 58}{space 3}0.262{col 66}{space 4}-3.611718{col 79}{space 3} 13.22364
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 21}12  {c |}{col 26}{res}{space 2}    10337{col 38}{space 2}  4672.18{col 49}{space 1}    2.21{col 58}{space 3}0.028{col 66}{space 4}  1151.26{col 79}{space 3} 19522.74
-{txt}{space 21}14  {c |}{col 26}{res}{space 2} 24894.73{col 38}{space 2} 5439.714{col 49}{space 1}    4.58{col 58}{space 3}0.000{col 66}{space 4} 14199.99{col 79}{space 3} 35589.48
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 1924.955{col 38}{space 2} 2313.584{col 49}{space 1}    0.83{col 58}{space 3}0.406{col 66}{space 4}-2623.665{col 79}{space 3} 6473.575
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2}-351.8403{col 38}{space 2} 2034.967{col 49}{space 1}   -0.17{col 58}{space 3}0.863{col 66}{space 4}-4352.686{col 79}{space 3} 3649.006
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 3680.737{col 38}{space 2} 1380.621{col 49}{space 1}    2.67{col 58}{space 3}0.008{col 66}{space 4} 966.3688{col 79}{space 3} 6395.106
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 847.4183{col 38}{space 2}  2042.46{col 49}{space 1}    0.41{col 58}{space 3}0.678{col 66}{space 4} -3168.16{col 79}{space 3} 4862.997
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1833.224{col 38}{space 2} 2044.903{col 49}{space 1}   -0.90{col 58}{space 3}0.371{col 66}{space 4}-5853.604{col 79}{space 3} 2187.157
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-3803.713{col 38}{space 2} 2429.672{col 49}{space 1}   -1.57{col 58}{space 3}0.118{col 66}{space 4}-8580.569{col 79}{space 3}  973.144
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2} 12886.54{col 38}{space 2} 7635.679{col 49}{space 1}    1.69{col 58}{space 3}0.092{col 66}{space 4}-2125.587{col 79}{space 3} 27898.66
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 12202.27{col 38}{space 2}  635.374{col 66}{space 4} 10953.09{col 79}{space 3} 13451.45
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}      185{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}      217{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan c.polImpact##i.atCap i.year i.race i.sex i.region if inrange(year, 10, 14), ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       402
-{txt}{col 51}LR chi2({res}11{txt}){col 67}= {res}     44.67
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0000
-{txt}Log likelihood = {res}-2473.5985{txt}{col 51}Pseudo R2{col 67}= {res}    0.0089
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 15}polImpact {c |}{col 26}{res}{space 2}-15.07246{col 38}{space 2} 6.551839{col 49}{space 1}   -2.30{col 58}{space 3}0.022{col 66}{space 4} -27.9537{col 79}{space 3} -2.19122
-{txt}{space 17}1.atCap {c |}{col 26}{res}{space 2}-4258.573{col 38}{space 2} 5840.257{col 49}{space 1}   -0.73{col 58}{space 3}0.466{col 66}{space 4}-15740.81{col 79}{space 3} 7223.662
-{txt}{space 24} {c |}
-{space 7}atCap#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2} 4.805961{col 38}{space 2} 4.281519{col 49}{space 1}    1.12{col 58}{space 3}0.262{col 66}{space 4}-3.611718{col 79}{space 3} 13.22364
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 21}12  {c |}{col 26}{res}{space 2}    10337{col 38}{space 2}  4672.18{col 49}{space 1}    2.21{col 58}{space 3}0.028{col 66}{space 4}  1151.26{col 79}{space 3} 19522.74
-{txt}{space 21}14  {c |}{col 26}{res}{space 2} 24894.73{col 38}{space 2} 5439.714{col 49}{space 1}    4.58{col 58}{space 3}0.000{col 66}{space 4} 14199.99{col 79}{space 3} 35589.48
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 1924.955{col 38}{space 2} 2313.584{col 49}{space 1}    0.83{col 58}{space 3}0.406{col 66}{space 4}-2623.665{col 79}{space 3} 6473.575
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2}-351.8403{col 38}{space 2} 2034.967{col 49}{space 1}   -0.17{col 58}{space 3}0.863{col 66}{space 4}-4352.686{col 79}{space 3} 3649.006
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 3680.737{col 38}{space 2} 1380.621{col 49}{space 1}    2.67{col 58}{space 3}0.008{col 66}{space 4} 966.3688{col 79}{space 3} 6395.106
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 847.4183{col 38}{space 2}  2042.46{col 49}{space 1}    0.41{col 58}{space 3}0.678{col 66}{space 4} -3168.16{col 79}{space 3} 4862.997
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1833.224{col 38}{space 2} 2044.903{col 49}{space 1}   -0.90{col 58}{space 3}0.371{col 66}{space 4}-5853.604{col 79}{space 3} 2187.157
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-3803.713{col 38}{space 2} 2429.672{col 49}{space 1}   -1.57{col 58}{space 3}0.118{col 66}{space 4}-8580.569{col 79}{space 3}  973.144
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2} 12886.54{col 38}{space 2} 7635.679{col 49}{space 1}    1.69{col 58}{space 3}0.092{col 66}{space 4}-2125.587{col 79}{space 3} 27898.66
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 12202.27{col 38}{space 2}  635.374{col 66}{space 4} 10953.09{col 79}{space 3} 13451.45
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}      185{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}      217{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan c.polImpact##atCap i.year i.race i.sex i.region if inrange(year, 10, 14), ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       402
-{txt}{col 51}LR chi2({res}11{txt}){col 67}= {res}     44.67
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0000
-{txt}Log likelihood = {res}-2473.5985{txt}{col 51}Pseudo R2{col 67}= {res}    0.0089
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 15}polImpact {c |}{col 26}{res}{space 2}-15.07246{col 38}{space 2} 6.551839{col 49}{space 1}   -2.30{col 58}{space 3}0.022{col 66}{space 4} -27.9537{col 79}{space 3} -2.19122
-{txt}{space 17}1.atCap {c |}{col 26}{res}{space 2}-4258.573{col 38}{space 2} 5840.257{col 49}{space 1}   -0.73{col 58}{space 3}0.466{col 66}{space 4}-15740.81{col 79}{space 3} 7223.662
-{txt}{space 24} {c |}
-{space 7}atCap#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2} 4.805961{col 38}{space 2} 4.281519{col 49}{space 1}    1.12{col 58}{space 3}0.262{col 66}{space 4}-3.611718{col 79}{space 3} 13.22364
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 21}12  {c |}{col 26}{res}{space 2}    10337{col 38}{space 2}  4672.18{col 49}{space 1}    2.21{col 58}{space 3}0.028{col 66}{space 4}  1151.26{col 79}{space 3} 19522.74
-{txt}{space 21}14  {c |}{col 26}{res}{space 2} 24894.73{col 38}{space 2} 5439.714{col 49}{space 1}    4.58{col 58}{space 3}0.000{col 66}{space 4} 14199.99{col 79}{space 3} 35589.48
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 1924.955{col 38}{space 2} 2313.584{col 49}{space 1}    0.83{col 58}{space 3}0.406{col 66}{space 4}-2623.665{col 79}{space 3} 6473.575
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2}-351.8403{col 38}{space 2} 2034.967{col 49}{space 1}   -0.17{col 58}{space 3}0.863{col 66}{space 4}-4352.686{col 79}{space 3} 3649.006
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 3680.737{col 38}{space 2} 1380.621{col 49}{space 1}    2.67{col 58}{space 3}0.008{col 66}{space 4} 966.3688{col 79}{space 3} 6395.106
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 847.4183{col 38}{space 2}  2042.46{col 49}{space 1}    0.41{col 58}{space 3}0.678{col 66}{space 4} -3168.16{col 79}{space 3} 4862.997
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1833.224{col 38}{space 2} 2044.903{col 49}{space 1}   -0.90{col 58}{space 3}0.371{col 66}{space 4}-5853.604{col 79}{space 3} 2187.157
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-3803.713{col 38}{space 2} 2429.672{col 49}{space 1}   -1.57{col 58}{space 3}0.118{col 66}{space 4}-8580.569{col 79}{space 3}  973.144
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2} 12886.54{col 38}{space 2} 7635.679{col 49}{space 1}    1.69{col 58}{space 3}0.092{col 66}{space 4}-2125.587{col 79}{space 3} 27898.66
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 12202.27{col 38}{space 2}  635.374{col 66}{space 4} 10953.09{col 79}{space 3} 13451.45
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}      185{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}      217{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan c.polImpact##atCap i.year i.race i.sex i.region if inrange(year, 10, 14) & parInc < 50000, ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       106
-{txt}{col 51}LR chi2({res}11{txt}){col 67}= {res}     15.61
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.1560
-{txt}Log likelihood = {res}  -766.595{txt}{col 51}Pseudo R2{col 67}= {res}    0.0101
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 15}polImpact {c |}{col 26}{res}{space 2}-8.767786{col 38}{space 2}  8.58574{col 49}{space 1}   -1.02{col 58}{space 3}0.310{col 66}{space 4}-25.81264{col 79}{space 3} 8.277062
-{txt}{space 17}1.atCap {c |}{col 26}{res}{space 2} 1277.815{col 38}{space 2} 9385.124{col 49}{space 1}    0.14{col 58}{space 3}0.892{col 66}{space 4}-17354.01{col 79}{space 3} 19909.64
-{txt}{space 24} {c |}
-{space 7}atCap#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2} 2.203643{col 38}{space 2}  7.02169{col 49}{space 1}    0.31{col 58}{space 3}0.754{col 66}{space 4}-11.73617{col 79}{space 3} 16.14346
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 21}12  {c |}{col 26}{res}{space 2} 5131.287{col 38}{space 2} 5648.326{col 49}{space 1}    0.91{col 58}{space 3}0.366{col 66}{space 4}-6082.058{col 79}{space 3} 16344.63
-{txt}{space 21}14  {c |}{col 26}{res}{space 2} 6618.904{col 38}{space 2} 9169.533{col 49}{space 1}    0.72{col 58}{space 3}0.472{col 66}{space 4}-11584.92{col 79}{space 3} 24822.73
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 6136.844{col 38}{space 2} 3157.542{col 49}{space 1}    1.94{col 58}{space 3}0.055{col 66}{space 4} -131.669{col 79}{space 3} 12405.36
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 8897.928{col 38}{space 2} 2932.286{col 49}{space 1}    3.03{col 58}{space 3}0.003{col 66}{space 4} 3076.603{col 79}{space 3} 14719.25
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 3642.708{col 38}{space 2}  2067.96{col 49}{space 1}    1.76{col 58}{space 3}0.081{col 66}{space 4}-462.7114{col 79}{space 3} 7748.126
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 206.6731{col 38}{space 2} 4060.307{col 49}{space 1}    0.05{col 58}{space 3}0.960{col 66}{space 4}-7854.055{col 79}{space 3} 8267.401
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2} 853.0593{col 38}{space 2}     3928{col 49}{space 1}    0.22{col 58}{space 3}0.829{col 66}{space 4}-6945.006{col 79}{space 3} 8651.125
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-160.9596{col 38}{space 2} 4429.293{col 49}{space 1}   -0.04{col 58}{space 3}0.971{col 66}{space 4}-8954.218{col 79}{space 3} 8632.299
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2} 619.6424{col 38}{space 2} 10623.81{col 49}{space 1}    0.06{col 58}{space 3}0.954{col 66}{space 4}-20471.29{col 79}{space 3} 21710.58
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 9556.253{col 38}{space 2} 853.1942{col 66}{space 4} 7862.449{col 79}{space 3} 11250.06
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}       36{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}       70{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan c.polImpact##atCap i.year i.race i.sex i.region if inrange(year, 10, 14) & loan < 10000, ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       336
-{txt}{col 51}LR chi2({res}11{txt}){col 67}= {res}     30.67
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0012
-{txt}Log likelihood = {res}-1623.1594{txt}{col 51}Pseudo R2{col 67}= {res}    0.0094
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 15}polImpact {c |}{col 26}{res}{space 2} -5.90254{col 38}{space 2} 3.018784{col 49}{space 1}   -1.96{col 58}{space 3}0.051{col 66}{space 4}-11.84136{col 79}{space 3} .0362843
-{txt}{space 17}1.atCap {c |}{col 26}{res}{space 2}-2372.743{col 38}{space 2} 2675.524{col 49}{space 1}   -0.89{col 58}{space 3}0.376{col 66}{space 4}-7636.274{col 79}{space 3} 2890.788
-{txt}{space 24} {c |}
-{space 7}atCap#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2} 1.785353{col 38}{space 2} 1.942798{col 49}{space 1}    0.92{col 58}{space 3}0.359{col 66}{space 4}-2.036695{col 79}{space 3} 5.607401
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 21}12  {c |}{col 26}{res}{space 2} 4464.336{col 38}{space 2} 2202.051{col 49}{space 1}    2.03{col 58}{space 3}0.043{col 66}{space 4} 132.2629{col 79}{space 3}  8796.41
-{txt}{space 21}14  {c |}{col 26}{res}{space 2} 926.1797{col 38}{space 2} 3175.895{col 49}{space 1}    0.29{col 58}{space 3}0.771{col 66}{space 4}-5321.727{col 79}{space 3} 7174.087
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 2256.616{col 38}{space 2} 1094.803{col 49}{space 1}    2.06{col 58}{space 3}0.040{col 66}{space 4} 102.8204{col 79}{space 3} 4410.412
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2}-321.9474{col 38}{space 2}  976.488{col 49}{space 1}   -0.33{col 58}{space 3}0.742{col 66}{space 4}-2242.983{col 79}{space 3} 1599.088
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 364.4385{col 38}{space 2} 659.0212{col 49}{space 1}    0.55{col 58}{space 3}0.581{col 66}{space 4}-932.0474{col 79}{space 3} 1660.924
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-167.3556{col 38}{space 2} 975.1367{col 49}{space 1}   -0.17{col 58}{space 3}0.864{col 66}{space 4}-2085.732{col 79}{space 3} 1751.021
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1338.676{col 38}{space 2} 951.2984{col 49}{space 1}   -1.41{col 58}{space 3}0.160{col 66}{space 4}-3210.156{col 79}{space 3} 532.8044
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-2954.638{col 38}{space 2} 1177.467{col 49}{space 1}   -2.51{col 58}{space 3}0.013{col 66}{space 4}-5271.057{col 79}{space 3}-638.2187
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2} 6459.265{col 38}{space 2} 3502.239{col 49}{space 1}    1.84{col 58}{space 3}0.066{col 66}{space 4}-430.6544{col 79}{space 3} 13349.18
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2}  5202.69{col 38}{space 2} 342.1408{col 66}{space 4}   4529.6{col 79}{space 3}  5875.78
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}      185{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}      151{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. tobit loan c.polImpact##atCap intDate i.race i.sex i.region if inrange(year, 10, 14) & loan < 10000, ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       336
-{txt}{col 51}LR chi2({res}10{txt}){col 67}= {res}     24.41
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0066
-{txt}Log likelihood = {res}-1626.2887{txt}{col 51}Pseudo R2{col 67}= {res}    0.0074
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 15}polImpact {c |}{col 26}{res}{space 2}-2.152927{col 38}{space 2} 2.605916{col 49}{space 1}   -0.83{col 58}{space 3}0.409{col 66}{space 4}-7.279461{col 79}{space 3} 2.973607
-{txt}{space 17}1.atCap {c |}{col 26}{res}{space 2}-2230.688{col 38}{space 2} 2690.954{col 49}{space 1}   -0.83{col 58}{space 3}0.408{col 66}{space 4}-7524.514{col 79}{space 3} 3063.139
-{txt}{space 24} {c |}
-{space 7}atCap#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2} 1.613835{col 38}{space 2} 1.947634{col 49}{space 1}    0.83{col 58}{space 3}0.408{col 66}{space 4}-2.217682{col 79}{space 3} 5.445352
-{txt}{space 24} {c |}
-{space 17}intDate {c |}{col 26}{res}{space 2} 29.07026{col 38}{space 2} 52.20939{col 49}{space 1}    0.56{col 58}{space 3}0.578{col 66}{space 4}-73.63957{col 79}{space 3} 131.7801
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 2284.629{col 38}{space 2}  1101.96{col 49}{space 1}    2.07{col 58}{space 3}0.039{col 66}{space 4} 116.7799{col 79}{space 3} 4452.478
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2}  -382.67{col 38}{space 2} 980.2982{col 49}{space 1}   -0.39{col 58}{space 3}0.697{col 66}{space 4}-2311.179{col 79}{space 3} 1545.839
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 447.7527{col 38}{space 2} 662.4998{col 49}{space 1}    0.68{col 58}{space 3}0.500{col 66}{space 4}-855.5616{col 79}{space 3} 1751.067
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-204.8717{col 38}{space 2} 982.7257{col 49}{space 1}   -0.21{col 58}{space 3}0.835{col 66}{space 4}-2138.156{col 79}{space 3} 1728.413
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1721.881{col 38}{space 2} 947.9314{col 49}{space 1}   -1.82{col 58}{space 3}0.070{col 66}{space 4}-3586.716{col 79}{space 3} 142.9535
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-3170.611{col 38}{space 2} 1180.717{col 49}{space 1}   -2.69{col 58}{space 3}0.008{col 66}{space 4}-5493.397{col 79}{space 3}-847.8261
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2}-14596.31{col 38}{space 2} 29537.99{col 49}{space 1}   -0.49{col 58}{space 3}0.622{col 66}{space 4}-72705.44{col 79}{space 3} 43512.82
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 5249.241{col 38}{space 2} 345.6956{col 66}{space 4} 4569.165{col 79}{space 3} 5929.317
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}      185{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}      151{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
 
 {com}. 

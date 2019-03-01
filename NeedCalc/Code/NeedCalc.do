@@ -1,3 +1,4 @@
+use ../Input/Merged.dta, clear
 //Available Income Calc
 
 //Preliminary stats:
@@ -124,3 +125,5 @@ gen need = tuition - efc
 //Cap dummies
 gen atCap = 0 if !missing(need)
 replace atCap = 1 if need >= 5500 & !missing(need)
+
+save ../Output/Need.dta, replace
