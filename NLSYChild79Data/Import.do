@@ -134,7 +134,7 @@ format intDate* %tm
 drop Y1* Y2*
 
 //Calculates how many siblings total
-duplicates tag mid, generate(siblings)
+duplicates tag mid, generate(sibs)
 
 //Get only observations with data on receiving loans
 drop if missing(recloan0) & missing(recloan2) ///

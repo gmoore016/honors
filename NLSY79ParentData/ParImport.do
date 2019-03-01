@@ -55,4 +55,6 @@ replace assets = . if inlist(assets, -1, -2, -3, -4, -5)
 replace homeVal = . if homeVal < 0
 replace married = . if married < 0
 
+rename married momMarried
+
 sort mid year
