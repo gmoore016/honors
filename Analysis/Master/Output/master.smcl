@@ -1,9 +1,9 @@
 {smcl}
 {com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}C:\Users\gmoore\desktop\honors\analysis\master\code\../Output/master.smcl
+       {txt}log:  {res}C:\Users\gmoore\desktop\honors\analysis\Master\Code\../Output/master.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}28 Feb 2019, 23:49:10
+ {txt}opened on:  {res} 1 Mar 2019, 01:38:29
 {txt}
 {com}. 
 . set more off
@@ -682,600 +682,6 @@ partialtuition0 partialtuition2 ... partialtuition14{txt}->{res}partialtuition
 {txt}(70 missing values generated)
 
 {com}. 
-. //Box 1: Just parInc
-. 
-. //Box 2: Income Allowances
-. tempvar incAllowance
-{txt}
-{com}. gen `incAllowance' = 0
-{txt}
-{com}. 
-. //Social security allowance
-. replace `incAllowance' = `incAllowance' + .0765 * parInc if parInc < 94200
-{txt}(476 real changes made)
-
-{com}. replace `incAllowance' = `incAllowance' + 7206.3 + 0.145 * (parInc - 94200) if parInc >= 94200
-{txt}(465 real changes made, 195 to missing)
-
-{com}. 
-. //Income protection (line 12), aka table A3
-. //Assumes parents are not also in college
-. if hhSize == 2{c -(}
-.         replace `incAllowance' = `incAllowance' + 15000
-. {c )-}
-{txt}
-{com}. else if hhSize == 3{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 18680
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16130
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 4{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 23070
-{txt}(755 real changes made)
-{com}.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 20510
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 17950
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 5{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 27220
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24660
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 22100
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 19540
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16980
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize >= 6{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 31840
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 29280
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 26720
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24160
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600
-.         {c )-}
-.         else if sibsInCollege == 5{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600 - 2550
-.         {c )-}
-.         else if sibsInCollege >= 6{c -(}
-.                 replace `incAllowance' = 21600 - (sibsInCollege - 6) * 2550
-.         {c )-}
-.         `incAllowance' = `incAllowance' + (hhSize - 6) * 3590
-. {c )-}
-{txt}
-{com}. 
-. //Single-parent deducation (line 13)
-. replace `incAllowance' = `incAllowance' + min(3200, .35 * parInc) if !momMarried
-{txt}(241 real changes made)
-
-{com}. 
-. 
-. //Box 3
-. tempvar availInc
-{txt}
-{com}. gen `availInc' = parInc - `incAllowance'
-{txt}(195 missing values generated)
-
-{com}. 
-. 
-. //Box 4
-. tempvar availAssets
-{txt}
-{com}. gen `availAssets' = max(0, 0.12 * (assets - homeVal))
-{txt}
-{com}. 
-. 
-. //Box 5
-. tempvar resources
-{txt}
-{com}. gen `resources' = `availInc' + `availAssets'
-{txt}(195 missing values generated)
-
-{com}. 
-. tempvar grossCont
-{txt}
-{com}. gen `grossCont' = .
-{txt}(950 missing values generated)
-
-{com}. replace `grossCont' = -750 if `resources' < -3409
-{txt}(104 real changes made)
-
-{com}. replace `grossCont' = .22 * `availInc' if inrange(`resources', -3409, 13400)
-{txt}(93 real changes made)
-
-{com}. replace `grossCont' = 2948 + .25 * (`resources' - 13400) if inrange(`resources', 13401, 16800)
-{txt}(25 real changes made)
-
-{com}. replace `grossCont' = 3798 + .29 * (`resources' - 16800) if inrange(`resources', 16801, 20200)
-{txt}(18 real changes made)
-
-{com}. replace `grossCont' = 4784 + .34 * (`resources' - 20200) if inrange(`resources', 20201, 23700)
-{txt}(16 real changes made)
-
-{com}. replace `grossCont' = 5974 + .40 * (`resources' - 23700) if inrange(`resources', 23701, 27100)
-{txt}(18 real changes made)
-
-{com}. replace `grossCont' = 7334 + .47 * (`resources' - 27100) if `resources' >= 27101
-{txt}(481 real changes made)
-
-{com}. 
-. replace `grossCont' = max(`grossCont', 0)
-{txt}(324 real changes made)
-
-{com}. 
-. gen efc = `grossCont' / sibsInColl
-{txt}(645 missing values generated)
-
-{com}. 
-. //If stopped at line 3
-. replace efc = 0 if parInc < 20000
-{txt}(67 real changes made)
-
-{com}. 
-. //Need
-. gen need = tuition - efc
-{txt}(612 missing values generated)
-
-{com}. //replace need = 0 if need < 0
-. 
-. //Cap dummies
-. gen atCap = 0 if !missing(need)
-{txt}(612 missing values generated)
-
-{com}. replace atCap = 1 if need >= 5500 & !missing(need)
-{txt}(107 real changes made)
-
-{com}. 
-. //Drops temp variables (somehow not automatic?)
-. drop __*
-{txt}
-{com}. 
-. save ../Output/Need.dta, replace
-{txt}file ../Output/Need.dta saved
-
-{com}. 
-{txt}end of do-file
-
-{com}. 
-. /*
-> cd ../../Tables/Code
-> do tables
-> */
-. 
-. cd ../../Regressions/Code
-{res}C:\Users\gmoore\desktop\honors\analysis\Regressions\Code
-{txt}
-{com}. do regs
-{txt}
-{com}. use ../../NeedCalc/Output/Need.dta, clear
-{txt}
-{com}. 
-. //Linear time trend
-. tobit loan atCap##c.polImpact need intDate i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       191
-{txt}{col 51}LR chi2({res}12{txt}){col 67}= {res}     37.08
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0002
-{txt}Log likelihood = {res}-1135.4587{txt}{col 51}Pseudo R2{col 67}= {res}    0.0161
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 17}1.atCap {c |}{col 26}{res}{space 2} 365.7193{col 38}{space 2} 2747.683{col 49}{space 1}    0.13{col 58}{space 3}0.894{col 66}{space 4}-5056.299{col 79}{space 3} 5787.738
-{txt}{space 15}polImpact {c |}{col 26}{res}{space 2}-2.118942{col 38}{space 2} 4.386204{col 49}{space 1}   -0.48{col 58}{space 3}0.630{col 66}{space 4}-10.77426{col 79}{space 3} 6.536378
-{txt}{space 24} {c |}
-{space 7}atCap#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2} 1.273193{col 38}{space 2} 2.132897{col 49}{space 1}    0.60{col 58}{space 3}0.551{col 66}{space 4}-2.935664{col 79}{space 3}  5.48205
-{txt}{space 24} {c |}
-{space 20}need {c |}{col 26}{res}{space 2} .1164893{col 38}{space 2} .0380139{col 49}{space 1}    3.06{col 58}{space 3}0.003{col 66}{space 4} .0414763{col 79}{space 3} .1915024
-{txt}{space 17}intDate {c |}{col 26}{res}{space 2} 101.1579{col 38}{space 2}   155.74{col 49}{space 1}    0.65{col 58}{space 3}0.517{col 66}{space 4}-206.1647{col 79}{space 3} 408.4804
-{txt}{space 10}1.fallSemester {c |}{col 26}{res}{space 2}-299.1045{col 38}{space 2} 1762.986{col 49}{space 1}   -0.17{col 58}{space 3}0.865{col 66}{space 4}-3778.014{col 79}{space 3} 3179.805
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 2081.635{col 38}{space 2} 2322.386{col 49}{space 1}    0.90{col 58}{space 3}0.371{col 66}{space 4}-2501.142{col 79}{space 3} 6664.411
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2599.554{col 38}{space 2} 2144.888{col 49}{space 1}    1.21{col 58}{space 3}0.227{col 66}{space 4}-1632.965{col 79}{space 3} 6832.074
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1317.073{col 38}{space 2}  1446.97{col 49}{space 1}    0.91{col 58}{space 3}0.364{col 66}{space 4} -1538.24{col 79}{space 3} 4172.386
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-2795.865{col 38}{space 2}  2357.72{col 49}{space 1}   -1.19{col 58}{space 3}0.237{col 66}{space 4}-7448.366{col 79}{space 3} 1856.636
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1555.988{col 38}{space 2}  2347.58{col 49}{space 1}   -0.66{col 58}{space 3}0.508{col 66}{space 4} -6188.48{col 79}{space 3} 3076.505
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-6404.725{col 38}{space 2} 2846.921{col 49}{space 1}   -2.25{col 58}{space 3}0.026{col 66}{space 4}-12022.57{col 79}{space 3}-786.8816
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2}-58000.44{col 38}{space 2} 90003.85{col 49}{space 1}   -0.64{col 58}{space 3}0.520{col 66}{space 4}-235605.5{col 79}{space 3} 119604.6
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 8751.533{col 38}{space 2} 661.5182{col 66}{space 4} 7446.155{col 79}{space 3} 10056.91
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}       88{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}      103{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. 
-. //Dummied time trend
-. tobit loan atCap##c.polImpact need i.year i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       191
-{txt}{col 51}LR chi2({res}13{txt}){col 67}= {res}     38.51
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0002
-{txt}Log likelihood = {res}-1134.7431{txt}{col 51}Pseudo R2{col 67}= {res}    0.0167
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 17}1.atCap {c |}{col 26}{res}{space 2} 23.44005{col 38}{space 2} 2763.785{col 49}{space 1}    0.01{col 58}{space 3}0.993{col 66}{space 4}-5430.561{col 79}{space 3} 5477.441
-{txt}{space 15}polImpact {c |}{col 26}{res}{space 2}-9.018187{col 38}{space 2}  7.66756{col 49}{space 1}   -1.18{col 58}{space 3}0.241{col 66}{space 4} -24.1492{col 79}{space 3} 6.112829
-{txt}{space 24} {c |}
-{space 7}atCap#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2} 1.748973{col 38}{space 2} 2.183162{col 49}{space 1}    0.80{col 58}{space 3}0.424{col 66}{space 4}-2.559237{col 79}{space 3} 6.057184
-{txt}{space 24} {c |}
-{space 20}need {c |}{col 26}{res}{space 2} .1155075{col 38}{space 2} .0380432{col 49}{space 1}    3.04{col 58}{space 3}0.003{col 66}{space 4} .0404337{col 79}{space 3} .1905812
-{txt}{space 24} {c |}
-{space 20}year {c |}
-{space 21}10  {c |}{col 26}{res}{space 2} 10299.47{col 38}{space 2}  7860.68{col 49}{space 1}    1.31{col 58}{space 3}0.192{col 66}{space 4}-5212.649{col 79}{space 3} 25811.58
-{txt}{space 21}12  {c |}{col 26}{res}{space 2} 17504.48{col 38}{space 2} 14021.08{col 49}{space 1}    1.25{col 58}{space 3}0.214{col 66}{space 4}-10164.45{col 79}{space 3} 45173.41
-{txt}{space 24} {c |}
-{space 10}1.fallSemester {c |}{col 26}{res}{space 2}  562.185{col 38}{space 2} 1751.356{col 49}{space 1}    0.32{col 58}{space 3}0.749{col 66}{space 4}-2893.907{col 79}{space 3} 4018.277
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2}  2386.42{col 38}{space 2} 2328.253{col 49}{space 1}    1.02{col 58}{space 3}0.307{col 66}{space 4} -2208.11{col 79}{space 3} 6980.949
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2757.809{col 38}{space 2} 2151.957{col 49}{space 1}    1.28{col 58}{space 3}0.202{col 66}{space 4}-1488.821{col 79}{space 3} 7004.439
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1465.412{col 38}{space 2} 1455.544{col 49}{space 1}    1.01{col 58}{space 3}0.315{col 66}{space 4}-1406.931{col 79}{space 3} 4337.755
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-2602.043{col 38}{space 2}   2362.1{col 49}{space 1}   -1.10{col 58}{space 3}0.272{col 66}{space 4}-7263.366{col 79}{space 3} 2059.279
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1471.623{col 38}{space 2} 2344.745{col 49}{space 1}   -0.63{col 58}{space 3}0.531{col 66}{space 4}-6098.698{col 79}{space 3} 3155.451
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-6136.788{col 38}{space 2} 2853.789{col 49}{space 1}   -2.15{col 58}{space 3}0.033{col 66}{space 4} -11768.4{col 79}{space 3}-505.1754
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2}  -462.43{col 38}{space 2} 3467.669{col 49}{space 1}   -0.13{col 58}{space 3}0.894{col 66}{space 4}-7305.462{col 79}{space 3} 6380.602
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 8731.908{col 38}{space 2} 659.7669{col 66}{space 4} 7429.936{col 79}{space 3} 10033.88
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}       88{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}      103{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. 
-{txt}end of do-file
-
-{com}. 
-. cd ../../Master/Code
-{res}C:\Users\gmoore\desktop\honors\analysis\Master\Code
-{txt}
-{com}. save ../Output/Master.dta, replace
-{txt}file ../Output/Master.dta saved
-
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. use ../Input/Merged.dta, clear
-{err}{p 0 4 2}
-file ../Input/Merged.dta
-not found
-{p_end}
-{txt}{search r(601):r(601);}
-
-end of do-file
-
-{search r(601):r(601);}
-
-{com}. ls
-{txt}  <dir>   2/28/19 22:54  {res}.                 
-{txt}  <dir>   2/28/19 22:54  {res}..                
-{txt}   0.8k   2/28/19 22:54  {res}Master.do         
-
-{com}. cd ..
-{res}C:\Users\gmoore\desktop\honors\analysis\Master
-
-{com}. cd ../needcalc
-{res}C:\Users\gmoore\desktop\honors\analysis\needcalc
-
-{com}. cd code
-{res}C:\Users\gmoore\desktop\honors\analysis\needcalc\code
-
-{com}. ls
-{txt}  <dir>   2/28/19 23:50  {res}.                 
-{txt}  <dir>   2/28/19 23:50  {res}..                
-{txt}   3.6k   2/28/19 23:50  {res}NeedCalc.do       
-
-{com}. do needcalc
-{txt}
-{com}. use ../Input/Merged.dta, clear
-{txt}
-{com}. //Available Income Calc
-. 
-. //Preliminary stats:
-. 
-. //Household is composed of:
-. //Child and mother, plus siblings, plus spouse
-. gen hhSize = 2 + sibs + momMarried
-{txt}(70 missing values generated)
-
-{com}. 
-. //Mother's age
-. gen mAge = (ym(2008, 1) - parDob) / 12
-{txt}(15 missing values generated)
-
-{com}. 
-. //Box 1: Just parInc
-. 
-. //Box 2: Income Allowances
-. tempvar incAllowance
-{txt}
-{com}. gen `incAllowance' = 0
-{txt}
-{com}. 
-. //Social security allowance
-. replace `incAllowance' = `incAllowance' + .0765 * parInc if parInc < 94200
-{txt}(476 real changes made)
-
-{com}. replace `incAllowance' = `incAllowance' + 7206.3 + 0.145 * (parInc - 94200) if parInc >= 94200
-{txt}(465 real changes made, 195 to missing)
-
-{com}. 
-. //Income protection (line 12), aka table A3
-. //Assumes parents are not also in college
-. if hhSize == 2{c -(}
-.         replace `incAllowance' = `incAllowance' + 15000
-. {c )-}
-{txt}
-{com}. else if hhSize == 3{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 18680
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16130
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 4{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 23070
-{txt}(755 real changes made)
-{com}.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 20510
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 17950
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 5{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 27220
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24660
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 22100
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 19540
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16980
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize >= 6{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 31840
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 29280
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 26720
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24160
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600
-.         {c )-}
-.         else if sibsInCollege == 5{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600 - 2550
-.         {c )-}
-.         else if sibsInCollege >= 6{c -(}
-.                 replace `incAllowance' = 21600 - (sibsInCollege - 6) * 2550
-.         {c )-}
-.         `incAllowance' = `incAllowance' + (hhSize - 6) * 3590
-. {c )-}
-{txt}
-{com}. 
-. //Single-parent deducation (line 13)
-. replace `incAllowance' = `incAllowance' + min(3200, .35 * parInc) if !momMarried
-{txt}(241 real changes made)
-
-{com}. 
-. 
-. //Box 3
-. tempvar availInc
-{txt}
-{com}. gen `availInc' = parInc - `incAllowance'
-{txt}(195 missing values generated)
-
-{com}. 
-. 
-. //Box 4
-. tempvar availAssets
-{txt}
-{com}. gen `availAssets' = max(0, 0.12 * (assets - homeVal))
-{txt}
-{com}. 
-. 
-. //Box 5
-. tempvar resources
-{txt}
-{com}. gen `resources' = `availInc' + `availAssets'
-{txt}(195 missing values generated)
-
-{com}. 
-. tempvar grossCont
-{txt}
-{com}. gen `grossCont' = .
-{txt}(950 missing values generated)
-
-{com}. replace `grossCont' = -750 if `resources' < -3409
-{txt}(104 real changes made)
-
-{com}. replace `grossCont' = .22 * `availInc' if inrange(`resources', -3409, 13400)
-{txt}(93 real changes made)
-
-{com}. replace `grossCont' = 2948 + .25 * (`resources' - 13400) if inrange(`resources', 13401, 16800)
-{txt}(25 real changes made)
-
-{com}. replace `grossCont' = 3798 + .29 * (`resources' - 16800) if inrange(`resources', 16801, 20200)
-{txt}(18 real changes made)
-
-{com}. replace `grossCont' = 4784 + .34 * (`resources' - 20200) if inrange(`resources', 20201, 23700)
-{txt}(16 real changes made)
-
-{com}. replace `grossCont' = 5974 + .40 * (`resources' - 23700) if inrange(`resources', 23701, 27100)
-{txt}(18 real changes made)
-
-{com}. replace `grossCont' = 7334 + .47 * (`resources' - 27100) if `resources' >= 27101
-{txt}(481 real changes made)
-
-{com}. 
-. replace `grossCont' = max(`grossCont', 0)
-{txt}(324 real changes made)
-
-{com}. 
-. gen efc = `grossCont' / sibsInColl
-{txt}(645 missing values generated)
-
-{com}. 
-. //If stopped at line 3
-. replace efc = 0 if parInc < 20000
-{txt}(67 real changes made)
-
-{com}. 
-. //Need
-. gen need = tuition - efc
-{txt}(612 missing values generated)
-
-{com}. //replace need = 0 if need < 0
-. 
-. //Cap dummies
-. gen atCap = 0 if !missing(need)
-{txt}(612 missing values generated)
-
-{com}. replace atCap = 1 if need >= 5500 & !missing(need)
-{txt}(107 real changes made)
-
-{com}. 
-. //Drops temp variables (somehow not automatic?)
-. drop __*
-{txt}
-{com}. 
-. save ../Output/Need.dta, replace
-{txt}file ../Output/Need.dta saved
-
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\NeedCalc\Code\NeedCalc.do"
-{txt}
-{com}. use ../Input/Merged.dta, clear
-{txt}
-{com}. //Available Income Calc
-. 
-. //Preliminary stats:
-. 
-. //Household is composed of:
-. //Child and mother, plus siblings, plus spouse
-. gen hhSize = 2 + sibs + momMarried
-{txt}(70 missing values generated)
-
-{com}. 
-. //Mother's age
-. gen mAge = (ym(2008, 1) - parDob) / 12
-{txt}(15 missing values generated)
-
-{com}. kill
-{err}unrecognized command:  kill
-{txt}{search r(199):r(199);}
-
-end of do-file
-
-{search r(199):r(199);}
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\NeedCalc\Code\NeedCalc.do"
-{txt}
-{com}. use ../Input/Merged.dta, clear
-{txt}
-{com}. //Available Income Calc
-. 
-. //Preliminary stats:
-. 
-. //Household is composed of:
-. //Child and mother, plus siblings, plus spouse
-. gen hhSize = 2 + sibs + momMarried
-{txt}(70 missing values generated)
-
-{com}. 
-. //Mother's age
-. gen mAge = floor((ym(2008, 1) - parDob) / 12)
-{txt}(15 missing values generated)
-
-{com}. kill
-{err}unrecognized command:  kill
-{txt}{search r(199):r(199);}
-
-end of do-file
-
-{search r(199):r(199);}
-
-{com}. hist mAge
-{txt}(bin={res}29{txt}, start={res}43{txt}, width={res}.27586207{txt})
-{res}
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\NeedCalc\Code\NeedCalc.do"
-{txt}
-{com}. use ../Input/Merged.dta, clear
-{txt}
-{com}. //Available Income Calc
-. 
-. //Preliminary stats:
-. 
-. //Household is composed of:
-. //Child and mother, plus siblings, plus spouse
-. gen hhSize = 2 + sibs + momMarried
-{txt}(70 missing values generated)
-
-{com}. 
 . //Mother's age
 . gen mAge = floor((ym(2008, 1) - parDob) / 12)
 {txt}(15 missing values generated)
@@ -1297,1857 +703,82 @@ end of do-file
 {txt}(465 real changes made, 195 to missing)
 
 {com}. 
+. 
+. 
 . //Income protection (line 12), aka table A3
 . //Assumes parents are not also in college
-. if hhSize == 2{c -(}
-.         replace `incAllowance' = `incAllowance' + 15000
-. {c )-}
-{txt}
-{com}. else if hhSize == 3{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 18680
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16130
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 4{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 23070
-{txt}(755 real changes made)
-{com}.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 20510
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 17950
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 5{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 27220
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24660
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 22100
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 19540
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16980
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize >= 6{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 31840
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 29280
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 26720
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24160
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600
-.         {c )-}
-.         else if sibsInCollege == 5{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600 - 2550
-.         {c )-}
-.         else if sibsInCollege >= 6{c -(}
-.                 replace `incAllowance' = 21600 - (sibsInCollege - 6) * 2550
-.         {c )-}
-.         `incAllowance' = `incAllowance' + (hhSize - 6) * 3590
-. {c )-}
-{txt}
-{com}. 
-. //Single-parent deducation (line 13)
-. replace `incAllowance' = `incAllowance' + min(3200, .35 * parInc) if !momMarried
-{txt}(241 real changes made)
-
-{com}. 
 . 
-. //Box 3
-. tempvar availInc
-{txt}
-{com}. gen `availInc' = parInc - `incAllowance'
-{txt}(195 missing values generated)
+. //Household size 2
+. replace `incAllowance' = `incAllowance' + 15000 if hhSize == 2
+{txt}(32 real changes made)
 
 {com}. 
-. 
-. //Box 4
-. tempvar availAssets
-{txt}
-{com}. gen `availAssets' = assets - homeVal
-{txt}(267 missing values generated)
+. //Household size 3
+. replace `incAllowance' = `incAllowance' + 18680 if hhSize == 3 & sibsInCollege == 0
+{txt}(91 real changes made)
 
-{com}. //Table A5
-. `availAssets' = . if missing(momMarried)
-{err}unrecognized command:  __000002
-{txt}{search r(199):r(199);}
-
-end of do-file
-
-{search r(199):r(199);}
-
-{com}. ls
-{txt}  <dir>   3/01/19  0:45  {res}.                 
-{txt}  <dir>   3/01/19  0:45  {res}..                
-{txt}   8.2k   3/01/19  0:45  {res}NeedCalc.do       
-
-{com}. do NeedCalc
-{txt}
-{com}. use ../Input/Merged.dta, clear
-{txt}
-{com}. //Available Income Calc
-. 
-. //Preliminary stats:
-. 
-. //Household is composed of:
-. //Child and mother, plus siblings, plus spouse
-. gen hhSize = 2 + sibs + momMarried
-{txt}(70 missing values generated)
+{com}. replace `incAllowance' = `incAllowance' + 16130 if hhSize == 3 & sibsInCollege == 1
+{txt}(20 real changes made)
 
 {com}. 
-. //Mother's age
-. gen mAge = floor((ym(2008, 1) - parDob) / 12)
-{txt}(15 missing values generated)
+. //Household size 4
+. replace `incAllowance' = `incAllowance' + 23070 if hhSize == 4 & sibsInCollege == 0
+{txt}(208 real changes made)
 
-{com}. 
-. //Box 1: Just parInc
-. 
-. //Box 2: Income Allowances
-. tempvar incAllowance
-{txt}
-{com}. gen `incAllowance' = 0
-{txt}
-{com}. 
-. //Social security allowance
-. replace `incAllowance' = `incAllowance' + .0765 * parInc if parInc < 94200
-{txt}(476 real changes made)
-
-{com}. replace `incAllowance' = `incAllowance' + 7206.3 + 0.145 * (parInc - 94200) if parInc >= 94200
-{txt}(465 real changes made, 195 to missing)
-
-{com}. 
-. //Income protection (line 12), aka table A3
-. //Assumes parents are not also in college
-. if hhSize == 2{c -(}
-.         replace `incAllowance' = `incAllowance' + 15000
-. {c )-}
-{txt}
-{com}. else if hhSize == 3{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 18680
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16130
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 4{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 23070
-{txt}(755 real changes made)
-{com}.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 20510
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 17950
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 5{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 27220
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24660
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 22100
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 19540
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16980
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize >= 6{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 31840
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 29280
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 26720
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24160
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600
-.         {c )-}
-.         else if sibsInCollege == 5{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600 - 2550
-.         {c )-}
-.         else if sibsInCollege >= 6{c -(}
-.                 replace `incAllowance' = 21600 - (sibsInCollege - 6) * 2550
-.         {c )-}
-.         `incAllowance' = `incAllowance' + (hhSize - 6) * 3590
-. {c )-}
-{txt}
-{com}. 
-. //Single-parent deducation (line 13)
-. replace `incAllowance' = `incAllowance' + min(3200, .35 * parInc) if !momMarried
-{txt}(241 real changes made)
-
-{com}. 
-. 
-. //Box 3
-. tempvar availInc
-{txt}
-{com}. gen `availInc' = parInc - `incAllowance'
-{txt}(195 missing values generated)
-
-{com}. 
-. 
-. //Box 4
-. tempvar availAssets
-{txt}
-{com}. gen `availAssets' = assets - homeVal
-{txt}(267 missing values generated)
-
-{com}. //Table A5
-. `availAssets' = . if missing(momMarried)
-{err}unrecognized command:  __000002
-{txt}{search r(199):r(199);}
-
-end of do-file
-
-{search r(199):r(199);}
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. use ../Input/Merged.dta, clear
-{txt}
-{com}. //Available Income Calc
-. 
-. //Preliminary stats:
-. 
-. //Household is composed of:
-. //Child and mother, plus siblings, plus spouse
-. gen hhSize = 2 + sibs + momMarried
-{txt}(70 missing values generated)
-
-{com}. 
-. //Mother's age
-. gen mAge = floor((ym(2008, 1) - parDob) / 12)
-{txt}(15 missing values generated)
-
-{com}. 
-. //Box 1: Just parInc
-. 
-. //Box 2: Income Allowances
-. tempvar incAllowance
-{txt}
-{com}. gen `incAllowance' = 0
-{txt}
-{com}. 
-. //Social security allowance
-. replace `incAllowance' = `incAllowance' + .0765 * parInc if parInc < 94200
-{txt}(476 real changes made)
-
-{com}. replace `incAllowance' = `incAllowance' + 7206.3 + 0.145 * (parInc - 94200) if parInc >= 94200
-{txt}(465 real changes made, 195 to missing)
-
-{com}. 
-. //Income protection (line 12), aka table A3
-. //Assumes parents are not also in college
-. if hhSize == 2{c -(}
-.         replace `incAllowance' = `incAllowance' + 15000
-. {c )-}
-{txt}
-{com}. else if hhSize == 3{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 18680
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16130
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 4{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 23070
-{txt}(755 real changes made)
-{com}.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 20510
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 17950
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 5{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 27220
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24660
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 22100
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 19540
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16980
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize >= 6{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 31840
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 29280
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 26720
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24160
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600
-.         {c )-}
-.         else if sibsInCollege == 5{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600 - 2550
-.         {c )-}
-.         else if sibsInCollege >= 6{c -(}
-.                 replace `incAllowance' = 21600 - (sibsInCollege - 6) * 2550
-.         {c )-}
-.         `incAllowance' = `incAllowance' + (hhSize - 6) * 3590
-. {c )-}
-{txt}
-{com}. 
-. //Single-parent deducation (line 13)
-. replace `incAllowance' = `incAllowance' + min(3200, .35 * parInc) if !momMarried
-{txt}(241 real changes made)
-
-{com}. 
-. 
-. //Box 3
-. tempvar availInc
-{txt}
-{com}. gen `availInc' = parInc - `incAllowance'
-{txt}(195 missing values generated)
-
-{com}. 
-. 
-. //Box 4
-. tempvar availAssets
-{txt}
-{com}. gen `availAssets' = assets - homeVal
-{txt}(267 missing values generated)
-
-{com}. //Table A5
-. replace `availAssets' = . if missing(momMarried)
-{txt}(9 real changes made, 9 to missing)
-
-{com}. if momMarried & !missing(momMarried){c -(}
-.         `availAssets' = `availAssets' - 0 if mAge <= 25
-{err}unrecognized command:  __000002
-{txt}{search r(199):r(199);}
-{com}.         `availAssets' = `availAssets' - 2500 if mAge == 26
-.         `availAssets' = `availAssets' - 5100 if mAge == 27
-.         `availAssets' = `availAssets' - 7600 if mAge == 28
-.         `availAssets' = `availAssets' - 10200 if mAge == 29
-.         `availAssets' = `availAssets' - 12700 if mAge == 30
-.         `availAssets' = `availAssets' - 15200 if mAge == 31
-.         `availAssets' = `availAssets' - 17800 if mAge == 32
-.         `availAssets' = `availAssets' - 20300 if mAge == 33
-.         `availAssets' = `availAssets' - 22900 if mAge == 34
-.         `availAssets' = `availAssets' - 25400 if mAge == 35
-.         `availAssets' = `availAssets' - 27900 if mAge == 36
-.         `availAssets' = `availAssets' - 30500 if mAge == 37
-.         `availAssets' = `availAssets' - 33000 if mAge == 38
-.         `availAssets' = `availAssets' - 35600 if mAge == 39
-.         `availAssets' = `availAssets' - 38100 if mAge == 40
-.         `availAssets' = `availAssets' - 39100 if mAge == 41
-.         `availAssets' = `availAssets' - 40100 if mAge == 42
-.         `availAssets' = `availAssets' - 41100 if mAge == 43
-.         `availAssets' = `availAssets' - 42100 if mAge == 44
-.         `availAssets' = `availAssets' - 43100 if mAge == 45
-.         `availAssets' = `availAssets' - 44200 if mAge == 46
-.         `availAssets' = `availAssets' - 45300 if mAge == 47
-.         `availAssets' = `availAssets' - 46400 if mAge == 48
-.         `availAssets' = `availAssets' - 47600 if mAge == 49
-.         `availAssets' = `availAssets' - 48700 if mAge == 50
-.         `availAssets' = `availAssets' - 50200 if mAge == 51
-.         `availAssets' = `availAssets' - 51500 if mAge == 52
-.         `availAssets' = `availAssets' - 53000 if mAge == 53
-.         `availAssets' = `availAssets' - 54300 if mAge == 54
-.         `availAssets' = `availAssets' - 55900 if mAge == 55
-.         `availAssets' = `availAssets' - 57300 if mAge == 56
-.         `availAssets' = `availAssets' - 59000 if mAge == 57
-.         `availAssets' = `availAssets' - 60700 if mAge == 58
-.         `availAssets' = `availAssets' - 62500 if mAge == 59
-.         `availAssets' = `availAssets' - 64300 if mAge == 60
-.         `availAssets' = `availAssets' - 66200 if mAge == 61
-.         `availAssets' = `availAssets' - 68100 if mAge == 62
-.         `availAssets' = `availAssets' - 70400 if mAge == 63
-.         `availAssets' = `availAssets' - 72400 if mAge == 64
-.         `availAssets' = `availAssets' - 74800 if mAge >= 65 & !missing(mAge)
-.         `availAssets' = . if missing(mAge)
-. {c )-}
-{txt}{search r(199):r(199);}
-
-end of do-file
-
-{search r(199):r(199);}
-
-{com}. do NeedCalc
-{txt}
-{com}. use ../Input/Merged.dta, clear
-{txt}
-{com}. //Available Income Calc
-. 
-. //Preliminary stats:
-. 
-. //Household is composed of:
-. //Child and mother, plus siblings, plus spouse
-. gen hhSize = 2 + sibs + momMarried
-{txt}(70 missing values generated)
-
-{com}. 
-. //Mother's age
-. gen mAge = floor((ym(2008, 1) - parDob) / 12)
-{txt}(15 missing values generated)
-
-{com}. 
-. //Box 1: Just parInc
-. 
-. //Box 2: Income Allowances
-. tempvar incAllowance
-{txt}
-{com}. gen `incAllowance' = 0
-{txt}
-{com}. 
-. //Social security allowance
-. replace `incAllowance' = `incAllowance' + .0765 * parInc if parInc < 94200
-{txt}(476 real changes made)
-
-{com}. replace `incAllowance' = `incAllowance' + 7206.3 + 0.145 * (parInc - 94200) if parInc >= 94200
-{txt}(465 real changes made, 195 to missing)
-
-{com}. 
-. //Income protection (line 12), aka table A3
-. //Assumes parents are not also in college
-. if hhSize == 2{c -(}
-.         replace `incAllowance' = `incAllowance' + 15000
-. {c )-}
-{txt}
-{com}. else if hhSize == 3{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 18680
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16130
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 4{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 23070
-{txt}(755 real changes made)
-{com}.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 20510
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 17950
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 5{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 27220
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24660
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 22100
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 19540
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16980
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize >= 6{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 31840
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 29280
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 26720
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24160
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600
-.         {c )-}
-.         else if sibsInCollege == 5{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600 - 2550
-.         {c )-}
-.         else if sibsInCollege >= 6{c -(}
-.                 replace `incAllowance' = 21600 - (sibsInCollege - 6) * 2550
-.         {c )-}
-.         `incAllowance' = `incAllowance' + (hhSize - 6) * 3590
-. {c )-}
-{txt}
-{com}. 
-. //Single-parent deducation (line 13)
-. replace `incAllowance' = `incAllowance' + min(3200, .35 * parInc) if !momMarried
-{txt}(241 real changes made)
-
-{com}. 
-. 
-. //Box 3
-. tempvar availInc
-{txt}
-{com}. gen `availInc' = parInc - `incAllowance'
-{txt}(195 missing values generated)
-
-{com}. 
-. 
-. //Box 4
-. tempvar availAssets
-{txt}
-{com}. gen `availAssets' = assets - homeVal
-{txt}(267 missing values generated)
-
-{com}. //Table A5
-. replace `availAssets' = . if missing(momMarried)
-{txt}(9 real changes made, 9 to missing)
-
-{com}. if momMarried & !missing(momMarried){c -(}
-.         replace `availAssets' = `availAssets' - 0 if mAge <= 25
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 2500 if mAge == 26
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 5100 if mAge == 27
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 7600 if mAge == 28
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 10200 if mAge == 29
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 12700 if mAge == 30
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 15200 if mAge == 31
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 17800 if mAge == 32
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 20300 if mAge == 33
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 22900 if mAge == 34
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 25400 if mAge == 35
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 27900 if mAge == 36
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 30500 if mAge == 37
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 33000 if mAge == 38
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 35600 if mAge == 39
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 38100 if mAge == 40
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 39100 if mAge == 41
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 40100 if mAge == 42
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 41100 if mAge == 43
-{txt}(29 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 42100 if mAge == 44
-{txt}(65 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 43100 if mAge == 45
-{txt}(70 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 44200 if mAge == 46
+{com}. replace `incAllowance' = `incAllowance' + 20510 if hhSize == 4 & sibsInCollege == 1
 {txt}(84 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 45300 if mAge == 47
-{txt}(97 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 46400 if mAge == 48
-{txt}(101 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 47600 if mAge == 49
-{txt}(98 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 48700 if mAge == 50
-{txt}(112 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 50200 if mAge == 51
-{txt}(12 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 51500 if mAge == 52
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 53000 if mAge == 53
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 54300 if mAge == 54
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 55900 if mAge == 55
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 57300 if mAge == 56
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 59000 if mAge == 57
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 60700 if mAge == 58
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 62500 if mAge == 59
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 64300 if mAge == 60
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 66200 if mAge == 61
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 68100 if mAge == 62
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 70400 if mAge == 63
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 72400 if mAge == 64
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 74800 if mAge >= 65 & !missing(mAge)
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = . if missing(mAge)
-{txt}(6 real changes made, 6 to missing)
-{com}. {c )-}
-{txt}
-{com}. if !momMarried{c -(}
-.         replace `availAssets' = `availAssets' - 0 if mAge <= 25
-.         replace `availAssets' = `availAssets' - 1000 if mAge == 26
-.         replace `availAssets' = `availAssets' - 2100 if mAge == 27
-.         replace `availAssets' = `availAssets' - 3100 if mAge == 28
-.         replace `availAssets' = `availAssets' - 4200 if mAge == 29
-.         replace `availAssets' = `availAssets' - 5200 if mAge == 30
-.         replace `availAssets' = `availAssets' - 6300 if mAge == 31
-.         replace `availAssets' = `availAssets' - 7300 if mAge == 32
-.         replace `availAssets' = `availAssets' - 8400 if mAge == 33
-.         replace `availAssets' = `availAssets' - 9400 if mAge == 34
-.         replace `availAssets' = `availAssets' - 10500 if mAge == 35
-.         replace `availAssets' = `availAssets' - 11500 if mAge == 36
-.         replace `availAssets' = `availAssets' - 12600 if mAge == 37
-.         replace `availAssets' = `availAssets' - 13600 if mAge == 38
-.         replace `availAssets' = `availAssets' - 14700 if mAge == 39
-.         replace `availAssets' = `availAssets' - 15700 if mAge == 40
-.         replace `availAssets' = `availAssets' - 16100 if mAge == 41
-.         replace `availAssets' = `availAssets' - 16400 if mAge == 42
-.         replace `availAssets' = `availAssets' - 16800 if mAge == 43
-.         replace `availAssets' = `availAssets' - 17200 if mAge == 44
-.         replace `availAssets' = `availAssets' - 17500 if mAge == 45
-.         replace `availAssets' = `availAssets' - 17900 if mAge == 46
-.         replace `availAssets' = `availAssets' - 18300 if mAge == 47
-.         replace `availAssets' = `availAssets' - 18800 if mAge == 48
-.         replace `availAssets' = `availAssets' - 19200 if mAge == 49
-.         replace `availAssets' = `availAssets' - 19700 if mAge == 50
-.         replace `availAssets' = `availAssets' - 20100 if mAge == 51
-.         replace `availAssets' = `availAssets' - 20500 if mAge == 52
-.         replace `availAssets' = `availAssets' - 21000 if mAge == 53
-.         replace `availAssets' = `availAssets' - 21600 if mAge == 54
-.         replace `availAssets' = `availAssets' - 22100 if mAge == 55
-.         replace `availAssets' = `availAssets' - 22700 if mAge == 56
-.         replace `availAssets' = `availAssets' - 23200 if mAge == 57
-.         replace `availAssets' = `availAssets' - 23900 if mAge == 58
-.         replace `availAssets' = `availAssets' - 24400 if mAge == 59
-.         replace `availAssets' = `availAssets' - 25100 if mAge == 60
-.         replace `availAssets' = `availAssets' - 25700 if mAge == 61
-.         replace `availAssets' = `availAssets' - 26400 if mAge == 62
-.         replace `availAssets' = `availAssets' - 27200 if mAge == 63
-.         replace `availAssets' = `availAssets' - 27900 if mAge == 64
-.         replace `availAssets' = `availAssets' - 28700 if mAge >= 65 & !missing(mAge)
-.         replace `availAssets' = . if missing(mAge)
-. {c )-}
-{txt}
-{com}. 
-. 
-. gen `availAssets' = max(0, 0.12 * `availAssets')
-{err}__000002 already defined
-{txt}{search r(110):r(110);}
 
-end of do-file
-
-{search r(110):r(110);}
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. use ../Input/Merged.dta, clear
-{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\NeedCalc\Code\NeedCalc.do"
-{txt}
-{com}. use ../Input/Merged.dta, clear
-{txt}
-{com}. //Available Income Calc
-. 
-. //Preliminary stats:
-. 
-. //Household is composed of:
-. //Child and mother, plus siblings, plus spouse
-. gen hhSize = 2 + sibs + momMarried
-{txt}(70 missing values generated)
+{com}. replace `incAllowance' = `incAllowance' + 17950 if hhSize == 4 & sibsInCollege == 2
+{txt}(2 real changes made)
 
 {com}. 
-. //Mother's age
-. gen mAge = floor((ym(2008, 1) - parDob) / 12)
-{txt}(15 missing values generated)
+. //Household size 5
+. replace `incAllowance' = `incAllowance' + 27220 if hhSize == 5 & sibsInCollege == 0
+{txt}(119 real changes made)
 
-{com}. 
-. //Box 1: Just parInc
-. 
-. //Box 2: Income Allowances
-. tempvar incAllowance
-{txt}
-{com}. gen `incAllowance' = 0
-{txt}
-{com}. 
-. //Social security allowance
-. replace `incAllowance' = `incAllowance' + .0765 * parInc if parInc < 94200
-{txt}(476 real changes made)
+{com}. replace `incAllowance' = `incAllowance' + 24660 if hhSize == 5 & sibsInCollege == 1
+{txt}(62 real changes made)
 
-{com}. replace `incAllowance' = `incAllowance' + 7206.3 + 0.145 * (parInc - 94200) if parInc >= 94200
-{txt}(465 real changes made, 195 to missing)
-
-{com}. 
-. //Income protection (line 12), aka table A3
-. //Assumes parents are not also in college
-. if hhSize == 2{c -(}
-.         replace `incAllowance' = `incAllowance' + 15000
-. {c )-}
-{txt}
-{com}. else if hhSize == 3{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 18680
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16130
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 4{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 23070
-{txt}(755 real changes made)
-{com}.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 20510
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 17950
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 5{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 27220
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24660
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 22100
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 19540
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16980
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize >= 6{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 31840
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 29280
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 26720
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24160
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600
-.         {c )-}
-.         else if sibsInCollege == 5{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600 - 2550
-.         {c )-}
-.         else if sibsInCollege >= 6{c -(}
-.                 replace `incAllowance' = 21600 - (sibsInCollege - 6) * 2550
-.         {c )-}
-.         `incAllowance' = `incAllowance' + (hhSize - 6) * 3590
-. {c )-}
-{txt}
-{com}. 
-. //Single-parent deducation (line 13)
-. replace `incAllowance' = `incAllowance' + min(3200, .35 * parInc) if !momMarried
-{txt}(241 real changes made)
-
-{com}. 
-. 
-. //Box 3
-. tempvar availInc
-{txt}
-{com}. gen `availInc' = parInc - `incAllowance'
-{txt}(195 missing values generated)
-
-{com}. 
-. 
-. //Box 4
-. tempvar availAssets
-{txt}
-{com}. gen `availAssets' = assets - homeVal
-{txt}(267 missing values generated)
-
-{com}. //Table A5
-. replace `availAssets' = . if missing(momMarried)
-{txt}(9 real changes made, 9 to missing)
-
-{com}. if momMarried & !missing(momMarried){c -(}
-.         replace `availAssets' = `availAssets' - 0 if mAge <= 25
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 2500 if mAge == 26
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 5100 if mAge == 27
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 7600 if mAge == 28
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 10200 if mAge == 29
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 12700 if mAge == 30
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 15200 if mAge == 31
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 17800 if mAge == 32
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 20300 if mAge == 33
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 22900 if mAge == 34
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 25400 if mAge == 35
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 27900 if mAge == 36
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 30500 if mAge == 37
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 33000 if mAge == 38
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 35600 if mAge == 39
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 38100 if mAge == 40
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 39100 if mAge == 41
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 40100 if mAge == 42
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 41100 if mAge == 43
-{txt}(29 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 42100 if mAge == 44
-{txt}(65 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 43100 if mAge == 45
-{txt}(70 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 44200 if mAge == 46
-{txt}(84 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 45300 if mAge == 47
-{txt}(97 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 46400 if mAge == 48
-{txt}(101 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 47600 if mAge == 49
-{txt}(98 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 48700 if mAge == 50
-{txt}(112 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 50200 if mAge == 51
-{txt}(12 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 51500 if mAge == 52
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 53000 if mAge == 53
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 54300 if mAge == 54
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 55900 if mAge == 55
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 57300 if mAge == 56
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 59000 if mAge == 57
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 60700 if mAge == 58
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 62500 if mAge == 59
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 64300 if mAge == 60
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 66200 if mAge == 61
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 68100 if mAge == 62
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 70400 if mAge == 63
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 72400 if mAge == 64
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 74800 if mAge >= 65 & !missing(mAge)
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = . if missing(mAge)
-{txt}(6 real changes made, 6 to missing)
-{com}. {c )-}
-{txt}
-{com}. if !momMarried{c -(}
-.         replace `availAssets' = `availAssets' - 0 if mAge <= 25
-.         replace `availAssets' = `availAssets' - 1000 if mAge == 26
-.         replace `availAssets' = `availAssets' - 2100 if mAge == 27
-.         replace `availAssets' = `availAssets' - 3100 if mAge == 28
-.         replace `availAssets' = `availAssets' - 4200 if mAge == 29
-.         replace `availAssets' = `availAssets' - 5200 if mAge == 30
-.         replace `availAssets' = `availAssets' - 6300 if mAge == 31
-.         replace `availAssets' = `availAssets' - 7300 if mAge == 32
-.         replace `availAssets' = `availAssets' - 8400 if mAge == 33
-.         replace `availAssets' = `availAssets' - 9400 if mAge == 34
-.         replace `availAssets' = `availAssets' - 10500 if mAge == 35
-.         replace `availAssets' = `availAssets' - 11500 if mAge == 36
-.         replace `availAssets' = `availAssets' - 12600 if mAge == 37
-.         replace `availAssets' = `availAssets' - 13600 if mAge == 38
-.         replace `availAssets' = `availAssets' - 14700 if mAge == 39
-.         replace `availAssets' = `availAssets' - 15700 if mAge == 40
-.         replace `availAssets' = `availAssets' - 16100 if mAge == 41
-.         replace `availAssets' = `availAssets' - 16400 if mAge == 42
-.         replace `availAssets' = `availAssets' - 16800 if mAge == 43
-.         replace `availAssets' = `availAssets' - 17200 if mAge == 44
-.         replace `availAssets' = `availAssets' - 17500 if mAge == 45
-.         replace `availAssets' = `availAssets' - 17900 if mAge == 46
-.         replace `availAssets' = `availAssets' - 18300 if mAge == 47
-.         replace `availAssets' = `availAssets' - 18800 if mAge == 48
-.         replace `availAssets' = `availAssets' - 19200 if mAge == 49
-.         replace `availAssets' = `availAssets' - 19700 if mAge == 50
-.         replace `availAssets' = `availAssets' - 20100 if mAge == 51
-.         replace `availAssets' = `availAssets' - 20500 if mAge == 52
-.         replace `availAssets' = `availAssets' - 21000 if mAge == 53
-.         replace `availAssets' = `availAssets' - 21600 if mAge == 54
-.         replace `availAssets' = `availAssets' - 22100 if mAge == 55
-.         replace `availAssets' = `availAssets' - 22700 if mAge == 56
-.         replace `availAssets' = `availAssets' - 23200 if mAge == 57
-.         replace `availAssets' = `availAssets' - 23900 if mAge == 58
-.         replace `availAssets' = `availAssets' - 24400 if mAge == 59
-.         replace `availAssets' = `availAssets' - 25100 if mAge == 60
-.         replace `availAssets' = `availAssets' - 25700 if mAge == 61
-.         replace `availAssets' = `availAssets' - 26400 if mAge == 62
-.         replace `availAssets' = `availAssets' - 27200 if mAge == 63
-.         replace `availAssets' = `availAssets' - 27900 if mAge == 64
-.         replace `availAssets' = `availAssets' - 28700 if mAge >= 65 & !missing(mAge)
-.         replace `availAssets' = . if missing(mAge)
-. {c )-}
-{txt}
-{com}. 
-. 
-. replace `availAssets' = max(0, 0.12 * `availAssets')
-{txt}(950 real changes made)
-
-{com}. 
-. 
-. //Box 5
-. tempvar resources
-{txt}
-{com}. gen `resources' = `availInc' + `availAssets'
-{txt}(195 missing values generated)
-
-{com}. 
-. tempvar grossCont
-{txt}
-{com}. gen `grossCont' = .
-{txt}(950 missing values generated)
-
-{com}. replace `grossCont' = -750 if `resources' < -3409
-{txt}(107 real changes made)
-
-{com}. replace `grossCont' = .22 * `availInc' if inrange(`resources', -3409, 13400)
-{txt}(97 real changes made)
-
-{com}. replace `grossCont' = 2948 + .25 * (`resources' - 13400) if inrange(`resources', 13401, 16800)
-{txt}(22 real changes made)
-
-{com}. replace `grossCont' = 3798 + .29 * (`resources' - 16800) if inrange(`resources', 16801, 20200)
+{com}. replace `incAllowance' = `incAllowance' + 22100 if hhSize == 5 & sibsInCollege == 2
 {txt}(21 real changes made)
 
-{com}. replace `grossCont' = 4784 + .34 * (`resources' - 20200) if inrange(`resources', 20201, 23700)
-{txt}(18 real changes made)
+{com}. replace `incAllowance' = `incAllowance' + 19540 if hhSize == 5 & sibsInCollege == 3
+{txt}(0 real changes made)
 
-{com}. replace `grossCont' = 5974 + .40 * (`resources' - 23700) if inrange(`resources', 23701, 27100)
-{txt}(15 real changes made)
-
-{com}. replace `grossCont' = 7334 + .47 * (`resources' - 27100) if `resources' >= 27101
-{txt}(475 real changes made)
+{com}. replace `incAllowance' = `incAllowance' + 16980 if hhSize == 5 & sibsInCollege == 4
+{txt}(0 real changes made)
 
 {com}. 
-. replace `grossCont' = max(`grossCont', 0)
-{txt}(324 real changes made)
+. //Household size 6
+. replace `incAllowance' = `incAllowance' + 31840 if hhSize >= 6 & sibsInCollege == 0
+{txt}(55 real changes made)
+
+{com}. replace `incAllowance' = `incAllowance' + 29280 if hhSize >= 6 & sibsInCollege == 1
+{txt}(45 real changes made)
+
+{com}. replace `incAllowance' = `incAllowance' + 26720 if hhSize >= 6 & sibsInCollege == 2
+{txt}(13 real changes made)
+
+{com}. replace `incAllowance' = `incAllowance' + 24160 if hhSize >= 6 & sibsInCollege == 3
+{txt}(3 real changes made)
+
+{com}. replace `incAllowance' = `incAllowance' + 21600 if hhSize >= 6 & sibsInCollege == 4
+{txt}(0 real changes made)
+
+{com}. replace `incAllowance' = `incAllowance' + 21600 - 2550 if hhSize >= 6 & sibsInCollege == 5
+{txt}(0 real changes made)
+
+{com}. replace `incAllowance' = `incAllowance' + 21600 - (sibsInCollege - 6) * 2550 if hhSize >= 6 & sibsInCollege >= 6
+{txt}(0 real changes made)
+
+{com}. replace `incAllowance' = `incAllowance' + (hhSize - 6) * 3590 if hhSize >= 6
+{txt}(43 real changes made)
 
 {com}. 
-. gen efc = `grossCont' / sibsInColl
-{txt}(645 missing values generated)
-
-{com}. 
-. //If stopped at line 3
-. replace efc = 0 if parInc < 20000
-{txt}(67 real changes made)
-
-{com}. 
-. //Need
-. gen need = tuition - efc
-{txt}(612 missing values generated)
-
-{com}. //replace need = 0 if need < 0
 . 
-. //Cap dummies
-. gen atCap = 0 if !missing(need)
-{txt}(612 missing values generated)
-
-{com}. replace atCap = 1 if need >= 5500 & !missing(need)
-{txt}(108 real changes made)
-
-{com}. 
-. //Drops temp variables (somehow not automatic?)
-. drop __*
-{txt}
-{com}. 
-. save ../Output/Need.dta, replace
-{txt}file ../Output/Need.dta saved
-
-{com}. 
-{txt}end of do-file
-
-{com}. hist need
-{txt}(bin={res}18{txt}, start={res}-191538.97{txt}, width={res}13585.498{txt})
-{res}
-{com}. count if !momMarried
-{res}  278
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\NeedCalc\Code\NeedCalc.do"
-{txt}
-{com}. use ../Input/Merged.dta, clear
-{txt}
-{com}. //Available Income Calc
 . 
-. //Preliminary stats:
-. 
-. //Household is composed of:
-. //Child and mother, plus siblings, plus spouse
-. gen hhSize = 2 + sibs + momMarried
-{txt}(70 missing values generated)
-
-{com}. 
-. //Mother's age
-. gen mAge = floor((ym(2008, 1) - parDob) / 12)
-{txt}(15 missing values generated)
-
-{com}. 
-. //Box 1: Just parInc
-. 
-. //Box 2: Income Allowances
-. tempvar incAllowance
-{txt}
-{com}. gen `incAllowance' = 0
-{txt}
-{com}. 
-. //Social security allowance
-. replace `incAllowance' = `incAllowance' + .0765 * parInc if parInc < 94200
-{txt}(476 real changes made)
-
-{com}. replace `incAllowance' = `incAllowance' + 7206.3 + 0.145 * (parInc - 94200) if parInc >= 94200
-{txt}(465 real changes made, 195 to missing)
-
-{com}. 
-. //Income protection (line 12), aka table A3
-. //Assumes parents are not also in college
-. if hhSize == 2{c -(}
-.         replace `incAllowance' = `incAllowance' + 15000
-. {c )-}
-{txt}
-{com}. else if hhSize == 3{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 18680
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16130
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 4{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 23070
-{txt}(755 real changes made)
-{com}.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 20510
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 17950
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 5{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 27220
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24660
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 22100
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 19540
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16980
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize >= 6{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 31840
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 29280
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 26720
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24160
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600
-.         {c )-}
-.         else if sibsInCollege == 5{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600 - 2550
-.         {c )-}
-.         else if sibsInCollege >= 6{c -(}
-.                 replace `incAllowance' = 21600 - (sibsInCollege - 6) * 2550
-.         {c )-}
-.         `incAllowance' = `incAllowance' + (hhSize - 6) * 3590
-. {c )-}
-{txt}
-{com}. 
 . //Single-parent deducation (line 13)
-. replace `incAllowance' = `incAllowance' + min(3200, .35 * parInc) if !momMarried
-{txt}(241 real changes made)
-
-{com}. 
-. 
-. //Box 3
-. tempvar availInc
-{txt}
-{com}. gen `availInc' = parInc - `incAllowance'
-{txt}(195 missing values generated)
-
-{com}. 
-. 
-. //Box 4
-. tempvar availAssets
-{txt}
-{com}. gen `availAssets' = assets - homeVal
-{txt}(267 missing values generated)
-
-{com}. //Table A5
-. replace `availAssets' = . if missing(momMarried)
-{txt}(9 real changes made, 9 to missing)
-
-{com}. if momMarried & !missing(momMarried){c -(}
-.         replace `availAssets' = `availAssets' - 0 if mAge <= 25
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 2500 if mAge == 26
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 5100 if mAge == 27
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 7600 if mAge == 28
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 10200 if mAge == 29
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 12700 if mAge == 30
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 15200 if mAge == 31
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 17800 if mAge == 32
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 20300 if mAge == 33
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 22900 if mAge == 34
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 25400 if mAge == 35
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 27900 if mAge == 36
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 30500 if mAge == 37
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 33000 if mAge == 38
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 35600 if mAge == 39
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 38100 if mAge == 40
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 39100 if mAge == 41
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 40100 if mAge == 42
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 41100 if mAge == 43
-{txt}(29 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 42100 if mAge == 44
-{txt}(65 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 43100 if mAge == 45
-{txt}(70 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 44200 if mAge == 46
-{txt}(84 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 45300 if mAge == 47
-{txt}(97 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 46400 if mAge == 48
-{txt}(101 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 47600 if mAge == 49
-{txt}(98 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 48700 if mAge == 50
-{txt}(112 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 50200 if mAge == 51
-{txt}(12 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 51500 if mAge == 52
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 53000 if mAge == 53
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 54300 if mAge == 54
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 55900 if mAge == 55
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 57300 if mAge == 56
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 59000 if mAge == 57
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 60700 if mAge == 58
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 62500 if mAge == 59
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 64300 if mAge == 60
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 66200 if mAge == 61
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 68100 if mAge == 62
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 70400 if mAge == 63
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 72400 if mAge == 64
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 74800 if mAge >= 65 & !missing(mAge)
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = . if missing(mAge)
-{txt}(6 real changes made, 6 to missing)
-{com}. {c )-}
-{txt}
-{com}. if !momMarried{c -(}
-.         display "THIS IS A TEST"
-.         replace `availAssets' = `availAssets' - 0 if mAge <= 25
-.         replace `availAssets' = `availAssets' - 1000 if mAge == 26
-.         replace `availAssets' = `availAssets' - 2100 if mAge == 27
-.         replace `availAssets' = `availAssets' - 3100 if mAge == 28
-.         replace `availAssets' = `availAssets' - 4200 if mAge == 29
-.         replace `availAssets' = `availAssets' - 5200 if mAge == 30
-.         replace `availAssets' = `availAssets' - 6300 if mAge == 31
-.         replace `availAssets' = `availAssets' - 7300 if mAge == 32
-.         replace `availAssets' = `availAssets' - 8400 if mAge == 33
-.         replace `availAssets' = `availAssets' - 9400 if mAge == 34
-.         replace `availAssets' = `availAssets' - 10500 if mAge == 35
-.         replace `availAssets' = `availAssets' - 11500 if mAge == 36
-.         replace `availAssets' = `availAssets' - 12600 if mAge == 37
-.         replace `availAssets' = `availAssets' - 13600 if mAge == 38
-.         replace `availAssets' = `availAssets' - 14700 if mAge == 39
-.         replace `availAssets' = `availAssets' - 15700 if mAge == 40
-.         replace `availAssets' = `availAssets' - 16100 if mAge == 41
-.         replace `availAssets' = `availAssets' - 16400 if mAge == 42
-.         replace `availAssets' = `availAssets' - 16800 if mAge == 43
-.         replace `availAssets' = `availAssets' - 17200 if mAge == 44
-.         replace `availAssets' = `availAssets' - 17500 if mAge == 45
-.         replace `availAssets' = `availAssets' - 17900 if mAge == 46
-.         replace `availAssets' = `availAssets' - 18300 if mAge == 47
-.         replace `availAssets' = `availAssets' - 18800 if mAge == 48
-.         replace `availAssets' = `availAssets' - 19200 if mAge == 49
-.         replace `availAssets' = `availAssets' - 19700 if mAge == 50
-.         replace `availAssets' = `availAssets' - 20100 if mAge == 51
-.         replace `availAssets' = `availAssets' - 20500 if mAge == 52
-.         replace `availAssets' = `availAssets' - 21000 if mAge == 53
-.         replace `availAssets' = `availAssets' - 21600 if mAge == 54
-.         replace `availAssets' = `availAssets' - 22100 if mAge == 55
-.         replace `availAssets' = `availAssets' - 22700 if mAge == 56
-.         replace `availAssets' = `availAssets' - 23200 if mAge == 57
-.         replace `availAssets' = `availAssets' - 23900 if mAge == 58
-.         replace `availAssets' = `availAssets' - 24400 if mAge == 59
-.         replace `availAssets' = `availAssets' - 25100 if mAge == 60
-.         replace `availAssets' = `availAssets' - 25700 if mAge == 61
-.         replace `availAssets' = `availAssets' - 26400 if mAge == 62
-.         replace `availAssets' = `availAssets' - 27200 if mAge == 63
-.         replace `availAssets' = `availAssets' - 27900 if mAge == 64
-.         replace `availAssets' = `availAssets' - 28700 if mAge >= 65 & !missing(mAge)
-.         replace `availAssets' = . if missing(mAge)
-. {c )-}
-{txt}
-{com}. 
-. 
-. replace `availAssets' = max(0, 0.12 * `availAssets')
-{txt}(950 real changes made)
-
-{com}. 
-. 
-. //Box 5
-. tempvar resources
-{txt}
-{com}. gen `resources' = `availInc' + `availAssets'
-{txt}(195 missing values generated)
-
-{com}. 
-. tempvar grossCont
-{txt}
-{com}. gen `grossCont' = .
-{txt}(950 missing values generated)
-
-{com}. replace `grossCont' = -750 if `resources' < -3409
-{txt}(107 real changes made)
-
-{com}. replace `grossCont' = .22 * `availInc' if inrange(`resources', -3409, 13400)
-{txt}(97 real changes made)
-
-{com}. replace `grossCont' = 2948 + .25 * (`resources' - 13400) if inrange(`resources', 13401, 16800)
-{txt}(22 real changes made)
-
-{com}. replace `grossCont' = 3798 + .29 * (`resources' - 16800) if inrange(`resources', 16801, 20200)
-{txt}(21 real changes made)
-
-{com}. replace `grossCont' = 4784 + .34 * (`resources' - 20200) if inrange(`resources', 20201, 23700)
-{txt}(18 real changes made)
-
-{com}. replace `grossCont' = 5974 + .40 * (`resources' - 23700) if inrange(`resources', 23701, 27100)
-{txt}(15 real changes made)
-
-{com}. replace `grossCont' = 7334 + .47 * (`resources' - 27100) if `resources' >= 27101
-{txt}(475 real changes made)
-
-{com}. 
-. replace `grossCont' = max(`grossCont', 0)
-{txt}(324 real changes made)
-
-{com}. 
-. gen efc = `grossCont' / sibsInColl
-{txt}(645 missing values generated)
-
-{com}. 
-. //If stopped at line 3
-. replace efc = 0 if parInc < 20000
-{txt}(67 real changes made)
-
-{com}. 
-. //Need
-. gen need = tuition - efc
-{txt}(612 missing values generated)
-
-{com}. //replace need = 0 if need < 0
-. 
-. //Cap dummies
-. gen atCap = 0 if !missing(need)
-{txt}(612 missing values generated)
-
-{com}. replace atCap = 1 if need >= 5500 & !missing(need)
-{txt}(108 real changes made)
-
-{com}. 
-. //Drops temp variables (somehow not automatic?)
-. drop __*
-{txt}
-{com}. 
-. save ../Output/Need.dta, replace
-{txt}file ../Output/Need.dta saved
-
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\NeedCalc\Code\NeedCalc.do"
-{txt}
-{com}. use ../Input/Merged.dta, clear
-{txt}
-{com}. //Available Income Calc
-. 
-. //Preliminary stats:
-. 
-. //Household is composed of:
-. //Child and mother, plus siblings, plus spouse
-. gen hhSize = 2 + sibs + momMarried
-{txt}(70 missing values generated)
-
-{com}. 
-. //Mother's age
-. gen mAge = floor((ym(2008, 1) - parDob) / 12)
-{txt}(15 missing values generated)
-
-{com}. 
-. //Box 1: Just parInc
-. 
-. //Box 2: Income Allowances
-. tempvar incAllowance
-{txt}
-{com}. gen `incAllowance' = 0
-{txt}
-{com}. 
-. //Social security allowance
-. replace `incAllowance' = `incAllowance' + .0765 * parInc if parInc < 94200
-{txt}(476 real changes made)
-
-{com}. replace `incAllowance' = `incAllowance' + 7206.3 + 0.145 * (parInc - 94200) if parInc >= 94200
-{txt}(465 real changes made, 195 to missing)
-
-{com}. 
-. //Income protection (line 12), aka table A3
-. //Assumes parents are not also in college
-. if hhSize == 2{c -(}
-.         replace `incAllowance' = `incAllowance' + 15000
-. {c )-}
-{txt}
-{com}. else if hhSize == 3{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 18680
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16130
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 4{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 23070
-{txt}(755 real changes made)
-{com}.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 20510
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 17950
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 5{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 27220
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24660
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 22100
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 19540
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16980
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize >= 6{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 31840
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 29280
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 26720
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24160
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600
-.         {c )-}
-.         else if sibsInCollege == 5{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600 - 2550
-.         {c )-}
-.         else if sibsInCollege >= 6{c -(}
-.                 replace `incAllowance' = 21600 - (sibsInCollege - 6) * 2550
-.         {c )-}
-.         `incAllowance' = `incAllowance' + (hhSize - 6) * 3590
-. {c )-}
-{txt}
-{com}. 
-. //Single-parent deducation (line 13)
-. replace `incAllowance' = `incAllowance' + min(3200, .35 * parInc) if !momMarried
-{txt}(241 real changes made)
-
-{com}. 
-. 
-. //Box 3
-. tempvar availInc
-{txt}
-{com}. gen `availInc' = parInc - `incAllowance'
-{txt}(195 missing values generated)
-
-{com}. 
-. 
-. //Box 4
-. tempvar availAssets
-{txt}
-{com}. gen `availAssets' = assets - homeVal
-{txt}(267 missing values generated)
-
-{com}. //Table A5
-. replace `availAssets' = . if missing(momMarried)
-{txt}(9 real changes made, 9 to missing)
-
-{com}. if momMarried & !missing(momMarried){c -(}
-.         replace `availAssets' = `availAssets' - 0 if mAge <= 25
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 2500 if mAge == 26
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 5100 if mAge == 27
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 7600 if mAge == 28
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 10200 if mAge == 29
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 12700 if mAge == 30
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 15200 if mAge == 31
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 17800 if mAge == 32
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 20300 if mAge == 33
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 22900 if mAge == 34
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 25400 if mAge == 35
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 27900 if mAge == 36
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 30500 if mAge == 37
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 33000 if mAge == 38
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 35600 if mAge == 39
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 38100 if mAge == 40
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 39100 if mAge == 41
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 40100 if mAge == 42
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 41100 if mAge == 43
-{txt}(29 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 42100 if mAge == 44
-{txt}(65 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 43100 if mAge == 45
-{txt}(70 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 44200 if mAge == 46
-{txt}(84 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 45300 if mAge == 47
-{txt}(97 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 46400 if mAge == 48
-{txt}(101 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 47600 if mAge == 49
-{txt}(98 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 48700 if mAge == 50
-{txt}(112 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 50200 if mAge == 51
-{txt}(12 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 51500 if mAge == 52
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 53000 if mAge == 53
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 54300 if mAge == 54
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 55900 if mAge == 55
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 57300 if mAge == 56
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 59000 if mAge == 57
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 60700 if mAge == 58
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 62500 if mAge == 59
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 64300 if mAge == 60
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 66200 if mAge == 61
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 68100 if mAge == 62
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 70400 if mAge == 63
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 72400 if mAge == 64
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = `availAssets' - 74800 if mAge >= 65 & !missing(mAge)
-{txt}(0 real changes made)
-{com}.         replace `availAssets' = . if missing(mAge)
-{txt}(6 real changes made, 6 to missing)
-{com}. {c )-}
-{txt}
-{com}. 
-.         display "THIS IS A TEST"
-{res}THIS IS A TEST
-{txt}
-{com}.         
-. if !momMarried{c -(}
-.         replace `availAssets' = `availAssets' - 0 if mAge <= 25
-.         replace `availAssets' = `availAssets' - 1000 if mAge == 26
-.         replace `availAssets' = `availAssets' - 2100 if mAge == 27
-.         replace `availAssets' = `availAssets' - 3100 if mAge == 28
-.         replace `availAssets' = `availAssets' - 4200 if mAge == 29
-.         replace `availAssets' = `availAssets' - 5200 if mAge == 30
-.         replace `availAssets' = `availAssets' - 6300 if mAge == 31
-.         replace `availAssets' = `availAssets' - 7300 if mAge == 32
-.         replace `availAssets' = `availAssets' - 8400 if mAge == 33
-.         replace `availAssets' = `availAssets' - 9400 if mAge == 34
-.         replace `availAssets' = `availAssets' - 10500 if mAge == 35
-.         replace `availAssets' = `availAssets' - 11500 if mAge == 36
-.         replace `availAssets' = `availAssets' - 12600 if mAge == 37
-.         replace `availAssets' = `availAssets' - 13600 if mAge == 38
-.         replace `availAssets' = `availAssets' - 14700 if mAge == 39
-.         replace `availAssets' = `availAssets' - 15700 if mAge == 40
-.         replace `availAssets' = `availAssets' - 16100 if mAge == 41
-.         replace `availAssets' = `availAssets' - 16400 if mAge == 42
-.         replace `availAssets' = `availAssets' - 16800 if mAge == 43
-.         replace `availAssets' = `availAssets' - 17200 if mAge == 44
-.         replace `availAssets' = `availAssets' - 17500 if mAge == 45
-.         replace `availAssets' = `availAssets' - 17900 if mAge == 46
-.         replace `availAssets' = `availAssets' - 18300 if mAge == 47
-.         replace `availAssets' = `availAssets' - 18800 if mAge == 48
-.         replace `availAssets' = `availAssets' - 19200 if mAge == 49
-.         replace `availAssets' = `availAssets' - 19700 if mAge == 50
-.         replace `availAssets' = `availAssets' - 20100 if mAge == 51
-.         replace `availAssets' = `availAssets' - 20500 if mAge == 52
-.         replace `availAssets' = `availAssets' - 21000 if mAge == 53
-.         replace `availAssets' = `availAssets' - 21600 if mAge == 54
-.         replace `availAssets' = `availAssets' - 22100 if mAge == 55
-.         replace `availAssets' = `availAssets' - 22700 if mAge == 56
-.         replace `availAssets' = `availAssets' - 23200 if mAge == 57
-.         replace `availAssets' = `availAssets' - 23900 if mAge == 58
-.         replace `availAssets' = `availAssets' - 24400 if mAge == 59
-.         replace `availAssets' = `availAssets' - 25100 if mAge == 60
-.         replace `availAssets' = `availAssets' - 25700 if mAge == 61
-.         replace `availAssets' = `availAssets' - 26400 if mAge == 62
-.         replace `availAssets' = `availAssets' - 27200 if mAge == 63
-.         replace `availAssets' = `availAssets' - 27900 if mAge == 64
-.         replace `availAssets' = `availAssets' - 28700 if mAge >= 65 & !missing(mAge)
-.         replace `availAssets' = . if missing(mAge)
-. {c )-}
-{txt}
-{com}. 
-. 
-. replace `availAssets' = max(0, 0.12 * `availAssets')
-{txt}(950 real changes made)
-
-{com}. 
-. 
-. //Box 5
-. tempvar resources
-{txt}
-{com}. gen `resources' = `availInc' + `availAssets'
-{txt}(195 missing values generated)
-
-{com}. 
-. tempvar grossCont
-{txt}
-{com}. gen `grossCont' = .
-{txt}(950 missing values generated)
-
-{com}. replace `grossCont' = -750 if `resources' < -3409
-{txt}(107 real changes made)
-
-{com}. replace `grossCont' = .22 * `availInc' if inrange(`resources', -3409, 13400)
-{txt}(97 real changes made)
-
-{com}. replace `grossCont' = 2948 + .25 * (`resources' - 13400) if inrange(`resources', 13401, 16800)
-{txt}(22 real changes made)
-
-{com}. replace `grossCont' = 3798 + .29 * (`resources' - 16800) if inrange(`resources', 16801, 20200)
-{txt}(21 real changes made)
-
-{com}. replace `grossCont' = 4784 + .34 * (`resources' - 20200) if inrange(`resources', 20201, 23700)
-{txt}(18 real changes made)
-
-{com}. replace `grossCont' = 5974 + .40 * (`resources' - 23700) if inrange(`resources', 23701, 27100)
-{txt}(15 real changes made)
-
-{com}. replace `grossCont' = 7334 + .47 * (`resources' - 27100) if `resources' >= 27101
-{txt}(475 real changes made)
-
-{com}. 
-. replace `grossCont' = max(`grossCont', 0)
-{txt}(324 real changes made)
-
-{com}. 
-. gen efc = `grossCont' / sibsInColl
-{txt}(645 missing values generated)
-
-{com}. 
-. //If stopped at line 3
-. replace efc = 0 if parInc < 20000
-{txt}(67 real changes made)
-
-{com}. 
-. //Need
-. gen need = tuition - efc
-{txt}(612 missing values generated)
-
-{com}. //replace need = 0 if need < 0
-. 
-. //Cap dummies
-. gen atCap = 0 if !missing(need)
-{txt}(612 missing values generated)
-
-{com}. replace atCap = 1 if need >= 5500 & !missing(need)
-{txt}(108 real changes made)
-
-{com}. 
-. //Drops temp variables (somehow not automatic?)
-. drop __*
-{txt}
-{com}. 
-. save ../Output/Need.dta, replace
-{txt}file ../Output/Need.dta saved
-
-{com}. 
-{txt}end of do-file
-
-{com}. scatter momMarried mAge
-{res}
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\NeedCalc\Code\NeedCalc.do"
-{txt}
-{com}. use ../Input/Merged.dta, clear
-{txt}
-{com}. //Available Income Calc
-. 
-. //Preliminary stats:
-. 
-. //Household is composed of:
-. //Child and mother, plus siblings, plus spouse
-. gen hhSize = 2 + sibs + momMarried
-{txt}(70 missing values generated)
-
-{com}. 
-. //Mother's age
-. gen mAge = floor((ym(2008, 1) - parDob) / 12)
-{txt}(15 missing values generated)
-
-{com}. 
-. //Box 1: Just parInc
-. 
-. //Box 2: Income Allowances
-. tempvar incAllowance
-{txt}
-{com}. gen `incAllowance' = 0
-{txt}
-{com}. 
-. //Social security allowance
-. replace `incAllowance' = `incAllowance' + .0765 * parInc if parInc < 94200
-{txt}(476 real changes made)
-
-{com}. replace `incAllowance' = `incAllowance' + 7206.3 + 0.145 * (parInc - 94200) if parInc >= 94200
-{txt}(465 real changes made, 195 to missing)
-
-{com}. 
-. //Income protection (line 12), aka table A3
-. //Assumes parents are not also in college
-. if hhSize == 2{c -(}
-.         replace `incAllowance' = `incAllowance' + 15000
-. {c )-}
-{txt}
-{com}. else if hhSize == 3{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 18680
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16130
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 4{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 23070
-{txt}(755 real changes made)
-{com}.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 20510
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 17950
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize == 5{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 27220
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24660
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 22100
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 19540
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 16980
-.         {c )-}
-. {c )-}
-{txt}
-{com}. else if hhSize >= 6{c -(}
-.         if sibsInCollege == 0{c -(}
-.                 replace `incAllowance' = `incAllowance' + 31840
-.         {c )-}
-.         else if sibsInCollege == 1{c -(}
-.                 replace `incAllowance' = `incAllowance' + 29280
-.         {c )-}
-.         else if sibsInCollege == 2{c -(}
-.                 replace `incAllowance' = `incAllowance' + 26720
-.         {c )-}
-.         else if sibsInCollege == 3{c -(}
-.                 replace `incAllowance' = `incAllowance' + 24160
-.         {c )-}
-.         else if sibsInCollege == 4{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600
-.         {c )-}
-.         else if sibsInCollege == 5{c -(}
-.                 replace `incAllowance' = `incAllowance' + 21600 - 2550
-.         {c )-}
-.         else if sibsInCollege >= 6{c -(}
-.                 replace `incAllowance' = 21600 - (sibsInCollege - 6) * 2550
-.         {c )-}
-.         `incAllowance' = `incAllowance' + (hhSize - 6) * 3590
-. {c )-}
-{txt}
-{com}. 
-. //Single-parent deducation (line 13)
-. replace `incAllowance' = `incAllowance' + min(3200, .35 * parInc) if !momMarried
+. replace `incAllowance' = `incAllowance' + min(3200, .35 * parInc) if !momMarried & !missing(momMarried)
 {txt}(241 real changes made)
 
 {com}. 
@@ -3171,6 +802,7 @@ end of do-file
 {txt}(9 real changes made, 9 to missing)
 
 {com}. 
+. //Mother married
 . replace `availAssets' = `availAssets' - 0 if mAge <= 25 & momMarried & !missing(momMarried)
 {txt}(0 real changes made)
 
@@ -3298,55 +930,137 @@ end of do-file
 {txt}(6 real changes made, 6 to missing)
 
 {com}.         
-. if !momMarried{c -(}
-.         replace `availAssets' = `availAssets' - 0 if mAge <= 25
-.         replace `availAssets' = `availAssets' - 1000 if mAge == 26
-.         replace `availAssets' = `availAssets' - 2100 if mAge == 27
-.         replace `availAssets' = `availAssets' - 3100 if mAge == 28
-.         replace `availAssets' = `availAssets' - 4200 if mAge == 29
-.         replace `availAssets' = `availAssets' - 5200 if mAge == 30
-.         replace `availAssets' = `availAssets' - 6300 if mAge == 31
-.         replace `availAssets' = `availAssets' - 7300 if mAge == 32
-.         replace `availAssets' = `availAssets' - 8400 if mAge == 33
-.         replace `availAssets' = `availAssets' - 9400 if mAge == 34
-.         replace `availAssets' = `availAssets' - 10500 if mAge == 35
-.         replace `availAssets' = `availAssets' - 11500 if mAge == 36
-.         replace `availAssets' = `availAssets' - 12600 if mAge == 37
-.         replace `availAssets' = `availAssets' - 13600 if mAge == 38
-.         replace `availAssets' = `availAssets' - 14700 if mAge == 39
-.         replace `availAssets' = `availAssets' - 15700 if mAge == 40
-.         replace `availAssets' = `availAssets' - 16100 if mAge == 41
-.         replace `availAssets' = `availAssets' - 16400 if mAge == 42
-.         replace `availAssets' = `availAssets' - 16800 if mAge == 43
-.         replace `availAssets' = `availAssets' - 17200 if mAge == 44
-.         replace `availAssets' = `availAssets' - 17500 if mAge == 45
-.         replace `availAssets' = `availAssets' - 17900 if mAge == 46
-.         replace `availAssets' = `availAssets' - 18300 if mAge == 47
-.         replace `availAssets' = `availAssets' - 18800 if mAge == 48
-.         replace `availAssets' = `availAssets' - 19200 if mAge == 49
-.         replace `availAssets' = `availAssets' - 19700 if mAge == 50
-.         replace `availAssets' = `availAssets' - 20100 if mAge == 51
-.         replace `availAssets' = `availAssets' - 20500 if mAge == 52
-.         replace `availAssets' = `availAssets' - 21000 if mAge == 53
-.         replace `availAssets' = `availAssets' - 21600 if mAge == 54
-.         replace `availAssets' = `availAssets' - 22100 if mAge == 55
-.         replace `availAssets' = `availAssets' - 22700 if mAge == 56
-.         replace `availAssets' = `availAssets' - 23200 if mAge == 57
-.         replace `availAssets' = `availAssets' - 23900 if mAge == 58
-.         replace `availAssets' = `availAssets' - 24400 if mAge == 59
-.         replace `availAssets' = `availAssets' - 25100 if mAge == 60
-.         replace `availAssets' = `availAssets' - 25700 if mAge == 61
-.         replace `availAssets' = `availAssets' - 26400 if mAge == 62
-.         replace `availAssets' = `availAssets' - 27200 if mAge == 63
-.         replace `availAssets' = `availAssets' - 27900 if mAge == 64
-.         replace `availAssets' = `availAssets' - 28700 if mAge >= 65 & !missing(mAge)
-.         replace `availAssets' = . if missing(mAge)
-. {c )-}
-{txt}
+. //Mother unmarried
+. replace `availAssets' = `availAssets' - 0 if mAge <= 25 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 1000 if mAge == 26 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 2100 if mAge == 27 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 3100 if mAge == 28 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 4200 if mAge == 29 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 5200 if mAge == 30 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 6300 if mAge == 31 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 7300 if mAge == 32 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 8400 if mAge == 33 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 9400 if mAge == 34 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 10500 if mAge == 35 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 11500 if mAge == 36 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 12600 if mAge == 37 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 13600 if mAge == 38 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 14700 if mAge == 39 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 15700 if mAge == 40 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 16100 if mAge == 41 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 16400 if mAge == 42 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 16800 if mAge == 43 & !momMarried
+{txt}(15 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 17200 if mAge == 44 & !momMarried
+{txt}(34 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 17500 if mAge == 45 & !momMarried
+{txt}(28 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 17900 if mAge == 46 & !momMarried
+{txt}(21 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 18300 if mAge == 47 & !momMarried
+{txt}(37 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 18800 if mAge == 48 & !momMarried
+{txt}(31 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 19200 if mAge == 49 & !momMarried
+{txt}(26 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 19700 if mAge == 50 & !momMarried
+{txt}(35 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 20100 if mAge == 51 & !momMarried
+{txt}(3 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 20500 if mAge == 52 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 21000 if mAge == 53 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 21600 if mAge == 54 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 22100 if mAge == 55 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 22700 if mAge == 56 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 23200 if mAge == 57 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 23900 if mAge == 58 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 24400 if mAge == 59 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 25100 if mAge == 60 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 25700 if mAge == 61 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 26400 if mAge == 62 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 27200 if mAge == 63 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 27900 if mAge == 64 & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = `availAssets' - 28700 if mAge >= 65 & !missing(mAge) & !momMarried
+{txt}(0 real changes made)
+
+{com}. replace `availAssets' = . if missing(mAge)
+{txt}(0 real changes made)
+
 {com}. 
-. 
+. //If negative, enter zero
 . replace `availAssets' = max(0, 0.12 * `availAssets')
-{txt}(931 real changes made)
+{txt}(950 real changes made)
 
 {com}. 
 . 
@@ -3363,32 +1077,32 @@ end of do-file
 {txt}(950 missing values generated)
 
 {com}. replace `grossCont' = -750 if `resources' < -3409
-{txt}(104 real changes made)
+{txt}(98 real changes made)
 
 {com}. replace `grossCont' = .22 * `availInc' if inrange(`resources', -3409, 13400)
-{txt}(96 real changes made)
+{txt}(101 real changes made)
 
 {com}. replace `grossCont' = 2948 + .25 * (`resources' - 13400) if inrange(`resources', 13401, 16800)
-{txt}(24 real changes made)
+{txt}(23 real changes made)
 
 {com}. replace `grossCont' = 3798 + .29 * (`resources' - 16800) if inrange(`resources', 16801, 20200)
-{txt}(21 real changes made)
+{txt}(20 real changes made)
 
 {com}. replace `grossCont' = 4784 + .34 * (`resources' - 20200) if inrange(`resources', 20201, 23700)
-{txt}(18 real changes made)
+{txt}(21 real changes made)
 
 {com}. replace `grossCont' = 5974 + .40 * (`resources' - 23700) if inrange(`resources', 23701, 27100)
-{txt}(14 real changes made)
+{txt}(24 real changes made)
 
 {com}. replace `grossCont' = 7334 + .47 * (`resources' - 27100) if `resources' >= 27101
-{txt}(478 real changes made)
+{txt}(468 real changes made)
 
 {com}. 
 . replace `grossCont' = max(`grossCont', 0)
-{txt}(324 real changes made)
+{txt}(313 real changes made)
 
 {com}. 
-. gen efc = `grossCont' / sibsInColl
+. gen efc = `grossCont' / sibsInCol
 {txt}(645 missing values generated)
 
 {com}. 
@@ -3407,8 +1121,8 @@ end of do-file
 . gen atCap = 0 if !missing(need)
 {txt}(612 missing values generated)
 
-{com}. replace atCap = 1 if need >= 5500 & !missing(need)
-{txt}(108 real changes made)
+{com}. replace atCap = 1 if need >= 4500 & !missing(need)
+{txt}(122 real changes made)
 
 {com}. 
 . //Drops temp variables (somehow not automatic?)
@@ -3422,3 +1136,119 @@ end of do-file
 {txt}end of do-file
 
 {com}. 
+. /*
+> cd ../../Tables/Code
+> do tables
+> */
+. 
+. cd ../../Regressions/Code
+{res}C:\Users\gmoore\desktop\honors\analysis\Regressions\Code
+{txt}
+{com}. do regs
+{txt}
+{com}. use ../../NeedCalc/Output/Need.dta, clear
+{txt}
+{com}. 
+. //Linear time trend
+. tobit loan atCap##c.polImpact need intDate i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
+{res}
+{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       191
+{txt}{col 51}LR chi2({res}12{txt}){col 67}= {res}     36.64
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0003
+{txt}Log likelihood = {res}  -1135.68{txt}{col 51}Pseudo R2{col 67}= {res}    0.0159
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}1.atCap {c |}{col 26}{res}{space 2} 84.08985{col 38}{space 2} 2755.757{col 49}{space 1}    0.03{col 58}{space 3}0.976{col 66}{space 4} -5353.86{col 79}{space 3}  5522.04
+{txt}{space 15}polImpact {c |}{col 26}{res}{space 2}-1.569015{col 38}{space 2} 4.417123{col 49}{space 1}   -0.36{col 58}{space 3}0.723{col 66}{space 4}-10.28535{col 79}{space 3} 7.147317
+{txt}{space 24} {c |}
+{space 7}atCap#c.polImpact {c |}
+{space 22}1  {c |}{col 26}{res}{space 2}  .623287{col 38}{space 2} 2.105011{col 49}{space 1}    0.30{col 58}{space 3}0.767{col 66}{space 4}-3.530543{col 79}{space 3} 4.777117
+{txt}{space 24} {c |}
+{space 20}need {c |}{col 26}{res}{space 2} .1325079{col 38}{space 2}  .041844{col 49}{space 1}    3.17{col 58}{space 3}0.002{col 66}{space 4}  .049937{col 79}{space 3} .2150788
+{txt}{space 17}intDate {c |}{col 26}{res}{space 2} 92.27226{col 38}{space 2} 156.4238{col 49}{space 1}    0.59{col 58}{space 3}0.556{col 66}{space 4}-216.3997{col 79}{space 3} 400.9442
+{txt}{space 10}1.fallSemester {c |}{col 26}{res}{space 2}-281.3757{col 38}{space 2} 1769.435{col 49}{space 1}   -0.16{col 58}{space 3}0.874{col 66}{space 4}-3773.011{col 79}{space 3}  3210.26
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 2141.139{col 38}{space 2} 2341.406{col 49}{space 1}    0.91{col 58}{space 3}0.362{col 66}{space 4}-2479.169{col 79}{space 3} 6761.447
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2534.857{col 38}{space 2} 2174.041{col 49}{space 1}    1.17{col 58}{space 3}0.245{col 66}{space 4}-1755.189{col 79}{space 3} 6824.903
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1317.766{col 38}{space 2} 1453.613{col 49}{space 1}    0.91{col 58}{space 3}0.366{col 66}{space 4}-1550.657{col 79}{space 3} 4186.189
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-2928.343{col 38}{space 2} 2365.215{col 49}{space 1}   -1.24{col 58}{space 3}0.217{col 66}{space 4}-7595.634{col 79}{space 3} 1738.948
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1604.272{col 38}{space 2} 2372.425{col 49}{space 1}   -0.68{col 58}{space 3}0.500{col 66}{space 4}-6285.791{col 79}{space 3} 3077.248
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-6408.225{col 38}{space 2} 2851.752{col 49}{space 1}   -2.25{col 58}{space 3}0.026{col 66}{space 4} -12035.6{col 79}{space 3}-780.8479
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2}-52761.47{col 38}{space 2} 90482.39{col 49}{space 1}   -0.58{col 58}{space 3}0.561{col 66}{space 4}-231310.9{col 79}{space 3} 125787.9
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                  /sigma {c |}{col 26}{res}{space 2} 8778.504{col 38}{space 2} 663.7636{col 66}{space 4} 7468.696{col 79}{space 3} 10088.31
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+  Obs. summary:{col 18}{res}       88{col 28}{txt} left-censored observations at loan<={res}0
+{txt}{col 18}{res}      103{col 28}{txt}    uncensored observations
+{col 18}{res}        0{col 28}{txt}right-censored observations
+
+{com}. 
+. //Dummied time trend
+. tobit loan atCap##c.polImpact need i.year i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
+{res}
+{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       191
+{txt}{col 51}LR chi2({res}13{txt}){col 67}= {res}     37.93
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0003
+{txt}Log likelihood = {res}-1135.0348{txt}{col 51}Pseudo R2{col 67}= {res}    0.0164
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}1.atCap {c |}{col 26}{res}{space 2}-191.4664{col 38}{space 2} 2761.209{col 49}{space 1}   -0.07{col 58}{space 3}0.945{col 66}{space 4}-5640.383{col 79}{space 3}  5257.45
+{txt}{space 15}polImpact {c |}{col 26}{res}{space 2}-8.073525{col 38}{space 2} 7.605139{col 49}{space 1}   -1.06{col 58}{space 3}0.290{col 66}{space 4}-23.08136{col 79}{space 3}  6.93431
+{txt}{space 24} {c |}
+{space 7}atCap#c.polImpact {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} .9718483{col 38}{space 2} 2.137983{col 49}{space 1}    0.45{col 58}{space 3}0.650{col 66}{space 4}-3.247206{col 79}{space 3} 5.190902
+{txt}{space 24} {c |}
+{space 20}need {c |}{col 26}{res}{space 2} .1325715{col 38}{space 2} .0419652{col 49}{space 1}    3.16{col 58}{space 3}0.002{col 66}{space 4}  .049758{col 79}{space 3} .2153849
+{txt}{space 24} {c |}
+{space 20}year {c |}
+{space 21}10  {c |}{col 26}{res}{space 2} 9641.966{col 38}{space 2} 7803.561{col 49}{space 1}    1.24{col 58}{space 3}0.218{col 66}{space 4}-5757.433{col 79}{space 3} 25041.36
+{txt}{space 21}12  {c |}{col 26}{res}{space 2} 16413.93{col 38}{space 2} 13930.66{col 49}{space 1}    1.18{col 58}{space 3}0.240{col 66}{space 4}-11076.57{col 79}{space 3} 43904.43
+{txt}{space 24} {c |}
+{space 10}1.fallSemester {c |}{col 26}{res}{space 2} 506.4888{col 38}{space 2} 1759.154{col 49}{space 1}    0.29{col 58}{space 3}0.774{col 66}{space 4}-2964.993{col 79}{space 3} 3977.971
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 2424.065{col 38}{space 2} 2348.693{col 49}{space 1}    1.03{col 58}{space 3}0.303{col 66}{space 4}  -2210.8{col 79}{space 3}  7058.93
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2665.885{col 38}{space 2} 2180.574{col 49}{space 1}    1.22{col 58}{space 3}0.223{col 66}{space 4}-1637.218{col 79}{space 3} 6968.989
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1455.963{col 38}{space 2} 1462.432{col 49}{space 1}    1.00{col 58}{space 3}0.321{col 66}{space 4}-1429.973{col 79}{space 3} 4341.898
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-2766.982{col 38}{space 2} 2368.877{col 49}{space 1}   -1.17{col 58}{space 3}0.244{col 66}{space 4}-7441.678{col 79}{space 3} 1907.714
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1539.543{col 38}{space 2} 2368.956{col 49}{space 1}   -0.65{col 58}{space 3}0.517{col 66}{space 4}-6214.395{col 79}{space 3} 3135.309
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-6154.683{col 38}{space 2} 2858.924{col 49}{space 1}   -2.15{col 58}{space 3}0.033{col 66}{space 4}-11796.43{col 79}{space 3}-512.9368
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2}-265.0551{col 38}{space 2} 3654.449{col 49}{space 1}   -0.07{col 58}{space 3}0.942{col 66}{space 4}-7476.675{col 79}{space 3} 6946.565
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                  /sigma {c |}{col 26}{res}{space 2} 8761.388{col 38}{space 2} 662.2349{col 66}{space 4} 7454.546{col 79}{space 3} 10068.23
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+  Obs. summary:{col 18}{res}       88{col 28}{txt} left-censored observations at loan<={res}0
+{txt}{col 18}{res}      103{col 28}{txt}    uncensored observations
+{col 18}{res}        0{col 28}{txt}right-censored observations
+
+{com}. 
+{txt}end of do-file
+
+{com}. 
+. cd ../../Master/Code
+{res}C:\Users\gmoore\desktop\honors\analysis\Master\Code
+{txt}
+{com}. save ../Output/Master.dta, replace
+{txt}file ../Output/Master.dta saved
+
+{com}. 
+{txt}end of do-file
+
+{com}. view "C:\Users\gmoore\Desktop\honors\Analysis\Master\Output\master.smcl"
+
+. exit, clear

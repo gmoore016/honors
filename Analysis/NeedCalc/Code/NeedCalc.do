@@ -51,13 +51,13 @@ replace `incAllowance' = `incAllowance' + 26720 if hhSize >= 6 & sibsInCollege =
 replace `incAllowance' = `incAllowance' + 24160 if hhSize >= 6 & sibsInCollege == 3
 replace `incAllowance' = `incAllowance' + 21600 if hhSize >= 6 & sibsInCollege == 4
 replace `incAllowance' = `incAllowance' + 21600 - 2550 if hhSize >= 6 & sibsInCollege == 5
-replace `incAllowance' = `incAllowance' + 21600 - (sibsInCollege - 6) * 2550if hhSize >= 6 & sibsInCollege >= 6
+replace `incAllowance' = `incAllowance' + 21600 - (sibsInCollege - 6) * 2550 if hhSize >= 6 & sibsInCollege >= 6
 replace `incAllowance' = `incAllowance' + (hhSize - 6) * 3590 if hhSize >= 6
 
 
 
 //Single-parent deducation (line 13)
-replace `incAllowance' = `incAllowance' + min(3200, .35 * parInc) if !momMarried
+replace `incAllowance' = `incAllowance' + min(3200, .35 * parInc) if !momMarried & !missing(momMarried)
 
 
 //Box 3
@@ -159,7 +159,7 @@ replace `availAssets' = `availAssets' - 27900 if mAge == 64 & !momMarried
 replace `availAssets' = `availAssets' - 28700 if mAge >= 65 & !missing(mAge) & !momMarried
 replace `availAssets' = . if missing(mAge)
 
-
+//If negative, enter zero
 replace `availAssets' = max(0, 0.12 * `availAssets')
 
 
@@ -179,7 +179,7 @@ replace `grossCont' = 7334 + .47 * (`resources' - 27100) if `resources' >= 27101
 
 replace `grossCont' = max(`grossCont', 0)
 
-gen efc = `grossCont' / sibsInColl
+gen efc = `grossCont' / sibsInCol
 
 //If stopped at line 3
 replace efc = 0 if parInc < 20000
@@ -190,7 +190,7 @@ gen need = tuition - efc
 
 //Cap dummies
 gen atCap = 0 if !missing(need)
-replace atCap = 1 if need >= 5500 & !missing(need)
+replace atCap = 1 if need >= 4500 & !missing(need)
 
 //Drops temp variables (somehow not automatic?)
 drop __*
