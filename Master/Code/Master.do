@@ -3,9 +3,11 @@ log using ../Output/master.smcl, replace
 
 set more off
 
+//Import data from parent file (NLSY 79)
 cd ../../NLSY79ParentData/Code
 do ParImport
 
+//Import data from children file (NLSY 79 CYA)
 cd ../../NLSYChild79Data/Code
 do Import
 
@@ -13,7 +15,9 @@ do Import
 //Assertion guarantees all children have parental incomes
 //Drop those women without children in college
 merge m:1 mid year using ../../NLSY79ParentData/Output/ParData.dta, assert(match using) nogen keep(match)
-//keep if parInc < 50000
+
+//Saves merged file as input for need calculations, then outputs file
+//with completed need calcs
 cd ../../NeedCalc/Code
 save ../Input/Merged.dta, replace
 do NeedCalc
