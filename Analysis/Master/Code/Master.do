@@ -22,8 +22,13 @@ cd ../../NeedCalc/Code
 save ../Input/Merged.dta, replace
 do NeedCalc
 
+/*
 cd ../../Tables/Code
 do tables
+*/
 
 cd ../../Regressions/Code
 do regs
+
+cd ../../Master/Code
+save ../Output/Master.dta, replace
