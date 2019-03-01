@@ -47,7 +47,14 @@ rename T3055100 married10
 rename T3986700 married12
 rename T4924000 married14
 
-keep parInc* assets* homeVal* married* mid
+//Adds birth month
+replace R0410300 = . if R0410300 < 0
+replace R0410100 = . if R0410100 < 0
+gen parDob = ym(1900 + R0410300, R0410100)
+format parDob %tm
+drop R0410300 R0410100
+
+keep parInc* assets* homeVal* married* mid parDob
 
 reshape long parInc assets homeVal married, i(mid) j(year)
 replace parInc = . if parInc < 0

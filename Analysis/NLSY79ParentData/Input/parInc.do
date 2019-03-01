@@ -4,6 +4,10 @@ label define vlR0214700   1 "HISPANIC"  2 "BLACK"  3 "NON-BLACK, NON-HISPANIC"
 label values R0214700 vlR0214700
 label define vlR0214800   1 "MALE"  2 "FEMALE"
 label values R0214800 vlR0214800
+label define vlR0410100   0 "0: < 1"  1 "1"  2 "2"  3 "3"  4 "4"  5 "5"  6 "6"  7 "7"  8 "8"  9 "9"  10 "10"  11 "11"  12 "12"  13 "13"  14 "14"  15 "15"  16 "16"
+label values R0410100 vlR0410100
+label define vlR0410300   55 "55"  56 "56"  57 "57"  58 "58"  59 "59"  60 "60"  61 "61"  62 "62"  63 "63"  64 "64"  65 "65"  66 "66"  67 "67"  68 "68"  69 "69"  70 "70"
+label values R0410300 vlR0410300
 label define vlR6940103   0 "0"
 label values R6940103 vlR6940103
 label define vlR6944402   0 "0"
@@ -60,6 +64,8 @@ label values T5022600 vlT5022600
   rename R0173600 SAMPLE_ID_1979 
   rename R0214700 SAMPLE_RACE_78SCRN 
   rename R0214800 SAMPLE_SEX_1979 
+  rename R0410100 Q1_3_A_M_1981   // Q1-3_A~M
+  rename R0410300 Q1_3_A_Y_1981   // Q1-3_A~Y
   rename R6917500 Q13_10_2000   // Q13-10
   rename R6940103 TNFW_TRUNC_2000 
   rename R6944402 RESIDENCE_IMPUTED_TRUNC_2000 
