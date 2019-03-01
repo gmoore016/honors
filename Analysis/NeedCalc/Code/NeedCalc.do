@@ -126,4 +126,7 @@ gen need = tuition - efc
 gen atCap = 0 if !missing(need)
 replace atCap = 1 if need >= 5500 & !missing(need)
 
+//Drops temp variables (somehow not automatic?)
+drop __*
+
 save ../Output/Need.dta, replace
