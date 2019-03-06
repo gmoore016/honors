@@ -17,6 +17,50 @@
 \endgroup
 
 \datalist[entry]{nyt/global//global/global}
+  \entry{aisch2017}{misc}{}
+    \name{author}{4}{}{%
+      {{hash=AG}{%
+         family={Aisch},
+         familyi={A\bibinitperiod},
+         given={Gregor},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=BL}{%
+         family={Buchanan},
+         familyi={B\bibinitperiod},
+         given={Larry},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=CA}{%
+         family={Cox},
+         familyi={C\bibinitperiod},
+         given={Amanda},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=QK}{%
+         family={Queally},
+         familyi={Q\bibinitperiod},
+         given={Kevin},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{AG+1}
+    \strng{fullhash}{AGBLCAQK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2017}
+    \field{labeldatesource}{year}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{title}{Economic Diversity and Student Outcomes at Princeton}
+    \verb{url}
+    \verb https://www.nytimes.com/interactive/projects/college-mobility/princet
+    \verb on-university
+    \endverb
+    \field{type}{Newspaper Article}
+    \field{year}{2017}
+  \endentry
+
   \entry{angrist2009}{book}{}
     \name{author}{2}{}{%
       {{hash=AJD}{%
@@ -156,6 +200,47 @@
     \field{journaltitle}{Journal of Social Policy}
     \field{month}{10}
     \field{year}{2005}
+  \endentry
+
+  \entry{eckel2007}{article}{}
+    \name{author}{4}{}{%
+      {{hash=EC}{%
+         family={Eckel},
+         familyi={E\bibinitperiod},
+         given={Catherine},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=JC}{%
+         family={Johnson},
+         familyi={J\bibinitperiod},
+         given={Cathleen},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=MC}{%
+         family={Montmarquette},
+         familyi={M\bibinitperiod},
+         given={Claude},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=RC}{%
+         family={Rojas},
+         familyi={R\bibinitperiod},
+         given={Christian},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{EC+1}
+    \strng{fullhash}{ECJCMCRC1}
+    \field{labelnamesource}{author}
+    \field{labelyear}{2007}
+    \field{labeldatesource}{year}
+    \field{sortinit}{E}
+    \field{sortinithash}{E}
+    \field{number}{2}
+    \field{pages}{233\bibrangedash 262}
+    \field{volume}{35}
+    \field{journaltitle}{Public Finance Review}
+    \field{year}{2007}
   \endentry
 
   \entry{feiveson2018}{article}{}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.5)  6 FEB 2019 00:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.5)  6 MAR 2019 17:49
 entering extended mode
 **./Honors.tex
 (Honors.tex
@@ -687,28 +687,22 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
 {C:/Users/gmoore/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-[2] [3]
-
-LaTeX Warning: Citation 'aisch2017' on page 4 undefined on input line 66.
-
-[4]
-
-LaTeX Warning: Citation 'eckel2007' on page 5 undefined on input line 68.
-
-[5]
+[2] [3] [4] [5]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 83.
- ("C:\Users\gmoore\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\omscmr.fd"
+
+("C:\Users\gmoore\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 83.
- [6] [7]
-<Images/Lucca6a.png, id=35, 538.51187pt x 383.4325pt>
+
+[6] [7]
+<Images/Lucca6a.png, id=34, 538.51187pt x 383.4325pt>
 File: Images/Lucca6a.png Graphic file (type png)
 <use Images/Lucca6a.png>
 Package pdftex.def Info: Images/Lucca6a.png  used on input line 111.
 (pdftex.def)             Requested size: 210.70462pt x 150.02368pt.
-<Images/Lucca6b.png, id=37, 520.94624pt x 377.41pt>
+<Images/Lucca6b.png, id=36, 520.94624pt x 377.41pt>
 File: Images/Lucca6b.png Graphic file (type png)
 <use Images/Lucca6b.png>
 Package pdftex.def Info: Images/Lucca6b.png  used on input line 117.
@@ -733,25 +727,20 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [14] [15] (Honors.aux)
+ [14] [15] [16] (Honors.aux)
 
 LaTeX Warning: There were undefined references.
-
-
-Package biblatex Warning: Please (re)run BibTeX on the file(s):
-(biblatex)                Honors
-(biblatex)                and rerun LaTeX afterwards.
 
 Package logreq Info: Writing requests to 'Honors.run.xml'.
 \openout1 = `Honors.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 12653 strings out of 492946
- 221970 string characters out of 3125823
+ 12660 strings out of 492946
+ 222179 string characters out of 3125823
  518383 words of memory out of 3000000
- 16281 multiletter control sequences out of 15000+200000
- 15676 words of font info for 104 fonts, out of 3000000 for 9000
+ 16290 multiletter control sequences out of 15000+200000
+ 15625 words of font info for 103 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,11n,70p,1334b,1445s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/gmoore/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
@@ -773,9 +762,9 @@ onts/cm/cmsy7.pfb><C:/Users/gmoore/AppData/Local/Programs/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmti10.pfb><C:/Users/gmoore/AppData/Local/Programs/MiKTeX 
 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/gmoore/AppData/Local/Pr
 ograms/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Honors.pdf (15 pages, 271027 bytes).
+Output written on Honors.pdf (16 pages, 269455 bytes).
 PDF statistics:
- 120 PDF objects out of 1000 (max. 8388607)
+ 123 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  16395 words of extra memory for PDF output out of 17280 (max. 10000000)
 
