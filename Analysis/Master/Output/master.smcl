@@ -2530,4 +2530,390 @@ end of do-file
 {com}. count if atCap & !missing(atCap)
 {res}  122
 
+{com}. binscatter need loan
+{res}{txt}warning: nquantiles(20) was specified, but only 12 were generated. see help file under nquantiles() for explanation.
+{res}
+{com}. binscatter need loan if loan <= 10000
+{res}{txt}warning: nquantiles(20) was specified, but only 11 were generated. see help file under nquantiles() for explanation.
+{res}
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. use ../../NeedCalc/Output/Need.dta, clear
+{txt}
+{com}. 
+. //General distribution of majors
+. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq graphregion(color(white)) ///
+>         xtitle("Parental Income in Year of Graduation")
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace 
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq graphregion(color(white)) ///
+>         xtitle("Debt When Graduating")
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdf, replace
+{txt}(file ../Output/loanDist.pdf written in PDF format)
+
+{com}. 
+. //Loan vs. Time by atCap
+. capture graph drop loanAtCap
+{txt}
+{com}. capture graph drop loanNotAtCap
+{txt}
+{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
+>         title(atCap) nodraw
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+
+{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
+>         title(!atCap) nodraw
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+
+{com}. graph combine loanAtCap loanNotAtCap, ycommon
+{res}{txt}
+{com}. graph export ../Output/LoanTimeCapBinscatter.pdf, replace
+{txt}(file ../Output/LoanTimeCapBinscatter.pdf written in PDF format)
+
+{com}. 
+. //Loan vs. Need by polImpact
+. capture graph drop loanNeedPol
+{txt}
+{com}. capture graph drop loanNeedNotPol
+{txt}
+{com}. binscatter loan need if polImpact & !missing(polImpact) & ///
+>         inrange(need, -5000, 30000), name(loanNeedPol) title(Post-Policy) nodraw
+{res}{txt}
+{com}. binscatter loan need if !polImpact & inrange(need, -5000, 30000), ///
+>         name(loanNeedNotPol) title(Pre-Policy) nodraw
+{res}{txt}
+{com}. graph combine loanNeedNotPol loanNeedPol, ycommon
+{res}{txt}
+{com}. graph export ../Output/LoanNeedPolBinscatter.pdf, replace
+{txt}(file ../Output/LoanNeedPolBinscatter.pdf written in PDF format)
+
+{com}. 
+. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. tobit loan atCap##c.polImpact need i.year i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
+{res}
+{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       191
+{txt}{col 51}LR chi2({res}13{txt}){col 67}= {res}     37.93
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0003
+{txt}Log likelihood = {res}-1135.0348{txt}{col 51}Pseudo R2{col 67}= {res}    0.0164
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}1.atCap {c |}{col 26}{res}{space 2}-191.4664{col 38}{space 2} 2761.209{col 49}{space 1}   -0.07{col 58}{space 3}0.945{col 66}{space 4}-5640.383{col 79}{space 3}  5257.45
+{txt}{space 15}polImpact {c |}{col 26}{res}{space 2}-8.073525{col 38}{space 2} 7.605139{col 49}{space 1}   -1.06{col 58}{space 3}0.290{col 66}{space 4}-23.08136{col 79}{space 3}  6.93431
+{txt}{space 24} {c |}
+{space 7}atCap#c.polImpact {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} .9718483{col 38}{space 2} 2.137983{col 49}{space 1}    0.45{col 58}{space 3}0.650{col 66}{space 4}-3.247206{col 79}{space 3} 5.190902
+{txt}{space 24} {c |}
+{space 20}need {c |}{col 26}{res}{space 2} .1325715{col 38}{space 2} .0419652{col 49}{space 1}    3.16{col 58}{space 3}0.002{col 66}{space 4}  .049758{col 79}{space 3} .2153849
+{txt}{space 24} {c |}
+{space 20}year {c |}
+{space 21}10  {c |}{col 26}{res}{space 2} 9641.966{col 38}{space 2} 7803.561{col 49}{space 1}    1.24{col 58}{space 3}0.218{col 66}{space 4}-5757.433{col 79}{space 3} 25041.36
+{txt}{space 21}12  {c |}{col 26}{res}{space 2} 16413.93{col 38}{space 2} 13930.66{col 49}{space 1}    1.18{col 58}{space 3}0.240{col 66}{space 4}-11076.57{col 79}{space 3} 43904.43
+{txt}{space 24} {c |}
+{space 10}1.fallSemester {c |}{col 26}{res}{space 2} 506.4888{col 38}{space 2} 1759.154{col 49}{space 1}    0.29{col 58}{space 3}0.774{col 66}{space 4}-2964.993{col 79}{space 3} 3977.971
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 2424.065{col 38}{space 2} 2348.693{col 49}{space 1}    1.03{col 58}{space 3}0.303{col 66}{space 4}  -2210.8{col 79}{space 3}  7058.93
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2665.885{col 38}{space 2} 2180.574{col 49}{space 1}    1.22{col 58}{space 3}0.223{col 66}{space 4}-1637.218{col 79}{space 3} 6968.989
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1455.963{col 38}{space 2} 1462.432{col 49}{space 1}    1.00{col 58}{space 3}0.321{col 66}{space 4}-1429.973{col 79}{space 3} 4341.898
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-2766.982{col 38}{space 2} 2368.877{col 49}{space 1}   -1.17{col 58}{space 3}0.244{col 66}{space 4}-7441.678{col 79}{space 3} 1907.714
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1539.543{col 38}{space 2} 2368.956{col 49}{space 1}   -0.65{col 58}{space 3}0.517{col 66}{space 4}-6214.395{col 79}{space 3} 3135.309
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-6154.683{col 38}{space 2} 2858.924{col 49}{space 1}   -2.15{col 58}{space 3}0.033{col 66}{space 4}-11796.43{col 79}{space 3}-512.9368
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2}-265.0551{col 38}{space 2} 3654.449{col 49}{space 1}   -0.07{col 58}{space 3}0.942{col 66}{space 4}-7476.675{col 79}{space 3} 6946.565
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                  /sigma {c |}{col 26}{res}{space 2} 8761.388{col 38}{space 2} 662.2349{col 66}{space 4} 7454.546{col 79}{space 3} 10068.23
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+  Obs. summary:{col 18}{res}       88{col 28}{txt} left-censored observations at loan<={res}0
+{txt}{col 18}{res}      103{col 28}{txt}    uncensored observations
+{col 18}{res}        0{col 28}{txt}right-censored observations
+
+{com}. 
+{txt}end of do-file
+
+{com}. tobit loan atCap##c.polImpact need i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
+{res}
+{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       191
+{txt}{col 51}LR chi2({res}11{txt}){col 67}= {res}     36.29
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0002
+{txt}Log likelihood = {res}-1135.8547{txt}{col 51}Pseudo R2{col 67}= {res}    0.0157
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}1.atCap {c |}{col 26}{res}{space 2}-14.80938{col 38}{space 2} 2757.098{col 49}{space 1}   -0.01{col 58}{space 3}0.996{col 66}{space 4}-5455.199{col 79}{space 3} 5425.581
+{txt}{space 15}polImpact {c |}{col 26}{res}{space 2} .8854165{col 38}{space 2} 1.490829{col 49}{space 1}    0.59{col 58}{space 3}0.553{col 66}{space 4}-2.056333{col 79}{space 3} 3.827165
+{txt}{space 24} {c |}
+{space 7}atCap#c.polImpact {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} .6240099{col 38}{space 2} 2.108319{col 49}{space 1}    0.30{col 58}{space 3}0.768{col 66}{space 4} -3.53619{col 79}{space 3} 4.784209
+{txt}{space 24} {c |}
+{space 20}need {c |}{col 26}{res}{space 2} .1337525{col 38}{space 2} .0419849{col 49}{space 1}    3.19{col 58}{space 3}0.002{col 66}{space 4} .0509067{col 79}{space 3} .2165983
+{txt}{space 10}1.fallSemester {c |}{col 26}{res}{space 2} 46.27752{col 38}{space 2} 1681.776{col 49}{space 1}    0.03{col 58}{space 3}0.978{col 66}{space 4}-3272.255{col 79}{space 3}  3364.81
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 2167.496{col 38}{space 2} 2343.125{col 49}{space 1}    0.93{col 58}{space 3}0.356{col 66}{space 4}-2456.031{col 79}{space 3} 6791.024
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2460.251{col 38}{space 2} 2171.509{col 49}{space 1}    1.13{col 58}{space 3}0.259{col 66}{space 4}-1824.638{col 79}{space 3} 6745.141
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2}  1317.69{col 38}{space 2} 1454.888{col 49}{space 1}    0.91{col 58}{space 3}0.366{col 66}{space 4} -1553.14{col 79}{space 3}  4188.52
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-2978.235{col 38}{space 2} 2366.103{col 49}{space 1}   -1.26{col 58}{space 3}0.210{col 66}{space 4}-7647.101{col 79}{space 3} 1690.632
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1722.761{col 38}{space 2} 2366.515{col 49}{space 1}   -0.73{col 58}{space 3}0.468{col 66}{space 4}-6392.441{col 79}{space 3}  2946.92
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-6480.082{col 38}{space 2} 2849.871{col 49}{space 1}   -2.27{col 58}{space 3}0.024{col 66}{space 4}-12103.54{col 79}{space 3}-856.6278
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2} 560.6876{col 38}{space 2} 3567.738{col 49}{space 1}    0.16{col 58}{space 3}0.875{col 66}{space 4}-6479.282{col 79}{space 3} 7600.657
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                  /sigma {c |}{col 26}{res}{space 2} 8786.593{col 38}{space 2} 664.4803{col 66}{space 4}  7475.42{col 79}{space 3} 10097.77
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+  Obs. summary:{col 18}{res}       88{col 28}{txt} left-censored observations at loan<={res}0
+{txt}{col 18}{res}      103{col 28}{txt}    uncensored observations
+{col 18}{res}        0{col 28}{txt}right-censored observations
+
+{com}. corr need atCap
+{txt}(obs=338)
+
+             {c |}     need    atCap
+{hline 13}{c +}{hline 18}
+        need {c |}{res}   1.0000
+       {txt}atCap {c |}{res}   0.4859   1.0000
+
+
+{com}. reg loan need atCap
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
+{txt}{hline 13}{char +}{hline 30}           F(  2,   320) ={res}    8.83
+    {txt}   Model {char |} {res}  536439592     2   268219796           {txt}Prob > F      = {res} 0.0002
+    {txt}Residual {char |} {res} 9.7209e+09   320  30377702.3           {txt}R-squared     = {res} 0.0523
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0464
+    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5511.6
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        loan{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}need {c |}{col 14}{res}{space 2} .0199412{col 26}{space 2} .0109603{col 37}{space 1}    1.82{col 46}{space 3}0.070{col 54}{space 4}-.0016221{col 67}{space 3} .0415046
+{txt}{space 7}atCap {c |}{col 14}{res}{space 2} 1791.613{col 26}{space 2} 731.6185{col 37}{space 1}    2.45{col 46}{space 3}0.015{col 54}{space 4}  352.223{col 67}{space 3} 3231.003
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  3326.72{col 26}{space 2} 435.0415{col 37}{space 1}    7.65{col 46}{space 3}0.000{col 54}{space 4} 2470.817{col 67}{space 3} 4182.623
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. loan need atCap##polImpact
+{err}unrecognized command:  loan
+{txt}{search r(199):r(199);}
+
+{com}. reg loan need atCap##polImpact
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
+{txt}{hline 13}{char +}{hline 30}           F(  6,   316) ={res}    4.02
+    {txt}   Model {char |} {res}  727706214     6   121284369           {txt}Prob > F      = {res} 0.0007
+    {txt}Residual {char |} {res} 9.5296e+09   316  30156956.1           {txt}R-squared     = {res} 0.0709
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0533
+    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5491.5
+
+{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           loan{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
+{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}need {c |}{col 17}{res}{space 2} .0219207{col 29}{space 2} .0109622{col 40}{space 1}    2.00{col 49}{space 3}0.046{col 57}{space 4} .0003525{col 70}{space 3} .0434889
+{txt}{space 8}1.atCap {c |}{col 17}{res}{space 2} 2076.094{col 29}{space 2} 912.6865{col 40}{space 1}    2.27{col 49}{space 3}0.024{col 57}{space 4} 280.3833{col 70}{space 3} 3871.804
+{txt}{space 15} {c |}
+{space 6}polImpact {c |}
+{space 10}1000  {c |}{col 17}{res}{space 2} 1721.374{col 29}{space 2} 905.7451{col 40}{space 1}    1.90{col 49}{space 3}0.058{col 57}{space 4}-60.67921{col 70}{space 3} 3503.427
+{txt}{space 10}1875  {c |}{col 17}{res}{space 2} 1596.338{col 29}{space 2} 1239.903{col 40}{space 1}    1.29{col 49}{space 3}0.199{col 57}{space 4} -843.171{col 70}{space 3} 4035.848
+{txt}{space 15} {c |}
+atCap#polImpact {c |}
+{space 8}1 1000  {c |}{col 17}{res}{space 2} -1957.55{col 29}{space 2} 1495.575{col 40}{space 1}   -1.31{col 49}{space 3}0.192{col 57}{space 4}-4900.093{col 70}{space 3} 984.9921
+{txt}{space 8}1 1875  {c |}{col 17}{res}{space 2} 119.9233{col 29}{space 2} 1864.453{col 40}{space 1}    0.06{col 49}{space 3}0.949{col 57}{space 4}-3548.387{col 70}{space 3} 3788.233
+{txt}{space 15} {c |}
+{space 10}_cons {c |}{col 17}{res}{space 2} 2768.844{col 29}{space 2} 507.6915{col 40}{space 1}    5.45{col 49}{space 3}0.000{col 57}{space 4} 1769.962{col 70}{space 3} 3767.727
+{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg loan need atCap##c.polImpact
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
+{txt}{hline 13}{char +}{hline 30}           F(  4,   318) ={res}    5.62
+    {txt}   Model {char |} {res}  677289608     4   169322402           {txt}Prob > F      = {res} 0.0002
+    {txt}Residual {char |} {res} 9.5800e+09   318  30125832.5           {txt}R-squared     = {res} 0.0660
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0543
+    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5488.7
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}             loan{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 13}need {c |}{col 19}{res}{space 2} .0214907{col 31}{space 2} .0109446{col 42}{space 1}    1.96{col 51}{space 3}0.050{col 59}{space 4}-.0000422{col 72}{space 3} .0430237
+{txt}{space 10}1.atCap {c |}{col 19}{res}{space 2} 1810.926{col 31}{space 2} 886.4707{col 42}{space 1}    2.04{col 51}{space 3}0.042{col 59}{space 4} 66.83709{col 72}{space 3} 3555.014
+{txt}{space 8}polImpact {c |}{col 19}{res}{space 2} 1.122272{col 31}{space 2} .5818587{col 42}{space 1}    1.93{col 51}{space 3}0.055{col 59}{space 4}-.0225069{col 72}{space 3} 2.267051
+{txt}{space 17} {c |}
+atCap#c.polImpact {c |}
+{space 15}1  {c |}{col 19}{res}{space 2}-.4348215{col 31}{space 2} .9129338{col 42}{space 1}   -0.48{col 51}{space 3}0.634{col 59}{space 4}-2.230975{col 72}{space 3} 1.361332
+{txt}{space 17} {c |}
+{space 12}_cons {c |}{col 19}{res}{space 2}  2850.92{col 31}{space 2} 498.5047{col 42}{space 1}    5.72{col 51}{space 3}0.000{col 59}{space 4} 1870.136{col 72}{space 3} 3831.705
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg loan need##atCap
+{err}need:  factor variables may not contain noninteger values
+{txt}{search r(452):r(452);}
+
+{com}. reg loan c.need##atCap
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
+{txt}{hline 13}{char +}{hline 30}           F(  3,   319) ={res}    8.45
+    {txt}   Model {char |} {res}  755298076     3   251766025           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 9.5020e+09   319  29786853.5           {txt}R-squared     = {res} 0.0736
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0649
+    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5457.7
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        loan{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}need {c |}{col 14}{res}{space 2} .0145272{col 26}{space 2} .0110354{col 37}{space 1}    1.32{col 46}{space 3}0.189{col 54}{space 4}-.0071842{col 67}{space 3} .0362386
+{txt}{space 5}1.atCap {c |}{col 14}{res}{space 2}-172.9726{col 26}{space 2} 1024.768{col 37}{space 1}   -0.17{col 46}{space 3}0.866{col 54}{space 4} -2189.13{col 67}{space 3} 1843.185
+{txt}{space 12} {c |}
+atCap#c.need {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .1652713{col 26}{space 2} .0609717{col 37}{space 1}    2.71{col 46}{space 3}0.007{col 54}{space 4} .0453139{col 67}{space 3} .2852287
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 3223.207{col 26}{space 2} 432.4792{col 37}{space 1}    7.45{col 46}{space 3}0.000{col 54}{space 4} 2372.335{col 67}{space 3} 4074.079
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg loan c.need##atCap if !polImpact
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     195
+{txt}{hline 13}{char +}{hline 30}           F(  3,   191) ={res}    6.40
+    {txt}   Model {char |} {res}  374719198     3   124906399           {txt}Prob > F      = {res} 0.0004
+    {txt}Residual {char |} {res} 3.7293e+09   191  19525333.4           {txt}R-squared     = {res} 0.0913
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0770
+    {txt}   Total {char |} {res} 4.1041e+09   194  21154937.5           {txt}Root MSE      = {res} 4418.7
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        loan{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}need {c |}{col 14}{res}{space 2}  .011213{col 26}{space 2} .0117279{col 37}{space 1}    0.96{col 46}{space 3}0.340{col 54}{space 4}-.0119199{col 67}{space 3} .0343458
+{txt}{space 5}1.atCap {c |}{col 14}{res}{space 2}  1164.62{col 26}{space 2} 1136.568{col 37}{space 1}    1.02{col 46}{space 3}0.307{col 54}{space 4}-1077.217{col 67}{space 3} 3406.457
+{txt}{space 12} {c |}
+atCap#c.need {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0952166{col 26}{space 2} .0694166{col 37}{space 1}    1.37{col 46}{space 3}0.172{col 54}{space 4} -.041705{col 67}{space 3} .2321383
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2587.768{col 26}{space 2} 428.9128{col 37}{space 1}    6.03{col 46}{space 3}0.000{col 54}{space 4} 1741.754{col 67}{space 3} 3433.782
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. count
+{res}  950
+
+{com}. count if !missing(need)
+{res}  338
+
+{com}. reg loan c.need##atCap if polImpact & !missing(polImpact)
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     128
+{txt}{hline 13}{char +}{hline 30}           F(  3,   124) ={res}    3.07
+    {txt}   Model {char |} {res}  414926619     3   138308873           {txt}Prob > F      = {res} 0.0303
+    {txt}Residual {char |} {res} 5.5811e+09   124  45009090.6           {txt}R-squared     = {res} 0.0692
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0467
+    {txt}   Total {char |} {res} 5.9961e+09   127  47213022.4           {txt}Root MSE      = {res} 6708.9
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        loan{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}need {c |}{col 14}{res}{space 2} .0240374{col 26}{space 2} .0211334{col 37}{space 1}    1.14{col 46}{space 3}0.258{col 54}{space 4}-.0177916{col 67}{space 3} .0658663
+{txt}{space 5}1.atCap {c |}{col 14}{res}{space 2}-2138.868{col 26}{space 2} 1874.972{col 37}{space 1}   -1.14{col 46}{space 3}0.256{col 54}{space 4}-5849.963{col 67}{space 3} 1572.227
+{txt}{space 12} {c |}
+atCap#c.need {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .2301021{col 26}{space 2} .1067254{col 37}{space 1}    2.16{col 46}{space 3}0.033{col 54}{space 4} .0188626{col 67}{space 3} .4413416
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 4500.354{col 26}{space 2} 920.6302{col 37}{space 1}    4.89{col 46}{space 3}0.000{col 54}{space 4} 2678.169{col 67}{space 3}  6322.54
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg loan c.need##atCap##polImpact
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
+{txt}{hline 13}{char +}{hline 30}           F( 11,   311) ={res}    3.67
+    {txt}   Model {char |} {res} 1.1795e+09    11   107229052           {txt}Prob > F      = {res} 0.0001
+    {txt}Residual {char |} {res} 9.0778e+09   311  29189018.5           {txt}R-squared     = {res} 0.1150
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0837
+    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5402.7
+
+{txt}{hline 23}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                  loan{col 24}{c |}      Coef.{col 36}   Std. Err.{col 48}      t{col 56}   P>|t|{col 64}     [95% Con{col 77}f. Interval]
+{hline 23}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 18}need {c |}{col 24}{res}{space 2}  .011213{col 36}{space 2} .0143394{col 47}{space 1}    0.78{col 56}{space 3}0.435{col 64}{space 4}-.0170016{col 77}{space 3} .0394275
+{txt}{space 15}1.atCap {c |}{col 24}{res}{space 2}  1164.62{col 36}{space 2} 1389.651{col 47}{space 1}    0.84{col 56}{space 3}0.403{col 64}{space 4}-1569.688{col 77}{space 3} 3898.927
+{txt}{space 22} {c |}
+{space 10}atCap#c.need {c |}
+{space 20}1  {c |}{col 24}{res}{space 2} .0952166{col 36}{space 2} .0848739{col 47}{space 1}    1.12{col 56}{space 3}0.263{col 64}{space 4} -.071783{col 77}{space 3} .2622162
+{txt}{space 22} {c |}
+{space 13}polImpact {c |}
+{space 17}1000  {c |}{col 24}{res}{space 2} 1777.425{col 36}{space 2} 1055.371{col 47}{space 1}    1.68{col 56}{space 3}0.093{col 64}{space 4}-299.1446{col 77}{space 3} 3853.995
+{txt}{space 17}1875  {c |}{col 24}{res}{space 2} 2082.163{col 36}{space 2} 1378.475{col 47}{space 1}    1.51{col 56}{space 3}0.132{col 64}{space 4}-630.1527{col 77}{space 3}  4794.48
+{txt}{space 22} {c |}
+{space 6}polImpact#c.need {c |}
+{space 17}1000  {c |}{col 24}{res}{space 2}  .005451{col 36}{space 2} .0260128{col 47}{space 1}    0.21{col 56}{space 3}0.834{col 64}{space 4}-.0457325{col 77}{space 3} .0566344
+{txt}{space 17}1875  {c |}{col 24}{res}{space 2} .0247251{col 36}{space 2} .0309674{col 47}{space 1}    0.80{col 56}{space 3}0.425{col 64}{space 4}-.0362071{col 77}{space 3} .0856573
+{txt}{space 22} {c |}
+{space 7}atCap#polImpact {c |}
+{space 15}1 1000  {c |}{col 24}{res}{space 2}-2217.358{col 36}{space 2} 2301.059{col 47}{space 1}   -0.96{col 56}{space 3}0.336{col 64}{space 4} -6744.97{col 77}{space 3} 2310.253
+{txt}{space 15}1 1875  {c |}{col 24}{res}{space 2}-6603.947{col 36}{space 2}   3037.4{col 47}{space 1}   -2.17{col 56}{space 3}0.030{col 64}{space 4} -12580.4{col 77}{space 3}-627.4949
+{txt}{space 22} {c |}
+atCap#polImpact#c.need {c |}
+{space 15}1 1000  {c |}{col 24}{res}{space 2} .0107531{col 36}{space 2} .1325761{col 47}{space 1}    0.08{col 56}{space 3}0.935{col 64}{space 4}-.2501064{col 77}{space 3} .2716125
+{txt}{space 15}1 1875  {c |}{col 24}{res}{space 2} .4518019{col 36}{space 2} .1817245{col 47}{space 1}    2.49{col 56}{space 3}0.013{col 64}{space 4}  .094237{col 77}{space 3} .8093669
+{txt}{space 22} {c |}
+{space 17}_cons {c |}{col 24}{res}{space 2} 2587.768{col 36}{space 2} 524.4204{col 47}{space 1}    4.93{col 56}{space 3}0.000{col 64}{space 4} 1555.908{col 77}{space 3} 3619.629
+{txt}{hline 23}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg loan c.need##atCap##.polImpact
+{err}.polImpact invalid name
+{txt}{search r(198):r(198);}
+
+{com}. reg loan c.need##atCap##c.polImpact
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
+{txt}{hline 13}{char +}{hline 30}           F(  7,   315) ={res}    5.08
+    {txt}   Model {char |} {res} 1.0410e+09     7   148716156           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 9.2163e+09   315  29258067.5           {txt}R-squared     = {res} 0.1015
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0815
+    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5409.1
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 20}need {c |}{col 26}{res}{space 2} .0097146{col 38}{space 2} .0138976{col 49}{space 1}    0.70{col 58}{space 3}0.485{col 66}{space 4}-.0176292{col 79}{space 3} .0370584
+{txt}{space 17}1.atCap {c |}{col 26}{res}{space 2} 1463.748{col 38}{space 2} 1338.025{col 49}{space 1}    1.09{col 58}{space 3}0.275{col 66}{space 4}-1168.848{col 79}{space 3} 4096.343
+{txt}{space 24} {c |}
+{space 12}atCap#c.need {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} .0547794{col 38}{space 2} .0814343{col 49}{space 1}    0.67{col 58}{space 3}0.502{col 66}{space 4}-.1054445{col 79}{space 3} .2150033
+{txt}{space 24} {c |}
+{space 15}polImpact {c |}{col 26}{res}{space 2}  1.33408{col 38}{space 2} .6523683{col 49}{space 1}    2.04{col 58}{space 3}0.042{col 66}{space 4}   .05053{col 79}{space 3}  2.61763
+{txt}{space 24} {c |}
+{space 6}c.need#c.polImpact {c |}{col 26}{res}{space 2} .0000115{col 38}{space 2} .0000154{col 49}{space 1}    0.75{col 58}{space 3}0.454{col 66}{space 4}-.0000188{col 79}{space 3} .0000418
+{txt}{space 24} {c |}
+{space 7}atCap#c.polImpact {c |}
+{space 22}1  {c |}{col 26}{res}{space 2}-3.068454{col 38}{space 2} 1.478403{col 49}{space 1}   -2.08{col 58}{space 3}0.039{col 66}{space 4}-5.977246{col 79}{space 3}-.1596613
+{txt}{space 24} {c |}
+atCap#c.need#c.polImpact {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} .0001742{col 38}{space 2} .0000884{col 49}{space 1}    1.97{col 58}{space 3}0.050{col 66}{space 4} 3.34e-07{col 79}{space 3} .0003481
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2} 2648.992{col 38}{space 2} 513.3517{col 49}{space 1}    5.16{col 58}{space 3}0.000{col 66}{space 4} 1638.961{col 79}{space 3} 3659.024
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
 {com}. 

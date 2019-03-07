@@ -32,5 +32,5 @@ binscatter loan need if polImpact & !missing(polImpact) & ///
 binscatter loan need if !polImpact & inrange(need, -5000, 30000), ///
 	name(loanNeedNotPol) title(Pre-Policy) nodraw
 graph combine loanNeedNotPol loanNeedPol, ycommon
-graph export ../Output/LoanTimePolBinscatter.pdf, replace
+graph export ../Output/LoanNeedPolBinscatter.pdf, replace
 
