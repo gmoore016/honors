@@ -19,13 +19,14 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{setspace} %For line spacing
+\usepackage{xcolor} %For commenting visibly
 
 %Header (MUST BE LOADED AFTER GEOMETRY)
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \lhead{Honors Thesis (Draft)}
 \chead{Gideon Moore}
-\rhead{Fall 2018}
+\rhead{March 2018}
 
 \usepackage{subcaption} %For subfigures
 
@@ -46,7 +47,7 @@
 	
 	From 2000 to 2015, total undergraduate enrollment rose by 30\% from 13.2 to 17 million students \parencite{mcfarland2017}. Meanwhile, the real quantity of outstanding student debt tripled from \$340 billion to more than \$1.3 trillion over the same period \parencite{feiveson2018}.
 	
-	Traditional models of investment would suggest financing methodology would not change consumer behavior--for a given student, whether they finance their education with debt or existing capital would not change their consumption decisions. However, empirically this is not the case. A survey by Nellie Mae suggests that one in six loan recipients have changed their career plans due to their debt obligation \parencite{baum2003}. This survey contained only those who had not yet defaulted on their debt--thus, as these borrowers were likely the most effected by debt, the true number is likely greater. \textcite{minicozzi2005} finds that men who take on more undergraduate debt take jobs with higher initial wages but lower year-over-year wage growth, again suggesting a real impact of what should be a purely accounting-based change. 
+	Traditional models of investment would suggest financing methodology would not change consumer behavior--for a given student, whether they finance their education with debt or existing capital would not change their consumption decisions. However, empirically this is not the case. A survey by Nellie Mae suggests that one in six loan recipients have changed their career plans due to their debt obligation \parencite{baum2003}. This survey contained only those who had not yet defaulted on their debt; as defaulters were heavily affected by debt, the true number is likely greater. \textcite{minicozzi2005} finds that men who take on more undergraduate debt take jobs with higher initial wages but lower year-over-year wage growth, again suggesting a real impact of what should be a purely accounting-based change. 
 	
 	A debt subsidy could theoretically create an income effect, however even an extremely generous program promising zero interest on student debt would only increase students' income by around \$50 per year per thousand dollars borrowed--a fraction of the expected lifetime earnings of a college attendee. Thus, it is unlikely the income effect from this subsidy would be able to explain any of the behavior outlined above.
 	
@@ -56,7 +57,7 @@
 	
 	The most relevant study on debt aversion is by \textcite{field2009}. In her trial, New York University law students were randomly assigned either loan- or grant-based aid. The students assigned loans were told that their debt would be forgiven upon entry into a public service sector. Similarly, students given grants were told that, if they did \emph{not} enter the public service sector, they would be obligated to repay their grants. The two programs were designed to be financially identical--they differed only in the framing of whether the student was ``in debt.'' However, the author found that the students who were given the debt-based aid were significantly more likely to choose the high-wage, non-public-service position than their counterparts receiving grant-based aid. Given the aid packages are financially identical, the authors conclude this likely derives from some negative socio-psychological impact of carrying debt.
 	
-	In an ideal world, we could answer this question simply through regressing some measure of career choice on debt level. However, endogeneity issues make this solution infeasible. Given students choose to take debt based on expectations of their future earnings, there exists a reverse-causal effect from career to debt. Therefore, we require a form of random assignment in order to accurately infer causality. 
+	In an ideal world, we could answer the question of debt and employment through regressing some measure of career choice on debt level. However, endogeneity issues make this solution infeasible. Given students choose to take debt based on expectations of their future earnings, there exists a reverse-causal effect from career to debt. Therefore, we require some sort of random assignment in order to accurately infer causality. 
 	
 	The focus of this paper is to determine whether increases in debt lead students to change their fields of study and eventually career choices. While prior work in the literature has largely focused on policy changes within a single institution, I hope to create a more representative picture of the nation as a whole using data from the National Longitudinal Survey of Youth. In 2006, the United States raised the cap for Stafford Loans for freshmen and sophomores, creating a natural experiment wherein the students before the policy change were more limited in their access to debt than the students after the shift.
 	
@@ -79,14 +80,14 @@
 
 	Consider a two-stage consumption model. Individuals consume in period one entirely through borrowing against period two earnings, labeled as $B$. In period one agents choose to pursue a higher-paying career path $H$ or a lower-paying career path $L$. Consumption in period two is composed of two parts, less the quantity borrowed in period one. First, $C$, non-monetary utility from the chosen career path; consider the value of altruism for working in a non-profit or the value of expression for working as an artist. The second consumption parameter in time two is monetary salary, denoted $H$ and $L$ for the higher- and lower-paying careers respectively.
 	
-	When taking career $L$, there is a risk $p$ of defaulting on your loan, in which case your monetary compensation for the period is reduced to zero, leaving only non-monetary compensation $C$. We assume that \emph{ceteris paribus} larger loans are more difficult to repay; thus, $p$ is a function increasing in $B$. Finally, there is some discount rate $r$ for the money borrowed in period one. This $r$ will favor the present, as we are examining interest-free loans for our students. This yields the following two utility functions: 
+	When taking career $L$, there is a risk $p$ of defaulting on your loan, in which case your monetary compensation for the period is reduced to zero, leaving only non-monetary compensation $C$. We assume that \emph{ceteris paribus} larger loans are more difficult to repay; thus, $p$ is a function increasing in $B$. Finally, there is some discount rate $r$ for the money borrowed in period one. This $r$ will favor the present, as we are examining interest-free loans for our students. This yields the following two utility functions for a risk-neutral consumer: 
 	\begin{align}
 	\mathbb{E}\left[U_H(B)\right] &= B + H - (1 - r)B \label{highu}\\
 	\mathbb{E}\left[U_L(B)\right] &= B + C + p(B) \times L - (1 - r)B \label{lowu}
 	\end{align}
 	
 	Note that students choosing career $L$ over career $H$ suggests that equation \ref{highu} is greater than equation \ref{lowu}. Some algebra yields the following equivalence relationship: 
-	$$U_L(B) - U_H(B) > 0 \iff p(B) > \frac{H - C}{L} \label{choicecon}$$ 
+	$$\mathbb{E}\left[U_L(B)\right] - \mathbb{E}\left[U_H(B)\right] > 0 \iff p(B) > \frac{H - C}{L} \label{choicecon}$$ 
 	Thus, there are five factors that could shift students from $H$ to $L$:
 	\begin{itemize}
 		\singlespacing
@@ -100,6 +101,8 @@
 	The above model is deterministic for any given student; given a fixed $H, C, L, p,$ and $B$ they will always choose the same career. Moreover, for simplicity, we allow $H, L$, and $p$ to be constant across all students, representing access to similar credit and labor markets. However, there exists idiosyncratic variation in $C$ between students; student $i$ may derive great utility from career $L$, while student $j$ may not care for $L$ at all.
 
 	Note that for each student there exists some $B^*$ such that they are indifferent between $H$ and $L$. Suppose there exists some global upper bound on borrowing $\bar{B}$ which is binding for both those on career paths $H$ and $L$. When $\bar{B}$ is increased as in figure \ref{struc}, this will cause some--but not all--students to shift career from $L$ to $H$ as $\bar{B}$ may shift to be greater than $B^*$ for some subset of students. Given students before and after this change are comparable, we could treat this shift as a natural experiment, providing each student after the shift with an additional $\Delta\bar{B}$ debt burden. 
+	
+	\textcolor{darkgray}{[COMMENT: I've been thinking about the welfare implications of this model for a while and haven't really reached a conclusion yet. It's clear there's a societal cost to these subsidized loans: $(1 - r)B$ is all government expenditure. Further, it seems as though shifting from line $H$ to line $L$ causes $C$ to be lost to society; while the wage difference $(H - L)$ is a transfer from firms, and so neither creates nor destroys welfare in perfect competition, the loss of $C$ appears to be a societal loss. Thus, while loans can be positive for equality, it seems like they may be quite costly to society. Unfortunately these costs are difficult to quantify since $C$ is a subjective value. The paper which inspired this model \parencite{abraham2018} suggests that income based repayment plans can provide the equality benefits without changing career choices, so that could be a good point of reference.]}
 
 	\section{HERA and Subsidized Student Loans}
 	
@@ -154,16 +157,10 @@
 	
 	\section{Statistical Model}
 	
-	Our data set is a collection of seniors surveyed on even years between 2000 and 2016. We conduct a two-stage least squares regression, using exposure to the increased student loan caps as an instrument for total student debt. Note, however, that debt is inherently censored below--students can only have positive values of debt, and those who would receive ``negative'' values are instead observed as 0. Due to this idiosyncrasy, I approach my first stage regression with two strategies.
+	Our data set is a collection of seniors surveyed on even years between 2000 and 2016. If possible, we would hope to model some career outcome $Y$ according to the following equation: $$Y = \beta_0 + \beta_1 \ln(\mbox{debt})_{it} + \vec{\xi}^T \vec{\mbox{demographics}}_i + \epsilon_{it}$$ In this model, $Y$ could take one of several values, such as major choice, career choice, or salary. 
 	
-	First, I attempt to use a Tobit model to forecast values for debt. Thus, I would like my first stage model to be $$\ln(debt)_{it} = \delta_0 + \delta_1 treatment_{it} + \delta_2 year_t + \delta_3 parentIncome_{it} + \vec{\gamma}^T \vec{\mbox{demographics}}_i + \mu_{it}$$ However, projected values from the Tobit using this model would fail, as errors are only guaranteed to be uncorrelated with fitted values under Ordinary Least Squares. Therefore I use a method suggested by \textcite{angrist2009} whereby the fitted Tobit values are used as an instrument for debt themselves. Thus, we calculate a pre-first stage such that $$\ln(\widehat{debt}')_{it} = \alpha_0 + \alpha_1 \widehat{debt}_{it} + \alpha_2 year_t + \alpha_3 parentIncome_{it} + \vec{\upsilon}^T \vec{\mbox{demographics}}_i + \mu_{it}$$ These projected values are then used as the values for debt in the second stage. 
-	
-	Using these estimates, we can then produce a second stage regression estimating a variety of career outcomes. For example, we estimate the probability of graduationg with various majors for each student. 
-	
-	In this example, the model would be $$Y = \beta_0 + \beta_1 \widehat{\ln(\mbox{debt})}_{it} + \beta_2 \mbox{hasDebt}_{it} \times \widehat{\ln(\mbox{debt})}_{it} + \vec{\xi}^T \vec{\mbox{demographics}}_i + \epsilon_{it}$$ where $Y$ is some outcome variable. There exist a selection of potential outcome variables worth examining.
-	
-	Our first model will place major choice on the left hand side. I believe this to be the most novel outcome of interest, as datasets have this level of resolution on their observations. Here I can use a random variable logit model to place students into one of six bins: humanities, STEM, Social Science, Professional, Business, and Pre-Grad. The specifications of these bins can be found in the appendix, and we will adjust these bins later as a form of robustness testing. The distribution of students broken down by major is visible in figure \ref{majDist}.
-	
+	Our first model will place major choice on the left hand side. I believe this to be the most novel outcome of interest, as few datasets have this level of resolution on their observations. Here I can use a random variable logit model to place students into one of six bins: humanities, STEM, Social Science, Professional, Business, and Pre-Grad. The specifications of these bins can be found in the appendix, and we will adjust these bins later as a form of robustness testing. The distribution of students broken down by major is visible in figure \ref{majDist}.
+
 	\begin{figure}
 		\centering
 		\caption{Breakdown of major in sample}
@@ -171,13 +168,30 @@
 		\includegraphics[width = 0.9\textwidth]{../Analysis/Charts/Output/majDist}
 	\end{figure}
 	
-	Our second model will be examining students' career outcomes.
+	Our second model will be examining students' career outcomes. This is the outcome most widely researched in the literature, such as in \textcite{rothstein2011} and \textcite{field2009}. Similar to the regression above, this would use a mixed logit model to examine whether increased debt pushes students into certain categories of career.
 	
-	Our final model will be directly examining students' final incomes.
+	Our final model will be directly examining students' final incomes. This is the most direct approach to measuring the impact of debt on choices; however, it may ignore factors such as career risk which would not be visible in simple income data.
+	
+	Unfortunately there exists reverse causality between debt and career choices; therefore, we must perform a two-stage least squares regression using exposure to the HERA credit increase as our instrumental variable in order to pseudo-randomly assign debt to our students. 
+	
+	We assume that outside of our random assignment, debt levels are dependent on parental resources, time trends, and demographic characteristics such as sex, race, and region of residence. As the time trend for debt levels may not be linear, we use dummies for each year to represent average debt within our sample for a given year. Further, we anticipate students taking out loans each semester; thus, those interviewed in the fall of their senior year would have less debt than those in the spring, so we include a semester dummy as well.
+	
+	The ideal first-stage model, then, would be: $$debt_i = \delta_0 + \delta_1 treatment_i + \delta_2 parIncome_i + \delta_3 fallSemester_i + \vec{\delta}^T i.year_i + \vec{\gamma}^T \vec{demographics}_i + \mu_i$$
+	
+	There exist two primary problems with this approach, however. The first is that debt is inherently left-censored. While students who take loans display some positive value, those who choose not to borrow display zero when they instead potentially chose some ``negative'' through investing their assets rather than borrowing. 
+	
+	The solution to this issue is to perform the first stage regression using a Tobit model rather than traditional OLS. This creates problems of its own however; as the Tobit is nonlinear, errors of projected values are not guaranteed to be uncorrelated. I therefore use a method suggested by \textcite{angrist2009} whereby the fitted Tobit values are used themselves as instruments for debt. 
+	
+	The second difficulty this model faces is that it is difficult to determine which students are ``treated,'' as not all students observed after the policy change received the additional credit. Since subsidized loans are targeted at low-income families, only students whose anticipated need is greater than the existing cap were subject to this increased credit line. 
+	
+	Anticipated need is equal to students' tuition payments minus their expected family contribution, or EFC. While we cannot observe students' true EFC, we can calculate an approximation using the Free Application for Federal Student Aid (FAFSA). Then, using this approximation, we are able to generate a measure of need and so determine who is affected by the policy shift. We then generate a dummy $atCap$ equal to 1 if a student's need is greater than the old borrowing limit and so are in our sample. 
+	
+	Thus, our final model for the first stage is as follows: $$debt_i = \delta_0 + \delta_1 treatmentSize_i + \delta_2 treatmentSize \times atCap + \delta_3 need + \delta_4 fallSemester + \vec{\delta}^T i.year + \vec{\gamma}^T \vec{demographics} + \mu_i$$ Given our model is correct, our coefficient of interest is $\delta_2$, the impact of being treated on those who were treated. Note we anticipate $\delta_1$ to be zero, as the policy should not impact those who are not in the targeted group.
+	
+	\textcolor{darkgray}{[COMMENT: Note this is where we run into problems--somehow $\delta_2$ does not end up being significant. I was surprised by this as we know from figure \ref{luc}, which used data directly from Fannie Mae, that this policy seems to have had a quite significant impact. This makes me think there's something we're not accounting for; potentially we need better controls for need or some better way to control for debt levels for the untreated students.]}
+	
 	
 	\section{Results}
-	
-	For testing of the first stage, we find that there exists a significant positive impact on debt of being in the treated cohort, as visible in table \ref{firstStage}. This sample was calculated using the observations from 2006--2010. While the result is only significant at the 6\% level, I feel confident with this instrument both because \textcite{lucca2018} find it it do be significant and because the survey-based nature of our data would be expected to widen the standard errors.
 	
 	\blindtext
 	
