@@ -10,3 +10,8 @@
 *.png
 
 *.dta
+
+Tex/Honors.synctex.gz
+Tex/Honors.aux
+Tex/Honors.dvi
+Tex/Honors.log
