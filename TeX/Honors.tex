@@ -68,7 +68,16 @@
 
 	\section{Structural Model}
 	
-	Consider a two-stage consumption model. Individuals consume in period one entirely through borrowing against period two earnings, labeled as $B$. In period one agents choose to pursue a higher-paying career path $H$ or a lower-paying career path $L$. Consumption in period two is composed of two parts, less the quantity borrowed in period one. First, $C$, non-monetary utility from the chosen career path; consider the value of altruism for working in a non-profit or the value of expression for working as an artist. The second consumption parameter in time two is monetary salary, denoted $H$ and $L$ for the higher- and lower-paying careers respectively. However, when taking career $L$, there is a risk $p$ of defaulting on your loan, in which case your monetary compensation for the period is reduced to zero, leaving only non-monetary compensation $C$. We assume that \emph{ceteris paribus} larger loans are more difficult to repay; thus, $p$ is a function increasing in $B$. Finally, there is some discount rate $r$ for the money borrowed in period one. This $r$ will favor the present, as we are examining interest-free loans for our students. This yields the following two utility functions: 
+	\begin{figure}
+		\centering
+		\caption{Illustration of Structural Model}
+		\label{struc}
+		\includegraphics[width = 0.8\textwidth]{Images/ModelSketch}
+	\end{figure}
+
+	Consider a two-stage consumption model. Individuals consume in period one entirely through borrowing against period two earnings, labeled as $B$. In period one agents choose to pursue a higher-paying career path $H$ or a lower-paying career path $L$. Consumption in period two is composed of two parts, less the quantity borrowed in period one. First, $C$, non-monetary utility from the chosen career path; consider the value of altruism for working in a non-profit or the value of expression for working as an artist. The second consumption parameter in time two is monetary salary, denoted $H$ and $L$ for the higher- and lower-paying careers respectively.
+	
+	When taking career $L$, there is a risk $p$ of defaulting on your loan, in which case your monetary compensation for the period is reduced to zero, leaving only non-monetary compensation $C$. We assume that \emph{ceteris paribus} larger loans are more difficult to repay; thus, $p$ is a function increasing in $B$. Finally, there is some discount rate $r$ for the money borrowed in period one. This $r$ will favor the present, as we are examining interest-free loans for our students. This yields the following two utility functions: 
 	\begin{align}
 	\mathbb{E}\left[U_H(B)\right] &= B + H - (1 - r)B \label{highu}\\
 	\mathbb{E}\left[U_L(B)\right] &= B + C + p(B) \times L - (1 - r)B \label{lowu}
@@ -88,7 +97,7 @@
 
 	The above model is deterministic for any given student; given a fixed $H, C, L, p,$ and $B$ they will always choose the same career. Moreover, for simplicity, we allow $H, L$, and $p$ to be constant across all students, representing access to similar credit and labor markets. However, there exists idiosyncratic variation in $C$ between students; student $i$ may derive great utility from career $L$, while student $j$ may not care for $L$ at all.
 
-	Note that for each student there exists some $B^*$ such that they are indifferent between $H$ and $L$. Suppose there exists some global upper bound on borrowing $\bar{B}$ which is binding for both those on career paths $H$ and $L$. When $\bar{B}$ is increased, as shown above, this will cause some--but not all--students to shift career from $L$ to $H$ as $\bar{B}$ may shift to be greater than $B^*$ for some subset of students.
+	Note that for each student there exists some $B^*$ such that they are indifferent between $H$ and $L$. Suppose there exists some global upper bound on borrowing $\bar{B}$ which is binding for both those on career paths $H$ and $L$. When $\bar{B}$ is increased as in figure \ref{struc}, this will cause some--but not all--students to shift career from $L$ to $H$ as $\bar{B}$ may shift to be greater than $B^*$ for some subset of students.
 
 	\section{HERA and Subsidized Student Loans}
 	
