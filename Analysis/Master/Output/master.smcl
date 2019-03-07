@@ -1790,4 +1790,744 @@ end of do-file
 {com}. 
 {txt}end of do-file
 
+{com}. desc
+
+{txt}Contains data from {res}../Output/Master.dta
+{txt}  obs:{res}           950                          
+{txt} vars:{res}            32                          6 Mar 2019 17:53
+{txt} size:{res}       110,200                          
+{txt}{hline}
+              storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:cid            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}ID CODE OF CHILD{p_end}
+{p 0 48}{bind:year           }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:mid            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}ID CODE OF MOTHER OF CHILD{p_end}
+{p 0 48}{bind:race           }{txt}{bind: float   }{bind:{txt}%23.0g    }{space 1}{bind:raceLab  }{bind:  }{res}{res}RACE OF CHILD (FROM MOTHERS SCREENER 79){p_end}
+{p 0 48}{bind:sex            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:sexLab   }{bind:  }{res}{res}SEX OF CHILD{p_end}
+{p 0 48}{bind:dob            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}DATE OF BIRTH OF CHILD - YEAR{p_end}
+{p 0 48}{bind:grade          }{txt}{bind: float   }{bind:{txt}%24.0g    }{space 1}{bind:gradeLab }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:maj            }{txt}{bind: float   }{bind:{txt}%67.0g    }{space 1}{txt}vlY3046600{p_end}
+{p 0 48}{space 44}{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:tuition        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:recloan        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:ynLab    }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:loan           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:region         }{txt}{bind: float   }{bind:{txt}%13.0g    }{space 1}{txt}regionLab{p_end}
+{p 0 48}{space 44}{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:intDate        }{txt}{bind: float   }{bind:{txt}%tm       }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:sibs           }{txt}{bind: byte    }{bind:{txt}%12.0g    }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:fulltuition    }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:partialtuition }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:inCollege      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:sibsInCollege  }{txt}{bind: byte    }{bind:{txt}%12.0g    }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:cohort         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:cohLab   }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:polImpact      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:majType        }{txt}{bind: float   }{bind:{txt}%14.0g    }{space 1}{txt}majTypeLab{p_end}
+{p 0 48}{space 44}{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:fallSemester   }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:momMarried     }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:parInc         }{txt}{bind: long    }{bind:{txt}%12.0g    }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:assets         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:homeVal        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:parDob         }{txt}{bind: float   }{bind:{txt}%tm       }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:hhSize         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:mAge           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:efc            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:need           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:atCap          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{txt}{hline}
+Sorted by:  
+{res}     Note:  dataset has changed since last saved
+
+{com}. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. by atCap: scatter intDate debt
+{err}not sorted
+{txt}{search r(5):r(5);}
+
+{com}. sort atCap
+
+. by atCap: scatter intDate debt
+{err}scatter may not be combined with by
+{txt}{search r(190):r(190);}
+
+{com}. scatter intDate debt if atCap
+{err}variable debt not found
+{txt}{search r(111):r(111);}
+
+{com}. scatter intDate loan if atCap
+{res}
+{com}. scatter loan intDate if atCap
+{res}
+{com}. scatter loan intDate if atCap & !missing(atCap)
+{res}
+{com}. scatter loan intDate if !atCap
+{res}
+{com}. scatter loan intDate if atCap & !missing(atCap)
+{res}
+{com}. binscatter loan need if !polImpact
+{res}
+{com}. binscatter loan need if !polImpact & need > 0
+{res}
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. graph scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
+{err}{p 0 4 2}
+scattergraph_g.new  loan intDate if atCap & !missing(atCap), name(loanAtCap): class member function not found
+{p_end}
+{txt}{search r(4023):r(4023);}
+
+end of do-file
+
+{search r(4023):r(4023);}
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. graph scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
+{err}{p 0 4 2}
+scattergraph_g.new  loan intDate if atCap & !missing(atCap), name(loanAtCap): class member function not found
+{p_end}
+{txt}{search r(4023):r(4023);}
+
+end of do-file
+
+{search r(4023):r(4023);}
+
+{com}. help graph combine
+
+. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
+{res}{txt}
+{com}. scatter loan intDate if !atCap, name(loanNotAtCap)
+{res}{txt}
+{com}. graph combine loanAtCap loanNotAtCap
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. //Loan vs. Time vs. atCap
+. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
+{err}graph loanAtCap already exists
+{txt}{search r(110):r(110);}
+
+end of do-file
+
+{search r(110):r(110);}
+
+{com}. clear loanAtCap loanNotAtCap
+{err}loanNotAtCap not allowed
+{txt}{search r(198):r(198);}
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. use ../../NeedCalc/Output/Need.dta, clear
+{txt}
+{com}. 
+. //General distribution of majors
+. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq graphregion(color(white)) ///
+>         xtitle("Parental Income in Year of Graduation")
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace 
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq graphregion(color(white)) ///
+>         xtitle("Debt When Graduating")
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdf, replace
+{txt}(file ../Output/loanDist.pdf written in PDF format)
+
+{com}. 
+. //Loan vs. Time vs. atCap
+. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
+{err}graph loanAtCap already exists
+{txt}{search r(110):r(110);}
+
+end of do-file
+
+{search r(110):r(110);}
+
+{com}. clear
+
+. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. use ../../NeedCalc/Output/Need.dta, clear
+{txt}
+{com}. 
+. //General distribution of majors
+. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq graphregion(color(white)) ///
+>         xtitle("Parental Income in Year of Graduation")
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace 
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq graphregion(color(white)) ///
+>         xtitle("Debt When Graduating")
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdf, replace
+{txt}(file ../Output/loanDist.pdf written in PDF format)
+
+{com}. 
+. //Loan vs. Time vs. atCap
+. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
+{err}graph loanAtCap already exists
+{txt}{search r(110):r(110);}
+
+end of do-file
+
+{search r(110):r(110);}
+
+{com}. graph drop
+{err}nothing found where graph name expected
+{txt}{search r(198):r(198);}
+
+{com}. graph drop *
+{err}* invalid name
+no graphs dropped
+{txt}{search r(111):r(111);}
+
+{com}. help graph drop
+
+. graph drop _all
+
+. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. use ../../NeedCalc/Output/Need.dta, clear
+{txt}
+{com}. 
+. //General distribution of majors
+. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq graphregion(color(white)) ///
+>         xtitle("Parental Income in Year of Graduation")
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace 
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq graphregion(color(white)) ///
+>         xtitle("Debt When Graduating")
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdf, replace
+{txt}(file ../Output/loanDist.pdf written in PDF format)
+
+{com}. 
+. //Loan vs. Time vs. atCap
+. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
+{res}{txt}
+{com}. scatter loan intDate if !atCap, name(loanNotAtCap)
+{res}{txt}
+{com}. graph combine loanAtCap loanNotAtCap, scale(1)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. help graph combine
+
+. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. use ../../NeedCalc/Output/Need.dta, clear
+{txt}
+{com}. 
+. //General distribution of majors
+. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq graphregion(color(white)) ///
+>         xtitle("Parental Income in Year of Graduation")
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace 
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq graphregion(color(white)) ///
+>         xtitle("Debt When Graduating")
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdf, replace
+{txt}(file ../Output/loanDist.pdf written in PDF format)
+
+{com}. 
+. //Loan vs. Time vs. atCap
+. capture graph drop loanAtCap loanNotAtCapd
+{txt}
+{com}. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
+{err}graph loanAtCap already exists
+{txt}{search r(110):r(110);}
+
+end of do-file
+
+{search r(110):r(110);}
+
+{com}. help graph drop
+
+. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. use ../../NeedCalc/Output/Need.dta, clear
+{txt}
+{com}. 
+. //General distribution of majors
+. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq graphregion(color(white)) ///
+>         xtitle("Parental Income in Year of Graduation")
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace 
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq graphregion(color(white)) ///
+>         xtitle("Debt When Graduating")
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdf, replace
+{txt}(file ../Output/loanDist.pdf written in PDF format)
+
+{com}. 
+. //Loan vs. Time vs. atCap
+. capture graph drop loanAtCap
+{txt}
+{com}. capture graph drop loanNotAtCap
+{txt}
+{com}. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
+{res}{txt}
+{com}. scatter loan intDate if !atCap, name(loanNotAtCap)
+{res}{txt}
+{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. capture graph drop loanAtCap
+{txt}
+{com}. capture graph drop loanNotAtCap
+{txt}
+{com}. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ymax(50000)
+{err}option {bf:ymax()} not allowed
+{txt}{search r(198):r(198);}
+
+end of do-file
+
+{search r(198):r(198);}
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. use ../../NeedCalc/Output/Need.dta, clear
+{txt}
+{com}. 
+. //General distribution of majors
+. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq graphregion(color(white)) ///
+>         xtitle("Parental Income in Year of Graduation")
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace 
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq graphregion(color(white)) ///
+>         xtitle("Debt When Graduating")
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdf, replace
+{txt}(file ../Output/loanDist.pdf written in PDF format)
+
+{com}. 
+. //Loan vs. Time vs. atCap
+. capture graph drop loanAtCap
+{txt}
+{com}. capture graph drop loanNotAtCap
+{txt}
+{com}. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap) yscale(range(0 50000))
+{res}{txt}
+{com}. scatter loan intDate if !atCap, name(loanNotAtCap) yscale(range(0 50000))
+{res}{txt}
+{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. //Loan vs. Time vs. atCap
+. capture graph drop loanAtCap
+{txt}
+{com}. capture graph drop loanNotAtCap
+{txt}
+{com}. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
+>         yscale(range(0 50000)) title(atCap)
+{res}{txt}
+{com}. scatter loan intDate if !atCap, name(loanNotAtCap) ///
+>         yscale(range(0 50000)) title(!atCap)
+{res}{txt}
+{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. //Loan vs. Time vs. atCap
+. capture graph drop loanAtCap
+{txt}
+{com}. capture graph drop loanNotAtCap
+{txt}
+{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
+>         yscale(range(0 50000)) title(atCap)
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+{res}{txt}
+{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
+>         yscale(range(0 50000)) title(!atCap)
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+{res}{txt}
+{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
+{res}{txt}
+{com}. 
+. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. //Loan vs. Time vs. atCap
+. capture graph drop loanAtCap
+{txt}
+{com}. capture graph drop loanNotAtCap
+{txt}
+{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
+>         yscale(range(0 10000)) title(atCap)
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+{res}{txt}
+{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
+>         yscale(range(0 10000)) title(!atCap)
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+{res}{txt}
+{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. //Loan vs. Time vs. atCap
+. capture graph drop loanAtCap
+{txt}
+{com}. capture graph drop loanNotAtCap
+{txt}
+{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
+>         yscale(range(0 12000)) title(atCap)
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+{res}{txt}
+{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
+>         yscale(range(0 12000)) title(!atCap)
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+{res}{txt}
+{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. binscatter loan intDate if atCap & !missing(atCap)
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+{res}
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. //Loan vs. Time by atCap
+. capture graph drop loanAtCap
+{txt}
+{com}. capture graph drop loanNotAtCap
+{txt}
+{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
+>         yscale(range(0 12000)) title(atCap)
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+{res}{txt}
+{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
+>         yscale(range(0 12000)) title(!atCap)
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+{res}{txt}
+{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
+{res}{txt}
+{com}. 
+. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. graph combine loanAtCap loanNotAtCap, iscale(1) col(1)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. help graph combine
+
+. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. capture graph drop loanAtCap
+{txt}
+{com}. capture graph drop loanNotAtCap
+{txt}
+{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
+>         title(atCap)
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+{res}{txt}
+{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
+>         title(!atCap)
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+{res}{txt}
+{com}. graph combine loanAtCap loanNotAtCap, iscale(1) ycommon
+{res}{txt}
+{com}. 
+. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. capture graph drop loanAtCap
+{txt}
+{com}. capture graph drop loanNotAtCap
+{txt}
+{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
+>         title(atCap) nodraw
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+
+{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
+>         title(!atCap) nodraw
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+
+{com}. graph combine loanAtCap loanNotAtCap, iscale(1) ycommon
+{res}{txt}
+{com}. 
+. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. graph combine loanAtCap loanNotAtCap, ycommon
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. graph combine loanAtCap loanNotAtCap, ycommon altshrink
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. binscatter debt need if !polImpact
+{err}variable debt not found
+{txt}{search r(111):r(111);}
+
+{com}. binscatter loan need if !polImpact
+{res}
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. //Loan vs. Need by polImpact
+. capture graph drop loanNeedPol
+{txt}
+{com}. capture graph drop loanNeedNotPol
+{txt}
+{com}. binscatter loan need if polImpact & !missing(polImpact) & need > -5000, ///
+>         name(loanNeedPol) title(Post-Policy) nodraw
+{res}{txt}
+{com}. binscatter loan need if !polImpact & need > -5000, ///
+>         name(loanNeedNotPol) title(Pre-Policy) nodraw
+{res}{txt}
+{com}. graph combine loanNeedPol loanNeedNotPol, ycommon
+{res}{txt}
+{com}. 
+. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. //Loan vs. Need by polImpact
+. capture graph drop loanNeedPol
+{txt}
+{com}. capture graph drop loanNeedNotPol
+{txt}
+{com}. binscatter loan need if polImpact & !missing(polImpact) & need > -5000, ///
+>         name(loanNeedPol) title(Post-Policy) nodraw
+{res}{txt}
+{com}. binscatter loan need if !polImpact & need > -5000, ///
+>         name(loanNeedNotPol) title(Pre-Policy) nodraw
+{res}{txt}
+{com}. graph combine loanNeedNotPol loanNeedPol, ycommon
+{res}{txt}
+{com}. 
+. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. //Loan vs. Need by polImpact
+. capture graph drop loanNeedPol
+{txt}
+{com}. capture graph drop loanNeedNotPol
+{txt}
+{com}. binscatter loan need if polImpact & !missing(polImpact) & ///
+>         inrange(need, -5000, 30000), name(loanNeedPol) title(Post-Policy) nodraw
+{res}{txt}
+{com}. binscatter loan need if !polImpact & inrange(need, -5000, 30000), ///
+>         name(loanNeedNotPol) title(Pre-Policy) nodraw
+{res}{txt}
+{com}. graph combine loanNeedNotPol loanNeedPol, ycommon
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. pwd
+{res}C:\Users\gmoore\desktop\honors\analysis\charts\code
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. use ../../NeedCalc/Output/Need.dta, clear
+{txt}
+{com}. 
+. //General distribution of majors
+. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq graphregion(color(white)) ///
+>         xtitle("Parental Income in Year of Graduation")
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace 
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq graphregion(color(white)) ///
+>         xtitle("Debt When Graduating")
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdf, replace
+{txt}(file ../Output/loanDist.pdf written in PDF format)
+
+{com}. 
+. //Loan vs. Time by atCap
+. capture graph drop loanAtCap
+{txt}
+{com}. capture graph drop loanNotAtCap
+{txt}
+{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
+>         title(atCap) nodraw
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+
+{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
+>         title(!atCap) nodraw
+{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+
+{com}. graph combine loanAtCap loanNotAtCap, ycommon
+{res}{txt}
+{com}. graph export ../Output/LoanTimeCapBinscatter.pdf, replace
+{txt}(file ../Output/LoanTimeCapBinscatter.pdf written in PDF format)
+
+{com}. 
+. //Loan vs. Need by polImpact
+. capture graph drop loanNeedPol
+{txt}
+{com}. capture graph drop loanNeedNotPol
+{txt}
+{com}. binscatter loan need if polImpact & !missing(polImpact) & ///
+>         inrange(need, -5000, 30000), name(loanNeedPol) title(Post-Policy) nodraw
+{res}{txt}
+{com}. binscatter loan need if !polImpact & inrange(need, -5000, 30000), ///
+>         name(loanNeedNotPol) title(Pre-Policy) nodraw
+{res}{txt}
+{com}. graph combine loanNeedNotPol loanNeedPol, ycommon
+{res}{txt}
+{com}. graph export ../Output/LoanTimePolBinscatter.pdf, replace
+{txt}(file ../Output/LoanTimePolBinscatter.pdf written in PDF format)
+
+{com}. 
+. 
+{txt}end of do-file
+
+{com}. box need
+{err}unrecognized command:  box
+{txt}{search r(199):r(199);}
+
+{com}. graph box need
+{res}
+{com}. graph box need if need > 0
+{res}
+{com}. count if atCap
+{res}  734
+
+{com}. count if atCap & !missing(atCap)
+{res}  122
+
 {com}. 
