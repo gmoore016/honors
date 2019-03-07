@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.5)  6 MAR 2019 17:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.5)  6 MAR 2019 21:30
 entering extended mode
 **./Honors.tex
 (Honors.tex
@@ -556,18 +556,18 @@ File: english.lbx 2018/11/02 v3.12 biblatex localization (PK/MW)
  (Honors.aux)
 \openout1 = `Honors.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
@@ -579,8 +579,8 @@ Package biblatex Info: Data encoding 'utf8' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Honors.bbl' found.
  (Honors.bbl)
-Package biblatex Info: Reference section=0 on input line 35.
-Package biblatex Info: Reference segment=0 on input line 35.
+Package biblatex Info: Reference section=0 on input line 34.
+Package biblatex Info: Reference segment=0 on input line 34.
 
 ("C:\Users\gmoore\AppData\Local\Programs\MiKTeX 2.9\tex/context/base\supp-pdf.m
 kii"
@@ -616,7 +616,7 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-LaTeX Info: Redefining \microtypecontext on input line 35.
+LaTeX Info: Redefining \microtypecontext on input line 34.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -668,7 +668,7 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 36.
+LaTeX Font Info:    Try loading font information for U+msa on input line 35.
 ("C:\Users\gmoore\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -676,7 +676,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 cfg"
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 36.
+LaTeX Font Info:    Try loading font information for U+msb on input line 35.
 
 ("C:\Users\gmoore\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -688,46 +688,57 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 {C:/Users/gmoore/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 [2] [3] [4] [5]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 83.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 82.
 
 ("C:\Users\gmoore\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 83.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 82.
 
 [6] [7]
 <Images/Lucca6a.png, id=34, 538.51187pt x 383.4325pt>
 File: Images/Lucca6a.png Graphic file (type png)
 <use Images/Lucca6a.png>
-Package pdftex.def Info: Images/Lucca6a.png  used on input line 111.
+Package pdftex.def Info: Images/Lucca6a.png  used on input line 110.
 (pdftex.def)             Requested size: 210.70462pt x 150.02368pt.
 <Images/Lucca6b.png, id=36, 520.94624pt x 377.41pt>
 File: Images/Lucca6b.png Graphic file (type png)
 <use Images/Lucca6b.png>
-Package pdftex.def Info: Images/Lucca6b.png  used on input line 117.
+Package pdftex.def Info: Images/Lucca6b.png  used on input line 116.
 (pdftex.def)             Requested size: 210.70462pt x 152.64865pt.
+<../Analysis/Charts/Output/parIncDist.pdf, id=37, 397.485pt x 289.08pt>
+File: ../Analysis/Charts/Output/parIncDist.pdf Graphic file (type pdf)
+<use ../Analysis/Charts/Output/parIncDist.pdf>
+Package pdftex.def Info: ../Analysis/Charts/Output/parIncDist.pdf  used on inpu
+t line 128.
+(pdftex.def)             Requested size: 387.00153pt x 281.4659pt.
+ [8]
+<../Analysis/Charts/Output/loanDist.pdf, id=41, 397.485pt x 289.08pt>
+File: ../Analysis/Charts/Output/loanDist.pdf Graphic file (type pdf)
+<use ../Analysis/Charts/Output/loanDist.pdf>
+Package pdftex.def Info: ../Analysis/Charts/Output/loanDist.pdf  used on input 
+line 137.
+(pdftex.def)             Requested size: 387.00153pt x 281.4659pt.
+ [9 <./Images/Lucca6a.png> <./Images/Lucca6b.png>] [10 <../Analysis/Charts/Outp
+ut/parIncDist.pdf>] [11 <../Analysis/Charts/Output/loanDist.pdf>]
+[12]
+<../Analysis/Charts/Output/majDist.pdf, id=64, 397.485pt x 289.08pt>
+File: ../Analysis/Charts/Output/majDist.pdf Graphic file (type pdf)
+<use ../Analysis/Charts/Output/majDist.pdf>
+Package pdftex.def Info: ../Analysis/Charts/Output/majDist.pdf  used on input l
+ine 160.
+(pdftex.def)             Requested size: 387.00153pt x 281.4659pt.
+ [13]
 
+LaTeX Warning: Reference `firstStage' on page 14 undefined on input line 169.
 
-LaTeX Warning: Reference `incDist' on page 8 undefined on input line 125.
-
-[8] [9 <./Images/Lucca6a.png> <./Images/Lucca6b.png>]
-
-LaTeX Warning: Reference `loanDist' on page 10 undefined on input line 127.
-
-[10] [11]
-
-LaTeX Warning: Reference `majDist' on page 12 undefined on input line 141.
-
-
-LaTeX Warning: Reference `firstStage' on page 12 undefined on input line 149.
-
-[12] [13]
+[14 <../Analysis/Charts/Output/majDist.pdf>] [15]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [14] [15] [16] (Honors.aux)
+ [16] [17] [18] (Honors.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -736,10 +747,10 @@ Package logreq Info: Writing requests to 'Honors.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 12660 strings out of 492946
- 222179 string characters out of 3125823
- 518383 words of memory out of 3000000
- 16290 multiletter control sequences out of 15000+200000
+ 12676 strings out of 492946
+ 222831 string characters out of 3125823
+ 519372 words of memory out of 3000000
+ 16302 multiletter control sequences out of 15000+200000
  15625 words of font info for 103 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,11n,70p,1334b,1445s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -762,9 +773,9 @@ onts/cm/cmsy7.pfb><C:/Users/gmoore/AppData/Local/Programs/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmti10.pfb><C:/Users/gmoore/AppData/Local/Programs/MiKTeX 
 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/gmoore/AppData/Local/Pr
 ograms/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Honors.pdf (16 pages, 269455 bytes).
+Output written on Honors.pdf (18 pages, 277138 bytes).
 PDF statistics:
- 123 PDF objects out of 1000 (max. 8388607)
+ 141 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 16395 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 16410 words of extra memory for PDF output out of 17280 (max. 10000000)
 

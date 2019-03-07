@@ -1,9 +1,9 @@
 {smcl}
 {com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}C:\Users\gmoore\desktop\honors\analysis\Master\Code\../Output/master.smcl
+       {txt}log:  {res}C:\Users\gmoore\desktop\honors\analysis\master\code\../Output/master.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res} 1 Mar 2019, 01:38:29
+ {txt}opened on:  {res} 6 Mar 2019, 17:53:49
 {txt}
 {com}. 
 . set more off
@@ -1136,11 +1136,6 @@ partialtuition0 partialtuition2 ... partialtuition14{txt}->{res}partialtuition
 {txt}end of do-file
 
 {com}. 
-. /*
-> cd ../../Tables/Code
-> do tables
-> */
-. 
 . cd ../../Regressions/Code
 {res}C:\Users\gmoore\desktop\honors\analysis\Regressions\Code
 {txt}
@@ -1240,6 +1235,20 @@ partialtuition0 partialtuition2 ... partialtuition14{txt}->{res}partialtuition
 {txt}end of do-file
 
 {com}. 
+. /*
+> cd ../../Tables/Code
+> do tables
+> */
+. 
+. cd ../../Charts/Code
+{res}C:\Users\gmoore\desktop\honors\analysis\Charts\Code
+{txt}
+{com}. do charts
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. 
 . cd ../../Master/Code
 {res}C:\Users\gmoore\desktop\honors\analysis\Master\Code
 {txt}
@@ -1249,6 +1258,536 @@ partialtuition0 partialtuition2 ... partialtuition14{txt}->{res}partialtuition
 {com}. 
 {txt}end of do-file
 
-{com}. view "C:\Users\gmoore\Desktop\honors\Analysis\Master\Output\master.smcl"
+{com}. ls
+{txt}  <dir>   3/06/19 17:52  {res}.                 
+{txt}  <dir>   3/06/19 17:52  {res}..                
+{txt}   0.8k   3/06/19 17:52  {res}Master.do         
 
-. exit, clear
+{com}. desc majtype
+{err}variable majtype not found
+{txt}{search r(111):r(111);}
+
+{com}. desc majType
+
+              {txt}storage   display    value
+variable name   type    format     label      variable label
+{hline}
+{p 0 48}{res}{bind:majType        }{txt}{bind: float   }{bind:{txt}%14.0g    }{space 1}{txt}majTypeLab{p_end}
+{p 0 48}{space 44}{bind:  }{res}{res}{p_end}
+
+{com}. sum majType
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+{space 5}majType {c |}{res}       772    2.360104    1.243343          0          4
+
+{com}. graph pie majType
+{res}
+{com}. graph pie, by(majType)
+{err}sum of pie wedges is not positive
+{res}{err}sum of pie wedges is not positive
+{res}{err}sum of pie wedges is not positive
+{res}{err}sum of pie wedges is not positive
+{res}{err}sum of pie wedges is not positive
+{res}
+{com}. help graph pie
+
+. graph pie, over(majType)
+{res}
+{com}. hist parInc
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}
+{com}. hist parInc, freq
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}
+{com}. hist debt
+{err}variable debt not found
+{txt}{search r(111):r(111);}
+
+{com}. hist loan
+{txt}(bin={res}29{txt}, start={res}0{txt}, width={res}2758.6207{txt})
+{res}
+{com}. hist loan if loan
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}
+{com}. hist loan if loan, freq
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}
+{com}. hist need, freq
+{txt}(bin={res}18{txt}, start={res}-190791.67{txt}, width={res}13543.982{txt})
+{res}
+{com}. count if need > 0
+{res}  805
+
+{com}. count if need > 0 & !missing(need)
+{res}  193
+
+{com}. binScatter need year
+{err}unrecognized command:  binScatter not defined by binScatter.ado
+{txt}{search r(199):r(199);}
+
+{com}. help binscatter
+
+. binscatter need year
+{res}
+{com}. binscatter parInc need
+{res}
+{com}. binscatter parInc year
+{res}
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. graph pie, over(majType)
+{res}{txt}
+{com}. graph save ../Output/majDist.eps, replace
+{txt}(note: file ../Output/majDist.eps not found)
+{res}{txt}(file ../Output/majDist.eps saved)
+
+{com}. 
+{txt}end of do-file
+
+{com}. ls
+{txt}  <dir>   3/06/19 17:52  {res}.                 
+{txt}  <dir>   3/06/19 17:52  {res}..                
+{txt}   0.8k   3/06/19 17:52  {res}Master.do         
+
+{com}. pwd
+{res}C:\Users\gmoore\desktop\honors\analysis\Master\Code
+
+{com}. cd ../../charts/code
+{res}C:\Users\gmoore\desktop\honors\analysis\charts\code
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. graph pie, over(majType)
+{res}{txt}
+{com}. graph save ../Output/majDist.eps, replace
+{txt}(note: file ../Output/majDist.eps not found)
+{res}{txt}(file ../Output/majDist.eps saved)
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType)
+{res}{txt}
+{com}. graph save ../Output/majDist.eps, replace
+{res}{txt}(file ../Output/majDist.eps saved)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph save ../Output/parIncDist.eps, replace
+{txt}(note: file ../Output/parIncDist.eps not found)
+{res}{txt}(file ../Output/parIncDist.eps saved)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph save ../Output/loanDist.eps, replace
+{txt}(note: file ../Output/loanDist.eps not found)
+{res}{txt}(file ../Output/loanDist.eps saved)
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. graph pie, over(majType)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType)
+{res}{txt}
+{com}. graph save ../Output/majDist.pdf, replace
+{txt}(note: file ../Output/majDist.pdf not found)
+{res}{txt}(file ../Output/majDist.pdf saved)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph save ../Output/parIncDist.pdf, replace
+{txt}(note: file ../Output/parIncDist.pdf not found)
+{res}{txt}(file ../Output/parIncDist.pdf saved)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph save ../Output/loanDist.pdf, replace
+{txt}(note: file ../Output/loanDist.pdf not found)
+{res}{txt}(file ../Output/loanDist.pdf saved)
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType)
+{res}{txt}
+{com}. graph save ../Output/majDist.pdf, as(pdf) replace
+{err}option {bf:as()} not allowed
+{txt}{search r(198):r(198);}
+
+end of do-file
+
+{search r(198):r(198);}
+
+{com}. help graph export
+
+. ls
+{txt}  <dir>   3/06/19 21:15  {res}.                 
+{txt}  <dir>   3/06/19 21:15  {res}..                
+{txt}   0.3k   3/06/19 21:15  {res}charts.do         
+
+{com}. do charts
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType)
+{res}{txt}
+{com}. graph save ../Output/majDist.ps, replace
+{txt}(note: file ../Output/majDist.ps not found)
+{res}{txt}(file ../Output/majDist.ps saved)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph save ../Output/parIncDist.ps, replace
+{txt}(note: file ../Output/parIncDist.ps not found)
+{res}{txt}(file ../Output/parIncDist.ps saved)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph save ../Output/loanDist.ps, replace
+{txt}(note: file ../Output/loanDist.ps not found)
+{res}{txt}(file ../Output/loanDist.ps saved)
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType)
+{res}{txt}
+{com}. graph save ../Output/majDist.png, replace
+{txt}(note: file ../Output/majDist.png not found)
+{res}{txt}(file ../Output/majDist.png saved)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph save ../Output/parIncDist.png, replace
+{txt}(note: file ../Output/parIncDist.png not found)
+{res}{txt}(file ../Output/parIncDist.png saved)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph save ../Output/loanDist.png, replace
+{txt}(note: file ../Output/loanDist.png not found)
+{res}{txt}(file ../Output/loanDist.png saved)
+
+{com}. 
+{txt}end of do-file
+
+{com}. help graph save
+
+. help graph export
+
+. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType)
+{res}{txt}
+{com}. graph export ../Output/majDist.ps, replace
+{txt}(note: file ../Output/majDist.ps not found)
+(file ../Output/majDist.ps written in PostScript format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.ps, replace
+{txt}(note: file ../Output/parIncDist.ps not found)
+(file ../Output/parIncDist.ps written in PostScript format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.ps, replace
+{txt}(note: file ../Output/loanDist.ps not found)
+(file ../Output/loanDist.ps written in PostScript format)
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType)
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdfs, replace
+{err}{p 0 4 2}
+output-file suffix "pdfs" not recognized{break}
+specify correct suffix or specify as() option
+{p_end}
+{txt}{search r(198):r(198);}
+
+end of do-file
+
+{search r(198):r(198);}
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType)
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdfs, replace
+{err}{p 0 4 2}
+output-file suffix "pdfs" not recognized{break}
+specify correct suffix or specify as() option
+{p_end}
+{txt}{search r(198):r(198);}
+
+end of do-file
+
+{search r(198):r(198);}
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType)
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdf, replace
+{txt}(file ../Output/loanDist.pdf written in PDF format)
+
+{com}. 
+{txt}end of do-file
+
+{com}. help graph pie
+
+. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. graph pie, over(majType) pie(explode)
+{res}{err}invalid wedge numbers in pie(), explode
+{txt}{search r(198):r(198);}
+
+end of do-file
+
+{search r(198):r(198);}
+
+{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. graph pie, over(majType) pie(_all, explode)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}.  do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
+{txt}
+{com}. graph pie, over(majType) plabel(_all percent)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. help graph
+
+. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq graphregion(color(white))
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace 
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq graphregion(color(white))
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdf, replace
+{txt}(file ../Output/loanDist.pdf written in PDF format)
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq graphregion(color(white)) ///
+>         xlabel("Parental Income in Year of graduation"
+{err}) required
+{txt}{search r(100):r(100);}
+
+end of do-file
+
+{search r(100):r(100);}
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq graphregion(color(white)) ///
+>         xlabel("Parental Income in Year of graduation")
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{err}invalid label specifier, :  "Parental Income in Year of graduation":
+{txt}{search r(198):r(198);}
+
+end of do-file
+
+{search r(198):r(198);}
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq graphregion(color(white)) ///
+>         xtitle("Parental Income in Year of Graduation")
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace 
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq graphregion(color(white)) ///
+>         xtitle("Debt when Graduating")
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdf, replace
+{txt}(file ../Output/loanDist.pdf written in PDF format)
+
+{com}. 
+{txt}end of do-file
+
+{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}
+{com}. //General distribution of majors
+. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
+{res}{txt}
+{com}. graph export ../Output/majDist.pdf, replace
+{txt}(file ../Output/majDist.pdf written in PDF format)
+
+{com}. 
+. //Student income distribution
+. hist parInc, freq graphregion(color(white)) ///
+>         xtitle("Parental Income in Year of Graduation")
+{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
+{res}{txt}
+{com}. graph export ../Output/parIncDist.pdf, replace 
+{txt}(file ../Output/parIncDist.pdf written in PDF format)
+
+{com}. 
+. //Debt distribution
+. hist loan if loan, freq graphregion(color(white)) ///
+>         xtitle("Debt When Graduating")
+{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
+{res}{txt}
+{com}. graph export ../Output/loanDist.pdf, replace
+{txt}(file ../Output/loanDist.pdf written in PDF format)
+
+{com}. 
+{txt}end of do-file
+
+{com}. 

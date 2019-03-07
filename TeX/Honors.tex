@@ -10,7 +10,6 @@
 
 %Graphics info
 \usepackage{graphicx}
-\graphicspath{{Images/}}
 
 %Misc packages
 \usepackage{microtype}
@@ -108,13 +107,13 @@
 		\centering
 		\caption{Student Loan Frequencies 2006-2007}
 		\label{luc06}
-		\includegraphics[width = \linewidth]{Lucca6a.png}
+		\includegraphics[width = \linewidth]{Images/Lucca6a.png}
 		\end{subfigure} 
 	\begin{subfigure}{0.49\textwidth}
 		\centering
 		\caption{Student Loan Frequencies 2007-2008}
 		\label{luc07}
-		\includegraphics[width = \linewidth]{Lucca6b.png}
+		\includegraphics[width = \linewidth]{Images/Lucca6b.png}
 		\end{subfigure}
 	\end{figure}
 	
@@ -122,7 +121,21 @@
 	
 	For my paper I use data from the National Longitudinal Survey of Youth '79 Children and Young Adults (NLSY79 CYA). A follow-up to the original National Longitudinal Survey of Youth '79, the CYA surveys the original respondents' children semiyearly from birth until the present day. Thus, we have respondents across the entire age spectrum during the implementation of the policy, allowing us to observe time-varying trends in debt acquisition and career choice. 
 	
+	\begin{figure}
+		\centering
+		\caption{Distribution of Parental Income}
+		\label{incDist}
+		\includegraphics[width = 0.9\textwidth]{../Analysis/Charts/Output/parIncDist}
+	\end{figure}
+	
 	The benefits of the CYA data over the Princeton data from \textcite{rothstein2011} are several. First, the NLSY is designed to focus on lower income households rather than Anon U's much wealthier sample. As visible in figure \ref{incDist}, 20\% of students come from households below the federal poverty line, as opposed to 10\% nationally. Second, the students in this survey attend a much broader range of colleges than those in the Rothstein data set. As the students who are accepted into prestigious universities such as Anon U are by definition selected, they \emph{cannot} be representative of the general American college-bound population. Third, the CYA surveys students both about their finances and about their career aspirations at each step of the process. Thus, not only can I track student outcomes after graduation, I am able to plot students' intentions over time, tracking variables such as intended major during their time at school. This provides a more interesting, nuanced panel as we can see how students' intentions evolve as their access to credit changes. Finally, with data from several different colleges, we can examine how college traits interact with student debt and career outcomes. 
+	
+	\begin{figure}
+		\centering
+		\caption{Distribution of Loan Size}
+		\label{loanDist}
+		\includegraphics[width = 0.9\textwidth]{../Analysis/Charts/Output/loanDist}
+	\end{figure}
 	
 	One drawback of the CYA data set is that, as a survey, many of the figures are less precise than those in other sets. For example, when asked about their level of debt, the vast majority of responses are rounded numbers. While useful for qualitative analysis, this makes it difficult to assess data granularly as done by \textcite{lucca2018} in figure \ref{luc}. Fortunately, because they have a nationally representative dataset, there is no reason to believe their results would differ with our sample. Indeed, as our sample is of lower income relative to the general population, I would argue that subjects are bound more strongly by the policy as for many students federal loans may be their only option for college financing. In addition, as visible in figure \ref{loanDist}, we can see that 85\% of students received \$10,000 or less in debt, suggesting an additional \$1,000 would be meaningful relative to their overall quantity. 
 	
@@ -139,6 +152,13 @@
 	In this example, the model would be $$Y = \beta_0 + \beta_1 \widehat{\ln(\mbox{debt})}_{it} + \beta_2 \mbox{hasDebt}_{it} \times \widehat{\ln(\mbox{debt})}_{it} + \vec{\xi}^T \vec{\mbox{demographics}}_i + \epsilon_{it}$$ where $Y$ is some outcome variable. There exist a selection of potential outcome variables worth examining.
 	
 	Our first model will place major choice on the left hand side. I believe this to be the most novel outcome of interest, as datasets have this level of resolution on their observations. Here I can use a random variable logit model to place students into one of six bins: humanities, STEM, Social Science, Professional, Business, and Pre-Grad. The specifications of these bins can be found in the appendix, and we will adjust these bins later as a form of robustness testing. The distribution of students broken down by major is visible in figure \ref{majDist}.
+	
+	\begin{figure}
+		\centering
+		\caption{Breakdown of major in sample}
+		\label{majDist}
+		\includegraphics[width = 0.9\textwidth]{../Analysis/Charts/Output/majDist}
+	\end{figure}
 	
 	Our second model will be examining students' career outcomes.
 	
