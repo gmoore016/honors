@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}C:\Users\gmoore\desktop\honors\analysis\master\code\../Output/master.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res} 6 Mar 2019, 17:53:49
+ {txt}opened on:  {res} 8 Mar 2019, 13:40:55
 {txt}
 {com}. 
 . set more off
@@ -1232,1382 +1232,134 @@ partialtuition0 partialtuition2 ... partialtuition14{txt}->{res}partialtuition
 {col 18}{res}        0{col 28}{txt}right-censored observations
 
 {com}. 
-{txt}end of do-file
+. //How debt changes with need--increased slope after cap
+. //Slope steaper after policy change
+. reg loan c.need##atCap if polImpact & !missing(polImpact)
 
-{com}. 
-. /*
-> cd ../../Tables/Code
-> do tables
-> */
-. 
-. cd ../../Charts/Code
-{res}C:\Users\gmoore\desktop\honors\analysis\Charts\Code
-{txt}
-{com}. do charts
-{txt}
-{com}. 
-{txt}end of do-file
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     128
+{txt}{hline 13}{char +}{hline 30}           F(  3,   124) ={res}    3.07
+    {txt}   Model {char |} {res}  414926619     3   138308873           {txt}Prob > F      = {res} 0.0303
+    {txt}Residual {char |} {res} 5.5811e+09   124  45009090.6           {txt}R-squared     = {res} 0.0692
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0467
+    {txt}   Total {char |} {res} 5.9961e+09   127  47213022.4           {txt}Root MSE      = {res} 6708.9
 
-{com}. 
-. cd ../../Master/Code
-{res}C:\Users\gmoore\desktop\honors\analysis\Master\Code
-{txt}
-{com}. save ../Output/Master.dta, replace
-{txt}file ../Output/Master.dta saved
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        loan{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}need {c |}{col 14}{res}{space 2} .0240374{col 26}{space 2} .0211334{col 37}{space 1}    1.14{col 46}{space 3}0.258{col 54}{space 4}-.0177916{col 67}{space 3} .0658663
+{txt}{space 5}1.atCap {c |}{col 14}{res}{space 2}-2138.868{col 26}{space 2} 1874.972{col 37}{space 1}   -1.14{col 46}{space 3}0.256{col 54}{space 4}-5849.963{col 67}{space 3} 1572.227
+{txt}{space 12} {c |}
+atCap#c.need {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .2301021{col 26}{space 2} .1067254{col 37}{space 1}    2.16{col 46}{space 3}0.033{col 54}{space 4} .0188626{col 67}{space 3} .4413416
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 4500.354{col 26}{space 2} 920.6302{col 37}{space 1}    4.89{col 46}{space 3}0.000{col 54}{space 4} 2678.169{col 67}{space 3}  6322.54
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg loan c.need##atCap if !polImpact
 
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     195
+{txt}{hline 13}{char +}{hline 30}           F(  3,   191) ={res}    6.40
+    {txt}   Model {char |} {res}  374719198     3   124906399           {txt}Prob > F      = {res} 0.0004
+    {txt}Residual {char |} {res} 3.7293e+09   191  19525333.4           {txt}R-squared     = {res} 0.0913
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0770
+    {txt}   Total {char |} {res} 4.1041e+09   194  21154937.5           {txt}Root MSE      = {res} 4418.7
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        loan{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}need {c |}{col 14}{res}{space 2}  .011213{col 26}{space 2} .0117279{col 37}{space 1}    0.96{col 46}{space 3}0.340{col 54}{space 4}-.0119199{col 67}{space 3} .0343458
+{txt}{space 5}1.atCap {c |}{col 14}{res}{space 2}  1164.62{col 26}{space 2} 1136.568{col 37}{space 1}    1.02{col 46}{space 3}0.307{col 54}{space 4}-1077.217{col 67}{space 3} 3406.457
+{txt}{space 12} {c |}
+atCap#c.need {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0952166{col 26}{space 2} .0694166{col 37}{space 1}    1.37{col 46}{space 3}0.172{col 54}{space 4} -.041705{col 67}{space 3} .2321383
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2587.768{col 26}{space 2} 428.9128{col 37}{space 1}    6.03{col 46}{space 3}0.000{col 54}{space 4} 1741.754{col 67}{space 3} 3433.782
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
 {com}. 
-{txt}end of do-file
+. //Triple difference model
+. tobit loan atCap##c.polImpact##need i.year i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
+{err}need:  factor variables may not contain noninteger values
+{txt}{search r(452):r(452);}
+
+end of do-file
+{search r(452):r(452);}
+
+end of do-file
+
+{search r(452):r(452);}
 
 {com}. ls
-{txt}  <dir>   3/06/19 17:52  {res}.                 
-{txt}  <dir>   3/06/19 17:52  {res}..                
-{txt}   0.8k   3/06/19 17:52  {res}Master.do         
+{txt}  <dir>   3/08/19 13:41  {res}.                 
+{txt}  <dir>   3/08/19 13:41  {res}..                
+{txt}   0.6k   2/26/19 23:32  {res}master.smcl       
+{txt}   0.6k   3/08/19 13:41  {res}regs.do           
 
-{com}. desc majtype
-{err}variable majtype not found
-{txt}{search r(111):r(111);}
+{com}. cd ..
+{res}C:\Users\gmoore\desktop\honors\analysis\Regressions
 
-{com}. desc majType
-
-              {txt}storage   display    value
-variable name   type    format     label      variable label
-{hline}
-{p 0 48}{res}{bind:majType        }{txt}{bind: float   }{bind:{txt}%14.0g    }{space 1}{txt}majTypeLab{p_end}
-{p 0 48}{space 44}{bind:  }{res}{res}{p_end}
-
-{com}. sum majType
-
-{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
-{hline 13}{c +}{hline 56}
-{space 5}majType {c |}{res}       772    2.360104    1.243343          0          4
-
-{com}. graph pie majType
-{res}
-{com}. graph pie, by(majType)
-{err}sum of pie wedges is not positive
-{res}{err}sum of pie wedges is not positive
-{res}{err}sum of pie wedges is not positive
-{res}{err}sum of pie wedges is not positive
-{res}{err}sum of pie wedges is not positive
-{res}
-{com}. help graph pie
-
-. graph pie, over(majType)
-{res}
-{com}. hist parInc
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}
-{com}. hist parInc, freq
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}
-{com}. hist debt
-{err}variable debt not found
-{txt}{search r(111):r(111);}
-
-{com}. hist loan
-{txt}(bin={res}29{txt}, start={res}0{txt}, width={res}2758.6207{txt})
-{res}
-{com}. hist loan if loan
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}
-{com}. hist loan if loan, freq
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}
-{com}. hist need, freq
-{txt}(bin={res}18{txt}, start={res}-190791.67{txt}, width={res}13543.982{txt})
-{res}
-{com}. count if need > 0
-{res}  805
-
-{com}. count if need > 0 & !missing(need)
-{res}  193
-
-{com}. binScatter need year
-{err}unrecognized command:  binScatter not defined by binScatter.ado
+{com}. code
+{err}unrecognized command:  code
 {txt}{search r(199):r(199);}
-
-{com}. help binscatter
-
-. binscatter need year
-{res}
-{com}. binscatter parInc need
-{res}
-{com}. binscatter parInc year
-{res}
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. graph pie, over(majType)
-{res}{txt}
-{com}. graph save ../Output/majDist.eps, replace
-{txt}(note: file ../Output/majDist.eps not found)
-{res}{txt}(file ../Output/majDist.eps saved)
-
-{com}. 
-{txt}end of do-file
 
 {com}. ls
-{txt}  <dir>   3/06/19 17:52  {res}.                 
-{txt}  <dir>   3/06/19 17:52  {res}..                
-{txt}   0.8k   3/06/19 17:52  {res}Master.do         
-
-{com}. pwd
-{res}C:\Users\gmoore\desktop\honors\analysis\Master\Code
-
-{com}. cd ../../charts/code
-{res}C:\Users\gmoore\desktop\honors\analysis\charts\code
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. graph pie, over(majType)
-{res}{txt}
-{com}. graph save ../Output/majDist.eps, replace
-{txt}(note: file ../Output/majDist.eps not found)
-{res}{txt}(file ../Output/majDist.eps saved)
-
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType)
-{res}{txt}
-{com}. graph save ../Output/majDist.eps, replace
-{res}{txt}(file ../Output/majDist.eps saved)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph save ../Output/parIncDist.eps, replace
-{txt}(note: file ../Output/parIncDist.eps not found)
-{res}{txt}(file ../Output/parIncDist.eps saved)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph save ../Output/loanDist.eps, replace
-{txt}(note: file ../Output/loanDist.eps not found)
-{res}{txt}(file ../Output/loanDist.eps saved)
-
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. graph pie, over(majType)
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType)
-{res}{txt}
-{com}. graph save ../Output/majDist.pdf, replace
-{txt}(note: file ../Output/majDist.pdf not found)
-{res}{txt}(file ../Output/majDist.pdf saved)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph save ../Output/parIncDist.pdf, replace
-{txt}(note: file ../Output/parIncDist.pdf not found)
-{res}{txt}(file ../Output/parIncDist.pdf saved)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph save ../Output/loanDist.pdf, replace
-{txt}(note: file ../Output/loanDist.pdf not found)
-{res}{txt}(file ../Output/loanDist.pdf saved)
-
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType)
-{res}{txt}
-{com}. graph save ../Output/majDist.pdf, as(pdf) replace
-{err}option {bf:as()} not allowed
-{txt}{search r(198):r(198);}
-
-end of do-file
-
-{search r(198):r(198);}
-
-{com}. help graph export
-
-. ls
-{txt}  <dir>   3/06/19 21:15  {res}.                 
-{txt}  <dir>   3/06/19 21:15  {res}..                
-{txt}   0.3k   3/06/19 21:15  {res}charts.do         
-
-{com}. do charts
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType)
-{res}{txt}
-{com}. graph save ../Output/majDist.ps, replace
-{txt}(note: file ../Output/majDist.ps not found)
-{res}{txt}(file ../Output/majDist.ps saved)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph save ../Output/parIncDist.ps, replace
-{txt}(note: file ../Output/parIncDist.ps not found)
-{res}{txt}(file ../Output/parIncDist.ps saved)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph save ../Output/loanDist.ps, replace
-{txt}(note: file ../Output/loanDist.ps not found)
-{res}{txt}(file ../Output/loanDist.ps saved)
-
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType)
-{res}{txt}
-{com}. graph save ../Output/majDist.png, replace
-{txt}(note: file ../Output/majDist.png not found)
-{res}{txt}(file ../Output/majDist.png saved)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph save ../Output/parIncDist.png, replace
-{txt}(note: file ../Output/parIncDist.png not found)
-{res}{txt}(file ../Output/parIncDist.png saved)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph save ../Output/loanDist.png, replace
-{txt}(note: file ../Output/loanDist.png not found)
-{res}{txt}(file ../Output/loanDist.png saved)
-
-{com}. 
-{txt}end of do-file
-
-{com}. help graph save
-
-. help graph export
-
-. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType)
-{res}{txt}
-{com}. graph export ../Output/majDist.ps, replace
-{txt}(note: file ../Output/majDist.ps not found)
-(file ../Output/majDist.ps written in PostScript format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.ps, replace
-{txt}(note: file ../Output/parIncDist.ps not found)
-(file ../Output/parIncDist.ps written in PostScript format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.ps, replace
-{txt}(note: file ../Output/loanDist.ps not found)
-(file ../Output/loanDist.ps written in PostScript format)
-
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType)
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdfs, replace
-{err}{p 0 4 2}
-output-file suffix "pdfs" not recognized{break}
-specify correct suffix or specify as() option
-{p_end}
-{txt}{search r(198):r(198);}
-
-end of do-file
-
-{search r(198):r(198);}
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType)
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdfs, replace
-{err}{p 0 4 2}
-output-file suffix "pdfs" not recognized{break}
-specify correct suffix or specify as() option
-{p_end}
-{txt}{search r(198):r(198);}
-
-end of do-file
-
-{search r(198):r(198);}
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType)
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdf, replace
-{txt}(file ../Output/loanDist.pdf written in PDF format)
-
-{com}. 
-{txt}end of do-file
-
-{com}. help graph pie
-
-. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. graph pie, over(majType) pie(explode)
-{res}{err}invalid wedge numbers in pie(), explode
-{txt}{search r(198):r(198);}
-
-end of do-file
-
-{search r(198):r(198);}
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. graph pie, over(majType) pie(_all, explode)
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}.  do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. graph pie, over(majType) plabel(_all percent)
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. help graph
-
-. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq graphregion(color(white))
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace 
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq graphregion(color(white))
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdf, replace
-{txt}(file ../Output/loanDist.pdf written in PDF format)
-
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq graphregion(color(white)) ///
->         xlabel("Parental Income in Year of graduation"
-{err}) required
-{txt}{search r(100):r(100);}
-
-end of do-file
-
-{search r(100):r(100);}
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq graphregion(color(white)) ///
->         xlabel("Parental Income in Year of graduation")
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{err}invalid label specifier, :  "Parental Income in Year of graduation":
-{txt}{search r(198):r(198);}
-
-end of do-file
-
-{search r(198):r(198);}
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq graphregion(color(white)) ///
->         xtitle("Parental Income in Year of Graduation")
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace 
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq graphregion(color(white)) ///
->         xtitle("Debt when Graduating")
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdf, replace
-{txt}(file ../Output/loanDist.pdf written in PDF format)
-
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. //General distribution of majors
-. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq graphregion(color(white)) ///
->         xtitle("Parental Income in Year of Graduation")
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace 
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq graphregion(color(white)) ///
->         xtitle("Debt When Graduating")
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdf, replace
-{txt}(file ../Output/loanDist.pdf written in PDF format)
-
-{com}. 
-{txt}end of do-file
-
-{com}. desc
-
-{txt}Contains data from {res}../Output/Master.dta
-{txt}  obs:{res}           950                          
-{txt} vars:{res}            32                          6 Mar 2019 17:53
-{txt} size:{res}       110,200                          
-{txt}{hline}
-              storage   display    value
-variable name   type    format     label      variable label
-{hline}
-{p 0 48}{res}{bind:cid            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}ID CODE OF CHILD{p_end}
-{p 0 48}{bind:year           }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:mid            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}ID CODE OF MOTHER OF CHILD{p_end}
-{p 0 48}{bind:race           }{txt}{bind: float   }{bind:{txt}%23.0g    }{space 1}{bind:raceLab  }{bind:  }{res}{res}RACE OF CHILD (FROM MOTHERS SCREENER 79){p_end}
-{p 0 48}{bind:sex            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:sexLab   }{bind:  }{res}{res}SEX OF CHILD{p_end}
-{p 0 48}{bind:dob            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}DATE OF BIRTH OF CHILD - YEAR{p_end}
-{p 0 48}{bind:grade          }{txt}{bind: float   }{bind:{txt}%24.0g    }{space 1}{bind:gradeLab }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:maj            }{txt}{bind: float   }{bind:{txt}%67.0g    }{space 1}{txt}vlY3046600{p_end}
-{p 0 48}{space 44}{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:tuition        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:recloan        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:ynLab    }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:loan           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:region         }{txt}{bind: float   }{bind:{txt}%13.0g    }{space 1}{txt}regionLab{p_end}
-{p 0 48}{space 44}{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:intDate        }{txt}{bind: float   }{bind:{txt}%tm       }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:sibs           }{txt}{bind: byte    }{bind:{txt}%12.0g    }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:fulltuition    }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:partialtuition }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:inCollege      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:sibsInCollege  }{txt}{bind: byte    }{bind:{txt}%12.0g    }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:cohort         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:cohLab   }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:polImpact      }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:majType        }{txt}{bind: float   }{bind:{txt}%14.0g    }{space 1}{txt}majTypeLab{p_end}
-{p 0 48}{space 44}{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:fallSemester   }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:momMarried     }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:parInc         }{txt}{bind: long    }{bind:{txt}%12.0g    }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:assets         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:homeVal        }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:parDob         }{txt}{bind: float   }{bind:{txt}%tm       }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:hhSize         }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:mAge           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:efc            }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:need           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{p 0 48}{bind:atCap          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
-{txt}{hline}
-Sorted by:  
-{res}     Note:  dataset has changed since last saved
-
-{com}. 
-. 
-. 
-. 
-. 
-. 
-. 
-. 
-. 
-. 
-. by atCap: scatter intDate debt
-{err}not sorted
-{txt}{search r(5):r(5);}
-
-{com}. sort atCap
-
-. by atCap: scatter intDate debt
-{err}scatter may not be combined with by
-{txt}{search r(190):r(190);}
-
-{com}. scatter intDate debt if atCap
-{err}variable debt not found
-{txt}{search r(111):r(111);}
-
-{com}. scatter intDate loan if atCap
-{res}
-{com}. scatter loan intDate if atCap
-{res}
-{com}. scatter loan intDate if atCap & !missing(atCap)
-{res}
-{com}. scatter loan intDate if !atCap
-{res}
-{com}. scatter loan intDate if atCap & !missing(atCap)
-{res}
-{com}. binscatter loan need if !polImpact
-{res}
-{com}. binscatter loan need if !polImpact & need > 0
-{res}
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. graph scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
-{err}{p 0 4 2}
-scattergraph_g.new  loan intDate if atCap & !missing(atCap), name(loanAtCap): class member function not found
-{p_end}
-{txt}{search r(4023):r(4023);}
-
-end of do-file
-
-{search r(4023):r(4023);}
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. graph scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
-{err}{p 0 4 2}
-scattergraph_g.new  loan intDate if atCap & !missing(atCap), name(loanAtCap): class member function not found
-{p_end}
-{txt}{search r(4023):r(4023);}
-
-end of do-file
-
-{search r(4023):r(4023);}
-
-{com}. help graph combine
-
-. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
-{res}{txt}
-{com}. scatter loan intDate if !atCap, name(loanNotAtCap)
-{res}{txt}
-{com}. graph combine loanAtCap loanNotAtCap
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. //Loan vs. Time vs. atCap
-. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
-{err}graph loanAtCap already exists
-{txt}{search r(110):r(110);}
-
-end of do-file
-
-{search r(110):r(110);}
-
-{com}. clear loanAtCap loanNotAtCap
-{err}loanNotAtCap not allowed
-{txt}{search r(198):r(198);}
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
+{txt}  <dir>   2/28/19 22:51  {res}.                 
+{txt}  <dir>   2/28/19 22:51  {res}..                
+{txt}  <dir>   3/08/19 13:41  {res}Code              
+{txt}  <dir>   2/28/19 22:54  {res}Output            
+
+{com}. cd code
+{res}C:\Users\gmoore\desktop\honors\analysis\Regressions\code
+
+{com}. do regs
 {txt}
 {com}. use ../../NeedCalc/Output/Need.dta, clear
 {txt}
 {com}. 
-. //General distribution of majors
-. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq graphregion(color(white)) ///
->         xtitle("Parental Income in Year of Graduation")
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace 
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq graphregion(color(white)) ///
->         xtitle("Debt When Graduating")
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdf, replace
-{txt}(file ../Output/loanDist.pdf written in PDF format)
-
-{com}. 
-. //Loan vs. Time vs. atCap
-. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
-{err}graph loanAtCap already exists
-{txt}{search r(110):r(110);}
-
-end of do-file
-
-{search r(110):r(110);}
-
-{com}. clear
-
-. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. use ../../NeedCalc/Output/Need.dta, clear
-{txt}
-{com}. 
-. //General distribution of majors
-. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq graphregion(color(white)) ///
->         xtitle("Parental Income in Year of Graduation")
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace 
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq graphregion(color(white)) ///
->         xtitle("Debt When Graduating")
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdf, replace
-{txt}(file ../Output/loanDist.pdf written in PDF format)
-
-{com}. 
-. //Loan vs. Time vs. atCap
-. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
-{err}graph loanAtCap already exists
-{txt}{search r(110):r(110);}
-
-end of do-file
-
-{search r(110):r(110);}
-
-{com}. graph drop
-{err}nothing found where graph name expected
-{txt}{search r(198):r(198);}
-
-{com}. graph drop *
-{err}* invalid name
-no graphs dropped
-{txt}{search r(111):r(111);}
-
-{com}. help graph drop
-
-. graph drop _all
-
-. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. use ../../NeedCalc/Output/Need.dta, clear
-{txt}
-{com}. 
-. //General distribution of majors
-. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq graphregion(color(white)) ///
->         xtitle("Parental Income in Year of Graduation")
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace 
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq graphregion(color(white)) ///
->         xtitle("Debt When Graduating")
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdf, replace
-{txt}(file ../Output/loanDist.pdf written in PDF format)
-
-{com}. 
-. //Loan vs. Time vs. atCap
-. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
-{res}{txt}
-{com}. scatter loan intDate if !atCap, name(loanNotAtCap)
-{res}{txt}
-{com}. graph combine loanAtCap loanNotAtCap, scale(1)
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. help graph combine
-
-. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. use ../../NeedCalc/Output/Need.dta, clear
-{txt}
-{com}. 
-. //General distribution of majors
-. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq graphregion(color(white)) ///
->         xtitle("Parental Income in Year of Graduation")
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace 
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq graphregion(color(white)) ///
->         xtitle("Debt When Graduating")
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdf, replace
-{txt}(file ../Output/loanDist.pdf written in PDF format)
-
-{com}. 
-. //Loan vs. Time vs. atCap
-. capture graph drop loanAtCap loanNotAtCapd
-{txt}
-{com}. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
-{err}graph loanAtCap already exists
-{txt}{search r(110):r(110);}
-
-end of do-file
-
-{search r(110):r(110);}
-
-{com}. help graph drop
-
-. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. use ../../NeedCalc/Output/Need.dta, clear
-{txt}
-{com}. 
-. //General distribution of majors
-. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq graphregion(color(white)) ///
->         xtitle("Parental Income in Year of Graduation")
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace 
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq graphregion(color(white)) ///
->         xtitle("Debt When Graduating")
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdf, replace
-{txt}(file ../Output/loanDist.pdf written in PDF format)
-
-{com}. 
-. //Loan vs. Time vs. atCap
-. capture graph drop loanAtCap
-{txt}
-{com}. capture graph drop loanNotAtCap
-{txt}
-{com}. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap)
-{res}{txt}
-{com}. scatter loan intDate if !atCap, name(loanNotAtCap)
-{res}{txt}
-{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. capture graph drop loanAtCap
-{txt}
-{com}. capture graph drop loanNotAtCap
-{txt}
-{com}. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ymax(50000)
-{err}option {bf:ymax()} not allowed
-{txt}{search r(198):r(198);}
-
-end of do-file
-
-{search r(198):r(198);}
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. use ../../NeedCalc/Output/Need.dta, clear
-{txt}
-{com}. 
-. //General distribution of majors
-. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq graphregion(color(white)) ///
->         xtitle("Parental Income in Year of Graduation")
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace 
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq graphregion(color(white)) ///
->         xtitle("Debt When Graduating")
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdf, replace
-{txt}(file ../Output/loanDist.pdf written in PDF format)
-
-{com}. 
-. //Loan vs. Time vs. atCap
-. capture graph drop loanAtCap
-{txt}
-{com}. capture graph drop loanNotAtCap
-{txt}
-{com}. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap) yscale(range(0 50000))
-{res}{txt}
-{com}. scatter loan intDate if !atCap, name(loanNotAtCap) yscale(range(0 50000))
-{res}{txt}
-{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. //Loan vs. Time vs. atCap
-. capture graph drop loanAtCap
-{txt}
-{com}. capture graph drop loanNotAtCap
-{txt}
-{com}. scatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
->         yscale(range(0 50000)) title(atCap)
-{res}{txt}
-{com}. scatter loan intDate if !atCap, name(loanNotAtCap) ///
->         yscale(range(0 50000)) title(!atCap)
-{res}{txt}
-{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. //Loan vs. Time vs. atCap
-. capture graph drop loanAtCap
-{txt}
-{com}. capture graph drop loanNotAtCap
-{txt}
-{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
->         yscale(range(0 50000)) title(atCap)
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-{res}{txt}
-{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
->         yscale(range(0 50000)) title(!atCap)
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-{res}{txt}
-{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
-{res}{txt}
-{com}. 
-. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. //Loan vs. Time vs. atCap
-. capture graph drop loanAtCap
-{txt}
-{com}. capture graph drop loanNotAtCap
-{txt}
-{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
->         yscale(range(0 10000)) title(atCap)
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-{res}{txt}
-{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
->         yscale(range(0 10000)) title(!atCap)
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-{res}{txt}
-{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. //Loan vs. Time vs. atCap
-. capture graph drop loanAtCap
-{txt}
-{com}. capture graph drop loanNotAtCap
-{txt}
-{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
->         yscale(range(0 12000)) title(atCap)
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-{res}{txt}
-{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
->         yscale(range(0 12000)) title(!atCap)
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-{res}{txt}
-{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. binscatter loan intDate if atCap & !missing(atCap)
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
+. //Linear time trend
+. tobit loan atCap##c.polImpact need intDate i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
 {res}
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. //Loan vs. Time by atCap
-. capture graph drop loanAtCap
-{txt}
-{com}. capture graph drop loanNotAtCap
-{txt}
-{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
->         yscale(range(0 12000)) title(atCap)
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-{res}{txt}
-{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
->         yscale(range(0 12000)) title(!atCap)
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-{res}{txt}
-{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
-{res}{txt}
-{com}. 
-. 
-{txt}end of do-file
+{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       191
+{txt}{col 51}LR chi2({res}12{txt}){col 67}= {res}     36.64
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0003
+{txt}Log likelihood = {res}  -1135.68{txt}{col 51}Pseudo R2{col 67}= {res}    0.0159
 
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. graph combine loanAtCap loanNotAtCap, iscale(1) col(1)
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. graph combine loanAtCap loanNotAtCap, iscale(1)
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. help graph combine
-
-. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. capture graph drop loanAtCap
-{txt}
-{com}. capture graph drop loanNotAtCap
-{txt}
-{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
->         title(atCap)
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-{res}{txt}
-{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
->         title(!atCap)
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-{res}{txt}
-{com}. graph combine loanAtCap loanNotAtCap, iscale(1) ycommon
-{res}{txt}
-{com}. 
-. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. capture graph drop loanAtCap
-{txt}
-{com}. capture graph drop loanNotAtCap
-{txt}
-{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
->         title(atCap) nodraw
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-
-{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
->         title(!atCap) nodraw
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-
-{com}. graph combine loanAtCap loanNotAtCap, iscale(1) ycommon
-{res}{txt}
-{com}. 
-. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. graph combine loanAtCap loanNotAtCap, ycommon
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. graph combine loanAtCap loanNotAtCap, ycommon altshrink
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. binscatter debt need if !polImpact
-{err}variable debt not found
-{txt}{search r(111):r(111);}
-
-{com}. binscatter loan need if !polImpact
-{res}
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. //Loan vs. Need by polImpact
-. capture graph drop loanNeedPol
-{txt}
-{com}. capture graph drop loanNeedNotPol
-{txt}
-{com}. binscatter loan need if polImpact & !missing(polImpact) & need > -5000, ///
->         name(loanNeedPol) title(Post-Policy) nodraw
-{res}{txt}
-{com}. binscatter loan need if !polImpact & need > -5000, ///
->         name(loanNeedNotPol) title(Pre-Policy) nodraw
-{res}{txt}
-{com}. graph combine loanNeedPol loanNeedNotPol, ycommon
-{res}{txt}
-{com}. 
-. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. //Loan vs. Need by polImpact
-. capture graph drop loanNeedPol
-{txt}
-{com}. capture graph drop loanNeedNotPol
-{txt}
-{com}. binscatter loan need if polImpact & !missing(polImpact) & need > -5000, ///
->         name(loanNeedPol) title(Post-Policy) nodraw
-{res}{txt}
-{com}. binscatter loan need if !polImpact & need > -5000, ///
->         name(loanNeedNotPol) title(Pre-Policy) nodraw
-{res}{txt}
-{com}. graph combine loanNeedNotPol loanNeedPol, ycommon
-{res}{txt}
-{com}. 
-. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. //Loan vs. Need by polImpact
-. capture graph drop loanNeedPol
-{txt}
-{com}. capture graph drop loanNeedNotPol
-{txt}
-{com}. binscatter loan need if polImpact & !missing(polImpact) & ///
->         inrange(need, -5000, 30000), name(loanNeedPol) title(Post-Policy) nodraw
-{res}{txt}
-{com}. binscatter loan need if !polImpact & inrange(need, -5000, 30000), ///
->         name(loanNeedNotPol) title(Pre-Policy) nodraw
-{res}{txt}
-{com}. graph combine loanNeedNotPol loanNeedPol, ycommon
-{res}{txt}
-{com}. 
-{txt}end of do-file
-
-{com}. pwd
-{res}C:\Users\gmoore\desktop\honors\analysis\charts\code
-
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. use ../../NeedCalc/Output/Need.dta, clear
-{txt}
-{com}. 
-. //General distribution of majors
-. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}1.atCap {c |}{col 26}{res}{space 2} 84.08985{col 38}{space 2} 2755.757{col 49}{space 1}    0.03{col 58}{space 3}0.976{col 66}{space 4} -5353.86{col 79}{space 3}  5522.04
+{txt}{space 15}polImpact {c |}{col 26}{res}{space 2}-1.569015{col 38}{space 2} 4.417123{col 49}{space 1}   -0.36{col 58}{space 3}0.723{col 66}{space 4}-10.28535{col 79}{space 3} 7.147317
+{txt}{space 24} {c |}
+{space 7}atCap#c.polImpact {c |}
+{space 22}1  {c |}{col 26}{res}{space 2}  .623287{col 38}{space 2} 2.105011{col 49}{space 1}    0.30{col 58}{space 3}0.767{col 66}{space 4}-3.530543{col 79}{space 3} 4.777117
+{txt}{space 24} {c |}
+{space 20}need {c |}{col 26}{res}{space 2} .1325079{col 38}{space 2}  .041844{col 49}{space 1}    3.17{col 58}{space 3}0.002{col 66}{space 4}  .049937{col 79}{space 3} .2150788
+{txt}{space 17}intDate {c |}{col 26}{res}{space 2} 92.27226{col 38}{space 2} 156.4238{col 49}{space 1}    0.59{col 58}{space 3}0.556{col 66}{space 4}-216.3997{col 79}{space 3} 400.9442
+{txt}{space 10}1.fallSemester {c |}{col 26}{res}{space 2}-281.3757{col 38}{space 2} 1769.435{col 49}{space 1}   -0.16{col 58}{space 3}0.874{col 66}{space 4}-3773.011{col 79}{space 3}  3210.26
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 2141.139{col 38}{space 2} 2341.406{col 49}{space 1}    0.91{col 58}{space 3}0.362{col 66}{space 4}-2479.169{col 79}{space 3} 6761.447
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2534.857{col 38}{space 2} 2174.041{col 49}{space 1}    1.17{col 58}{space 3}0.245{col 66}{space 4}-1755.189{col 79}{space 3} 6824.903
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1317.766{col 38}{space 2} 1453.613{col 49}{space 1}    0.91{col 58}{space 3}0.366{col 66}{space 4}-1550.657{col 79}{space 3} 4186.189
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-2928.343{col 38}{space 2} 2365.215{col 49}{space 1}   -1.24{col 58}{space 3}0.217{col 66}{space 4}-7595.634{col 79}{space 3} 1738.948
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1604.272{col 38}{space 2} 2372.425{col 49}{space 1}   -0.68{col 58}{space 3}0.500{col 66}{space 4}-6285.791{col 79}{space 3} 3077.248
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-6408.225{col 38}{space 2} 2851.752{col 49}{space 1}   -2.25{col 58}{space 3}0.026{col 66}{space 4} -12035.6{col 79}{space 3}-780.8479
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2}-52761.47{col 38}{space 2} 90482.39{col 49}{space 1}   -0.58{col 58}{space 3}0.561{col 66}{space 4}-231310.9{col 79}{space 3} 125787.9
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                  /sigma {c |}{col 26}{res}{space 2} 8778.504{col 38}{space 2} 663.7636{col 66}{space 4} 7468.696{col 79}{space 3} 10088.31
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+  Obs. summary:{col 18}{res}       88{col 28}{txt} left-censored observations at loan<={res}0
+{txt}{col 18}{res}      103{col 28}{txt}    uncensored observations
+{col 18}{res}        0{col 28}{txt}right-censored observations
 
 {com}. 
-. //Student income distribution
-. hist parInc, freq graphregion(color(white)) ///
->         xtitle("Parental Income in Year of Graduation")
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace 
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq graphregion(color(white)) ///
->         xtitle("Debt When Graduating")
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdf, replace
-{txt}(file ../Output/loanDist.pdf written in PDF format)
-
-{com}. 
-. //Loan vs. Time by atCap
-. capture graph drop loanAtCap
-{txt}
-{com}. capture graph drop loanNotAtCap
-{txt}
-{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
->         title(atCap) nodraw
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-
-{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
->         title(!atCap) nodraw
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-
-{com}. graph combine loanAtCap loanNotAtCap, ycommon
-{res}{txt}
-{com}. graph export ../Output/LoanTimeCapBinscatter.pdf, replace
-{txt}(file ../Output/LoanTimeCapBinscatter.pdf written in PDF format)
-
-{com}. 
-. //Loan vs. Need by polImpact
-. capture graph drop loanNeedPol
-{txt}
-{com}. capture graph drop loanNeedNotPol
-{txt}
-{com}. binscatter loan need if polImpact & !missing(polImpact) & ///
->         inrange(need, -5000, 30000), name(loanNeedPol) title(Post-Policy) nodraw
-{res}{txt}
-{com}. binscatter loan need if !polImpact & inrange(need, -5000, 30000), ///
->         name(loanNeedNotPol) title(Pre-Policy) nodraw
-{res}{txt}
-{com}. graph combine loanNeedNotPol loanNeedPol, ycommon
-{res}{txt}
-{com}. graph export ../Output/LoanTimePolBinscatter.pdf, replace
-{txt}(file ../Output/LoanTimePolBinscatter.pdf written in PDF format)
-
-{com}. 
-. 
-{txt}end of do-file
-
-{com}. box need
-{err}unrecognized command:  box
-{txt}{search r(199):r(199);}
-
-{com}. graph box need
-{res}
-{com}. graph box need if need > 0
-{res}
-{com}. count if atCap
-{res}  734
-
-{com}. count if atCap & !missing(atCap)
-{res}  122
-
-{com}. binscatter need loan
-{res}{txt}warning: nquantiles(20) was specified, but only 12 were generated. see help file under nquantiles() for explanation.
-{res}
-{com}. binscatter need loan if loan <= 10000
-{res}{txt}warning: nquantiles(20) was specified, but only 11 were generated. see help file under nquantiles() for explanation.
-{res}
-{com}. do "C:\Users\gmoore\Desktop\honors\Analysis\Charts\Code\charts.do"
-{txt}
-{com}. use ../../NeedCalc/Output/Need.dta, clear
-{txt}
-{com}. 
-. //General distribution of majors
-. graph pie, over(majType) plabel(_all percent) graphregion(color(white))
-{res}{txt}
-{com}. graph export ../Output/majDist.pdf, replace
-{txt}(file ../Output/majDist.pdf written in PDF format)
-
-{com}. 
-. //Student income distribution
-. hist parInc, freq graphregion(color(white)) ///
->         xtitle("Parental Income in Year of Graduation")
-{txt}(bin={res}27{txt}, start={res}0{txt}, width={res}22073.556{txt})
-{res}{txt}
-{com}. graph export ../Output/parIncDist.pdf, replace 
-{txt}(file ../Output/parIncDist.pdf written in PDF format)
-
-{com}. 
-. //Debt distribution
-. hist loan if loan, freq graphregion(color(white)) ///
->         xtitle("Debt When Graduating")
-{txt}(bin={res}21{txt}, start={res}200{txt}, width={res}3800{txt})
-{res}{txt}
-{com}. graph export ../Output/loanDist.pdf, replace
-{txt}(file ../Output/loanDist.pdf written in PDF format)
-
-{com}. 
-. //Loan vs. Time by atCap
-. capture graph drop loanAtCap
-{txt}
-{com}. capture graph drop loanNotAtCap
-{txt}
-{com}. binscatter loan intDate if atCap & !missing(atCap), name(loanAtCap) ///
->         title(atCap) nodraw
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-
-{com}. binscatter loan intDate if !atCap, name(loanNotAtCap) ///
->         title(!atCap) nodraw
-{res}{txt}warning: nquantiles(20) was specified, but only 18 were generated. see help file under nquantiles() for explanation.
-
-{com}. graph combine loanAtCap loanNotAtCap, ycommon
-{res}{txt}
-{com}. graph export ../Output/LoanTimeCapBinscatter.pdf, replace
-{txt}(file ../Output/LoanTimeCapBinscatter.pdf written in PDF format)
-
-{com}. 
-. //Loan vs. Need by polImpact
-. capture graph drop loanNeedPol
-{txt}
-{com}. capture graph drop loanNeedNotPol
-{txt}
-{com}. binscatter loan need if polImpact & !missing(polImpact) & ///
->         inrange(need, -5000, 30000), name(loanNeedPol) title(Post-Policy) nodraw
-{res}{txt}
-{com}. binscatter loan need if !polImpact & inrange(need, -5000, 30000), ///
->         name(loanNeedNotPol) title(Pre-Policy) nodraw
-{res}{txt}
-{com}. graph combine loanNeedNotPol loanNeedPol, ycommon
-{res}{txt}
-{com}. graph export ../Output/LoanNeedPolBinscatter.pdf, replace
-{txt}(file ../Output/LoanNeedPolBinscatter.pdf written in PDF format)
-
-{com}. 
-. 
-{txt}end of do-file
-
-{com}. do "C:\Users\gmoore\AppData\Local\Temp\STD00000000.tmp"
-{txt}
-{com}. tobit loan atCap##c.polImpact need i.year i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
+. //Dummied time trend
+. tobit loan atCap##c.polImpact need i.year i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
 {res}
 {txt}Tobit regression{col 51}Number of obs{col 67}= {res}       191
 {txt}{col 51}LR chi2({res}13{txt}){col 67}= {res}     37.93
@@ -2652,150 +1404,29 @@ end of do-file
 {col 18}{res}        0{col 28}{txt}right-censored observations
 
 {com}. 
-{txt}end of do-file
+. //How debt changes with need--increased slope after cap
+. //Slope steaper after policy change
+. reg loan c.need##atCap if polImpact & !missing(polImpact)
 
-{com}. tobit loan atCap##c.polImpact need i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
-{res}
-{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       191
-{txt}{col 51}LR chi2({res}11{txt}){col 67}= {res}     36.29
-{txt}{col 51}Prob > chi2{col 67}= {res}    0.0002
-{txt}Log likelihood = {res}-1135.8547{txt}{col 51}Pseudo R2{col 67}= {res}    0.0157
-
-{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
-{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 17}1.atCap {c |}{col 26}{res}{space 2}-14.80938{col 38}{space 2} 2757.098{col 49}{space 1}   -0.01{col 58}{space 3}0.996{col 66}{space 4}-5455.199{col 79}{space 3} 5425.581
-{txt}{space 15}polImpact {c |}{col 26}{res}{space 2} .8854165{col 38}{space 2} 1.490829{col 49}{space 1}    0.59{col 58}{space 3}0.553{col 66}{space 4}-2.056333{col 79}{space 3} 3.827165
-{txt}{space 24} {c |}
-{space 7}atCap#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2} .6240099{col 38}{space 2} 2.108319{col 49}{space 1}    0.30{col 58}{space 3}0.768{col 66}{space 4} -3.53619{col 79}{space 3} 4.784209
-{txt}{space 24} {c |}
-{space 20}need {c |}{col 26}{res}{space 2} .1337525{col 38}{space 2} .0419849{col 49}{space 1}    3.19{col 58}{space 3}0.002{col 66}{space 4} .0509067{col 79}{space 3} .2165983
-{txt}{space 10}1.fallSemester {c |}{col 26}{res}{space 2} 46.27752{col 38}{space 2} 1681.776{col 49}{space 1}    0.03{col 58}{space 3}0.978{col 66}{space 4}-3272.255{col 79}{space 3}  3364.81
-{txt}{space 24} {c |}
-{space 20}race {c |}
-{space 18}BLACK  {c |}{col 26}{res}{space 2} 2167.496{col 38}{space 2} 2343.125{col 49}{space 1}    0.93{col 58}{space 3}0.356{col 66}{space 4}-2456.031{col 79}{space 3} 6791.024
-{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2460.251{col 38}{space 2} 2171.509{col 49}{space 1}    1.13{col 58}{space 3}0.259{col 66}{space 4}-1824.638{col 79}{space 3} 6745.141
-{txt}{space 24} {c |}
-{space 21}sex {c |}
-{space 17}FEMALE  {c |}{col 26}{res}{space 2}  1317.69{col 38}{space 2} 1454.888{col 49}{space 1}    0.91{col 58}{space 3}0.366{col 66}{space 4} -1553.14{col 79}{space 3}  4188.52
-{txt}{space 24} {c |}
-{space 18}region {c |}
-{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-2978.235{col 38}{space 2} 2366.103{col 49}{space 1}   -1.26{col 58}{space 3}0.210{col 66}{space 4}-7647.101{col 79}{space 3} 1690.632
-{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1722.761{col 38}{space 2} 2366.515{col 49}{space 1}   -0.73{col 58}{space 3}0.468{col 66}{space 4}-6392.441{col 79}{space 3}  2946.92
-{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-6480.082{col 38}{space 2} 2849.871{col 49}{space 1}   -2.27{col 58}{space 3}0.024{col 66}{space 4}-12103.54{col 79}{space 3}-856.6278
-{txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2} 560.6876{col 38}{space 2} 3567.738{col 49}{space 1}    0.16{col 58}{space 3}0.875{col 66}{space 4}-6479.282{col 79}{space 3} 7600.657
-{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-                  /sigma {c |}{col 26}{res}{space 2} 8786.593{col 38}{space 2} 664.4803{col 66}{space 4}  7475.42{col 79}{space 3} 10097.77
-{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-  Obs. summary:{col 18}{res}       88{col 28}{txt} left-censored observations at loan<={res}0
-{txt}{col 18}{res}      103{col 28}{txt}    uncensored observations
-{col 18}{res}        0{col 28}{txt}right-censored observations
-
-{com}. corr need atCap
-{txt}(obs=338)
-
-             {c |}     need    atCap
-{hline 13}{c +}{hline 18}
-        need {c |}{res}   1.0000
-       {txt}atCap {c |}{res}   0.4859   1.0000
-
-
-{com}. reg loan need atCap
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
-{txt}{hline 13}{char +}{hline 30}           F(  2,   320) ={res}    8.83
-    {txt}   Model {char |} {res}  536439592     2   268219796           {txt}Prob > F      = {res} 0.0002
-    {txt}Residual {char |} {res} 9.7209e+09   320  30377702.3           {txt}R-squared     = {res} 0.0523
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0464
-    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5511.6
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     128
+{txt}{hline 13}{char +}{hline 30}           F(  3,   124) ={res}    3.07
+    {txt}   Model {char |} {res}  414926619     3   138308873           {txt}Prob > F      = {res} 0.0303
+    {txt}Residual {char |} {res} 5.5811e+09   124  45009090.6           {txt}R-squared     = {res} 0.0692
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0467
+    {txt}   Total {char |} {res} 5.9961e+09   127  47213022.4           {txt}Root MSE      = {res} 6708.9
 
 {txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}        loan{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
 {hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 8}need {c |}{col 14}{res}{space 2} .0199412{col 26}{space 2} .0109603{col 37}{space 1}    1.82{col 46}{space 3}0.070{col 54}{space 4}-.0016221{col 67}{space 3} .0415046
-{txt}{space 7}atCap {c |}{col 14}{res}{space 2} 1791.613{col 26}{space 2} 731.6185{col 37}{space 1}    2.45{col 46}{space 3}0.015{col 54}{space 4}  352.223{col 67}{space 3} 3231.003
-{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  3326.72{col 26}{space 2} 435.0415{col 37}{space 1}    7.65{col 46}{space 3}0.000{col 54}{space 4} 2470.817{col 67}{space 3} 4182.623
-{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. loan need atCap##polImpact
-{err}unrecognized command:  loan
-{txt}{search r(199):r(199);}
-
-{com}. reg loan need atCap##polImpact
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
-{txt}{hline 13}{char +}{hline 30}           F(  6,   316) ={res}    4.02
-    {txt}   Model {char |} {res}  727706214     6   121284369           {txt}Prob > F      = {res} 0.0007
-    {txt}Residual {char |} {res} 9.5296e+09   316  30156956.1           {txt}R-squared     = {res} 0.0709
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0533
-    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5491.5
-
-{txt}{hline 16}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}           loan{col 17}{c |}      Coef.{col 29}   Std. Err.{col 41}      t{col 49}   P>|t|{col 57}     [95% Con{col 70}f. Interval]
-{hline 16}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 11}need {c |}{col 17}{res}{space 2} .0219207{col 29}{space 2} .0109622{col 40}{space 1}    2.00{col 49}{space 3}0.046{col 57}{space 4} .0003525{col 70}{space 3} .0434889
-{txt}{space 8}1.atCap {c |}{col 17}{res}{space 2} 2076.094{col 29}{space 2} 912.6865{col 40}{space 1}    2.27{col 49}{space 3}0.024{col 57}{space 4} 280.3833{col 70}{space 3} 3871.804
-{txt}{space 15} {c |}
-{space 6}polImpact {c |}
-{space 10}1000  {c |}{col 17}{res}{space 2} 1721.374{col 29}{space 2} 905.7451{col 40}{space 1}    1.90{col 49}{space 3}0.058{col 57}{space 4}-60.67921{col 70}{space 3} 3503.427
-{txt}{space 10}1875  {c |}{col 17}{res}{space 2} 1596.338{col 29}{space 2} 1239.903{col 40}{space 1}    1.29{col 49}{space 3}0.199{col 57}{space 4} -843.171{col 70}{space 3} 4035.848
-{txt}{space 15} {c |}
-atCap#polImpact {c |}
-{space 8}1 1000  {c |}{col 17}{res}{space 2} -1957.55{col 29}{space 2} 1495.575{col 40}{space 1}   -1.31{col 49}{space 3}0.192{col 57}{space 4}-4900.093{col 70}{space 3} 984.9921
-{txt}{space 8}1 1875  {c |}{col 17}{res}{space 2} 119.9233{col 29}{space 2} 1864.453{col 40}{space 1}    0.06{col 49}{space 3}0.949{col 57}{space 4}-3548.387{col 70}{space 3} 3788.233
-{txt}{space 15} {c |}
-{space 10}_cons {c |}{col 17}{res}{space 2} 2768.844{col 29}{space 2} 507.6915{col 40}{space 1}    5.45{col 49}{space 3}0.000{col 57}{space 4} 1769.962{col 70}{space 3} 3767.727
-{txt}{hline 16}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. reg loan need atCap##c.polImpact
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
-{txt}{hline 13}{char +}{hline 30}           F(  4,   318) ={res}    5.62
-    {txt}   Model {char |} {res}  677289608     4   169322402           {txt}Prob > F      = {res} 0.0002
-    {txt}Residual {char |} {res} 9.5800e+09   318  30125832.5           {txt}R-squared     = {res} 0.0660
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0543
-    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5488.7
-
-{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}             loan{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
-{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 13}need {c |}{col 19}{res}{space 2} .0214907{col 31}{space 2} .0109446{col 42}{space 1}    1.96{col 51}{space 3}0.050{col 59}{space 4}-.0000422{col 72}{space 3} .0430237
-{txt}{space 10}1.atCap {c |}{col 19}{res}{space 2} 1810.926{col 31}{space 2} 886.4707{col 42}{space 1}    2.04{col 51}{space 3}0.042{col 59}{space 4} 66.83709{col 72}{space 3} 3555.014
-{txt}{space 8}polImpact {c |}{col 19}{res}{space 2} 1.122272{col 31}{space 2} .5818587{col 42}{space 1}    1.93{col 51}{space 3}0.055{col 59}{space 4}-.0225069{col 72}{space 3} 2.267051
-{txt}{space 17} {c |}
-atCap#c.polImpact {c |}
-{space 15}1  {c |}{col 19}{res}{space 2}-.4348215{col 31}{space 2} .9129338{col 42}{space 1}   -0.48{col 51}{space 3}0.634{col 59}{space 4}-2.230975{col 72}{space 3} 1.361332
-{txt}{space 17} {c |}
-{space 12}_cons {c |}{col 19}{res}{space 2}  2850.92{col 31}{space 2} 498.5047{col 42}{space 1}    5.72{col 51}{space 3}0.000{col 59}{space 4} 1870.136{col 72}{space 3} 3831.705
-{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. reg loan need##atCap
-{err}need:  factor variables may not contain noninteger values
-{txt}{search r(452):r(452);}
-
-{com}. reg loan c.need##atCap
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
-{txt}{hline 13}{char +}{hline 30}           F(  3,   319) ={res}    8.45
-    {txt}   Model {char |} {res}  755298076     3   251766025           {txt}Prob > F      = {res} 0.0000
-    {txt}Residual {char |} {res} 9.5020e+09   319  29786853.5           {txt}R-squared     = {res} 0.0736
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0649
-    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5457.7
-
-{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}        loan{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
-{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 8}need {c |}{col 14}{res}{space 2} .0145272{col 26}{space 2} .0110354{col 37}{space 1}    1.32{col 46}{space 3}0.189{col 54}{space 4}-.0071842{col 67}{space 3} .0362386
-{txt}{space 5}1.atCap {c |}{col 14}{res}{space 2}-172.9726{col 26}{space 2} 1024.768{col 37}{space 1}   -0.17{col 46}{space 3}0.866{col 54}{space 4} -2189.13{col 67}{space 3} 1843.185
+{space 8}need {c |}{col 14}{res}{space 2} .0240374{col 26}{space 2} .0211334{col 37}{space 1}    1.14{col 46}{space 3}0.258{col 54}{space 4}-.0177916{col 67}{space 3} .0658663
+{txt}{space 5}1.atCap {c |}{col 14}{res}{space 2}-2138.868{col 26}{space 2} 1874.972{col 37}{space 1}   -1.14{col 46}{space 3}0.256{col 54}{space 4}-5849.963{col 67}{space 3} 1572.227
 {txt}{space 12} {c |}
 atCap#c.need {c |}
-{space 10}1  {c |}{col 14}{res}{space 2} .1652713{col 26}{space 2} .0609717{col 37}{space 1}    2.71{col 46}{space 3}0.007{col 54}{space 4} .0453139{col 67}{space 3} .2852287
+{space 10}1  {c |}{col 14}{res}{space 2} .2301021{col 26}{space 2} .1067254{col 37}{space 1}    2.16{col 46}{space 3}0.033{col 54}{space 4} .0188626{col 67}{space 3} .4413416
 {txt}{space 12} {c |}
-{space 7}_cons {c |}{col 14}{res}{space 2} 3223.207{col 26}{space 2} 432.4792{col 37}{space 1}    7.45{col 46}{space 3}0.000{col 54}{space 4} 2372.335{col 67}{space 3} 4074.079
+{space 7}_cons {c |}{col 14}{res}{space 2} 4500.354{col 26}{space 2} 920.6302{col 37}{space 1}    4.89{col 46}{space 3}0.000{col 54}{space 4} 2678.169{col 67}{space 3}  6322.54
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
+{res}{txt}
 {com}. reg loan c.need##atCap if !polImpact
 
       {txt}Source {c |}       SS       df       MS              Number of obs ={res}     195
@@ -2816,14 +1447,178 @@ atCap#c.need {c |}
 {txt}{space 12} {c |}
 {space 7}_cons {c |}{col 14}{res}{space 2} 2587.768{col 26}{space 2} 428.9128{col 37}{space 1}    6.03{col 46}{space 3}0.000{col 54}{space 4} 1741.754{col 67}{space 3} 3433.782
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. //Triple difference model
+. tobit loan atCap##c.polImpact##c.need i.year i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
 {res}
-{com}. count
-{res}  950
+{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       191
+{txt}{col 51}LR chi2({res}16{txt}){col 67}= {res}     42.16
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0004
+{txt}Log likelihood = {res}-1132.9164{txt}{col 51}Pseudo R2{col 67}= {res}    0.0183
 
-{com}. count if !missing(need)
-{res}  338
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}1.atCap {c |}{col 26}{res}{space 2} 1053.708{col 38}{space 2} 4195.134{col 49}{space 1}    0.25{col 58}{space 3}0.802{col 66}{space 4}-7225.861{col 79}{space 3} 9333.276
+{txt}{space 15}polImpact {c |}{col 26}{res}{space 2}-7.542594{col 38}{space 2} 7.515054{col 49}{space 1}   -1.00{col 58}{space 3}0.317{col 66}{space 4} -22.3744{col 79}{space 3}  7.28921
+{txt}{space 24} {c |}
+{space 7}atCap#c.polImpact {c |}
+{space 22}1  {c |}{col 26}{res}{space 2}-1.703131{col 38}{space 2} 3.578209{col 49}{space 1}   -0.48{col 58}{space 3}0.635{col 66}{space 4}-8.765129{col 79}{space 3} 5.358866
+{txt}{space 24} {c |}
+{space 20}need {c |}{col 26}{res}{space 2} .1664996{col 38}{space 2}  .062612{col 49}{space 1}    2.66{col 58}{space 3}0.009{col 66}{space 4} .0429279{col 79}{space 3} .2900713
+{txt}{space 24} {c |}
+{space 12}atCap#c.need {c |}
+{space 22}1  {c |}{col 26}{res}{space 2}-.1667402{col 38}{space 2} .2537731{col 49}{space 1}   -0.66{col 58}{space 3}0.512{col 66}{space 4}-.6675901{col 79}{space 3} .3341096
+{txt}{space 24} {c |}
+{space 6}c.polImpact#c.need {c |}{col 26}{res}{space 2} -.000059{col 38}{space 2} .0000495{col 49}{space 1}   -1.19{col 58}{space 3}0.235{col 66}{space 4}-.0001567{col 79}{space 3} .0000387
+{txt}{space 24} {c |}
+atCap#c.polImpact#c.need {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} .0003248{col 38}{space 2} .0002124{col 49}{space 1}    1.53{col 58}{space 3}0.128{col 66}{space 4}-.0000944{col 79}{space 3}  .000744
+{txt}{space 24} {c |}
+{space 20}year {c |}
+{space 21}10  {c |}{col 26}{res}{space 2} 8207.295{col 38}{space 2} 7695.151{col 49}{space 1}    1.07{col 58}{space 3}0.288{col 66}{space 4}-6979.952{col 79}{space 3} 23394.54
+{txt}{space 21}12  {c |}{col 26}{res}{space 2} 13796.06{col 38}{space 2} 13743.59{col 49}{space 1}    1.00{col 58}{space 3}0.317{col 66}{space 4}-13328.46{col 79}{space 3} 40920.58
+{txt}{space 24} {c |}
+{space 10}1.fallSemester {c |}{col 26}{res}{space 2} 301.2136{col 38}{space 2} 1746.658{col 49}{space 1}    0.17{col 58}{space 3}0.863{col 66}{space 4}-3146.012{col 79}{space 3} 3748.439
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 2160.074{col 38}{space 2} 2305.506{col 49}{space 1}    0.94{col 58}{space 3}0.350{col 66}{space 4}-2390.102{col 79}{space 3} 6710.249
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2671.722{col 38}{space 2} 2135.412{col 49}{space 1}    1.25{col 58}{space 3}0.213{col 66}{space 4}-1542.754{col 79}{space 3} 6886.199
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1639.655{col 38}{space 2} 1435.499{col 49}{space 1}    1.14{col 58}{space 3}0.255{col 66}{space 4}-1193.464{col 79}{space 3} 4472.774
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-2502.737{col 38}{space 2} 2368.693{col 49}{space 1}   -1.06{col 58}{space 3}0.292{col 66}{space 4} -7177.62{col 79}{space 3} 2172.146
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1356.314{col 38}{space 2} 2366.562{col 49}{space 1}   -0.57{col 58}{space 3}0.567{col 66}{space 4} -6026.99{col 79}{space 3} 3314.362
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-5696.586{col 38}{space 2} 2849.581{col 49}{space 1}   -2.00{col 58}{space 3}0.047{col 66}{space 4}-11320.56{col 79}{space 3}-72.61613
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2} 132.3412{col 38}{space 2}   3696.1{col 49}{space 1}    0.04{col 58}{space 3}0.971{col 66}{space 4}-7162.327{col 79}{space 3}  7427.01
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                  /sigma {c |}{col 26}{res}{space 2} 8585.146{col 38}{space 2} 649.5315{col 66}{space 4} 7303.223{col 79}{space 3}  9867.07
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+  Obs. summary:{col 18}{res}       88{col 28}{txt} left-censored observations at loan<={res}0
+{txt}{col 18}{res}      103{col 28}{txt}    uncensored observations
+{col 18}{res}        0{col 28}{txt}right-censored observations
 
-{com}. reg loan c.need##atCap if polImpact & !missing(polImpact)
+{com}. 
+{txt}end of do-file
+
+{com}. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. 
+. set more off
+
+. do regs
+{txt}
+{com}. use ../../NeedCalc/Output/Need.dta, clear
+{txt}
+{com}. 
+. //Linear time trend
+. tobit loan atCap##c.polImpact need intDate i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
+{res}
+{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       191
+{txt}{col 51}LR chi2({res}12{txt}){col 67}= {res}     36.64
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0003
+{txt}Log likelihood = {res}  -1135.68{txt}{col 51}Pseudo R2{col 67}= {res}    0.0159
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}1.atCap {c |}{col 26}{res}{space 2} 84.08985{col 38}{space 2} 2755.757{col 49}{space 1}    0.03{col 58}{space 3}0.976{col 66}{space 4} -5353.86{col 79}{space 3}  5522.04
+{txt}{space 15}polImpact {c |}{col 26}{res}{space 2}-1.569015{col 38}{space 2} 4.417123{col 49}{space 1}   -0.36{col 58}{space 3}0.723{col 66}{space 4}-10.28535{col 79}{space 3} 7.147317
+{txt}{space 24} {c |}
+{space 7}atCap#c.polImpact {c |}
+{space 22}1  {c |}{col 26}{res}{space 2}  .623287{col 38}{space 2} 2.105011{col 49}{space 1}    0.30{col 58}{space 3}0.767{col 66}{space 4}-3.530543{col 79}{space 3} 4.777117
+{txt}{space 24} {c |}
+{space 20}need {c |}{col 26}{res}{space 2} .1325079{col 38}{space 2}  .041844{col 49}{space 1}    3.17{col 58}{space 3}0.002{col 66}{space 4}  .049937{col 79}{space 3} .2150788
+{txt}{space 17}intDate {c |}{col 26}{res}{space 2} 92.27226{col 38}{space 2} 156.4238{col 49}{space 1}    0.59{col 58}{space 3}0.556{col 66}{space 4}-216.3997{col 79}{space 3} 400.9442
+{txt}{space 10}1.fallSemester {c |}{col 26}{res}{space 2}-281.3757{col 38}{space 2} 1769.435{col 49}{space 1}   -0.16{col 58}{space 3}0.874{col 66}{space 4}-3773.011{col 79}{space 3}  3210.26
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 2141.139{col 38}{space 2} 2341.406{col 49}{space 1}    0.91{col 58}{space 3}0.362{col 66}{space 4}-2479.169{col 79}{space 3} 6761.447
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2534.857{col 38}{space 2} 2174.041{col 49}{space 1}    1.17{col 58}{space 3}0.245{col 66}{space 4}-1755.189{col 79}{space 3} 6824.903
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1317.766{col 38}{space 2} 1453.613{col 49}{space 1}    0.91{col 58}{space 3}0.366{col 66}{space 4}-1550.657{col 79}{space 3} 4186.189
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-2928.343{col 38}{space 2} 2365.215{col 49}{space 1}   -1.24{col 58}{space 3}0.217{col 66}{space 4}-7595.634{col 79}{space 3} 1738.948
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1604.272{col 38}{space 2} 2372.425{col 49}{space 1}   -0.68{col 58}{space 3}0.500{col 66}{space 4}-6285.791{col 79}{space 3} 3077.248
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-6408.225{col 38}{space 2} 2851.752{col 49}{space 1}   -2.25{col 58}{space 3}0.026{col 66}{space 4} -12035.6{col 79}{space 3}-780.8479
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2}-52761.47{col 38}{space 2} 90482.39{col 49}{space 1}   -0.58{col 58}{space 3}0.561{col 66}{space 4}-231310.9{col 79}{space 3} 125787.9
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                  /sigma {c |}{col 26}{res}{space 2} 8778.504{col 38}{space 2} 663.7636{col 66}{space 4} 7468.696{col 79}{space 3} 10088.31
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+  Obs. summary:{col 18}{res}       88{col 28}{txt} left-censored observations at loan<={res}0
+{txt}{col 18}{res}      103{col 28}{txt}    uncensored observations
+{col 18}{res}        0{col 28}{txt}right-censored observations
+
+{com}. 
+. //Dummied time trend
+. tobit loan atCap##c.polImpact need i.year i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
+{res}
+{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       191
+{txt}{col 51}LR chi2({res}13{txt}){col 67}= {res}     37.93
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0003
+{txt}Log likelihood = {res}-1135.0348{txt}{col 51}Pseudo R2{col 67}= {res}    0.0164
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}1.atCap {c |}{col 26}{res}{space 2}-191.4664{col 38}{space 2} 2761.209{col 49}{space 1}   -0.07{col 58}{space 3}0.945{col 66}{space 4}-5640.383{col 79}{space 3}  5257.45
+{txt}{space 15}polImpact {c |}{col 26}{res}{space 2}-8.073525{col 38}{space 2} 7.605139{col 49}{space 1}   -1.06{col 58}{space 3}0.290{col 66}{space 4}-23.08136{col 79}{space 3}  6.93431
+{txt}{space 24} {c |}
+{space 7}atCap#c.polImpact {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} .9718483{col 38}{space 2} 2.137983{col 49}{space 1}    0.45{col 58}{space 3}0.650{col 66}{space 4}-3.247206{col 79}{space 3} 5.190902
+{txt}{space 24} {c |}
+{space 20}need {c |}{col 26}{res}{space 2} .1325715{col 38}{space 2} .0419652{col 49}{space 1}    3.16{col 58}{space 3}0.002{col 66}{space 4}  .049758{col 79}{space 3} .2153849
+{txt}{space 24} {c |}
+{space 20}year {c |}
+{space 21}10  {c |}{col 26}{res}{space 2} 9641.966{col 38}{space 2} 7803.561{col 49}{space 1}    1.24{col 58}{space 3}0.218{col 66}{space 4}-5757.433{col 79}{space 3} 25041.36
+{txt}{space 21}12  {c |}{col 26}{res}{space 2} 16413.93{col 38}{space 2} 13930.66{col 49}{space 1}    1.18{col 58}{space 3}0.240{col 66}{space 4}-11076.57{col 79}{space 3} 43904.43
+{txt}{space 24} {c |}
+{space 10}1.fallSemester {c |}{col 26}{res}{space 2} 506.4888{col 38}{space 2} 1759.154{col 49}{space 1}    0.29{col 58}{space 3}0.774{col 66}{space 4}-2964.993{col 79}{space 3} 3977.971
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 2424.065{col 38}{space 2} 2348.693{col 49}{space 1}    1.03{col 58}{space 3}0.303{col 66}{space 4}  -2210.8{col 79}{space 3}  7058.93
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2665.885{col 38}{space 2} 2180.574{col 49}{space 1}    1.22{col 58}{space 3}0.223{col 66}{space 4}-1637.218{col 79}{space 3} 6968.989
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1455.963{col 38}{space 2} 1462.432{col 49}{space 1}    1.00{col 58}{space 3}0.321{col 66}{space 4}-1429.973{col 79}{space 3} 4341.898
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-2766.982{col 38}{space 2} 2368.877{col 49}{space 1}   -1.17{col 58}{space 3}0.244{col 66}{space 4}-7441.678{col 79}{space 3} 1907.714
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1539.543{col 38}{space 2} 2368.956{col 49}{space 1}   -0.65{col 58}{space 3}0.517{col 66}{space 4}-6214.395{col 79}{space 3} 3135.309
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-6154.683{col 38}{space 2} 2858.924{col 49}{space 1}   -2.15{col 58}{space 3}0.033{col 66}{space 4}-11796.43{col 79}{space 3}-512.9368
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2}-265.0551{col 38}{space 2} 3654.449{col 49}{space 1}   -0.07{col 58}{space 3}0.942{col 66}{space 4}-7476.675{col 79}{space 3} 6946.565
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                  /sigma {c |}{col 26}{res}{space 2} 8761.388{col 38}{space 2} 662.2349{col 66}{space 4} 7454.546{col 79}{space 3} 10068.23
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+  Obs. summary:{col 18}{res}       88{col 28}{txt} left-censored observations at loan<={res}0
+{txt}{col 18}{res}      103{col 28}{txt}    uncensored observations
+{col 18}{res}        0{col 28}{txt}right-censored observations
+
+{com}. 
+. //How debt changes with need--increased slope after cap
+. //Slope steaper after policy change
+. reg loan c.need##atCap if polImpact & !missing(polImpact)
 
       {txt}Source {c |}       SS       df       MS              Number of obs ={res}     128
 {txt}{hline 13}{char +}{hline 30}           F(  3,   124) ={res}    3.07
@@ -2843,77 +1638,211 @@ atCap#c.need {c |}
 {txt}{space 12} {c |}
 {space 7}_cons {c |}{col 14}{res}{space 2} 4500.354{col 26}{space 2} 920.6302{col 37}{space 1}    4.89{col 46}{space 3}0.000{col 54}{space 4} 2678.169{col 67}{space 3}  6322.54
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg loan c.need##atCap if !polImpact
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     195
+{txt}{hline 13}{char +}{hline 30}           F(  3,   191) ={res}    6.40
+    {txt}   Model {char |} {res}  374719198     3   124906399           {txt}Prob > F      = {res} 0.0004
+    {txt}Residual {char |} {res} 3.7293e+09   191  19525333.4           {txt}R-squared     = {res} 0.0913
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0770
+    {txt}   Total {char |} {res} 4.1041e+09   194  21154937.5           {txt}Root MSE      = {res} 4418.7
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        loan{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}need {c |}{col 14}{res}{space 2}  .011213{col 26}{space 2} .0117279{col 37}{space 1}    0.96{col 46}{space 3}0.340{col 54}{space 4}-.0119199{col 67}{space 3} .0343458
+{txt}{space 5}1.atCap {c |}{col 14}{res}{space 2}  1164.62{col 26}{space 2} 1136.568{col 37}{space 1}    1.02{col 46}{space 3}0.307{col 54}{space 4}-1077.217{col 67}{space 3} 3406.457
+{txt}{space 12} {c |}
+atCap#c.need {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0952166{col 26}{space 2} .0694166{col 37}{space 1}    1.37{col 46}{space 3}0.172{col 54}{space 4} -.041705{col 67}{space 3} .2321383
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2587.768{col 26}{space 2} 428.9128{col 37}{space 1}    6.03{col 46}{space 3}0.000{col 54}{space 4} 1741.754{col 67}{space 3} 3433.782
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. //Triple difference model
+. tobit loan atCap##c.polImpact##c.need i.year i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
 {res}
-{com}. reg loan c.need##atCap##polImpact
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
-{txt}{hline 13}{char +}{hline 30}           F( 11,   311) ={res}    3.67
-    {txt}   Model {char |} {res} 1.1795e+09    11   107229052           {txt}Prob > F      = {res} 0.0001
-    {txt}Residual {char |} {res} 9.0778e+09   311  29189018.5           {txt}R-squared     = {res} 0.1150
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0837
-    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5402.7
-
-{txt}{hline 23}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{col 1}                  loan{col 24}{c |}      Coef.{col 36}   Std. Err.{col 48}      t{col 56}   P>|t|{col 64}     [95% Con{col 77}f. Interval]
-{hline 23}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 18}need {c |}{col 24}{res}{space 2}  .011213{col 36}{space 2} .0143394{col 47}{space 1}    0.78{col 56}{space 3}0.435{col 64}{space 4}-.0170016{col 77}{space 3} .0394275
-{txt}{space 15}1.atCap {c |}{col 24}{res}{space 2}  1164.62{col 36}{space 2} 1389.651{col 47}{space 1}    0.84{col 56}{space 3}0.403{col 64}{space 4}-1569.688{col 77}{space 3} 3898.927
-{txt}{space 22} {c |}
-{space 10}atCap#c.need {c |}
-{space 20}1  {c |}{col 24}{res}{space 2} .0952166{col 36}{space 2} .0848739{col 47}{space 1}    1.12{col 56}{space 3}0.263{col 64}{space 4} -.071783{col 77}{space 3} .2622162
-{txt}{space 22} {c |}
-{space 13}polImpact {c |}
-{space 17}1000  {c |}{col 24}{res}{space 2} 1777.425{col 36}{space 2} 1055.371{col 47}{space 1}    1.68{col 56}{space 3}0.093{col 64}{space 4}-299.1446{col 77}{space 3} 3853.995
-{txt}{space 17}1875  {c |}{col 24}{res}{space 2} 2082.163{col 36}{space 2} 1378.475{col 47}{space 1}    1.51{col 56}{space 3}0.132{col 64}{space 4}-630.1527{col 77}{space 3}  4794.48
-{txt}{space 22} {c |}
-{space 6}polImpact#c.need {c |}
-{space 17}1000  {c |}{col 24}{res}{space 2}  .005451{col 36}{space 2} .0260128{col 47}{space 1}    0.21{col 56}{space 3}0.834{col 64}{space 4}-.0457325{col 77}{space 3} .0566344
-{txt}{space 17}1875  {c |}{col 24}{res}{space 2} .0247251{col 36}{space 2} .0309674{col 47}{space 1}    0.80{col 56}{space 3}0.425{col 64}{space 4}-.0362071{col 77}{space 3} .0856573
-{txt}{space 22} {c |}
-{space 7}atCap#polImpact {c |}
-{space 15}1 1000  {c |}{col 24}{res}{space 2}-2217.358{col 36}{space 2} 2301.059{col 47}{space 1}   -0.96{col 56}{space 3}0.336{col 64}{space 4} -6744.97{col 77}{space 3} 2310.253
-{txt}{space 15}1 1875  {c |}{col 24}{res}{space 2}-6603.947{col 36}{space 2}   3037.4{col 47}{space 1}   -2.17{col 56}{space 3}0.030{col 64}{space 4} -12580.4{col 77}{space 3}-627.4949
-{txt}{space 22} {c |}
-atCap#polImpact#c.need {c |}
-{space 15}1 1000  {c |}{col 24}{res}{space 2} .0107531{col 36}{space 2} .1325761{col 47}{space 1}    0.08{col 56}{space 3}0.935{col 64}{space 4}-.2501064{col 77}{space 3} .2716125
-{txt}{space 15}1 1875  {c |}{col 24}{res}{space 2} .4518019{col 36}{space 2} .1817245{col 47}{space 1}    2.49{col 56}{space 3}0.013{col 64}{space 4}  .094237{col 77}{space 3} .8093669
-{txt}{space 22} {c |}
-{space 17}_cons {c |}{col 24}{res}{space 2} 2587.768{col 36}{space 2} 524.4204{col 47}{space 1}    4.93{col 56}{space 3}0.000{col 64}{space 4} 1555.908{col 77}{space 3} 3619.629
-{txt}{hline 23}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
-{com}. reg loan c.need##atCap##.polImpact
-{err}.polImpact invalid name
-{txt}{search r(198):r(198);}
-
-{com}. reg loan c.need##atCap##c.polImpact
-
-      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     323
-{txt}{hline 13}{char +}{hline 30}           F(  7,   315) ={res}    5.08
-    {txt}   Model {char |} {res} 1.0410e+09     7   148716156           {txt}Prob > F      = {res} 0.0000
-    {txt}Residual {char |} {res} 9.2163e+09   315  29258067.5           {txt}R-squared     = {res} 0.1015
-{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0815
-    {txt}   Total {char |} {res} 1.0257e+10   322  31854982.4           {txt}Root MSE      = {res} 5409.1
+{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       191
+{txt}{col 51}LR chi2({res}16{txt}){col 67}= {res}     42.16
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0004
+{txt}Log likelihood = {res}-1132.9164{txt}{col 51}Pseudo R2{col 67}= {res}    0.0183
 
 {txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
 {col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
 {hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{space 20}need {c |}{col 26}{res}{space 2} .0097146{col 38}{space 2} .0138976{col 49}{space 1}    0.70{col 58}{space 3}0.485{col 66}{space 4}-.0176292{col 79}{space 3} .0370584
-{txt}{space 17}1.atCap {c |}{col 26}{res}{space 2} 1463.748{col 38}{space 2} 1338.025{col 49}{space 1}    1.09{col 58}{space 3}0.275{col 66}{space 4}-1168.848{col 79}{space 3} 4096.343
-{txt}{space 24} {c |}
-{space 12}atCap#c.need {c |}
-{space 22}1  {c |}{col 26}{res}{space 2} .0547794{col 38}{space 2} .0814343{col 49}{space 1}    0.67{col 58}{space 3}0.502{col 66}{space 4}-.1054445{col 79}{space 3} .2150033
-{txt}{space 24} {c |}
-{space 15}polImpact {c |}{col 26}{res}{space 2}  1.33408{col 38}{space 2} .6523683{col 49}{space 1}    2.04{col 58}{space 3}0.042{col 66}{space 4}   .05053{col 79}{space 3}  2.61763
-{txt}{space 24} {c |}
-{space 6}c.need#c.polImpact {c |}{col 26}{res}{space 2} .0000115{col 38}{space 2} .0000154{col 49}{space 1}    0.75{col 58}{space 3}0.454{col 66}{space 4}-.0000188{col 79}{space 3} .0000418
+{space 17}1.atCap {c |}{col 26}{res}{space 2} 1053.708{col 38}{space 2} 4195.134{col 49}{space 1}    0.25{col 58}{space 3}0.802{col 66}{space 4}-7225.861{col 79}{space 3} 9333.276
+{txt}{space 15}polImpact {c |}{col 26}{res}{space 2}-7.542594{col 38}{space 2} 7.515054{col 49}{space 1}   -1.00{col 58}{space 3}0.317{col 66}{space 4} -22.3744{col 79}{space 3}  7.28921
 {txt}{space 24} {c |}
 {space 7}atCap#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2}-3.068454{col 38}{space 2} 1.478403{col 49}{space 1}   -2.08{col 58}{space 3}0.039{col 66}{space 4}-5.977246{col 79}{space 3}-.1596613
+{space 22}1  {c |}{col 26}{res}{space 2}-1.703131{col 38}{space 2} 3.578209{col 49}{space 1}   -0.48{col 58}{space 3}0.635{col 66}{space 4}-8.765129{col 79}{space 3} 5.358866
 {txt}{space 24} {c |}
-atCap#c.need#c.polImpact {c |}
-{space 22}1  {c |}{col 26}{res}{space 2} .0001742{col 38}{space 2} .0000884{col 49}{space 1}    1.97{col 58}{space 3}0.050{col 66}{space 4} 3.34e-07{col 79}{space 3} .0003481
+{space 20}need {c |}{col 26}{res}{space 2} .1664996{col 38}{space 2}  .062612{col 49}{space 1}    2.66{col 58}{space 3}0.009{col 66}{space 4} .0429279{col 79}{space 3} .2900713
 {txt}{space 24} {c |}
-{space 19}_cons {c |}{col 26}{res}{space 2} 2648.992{col 38}{space 2} 513.3517{col 49}{space 1}    5.16{col 58}{space 3}0.000{col 66}{space 4} 1638.961{col 79}{space 3} 3659.024
+{space 12}atCap#c.need {c |}
+{space 22}1  {c |}{col 26}{res}{space 2}-.1667402{col 38}{space 2} .2537731{col 49}{space 1}   -0.66{col 58}{space 3}0.512{col 66}{space 4}-.6675901{col 79}{space 3} .3341096
+{txt}{space 24} {c |}
+{space 6}c.polImpact#c.need {c |}{col 26}{res}{space 2} -.000059{col 38}{space 2} .0000495{col 49}{space 1}   -1.19{col 58}{space 3}0.235{col 66}{space 4}-.0001567{col 79}{space 3} .0000387
+{txt}{space 24} {c |}
+atCap#c.polImpact#c.need {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} .0003248{col 38}{space 2} .0002124{col 49}{space 1}    1.53{col 58}{space 3}0.128{col 66}{space 4}-.0000944{col 79}{space 3}  .000744
+{txt}{space 24} {c |}
+{space 20}year {c |}
+{space 21}10  {c |}{col 26}{res}{space 2} 8207.295{col 38}{space 2} 7695.151{col 49}{space 1}    1.07{col 58}{space 3}0.288{col 66}{space 4}-6979.952{col 79}{space 3} 23394.54
+{txt}{space 21}12  {c |}{col 26}{res}{space 2} 13796.06{col 38}{space 2} 13743.59{col 49}{space 1}    1.00{col 58}{space 3}0.317{col 66}{space 4}-13328.46{col 79}{space 3} 40920.58
+{txt}{space 24} {c |}
+{space 10}1.fallSemester {c |}{col 26}{res}{space 2} 301.2136{col 38}{space 2} 1746.658{col 49}{space 1}    0.17{col 58}{space 3}0.863{col 66}{space 4}-3146.012{col 79}{space 3} 3748.439
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 2160.074{col 38}{space 2} 2305.506{col 49}{space 1}    0.94{col 58}{space 3}0.350{col 66}{space 4}-2390.102{col 79}{space 3} 6710.249
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2671.722{col 38}{space 2} 2135.412{col 49}{space 1}    1.25{col 58}{space 3}0.213{col 66}{space 4}-1542.754{col 79}{space 3} 6886.199
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1639.655{col 38}{space 2} 1435.499{col 49}{space 1}    1.14{col 58}{space 3}0.255{col 66}{space 4}-1193.464{col 79}{space 3} 4472.774
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2}-2502.737{col 38}{space 2} 2368.693{col 49}{space 1}   -1.06{col 58}{space 3}0.292{col 66}{space 4} -7177.62{col 79}{space 3} 2172.146
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2}-1356.314{col 38}{space 2} 2366.562{col 49}{space 1}   -0.57{col 58}{space 3}0.567{col 66}{space 4} -6026.99{col 79}{space 3} 3314.362
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-5696.586{col 38}{space 2} 2849.581{col 49}{space 1}   -2.00{col 58}{space 3}0.047{col 66}{space 4}-11320.56{col 79}{space 3}-72.61613
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2} 132.3412{col 38}{space 2}   3696.1{col 49}{space 1}    0.04{col 58}{space 3}0.971{col 66}{space 4}-7162.327{col 79}{space 3}  7427.01
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                  /sigma {c |}{col 26}{res}{space 2} 8585.146{col 38}{space 2} 649.5315{col 66}{space 4} 7303.223{col 79}{space 3}  9867.07
 {txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}
+  Obs. summary:{col 18}{res}       88{col 28}{txt} left-censored observations at loan<={res}0
+{txt}{col 18}{res}      103{col 28}{txt}    uncensored observations
+{col 18}{res}        0{col 28}{txt}right-censored observations
+
 {com}. 
+{txt}end of do-file
+
+{com}. tobit loan atCap##c.polImpact##c.need i.year i.fall i.race i.sex i.region, ll
+{res}
+{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       322
+{txt}{col 51}LR chi2({res}21{txt}){col 67}= {res}     65.97
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0000
+{txt}Log likelihood = {res} -1960.822{txt}{col 51}Pseudo R2{col 67}= {res}    0.0165
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}1.atCap {c |}{col 26}{res}{space 2} 2632.194{col 38}{space 2} 2113.648{col 49}{space 1}    1.25{col 58}{space 3}0.214{col 66}{space 4}-1527.204{col 79}{space 3} 6791.593
+{txt}{space 15}polImpact {c |}{col 26}{res}{space 2}-6.158034{col 38}{space 2}  6.54106{col 49}{space 1}   -0.94{col 58}{space 3}0.347{col 66}{space 4}-19.03003{col 79}{space 3} 6.713965
+{txt}{space 24} {c |}
+{space 7}atCap#c.polImpact {c |}
+{space 22}1  {c |}{col 26}{res}{space 2}-3.457212{col 38}{space 2} 2.352833{col 49}{space 1}   -1.47{col 58}{space 3}0.143{col 66}{space 4}-8.087296{col 79}{space 3} 1.172872
+{txt}{space 24} {c |}
+{space 20}need {c |}{col 26}{res}{space 2} .0638748{col 38}{space 2} .0286728{col 49}{space 1}    2.23{col 58}{space 3}0.027{col 66}{space 4} .0074502{col 79}{space 3} .1202994
+{txt}{space 24} {c |}
+{space 12}atCap#c.need {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} .0081509{col 38}{space 2} .1304266{col 49}{space 1}    0.06{col 58}{space 3}0.950{col 66}{space 4}-.2485125{col 79}{space 3} .2648143
+{txt}{space 24} {c |}
+{space 6}c.polImpact#c.need {c |}{col 26}{res}{space 2} .0000239{col 38}{space 2} .0000399{col 49}{space 1}    0.60{col 58}{space 3}0.550{col 66}{space 4}-.0000547{col 79}{space 3} .0001025
+{txt}{space 24} {c |}
+atCap#c.polImpact#c.need {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} .0002152{col 38}{space 2} .0001397{col 49}{space 1}    1.54{col 58}{space 3}0.124{col 66}{space 4}-.0000597{col 79}{space 3}   .00049
+{txt}{space 24} {c |}
+{space 20}year {c |}
+{space 22}2  {c |}{col 26}{res}{space 2}-638.0942{col 38}{space 2} 3109.996{col 49}{space 1}   -0.21{col 58}{space 3}0.838{col 66}{space 4}-6758.182{col 79}{space 3} 5481.994
+{txt}{space 22}4  {c |}{col 26}{res}{space 2} 4763.483{col 38}{space 2}  2594.87{col 49}{space 1}    1.84{col 58}{space 3}0.067{col 66}{space 4}-342.9003{col 79}{space 3} 9869.867
+{txt}{space 22}6  {c |}{col 26}{res}{space 2} 3307.461{col 38}{space 2} 2597.561{col 49}{space 1}    1.27{col 58}{space 3}0.204{col 66}{space 4}-1804.219{col 79}{space 3}  8419.14
+{txt}{space 22}8  {c |}{col 26}{res}{space 2} 2092.928{col 38}{space 2} 2564.166{col 49}{space 1}    0.82{col 58}{space 3}0.415{col 66}{space 4}-2953.034{col 79}{space 3}  7138.89
+{txt}{space 21}10  {c |}{col 26}{res}{space 2} 10631.54{col 38}{space 2} 7101.408{col 49}{space 1}    1.50{col 58}{space 3}0.135{col 66}{space 4}-3343.155{col 79}{space 3} 24606.23
+{txt}{space 21}12  {c |}{col 26}{res}{space 2} 16452.99{col 38}{space 2} 12309.15{col 49}{space 1}    1.34{col 58}{space 3}0.182{col 66}{space 4}-7769.897{col 79}{space 3} 40675.88
+{txt}{space 21}14  {c |}{col 26}{res}{space 2} 34814.27{col 38}{space 2} 13658.47{col 49}{space 1}    2.55{col 58}{space 3}0.011{col 66}{space 4} 7936.084{col 79}{space 3} 61692.45
+{txt}{space 24} {c |}
+{space 10}1.fallSemester {c |}{col 26}{res}{space 2} 197.1312{col 38}{space 2} 1182.041{col 49}{space 1}    0.17{col 58}{space 3}0.868{col 66}{space 4}-2128.979{col 79}{space 3} 2523.241
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 2248.183{col 38}{space 2} 1595.933{col 49}{space 1}    1.41{col 58}{space 3}0.160{col 66}{space 4}-892.4164{col 79}{space 3} 5388.782
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2594.969{col 38}{space 2} 1462.401{col 49}{space 1}    1.77{col 58}{space 3}0.077{col 66}{space 4}-282.8547{col 79}{space 3} 5472.793
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1642.757{col 38}{space 2} 1004.535{col 49}{space 1}    1.64{col 58}{space 3}0.103{col 66}{space 4}-334.0436{col 79}{space 3} 3619.557
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 1024.285{col 38}{space 2} 1626.007{col 49}{space 1}    0.63{col 58}{space 3}0.529{col 66}{space 4}-2175.497{col 79}{space 3} 4224.066
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2} 1002.384{col 38}{space 2} 1572.975{col 49}{space 1}    0.64{col 58}{space 3}0.524{col 66}{space 4}-2093.037{col 79}{space 3} 4097.806
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2} -373.972{col 38}{space 2} 1821.331{col 49}{space 1}   -0.21{col 58}{space 3}0.837{col 66}{space 4}-3958.127{col 79}{space 3} 3210.183
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2}-6510.482{col 38}{space 2} 3138.933{col 49}{space 1}   -2.07{col 58}{space 3}0.039{col 66}{space 4}-12687.51{col 79}{space 3}-333.4497
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                  /sigma {c |}{col 26}{res}{space 2}     7818{col 38}{space 2}  446.716{col 66}{space 4} 6938.918{col 79}{space 3} 8697.082
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+  Obs. summary:{col 18}{res}      142{col 28}{txt} left-censored observations at loan<={res}0
+{txt}{col 18}{res}      180{col 28}{txt}    uncensored observations
+{col 18}{res}        0{col 28}{txt}right-censored observations
+
+{com}. sum year
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+{space 8}year {c |}{res}       950    7.968421    3.517089          0         14
+
+{com}. scatter year polImpact
+{res}
+{com}. gen postPol = year >= 10
+
+. tobit loan atCap##postPol##c.need i.year i.fall i.race i.sex i.region, ll
+{txt}note: 14.year omitted because of collinearity
+{res}
+{txt}Tobit regression{col 51}Number of obs{col 67}= {res}       322
+{txt}{col 51}LR chi2({res}20{txt}){col 67}= {res}     63.50
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0000
+{txt}Log likelihood = {res}-1962.0569{txt}{col 51}Pseudo R2{col 67}= {res}    0.0159
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                    loan{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}1.atCap {c |}{col 26}{res}{space 2} 2705.526{col 38}{space 2} 2207.327{col 49}{space 1}    1.23{col 58}{space 3}0.221{col 66}{space 4}-1638.162{col 79}{space 3} 7049.215
+{txt}{space 15}1.postPol {c |}{col 26}{res}{space 2} 23231.74{col 38}{space 2} 6308.788{col 49}{space 1}    3.68{col 58}{space 3}0.000{col 66}{space 4} 10816.99{col 79}{space 3} 35646.49
+{txt}{space 24} {c |}
+{space 11}atCap#postPol {c |}
+{space 20}1 1  {c |}{col 26}{res}{space 2}-5014.899{col 38}{space 2} 3278.182{col 49}{space 1}   -1.53{col 58}{space 3}0.127{col 66}{space 4}-11465.87{col 79}{space 3} 1436.071
+{txt}{space 24} {c |}
+{space 20}need {c |}{col 26}{res}{space 2} .0685878{col 38}{space 2} .0297916{col 49}{space 1}    2.30{col 58}{space 3}0.022{col 66}{space 4} .0099624{col 79}{space 3} .1272133
+{txt}{space 24} {c |}
+{space 12}atCap#c.need {c |}
+{space 22}1  {c |}{col 26}{res}{space 2}  .052279{col 38}{space 2} .1370086{col 49}{space 1}    0.38{col 58}{space 3}0.703{col 66}{space 4}-.2173334{col 79}{space 3} .3218913
+{txt}{space 24} {c |}
+{space 10}postPol#c.need {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} .0191689{col 38}{space 2} .0517952{col 49}{space 1}    0.37{col 58}{space 3}0.712{col 66}{space 4}-.0827562{col 79}{space 3} .1210941
+{txt}{space 24} {c |}
+{space 4}atCap#postPol#c.need {c |}
+{space 20}1 1  {c |}{col 26}{res}{space 2} .2038076{col 38}{space 2} .1921827{col 49}{space 1}    1.06{col 58}{space 3}0.290{col 66}{space 4}-.1743791{col 79}{space 3} .5819944
+{txt}{space 24} {c |}
+{space 20}year {c |}
+{space 22}2  {c |}{col 26}{res}{space 2}-702.5187{col 38}{space 2} 3134.198{col 49}{space 1}   -0.22{col 58}{space 3}0.823{col 66}{space 4}-6870.152{col 79}{space 3} 5465.114
+{txt}{space 22}4  {c |}{col 26}{res}{space 2} 4636.184{col 38}{space 2} 2615.367{col 49}{space 1}    1.77{col 58}{space 3}0.077{col 66}{space 4}-510.4669{col 79}{space 3} 9782.834
+{txt}{space 22}6  {c |}{col 26}{res}{space 2} 3209.304{col 38}{space 2} 2618.683{col 49}{space 1}    1.23{col 58}{space 3}0.221{col 66}{space 4}-1943.873{col 79}{space 3}  8362.48
+{txt}{space 22}8  {c |}{col 26}{res}{space 2} 1967.227{col 38}{space 2} 2585.756{col 49}{space 1}    0.76{col 58}{space 3}0.447{col 66}{space 4}-3121.154{col 79}{space 3} 7055.608
+{txt}{space 21}10  {c |}{col 26}{res}{space 2}-18376.38{col 38}{space 2}  5954.19{col 49}{space 1}   -3.09{col 58}{space 3}0.002{col 66}{space 4}-30093.34{col 79}{space 3}-6659.427
+{txt}{space 21}12  {c |}{col 26}{res}{space 2}-17685.24{col 38}{space 2} 6026.246{col 49}{space 1}   -2.93{col 58}{space 3}0.004{col 66}{space 4}-29543.99{col 79}{space 3}-5826.494
+{txt}{space 21}14  {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (omitted)
+{space 24} {c |}
+{space 10}1.fallSemester {c |}{col 26}{res}{space 2}-135.4122{col 38}{space 2} 1174.701{col 49}{space 1}   -0.12{col 58}{space 3}0.908{col 66}{space 4}-2447.047{col 79}{space 3} 2176.223
+{txt}{space 24} {c |}
+{space 20}race {c |}
+{space 18}BLACK  {c |}{col 26}{res}{space 2} 2137.821{col 38}{space 2} 1611.889{col 49}{space 1}    1.33{col 58}{space 3}0.186{col 66}{space 4}-1034.135{col 79}{space 3} 5309.777
+{txt}NON-BLACK, NON-HISPANIC  {c |}{col 26}{res}{space 2} 2518.607{col 38}{space 2} 1469.912{col 49}{space 1}    1.71{col 58}{space 3}0.088{col 66}{space 4}-373.9597{col 79}{space 3} 5411.173
+{txt}{space 24} {c |}
+{space 21}sex {c |}
+{space 17}FEMALE  {c |}{col 26}{res}{space 2} 1542.094{col 38}{space 2}  1010.24{col 49}{space 1}    1.53{col 58}{space 3}0.128{col 66}{space 4}-445.9073{col 79}{space 3} 3530.094
+{txt}{space 24} {c |}
+{space 18}region {c |}
+{space 10}NORTH CENTRAL  {c |}{col 26}{res}{space 2} 1099.814{col 38}{space 2} 1640.477{col 49}{space 1}    0.67{col 58}{space 3}0.503{col 66}{space 4}-2128.399{col 79}{space 3} 4328.026
+{txt}{space 18}SOUTH  {c |}{col 26}{res}{space 2} 1146.737{col 38}{space 2} 1589.326{col 49}{space 1}    0.72{col 58}{space 3}0.471{col 66}{space 4}-1980.819{col 79}{space 3} 4274.292
+{txt}{space 19}WEST  {c |}{col 26}{res}{space 2}-432.7699{col 38}{space 2} 1831.709{col 49}{space 1}   -0.24{col 58}{space 3}0.813{col 66}{space 4}  -4037.3{col 79}{space 3}  3171.76
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2}-6491.296{col 38}{space 2} 3154.899{col 49}{space 1}   -2.06{col 58}{space 3}0.040{col 66}{space 4}-12699.67{col 79}{space 3}-282.9266
+{txt}{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+                  /sigma {c |}{col 26}{res}{space 2} 7866.809{col 38}{space 2} 449.5233{col 66}{space 4} 6982.215{col 79}{space 3} 8751.404
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+  Obs. summary:{col 18}{res}      142{col 28}{txt} left-censored observations at loan<={res}0
+{txt}{col 18}{res}      180{col 28}{txt}    uncensored observations
+{col 18}{res}        0{col 28}{txt}right-censored observations
+
+{com}. gen hasDebt = loan > 0
+
+. 
