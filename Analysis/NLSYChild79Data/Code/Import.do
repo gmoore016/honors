@@ -104,13 +104,17 @@ rename Y2692000 partialtuition12
 
 rename Y3047500 tuition14
 
+
 forvalues i = 0(2)12{
+	//One of these should be missing (since missings coded as -7 for now)
 	assert fulltuition`i' < 0 | partialtuition`i' < 0
+	//Treating full-time tuition and part-time tuition identically
 	gen tuition`i' = max(fulltuition`i', partialtuition`i')
 }
 
 
 forval i = 0(2)10{
+	//Again, missings are negative
 	replace recloan`i' = . if recloan`i' < 0
 }
 
@@ -135,18 +139,20 @@ drop Y1* Y2*
 
 //Calculates how many siblings total
 duplicates tag mid, generate(sibs)
-
-//Get only observations with data on receiving loans
-drop if missing(recloan0) & missing(recloan2) ///
-	& missing(recloan4) & missing(recloan6) ///
-	& missing(recloan8) & missing(recloan10)
 	
 //Change to long data
 reshape long maj recloan loan region grade intDate tuition fulltuition partialtuition, i(cid) j(year)
 
+//Generate rough value for age
+//Must use year(dofm(intDate)) since intDate in %tm and year takes %td
+gen age = year(dofm(intDate)) - dob
+
 //Dummy for student in college; used to find concurrent siblings
 gen inCollege = grade >= 13
 duplicates tag year mid inCollege if inCollege > 0, generate(sibsInCollege)
+
+//Drops observations who are not 21 or 22
+keep if inlist(age, 21, 22)
 
 //Code to Stata missings
 replace maj = . if maj < 0
@@ -202,9 +208,6 @@ replace majType = 3 if inlist(maj, 7, 8, 10, 12, 21, 22, 26, 27, 28, 29, 32)
 replace majType = 4 if maj == 7
 
 
-//Tests if siblings are in college
-
-
 
 
 //assert missing(majType) == missing(maj) | maj == 0 | maj == 99
@@ -213,7 +216,6 @@ label values majType majTypeLab
 
 gen fallSemester = halfyear(dofm(intDate)) - 1
 
-keep if grade == 16
 
 save ../Output/ChildData.dta, replace
 
