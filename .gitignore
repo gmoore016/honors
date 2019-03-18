@@ -11,6 +11,8 @@
 
 *.dta
 
+*.smcl
+
 Tex/Honors.synctex.gz
 Tex/Honors.aux
 Tex/Honors.dvi
