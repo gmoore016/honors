@@ -3,6 +3,8 @@ log using ../Output/master.smcl, replace
 
 set more off
 
+args makechart
+
 //Import data from parent file (NLSY 79)
 cd ../../NLSY79ParentData/Code
 do ParImport
@@ -30,8 +32,12 @@ cd ../../Tables/Code
 do tables
 */
 
-cd ../../Charts/Code
-do charts
+if "`makechart'" != "-nc"{
+	cd ../../Charts/Code
+	do charts
+}
 
 cd ../../Master/Code
 save ../Output/Master.dta, replace
+
+log close
