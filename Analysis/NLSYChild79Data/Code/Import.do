@@ -104,6 +104,17 @@ rename Y2692000 partialtuition12
 
 rename Y3047500 tuition14
 
+//Graduation
+rename Y1016900 hsGrad0
+rename Y1259400 hsGrad2
+rename Y1493100 hsGrad4
+rename Y1742900 hsGrad6
+rename Y2023700 hsGrad8
+rename Y2348800 hsGrad10
+rename Y2678300 hsGrad12
+rename Y3034800 hsGrad14
+label values hsGrad* ynLab
+
 
 forvalues i = 0(2)12{
 	//One of these should be missing (since missings coded as -7 for now)
@@ -141,7 +152,7 @@ drop Y1* Y2*
 duplicates tag mid, generate(sibs)
 	
 //Change to long data
-reshape long maj recloan loan region grade intDate tuition fulltuition partialtuition, i(cid) j(year)
+reshape long maj recloan loan region grade intDate tuition fulltuition partialtuition hsGrad, i(cid) j(year)
 
 //Generate rough value for age
 //Must use year(dofm(intDate)) since intDate in %tm and year takes %td
@@ -164,6 +175,7 @@ replace grade = . if grade < 0 | grade == 95
 replace partialtuition = . if partialtuition < 0
 replace fulltuition = . if fulltuition < 0
 replace tuition = . if tuition < 0
+replace hsGrad = . if hsGrad < 0
 
 
 //Generates dummy for after policy change
