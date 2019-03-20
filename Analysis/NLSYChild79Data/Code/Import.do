@@ -160,7 +160,7 @@ replace loan = 0 if !recloan & !missing(recloan)
 replace loan = . if loan < 0
 replace region = . if region < 0
 replace recloan = . if recloan < 0
-replace grade = . if grade < 0
+replace grade = . if grade < 0 | grade == 95
 replace partialtuition = . if partialtuition < 0
 replace fulltuition = . if fulltuition < 0
 replace tuition = . if tuition < 0
