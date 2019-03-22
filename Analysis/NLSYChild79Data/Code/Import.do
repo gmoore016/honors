@@ -104,16 +104,33 @@ rename Y2692000 partialtuition12
 
 rename Y3047500 tuition14
 
-//Graduation
+//Education attainment data is kind of a disaster, so this needs multiple parts
+//Only have high school graduation info for 2000 and 2002
 rename Y1016900 hsGrad0
 rename Y1259400 hsGrad2
-rename Y1493100 hsGrad4
-rename Y1742900 hsGrad6
-rename Y2023700 hsGrad8
-rename Y2348800 hsGrad10
-rename Y2678300 hsGrad12
-rename Y3034800 hsGrad14
-label values hsGrad* ynLab
+forvalues i = 0(2)2{
+	replace hsGrad`i' = . if hsGrad`i' < 0
+}
+
+//Highest grade completed information is available for 2004-2012
+rename Y1672900 education4
+rename Y1948700 education6
+rename Y2267300 education8
+rename Y2616200 education10
+rename Y2966600 education12
+forvalues i = 4(2)12{
+	replace education`i' = . if education`i' < 0
+	gen hsGrad`i' = .
+	replace hsGrad`i' = education`i' >= 12 if !missing(education`i')
+}
+
+//Education variable in 2014 is different for some reason
+rename Y3332100 attainment14
+replace attainment14 = . if attainment14 < 0
+gen hsGrad14 = 0
+replace hsGrad14 = 1 if attainment14 >=3 & !missing(attainment14)
+
+drop education* attainment14
 
 
 forvalues i = 0(2)12{
@@ -175,7 +192,6 @@ replace grade = . if grade < 0 | grade == 95
 replace partialtuition = . if partialtuition < 0
 replace fulltuition = . if fulltuition < 0
 replace tuition = . if tuition < 0
-replace hsGrad = . if hsGrad < 0
 
 
 //Generates dummy for after policy change
