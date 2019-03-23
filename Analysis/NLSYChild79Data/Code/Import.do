@@ -116,6 +116,16 @@ rename Y3292300 unem14
 
 label values unem* ynLab
 
+//Income
+rename Y1151700 inc0
+rename Y1386700 inc2
+rename Y1638400 inc4
+rename Y1908700 inc6
+rename Y2224100 inc8
+rename Y2573900 inc10
+rename Y2921600 inc12
+rename Y3291400 inc14
+
 //Education attainment data is kind of a disaster, so this needs multiple parts
 //Only have high school graduation info for 2000 and 2002
 rename Y1016900 hsGrad0
@@ -188,7 +198,7 @@ drop Y1* Y2*
 duplicates tag mid, generate(sibs)
 	
 //Change to long data
-reshape long maj recloan loan region grade intDate tuition fulltuition partialtuition hsGrad unem, i(cid) j(year)
+reshape long maj recloan loan region grade intDate tuition fulltuition partialtuition hsGrad unem inc, i(cid) j(year)
 
 //Generate rough value for age
 //Must use year(dofm(intDate)) since intDate in %tm and year takes %td
@@ -212,6 +222,7 @@ replace partialtuition = . if partialtuition < 0
 replace fulltuition = . if fulltuition < 0
 replace tuition = . if tuition < 0
 replace unem = . if unem < 0
+replace inc = . if inc < 0
 
 //Generates dummy for college attendance
 gen col = !missing(maj) | (grade > 12 & !missing(grade))
