@@ -132,6 +132,13 @@ replace hsGrad14 = 1 if attainment14 >=3 & !missing(attainment14)
 
 drop education* attainment14
 
+//There are five people who are listed as graduated and then not graduated
+//in a later year, so this drops them
+forvalues i = 4(2)12{
+	local j = `i' + 2
+	drop if hsGrad`i' > hsGrad`j' & !missing(hsGrad`i')
+}
+
 
 forvalues i = 0(2)12{
 	//One of these should be missing (since missings coded as -7 for now)
