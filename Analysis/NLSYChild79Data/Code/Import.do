@@ -200,6 +200,8 @@ replace partialtuition = . if partialtuition < 0
 replace fulltuition = . if fulltuition < 0
 replace tuition = . if tuition < 0
 
+//Generates dummy for college attendance
+gen col = !missing(maj) | (grade > 12 & !missing(grade))
 
 //Generates dummy for after policy change
 gen cohort = (year >= 8)
