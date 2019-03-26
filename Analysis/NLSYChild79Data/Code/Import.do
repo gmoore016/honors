@@ -104,6 +104,28 @@ rename Y2692000 partialtuition12
 
 rename Y3047500 tuition14
 
+//Unemployment
+rename Y1152600 unem0
+rename Y1387600 unem2
+rename Y1639300 unem4
+rename Y1909600 unem6
+rename Y2224900 unem8
+rename Y2574800 unem10
+rename Y2922500 unem12
+rename Y3292300 unem14
+
+label values unem* ynLab
+
+//Income
+rename Y1151700 inc0
+rename Y1386700 inc2
+rename Y1638400 inc4
+rename Y1908700 inc6
+rename Y2224100 inc8
+rename Y2573900 inc10
+rename Y2921600 inc12
+rename Y3291400 inc14
+
 forvalues i = 0(2)12{
 	assert fulltuition`i' < 0 | partialtuition`i' < 0
 	gen tuition`i' = max(fulltuition`i', partialtuition`i')
@@ -142,7 +164,7 @@ drop if missing(recloan0) & missing(recloan2) ///
 	& missing(recloan8) & missing(recloan10)
 	
 //Change to long data
-reshape long maj recloan loan region grade intDate tuition fulltuition partialtuition, i(cid) j(year)
+reshape long maj recloan loan region grade intDate tuition fulltuition partialtuition unem inc, i(cid) j(year)
 
 //Dummy for student in college; used to find concurrent siblings
 gen inCollege = grade >= 13
