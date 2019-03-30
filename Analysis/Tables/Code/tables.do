@@ -16,27 +16,3 @@ quietly tabout sex race using ../Output/raceStats.tex, ///
 	sum c(mean recloan mean loan sd loan count loan) ///
 	style(tex) replace
 
-//Distribution of income
-hist parInc, freq graphregion(color(white))
-graph export ../Output/parIncHist.eps, replace
-graph export ../Output/parIncHist.png, replace
-
-//Student debt
-hist loan if recloan & !missing(recloan), freq graphregion(color(white))
-graph export ../Output/loanHist.eps, replace
-graph export ../Output/loanHist.png, replace
-
-//Student debt
-tabulate region
-quietly tabout region using ../Output/regionStats.tex, ///
-	style(tex) replace 
-
-//Major frequency
-graph pie, over(majType) plabel(_all sum) graphregion(color(white))
-graph export ../Output/majPie.png, replace
-
-//Debt distribution by major
-graph box loan if recloan & !missing(recloan), over(majType) graphregion(color(white))
-graph export ../Output/DebtbyMajType.png, replace
-graph box loan if recloan & !missing(recloan), over(majType) noout graphregion(color(white))
-graph export ../Output/DebtbyMajTypeNoOut.png, replace
