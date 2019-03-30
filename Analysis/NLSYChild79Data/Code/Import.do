@@ -205,7 +205,7 @@ reshape long maj recloan loan region grade intDate tuition fulltuition partialtu
 gen age = year(dofm(intDate)) - dob
 
 //Dummy for student in college; used to find concurrent siblings
-gen inCollege = grade >= 13
+gen inCollege = !missing(maj) | (grade > 12 & !missing(grade))
 duplicates tag year mid inCollege if inCollege > 0, generate(sibsInCollege)
 
 //Drops observations who are not 21 or 22
@@ -224,8 +224,6 @@ replace tuition = . if tuition < 0
 replace unem = . if unem < 0
 replace inc = . if inc < 0
 
-//Generates dummy for college attendance
-gen col = !missing(maj) | (grade > 12 & !missing(grade))
 
 //Generates dummy for after policy change
 gen cohort = (year >= 8)
