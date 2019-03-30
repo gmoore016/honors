@@ -180,6 +180,7 @@ replace grade = . if grade < 0
 replace partialtuition = . if partialtuition < 0
 replace fulltuition = . if fulltuition < 0
 replace tuition = . if tuition < 0
+replace inc = . if inc < 0
 
 
 //Generates dummy for after policy change
@@ -227,7 +228,9 @@ replace majType = 4 if maj == 7
 //Tests if siblings are in college
 
 
-
+//Generates log values of income and loans
+gen linc = ln(inc)
+gen lloan = ln(loan)
 
 //assert missing(majType) == missing(maj) | maj == 0 | maj == 99
 
@@ -236,6 +239,9 @@ label values majType majTypeLab
 gen fallSemester = halfyear(dofm(intDate)) - 1
 
 keep if grade == 16
+
+//Unncessary variable from mother's education analysis
+drop Y3332100
 
 save ../Output/ChildData.dta, replace
 

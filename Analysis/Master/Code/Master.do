@@ -20,9 +20,17 @@ merge m:1 mid year using ../../NLSY79ParentData/Output/ParData.dta, assert(match
 
 //Saves merged file as input for need calculations, then outputs file
 //with completed need calcs
+//Must calculate need before adjusting for inflation since FAFSA doesn't
+//adjust for inflation
 cd ../../NeedCalc/Code
 save ../Input/Merged.dta, replace
 do NeedCalc
+
+//Now adjust for inflation everywhere
+cd ../../InfAdj/Code
+save ../Input/PreAdj.dta, replace
+do InfAdj
+
 
 cd ../../Regressions/Code
 do regs
