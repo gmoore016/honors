@@ -1,6 +1,9 @@
 use ../Input/Merged.dta, clear
 //Available Income Calc
 
+
+
+
 //Preliminary stats:
 
 //Household is composed of:
@@ -9,6 +12,16 @@ gen hhSize = 2 + sibs + momMarried
 
 //Mother's age
 gen mAge = floor((ym(2008, 1) - parDob) / 12)
+
+//Imputing assets for those missing
+reg assets 
+
+
+
+
+
+
+
 
 //Box 1: Just parInc
 
