@@ -208,9 +208,6 @@ gen age = year(dofm(intDate)) - dob
 gen inCollege = grade > 12 & !missing(grade)
 duplicates tag year mid inCollege if inCollege > 0, generate(sibsInCollege)
 
-//Dummy for students every attending college
-gen col = (grade > 12 & !missing(grade)) | !missing(maj)
-
 //Drops observations who are not 21 or 22
 keep if inlist(age, 21, 22)
 
@@ -227,6 +224,8 @@ replace tuition = . if tuition < 0
 replace unem = . if unem < 0
 replace inc = . if inc < 0
 
+//Dummy for students ever attending college
+gen col = (grade > 12 & !missing(grade)) | !missing(maj)
 
 //Generates dummy for after policy change
 gen cohort = (year >= 8)
