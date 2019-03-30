@@ -170,8 +170,11 @@ reshape long maj recloan loan region grade intDate tuition fulltuition partialtu
 xtset cid year, delta(2)
 
 //Dummy for student in college; used to find concurrent siblings
-gen inCollege = grade >= 13
+gen inCollege = grade >= 13 & !missing(grade)
 duplicates tag year mid inCollege if inCollege > 0, generate(sibsInCollege)
+
+//Dummy for if student ever attended college
+gen col = !missing(maj) | (grade >= 13 &!missing(grade))
 
 //Code to Stata missings
 replace maj = . if maj < 0
