@@ -166,6 +166,9 @@ drop if missing(recloan0) & missing(recloan2) ///
 //Change to long data
 reshape long maj recloan loan region grade intDate tuition fulltuition partialtuition unem inc, i(cid) j(year)
 
+//Marks data as panel data
+xtset cid year, delta(2)
+
 //Dummy for student in college; used to find concurrent siblings
 gen inCollege = grade >= 13
 duplicates tag year mid inCollege if inCollege > 0, generate(sibsInCollege)
@@ -237,6 +240,9 @@ gen lloan = ln(loan)
 label values majType majTypeLab
 
 gen fallSemester = halfyear(dofm(intDate)) - 1
+
+//Generates income in two years
+gen incin2 = f.inc
 
 keep if grade == 16
 
