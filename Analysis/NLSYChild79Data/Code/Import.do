@@ -173,9 +173,6 @@ xtset cid year, delta(2)
 gen inCollege = grade >= 13 & !missing(grade)
 duplicates tag year mid inCollege if inCollege > 0, generate(sibsInCollege)
 
-//Dummy for if student ever attended college
-gen col = !missing(maj) | (grade >= 13 &!missing(grade))
-
 //Code to Stata missings
 replace maj = . if maj < 0
 replace loan = 0 if !recloan & !missing(recloan)
@@ -187,6 +184,9 @@ replace partialtuition = . if partialtuition < 0
 replace fulltuition = . if fulltuition < 0
 replace tuition = . if tuition < 0
 replace inc = . if inc < 0
+
+//Dummy for if student ever attended college
+gen col = !missing(maj) | (grade >= 13 &!missing(grade))
 
 
 //Generates dummy for after policy change
