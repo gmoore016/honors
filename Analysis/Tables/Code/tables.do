@@ -21,4 +21,6 @@ quietly tabout sex race using ../Output/raceStats.tex, ///
 tabulate cohort race, row chi2
 tabulate cohort sex, row chi2
 tabulate cohort region, row chi2
-tabulate cohort, summarize(adjinc)
+
+tabulate cohort, summarize(adjparinc)
+ttest adjparinc, by(cohort)
