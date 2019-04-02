@@ -18,10 +18,10 @@ reg loan c.need##atCap if polImpact & !missing(polImpact)
 reg loan c.need##atCap if !polImpact
 
 //Triple difference model
-tobit loan atCap##c.polImpact##c.need i.year i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
+tobit adjloan atCap##c.adjimp##c.adjneed i.year i.fall i.race i.sex i.region if year < 14, ll
 
 //Save predicted values to use as instrument
-predict loanHat, xb
+predict adjloanHat, xb
 
 
 
@@ -32,13 +32,13 @@ SECOND STAGES
 */
 
 //Naive approach
-reg inc loan need i.sex i.race i.region
+reg adjinc adjloan adjneed i.sex i.race i.region
 
 //Regression of income on debt using instrument
-ivregress 2sls inc (loan = loanHat) need i.sex i.race i.region
+ivregress 2sls adjinc (adjloan = adjloanHat) adjneed i.sex i.race i.region
 
 //Naive approach to major bins
-probit majType need i.sex i.race i.region
+probit majType adjneed i.sex i.race i.region
 
 //Regression of major bin on debt using instrument
-ivprobit majType (loan = loanHat) need i.sex i.race i.region, difficult
+ivprobit majType (adjloan = adjloanHat) adjneed i.sex i.race i.region, difficult
