@@ -1,4 +1,4 @@
-use ../Input/Merged.dta, clear
+use ../Input/Adjusted.dta, clear
 //Available Income Calc
 
 
@@ -204,6 +204,10 @@ gen need = tuition - efc
 //Cap dummies
 gen atCap = 0 if !missing(need)
 replace atCap = 1 if need >= 4500 & !missing(need)
+
+//Inflation adjust new values
+gen adjefc = 100 * efc / cpi
+gen adjneed = 100 * need / cpi
 
 //Drops temp variables (somehow not automatic?)
 drop __*

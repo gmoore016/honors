@@ -20,8 +20,6 @@ gen adjinc = 100 * inc / cpi
 gen adjloan = 100 * loan / cpi
 gen adjtuit = 100 * tuition / cpi
 gen adjparinc = 100 * parInc / cpi
-gen adjneed = 100 * parInc / cpi
-gen adjefc = 100 * efc / cpi
 gen adjimp = 100 * polImpact / cpi
 
 save ../Output/adjData.dta, replace
