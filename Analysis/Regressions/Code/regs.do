@@ -1,4 +1,10 @@
-use ../../NeedCalc/Output/Need.dta, clear
+use ../Input/Need.dta, clear
+
+/*
+
+FIRST STAGES
+
+*/
 
 //Linear time trend
 tobit loan atCap##c.polImpact need intDate i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
@@ -12,4 +18,27 @@ reg loan c.need##atCap if polImpact & !missing(polImpact)
 reg loan c.need##atCap if !polImpact
 
 //Triple difference model
-tobit loan atCap##c.polImpact##c.need i.year i.fall i.race i.sex i.region if inrange(year, 8, 12), ll
+tobit adjloan atCap##c.adjimp##c.adjneed i.year i.fall i.race i.sex i.region if year < 14, ll
+
+//Save predicted values to use as instrument
+predict adjloanHat, xb
+
+
+
+/*
+
+SECOND STAGES
+
+*/
+
+//Naive approach
+reg adjinc adjloan adjneed i.sex i.race i.region
+
+//Regression of income on debt using instrument
+ivregress 2sls adjinc (adjloan = adjloanHat) adjneed i.sex i.race i.region
+
+//Naive approach to major bins
+probit majType adjneed i.sex i.race i.region
+
+//Regression of major bin on debt using instrument
+ivprobit majType (adjloan = adjloanHat) adjneed i.sex i.race i.region, difficult

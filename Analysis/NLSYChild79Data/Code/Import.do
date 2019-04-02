@@ -104,6 +104,28 @@ rename Y2692000 partialtuition12
 
 rename Y3047500 tuition14
 
+//Unemployment
+rename Y1152600 unem0
+rename Y1387600 unem2
+rename Y1639300 unem4
+rename Y1909600 unem6
+rename Y2224900 unem8
+rename Y2574800 unem10
+rename Y2922500 unem12
+rename Y3292300 unem14
+
+label values unem* ynLab
+
+//Income
+rename Y1151700 inc0
+rename Y1386700 inc2
+rename Y1638400 inc4
+rename Y1908700 inc6
+rename Y2224100 inc8
+rename Y2573900 inc10
+rename Y2921600 inc12
+rename Y3291400 inc14
+
 forvalues i = 0(2)12{
 	assert fulltuition`i' < 0 | partialtuition`i' < 0
 	gen tuition`i' = max(fulltuition`i', partialtuition`i')
@@ -142,10 +164,13 @@ drop if missing(recloan0) & missing(recloan2) ///
 	& missing(recloan8) & missing(recloan10)
 	
 //Change to long data
-reshape long maj recloan loan region grade intDate tuition fulltuition partialtuition, i(cid) j(year)
+reshape long maj recloan loan region grade intDate tuition fulltuition partialtuition unem inc, i(cid) j(year)
+
+//Marks data as panel data
+xtset cid year, delta(2)
 
 //Dummy for student in college; used to find concurrent siblings
-gen inCollege = grade >= 13
+gen inCollege = grade >= 13 & !missing(grade)
 duplicates tag year mid inCollege if inCollege > 0, generate(sibsInCollege)
 
 //Code to Stata missings
@@ -158,6 +183,10 @@ replace grade = . if grade < 0
 replace partialtuition = . if partialtuition < 0
 replace fulltuition = . if fulltuition < 0
 replace tuition = . if tuition < 0
+replace inc = . if inc < 0
+
+//Dummy for if student ever attended college
+gen col = !missing(maj) | (grade >= 13 &!missing(grade))
 
 
 //Generates dummy for after policy change
@@ -205,7 +234,9 @@ replace majType = 4 if maj == 7
 //Tests if siblings are in college
 
 
-
+//Generates log values of income and loans
+gen linc = ln(inc)
+gen lloan = ln(loan)
 
 //assert missing(majType) == missing(maj) | maj == 0 | maj == 99
 
@@ -213,7 +244,13 @@ label values majType majTypeLab
 
 gen fallSemester = halfyear(dofm(intDate)) - 1
 
+//Generates income in two years
+gen incin2 = f.inc
+
 keep if grade == 16
+
+//Unncessary variable from mother's education analysis
+drop Y3332100
 
 save ../Output/ChildData.dta, replace
 

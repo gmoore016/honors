@@ -1,5 +1,4 @@
-use ../Input/Merged.dta, clear
-//Available Income Calc
+use ../Input/Adjusted.dta, clear
 
 //Preliminary stats:
 
@@ -9,6 +8,25 @@ gen hhSize = 2 + sibs + momMarried
 
 //Mother's age
 gen mAge = floor((ym(2008, 1) - parDob) / 12)
+
+//Imputing assets for those missing
+reg assets 
+
+
+
+
+//Impute assets for those missing
+reg adjassets adjparinc adjparinc2 mAge sibs year i.race i.region if year < 14, cluster(mid)
+predict adjassetshat
+replace adjassets = adjassetshat if missing(adjassets)
+replace assets = adjassets * cpi / 100 if missing(assets)
+
+
+
+
+
+//Available Income Calc
+
 
 //Box 1: Just parInc
 
@@ -191,6 +209,10 @@ gen need = tuition - efc
 //Cap dummies
 gen atCap = 0 if !missing(need)
 replace atCap = 1 if need >= 4500 & !missing(need)
+
+//Inflation adjust new values
+gen adjefc = 100 * efc / cpi
+gen adjneed = 100 * need / cpi
 
 //Drops temp variables (somehow not automatic?)
 drop __*

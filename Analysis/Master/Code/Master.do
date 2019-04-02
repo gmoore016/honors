@@ -18,13 +18,23 @@ do Import
 //Drop those women without children in college
 merge m:1 mid year using ../../NLSY79ParentData/Output/ParData.dta, assert(match using) nogen keep(match)
 
+//Now adjust for inflation everywhere
+cd ../../InfAdj/Code
+save ../Input/PreAdj.dta, replace
+do InfAdj
+
 //Saves merged file as input for need calculations, then outputs file
 //with completed need calcs
+//Must calculate need before adjusting for inflation since FAFSA doesn't
+//adjust for inflation
 cd ../../NeedCalc/Code
-save ../Input/Merged.dta, replace
+save ../Input/Adjusted.dta, replace
 do NeedCalc
 
+
+
 cd ../../Regressions/Code
+save ../Input/Need.dta, replace
 do regs
 
 /*
