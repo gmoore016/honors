@@ -66,7 +66,7 @@ keep parInc* assets* homeVal* married* mid momEd momGrad parDob
 
 reshape long parInc assets homeVal married, i(mid) j(year)
 replace parInc = . if parInc < 0
-replace assets = . if inlist(assets, -1, -2, -3, -4, -5)
+replace assets = . if inlist(assets, -1, -2, -3, -4, -5) | assets < -1000000
 replace homeVal = . if homeVal < 0
 replace married = . if married < 0
 
