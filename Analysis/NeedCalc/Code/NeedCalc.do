@@ -1,8 +1,4 @@
 use ../Input/Adjusted.dta, clear
-//Available Income Calc
-
-
-
 
 //Preliminary stats:
 
@@ -19,8 +15,17 @@ reg assets
 
 
 
+//Impute assets for those missing
+reg adjassets adjparinc adjparinc2 mAge sibs year i.race i.region if year < 14, cluster(mid)
+predict adjassetshat
+replace adjassets = adjassetshat if missing(adjassets)
+replace assets = adjassets * cpi / 100 if missing(assets)
 
 
+
+
+
+//Available Income Calc
 
 
 //Box 1: Just parInc
