@@ -41,12 +41,3 @@ ivprobit finMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.region, clust
 ivprobit lucMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.region, cluster(mid)
 ivprobit serveMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.region, cluster(mid)
 ivprobit humMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.region, cluster(mid)
-
-
-/*
-//Naive approach to major bins
-probit majType adjneed i.sex i.race i.region
-
-//Regression of major bin on debt using instrument
-ivprobit majType (adjloan = adjloanHat) adjneed i.sex i.race i.region, difficult
-*/
