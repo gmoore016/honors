@@ -17,6 +17,7 @@ merge 1:m year using ../Input/PreAdj.dta, keep(2 3) nogen
 
 //Adjust variables for inflation
 gen adjinc = 100 * inc / cpi
+gen adjincin2 = 100 * incin2 / cpi
 gen adjloan = 100 * loan / cpi
 gen adjtuit = 100 * tuition / cpi
 gen adjparinc = 100 * parInc / cpi
