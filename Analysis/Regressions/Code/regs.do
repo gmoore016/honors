@@ -32,7 +32,7 @@ SECOND STAGES
 */
 
 //Naive approach
-reg adjincin2 adjloan adjneed i.sex i.race i.region
+reg adjincin2 adjloan adjneed year i.sex i.race i.region
 
 //Regression of income on debt using instrument
 ivregress 2sls adjincin2 (adjloan = adjloanHat) adjneed year i.sex i.race i.region, cluster(mid)
