@@ -26,7 +26,7 @@
 \pagestyle{fancy}
 \lhead{Honors Thesis (Draft)}
 \chead{Gideon Moore}
-\rhead{March 2019}
+\rhead{April 2019}
 
 \usepackage{subcaption} %For subfigures
 
@@ -162,13 +162,35 @@
 	
 	One drawback of the CYA data set is that, as a survey, many of the figures are less precise than those in other sets. For example, when asked about their level of debt, the vast majority of responses are rounded numbers. While useful for qualitative analysis, this makes it difficult to assess data granularly as done by \textcite{lucca2018} in figure \ref{luc}. Fortunately, because they have a nationally representative dataset, there is no reason to believe their results would differ with our sample. Indeed, as our sample is of lower income relative to the general population, I would argue that subjects are bound more strongly by the policy as for many students federal loans may be their only option for college financing. In addition, as visible in figure \ref{loanDist}, we can see that 85\% of students received \$10,000 or less in debt, suggesting an additional \$1,000 would be meaningful relative to their overall quantity. 
 	
-	Because of the connection between the CYA and original NLSY79, we can import very rich background information for each of our participants. Specifically, for each student we can identify parental income for the year in question among other background traits inherited from parents.
+	Because of the connection between the CYA and original NLSY79, we can import very rich background information for each of our participants. Specifically, for each student we can identify parental income for the year in question among other background traits inherited from parents. We adjust all of these variables for inflation using the CPI calculated by the Federal Reserve of St. Louis. [CITATION NEEDED]
+	
+	Another difficulty with the NLSY sample is that certain questions are only asked in a more intensive form of the survey which is conducted on a subset of the sample every four years rather than every two. While the vast majority of our parameters are available for all subjects every other year, parental assets are only available in alternating years for roughly half the sample. I take two primary steps to rectify this. First, for those subjects who were surveyed about their assets, we extend the last known value into the missing year. For example, given asset data is missing in 2006, we use the subject's survey value for 2004. Second, for those parents with no existing asset data, we infer assets by performing the following regression on those whose asset data we do possess: $$\mbox{Assets} = \beta_0 + \beta_1 \mbox{Income} + \beta_2 \mbox{Income}^2 + \beta_3 \mbox{Age} + \beta_4 \mbox{Children} + \beta_5 \mbox{Year} + \vec{\beta} \vec{\mbox{Demographics}} + \epsilon$$ I choose to let income be quadratic to reflect increasing marginal propensity to save among the wealthy [CITATION NEEDED]. This regression yields the results visible in table \ref{assetTab}.
+	
+	\begin{table}
+		\centering
+		\begin{tabular}{lr}
+			lorem & ipsum \\
+			lorem & ipsum
+		\end{tabular}
+		\caption{Estimation of parental assets}
+		\label{assetTab}
+	\end{table}
 	
 	\section{Statistical Model}
 	
-	Our data set is a collection of seniors surveyed on even years between 2000 and 2016. If possible, we would hope to model some career outcome $Y$ according to the following equation: $$Y = \beta_0 + \beta_1 \ln(\mbox{debt})_{it} + \vec{\xi}^T \vec{\mbox{demographics}}_i + \epsilon_{it}$$ In this model, $Y$ could take one of several values, such as major choice, career choice, or salary. 
+	Our data set is a collection of seniors surveyed on even years between 2000 and 2014. If possible, we would hope to model some career outcome $Y$ according to the following equation: $$Y = \beta_0 + \beta_1 \mbox{debt}_{it} + \vec{\xi}^T \vec{\mbox{demographics}}_i + \epsilon_{it}$$ In this model, $Y$ could take one of several values, such as major choice, career choice, or salary. 
 	
-	Our first model will place major choice on the left hand side. I believe this to be the most novel outcome of interest, as few datasets have this level of resolution on their observations. Here I can use a random variable logit model to place students into one of six bins: humanities, STEM, Social Science, Professional, Business, and Pre-Grad. The specifications of these bins can be found in the appendix, and we will adjust these bins later as a form of robustness testing. The distribution of students broken down by major is visible in figure \ref{majDist}.
+	\begin{table}
+		\centering
+		\begin{tabular}{lr}
+		\end{tabular}
+		\caption{Results of the naive regression}
+		\label{naive2}
+	\end{table}
+	
+	The results of this regression using salary as the dependent variable are visible in table \ref{naive2}. 
+	
+	Our first model will place major choice on the left hand side. I believe this to be the most novel outcome of interest, as few datasets have this level of resolution on their observations. Here I can place majors into several bins, and then run a probit regression on individual bins to determine the effect of the policy. The specifications of these bins can be found in the appendix, and we will adjust these bins later as a form of robustness testing. The distribution of students broken down by major is visible in figure \ref{majDist}.
 
 	\begin{figure}
 		\centering
@@ -177,7 +199,7 @@
 		\includegraphics[width = 0.9\textwidth]{../Analysis/Charts/Output/majDist}
 	\end{figure}
 	
-	Our second model will be examining students' career outcomes. This is the outcome most widely researched in the literature, such as in \textcite{rothstein2011} and \textcite{field2009}. Similar to the regression above, this would use a mixed logit model to examine whether increased debt pushes students into certain categories of career.
+	Our second model will be examining students' career outcomes. This is the outcome most widely researched in the literature, such as in \textcite{rothstein2011} and \textcite{field2009}. Similar to the regression above, this would use a series of probit models to examine whether increased debt pushes students into certain categories of career.
 	
 	Our final model will be directly examining students' final incomes. This is the most direct approach to measuring the impact of debt on choices; however, it may ignore factors such as career risk which would not be visible in simple income data.
 	
@@ -195,9 +217,34 @@
 	
 	Anticipated need is equal to students' tuition payments minus their expected family contribution, or EFC. While we cannot observe students' true EFC, we can calculate an approximation using the Free Application for Federal Student Aid (FAFSA). Then, using this approximation, we are able to generate a measure of need and so determine who is affected by the policy shift. We then generate a dummy $atCap$ equal to 1 if a student's need is greater than the old borrowing limit and so are in our sample. 
 	
-	Thus, our final model for the first stage is as follows: $$debt_i = \delta_0 + \delta_1 treatmentSize_i + \delta_2 treatmentSize \times atCap + \delta_3 need + \delta_4 fallSemester + \vec{\delta}^T i.year + \vec{\gamma}^T \vec{demographics} + \mu_i$$ Given our model is correct, our coefficient of interest is $\delta_2$, the impact of being treated on those who were treated. Note we anticipate $\delta_1$ to be zero, as the policy should not impact those who are not in the targeted group.
+	Thus, our final model for the first stage is as follows: 
+	\begin{align*}
+	debt_i = \delta_0 &+ \delta_1 atCap + \delta_2 policyImpact + \delta_3 need + \delta_4 atCap \times policyImpact \\
+	 &+ \delta_5 atCap \times need + \delta_6 policyImpact \times need + \delta_7 atCap \times policyImpact \times need \\
+	 &+ \delta_8 fallSemester + \vec{\delta} i.year + \vec{\gamma} \vec{demographics}^T
+	 \end{align*} 
+	 Given our model is correct, our coefficient of interest is $\delta_7$, the impact of being in the treated cohort after the policy change in proportion to demonstrated need. Find an interpretation of each interaction coefficient in table \ref{coefInterp}.
 	
-	\textcolor{darkgray}{[COMMENT: Note this is where we run into problems--somehow $\delta_2$ does not end up being significant. I was surprised by this as we know from figure \ref{luc}, which used data directly from Fannie Mae, that this policy seems to have had a quite significant impact. This makes me think there's something we're not accounting for; potentially we need better controls for need or some better way to control for debt levels for the untreated students.]}
+	\begin{table}
+		\centering
+		
+		\begin{tabular}{lp{8cm}}
+			\toprule
+			Coefficient & Interpretation\\
+			\midrule
+			$\delta_1$ & Impact of having need greater than \$4,500 \\
+			$\delta_2$ & The impact of an additional dollar of credit line availability for those below the cap (expected to be zero)\\
+			$\delta_3$ & The impact of an additional dollar of need\\
+			$\delta_4$ & The impact of an additional dollar of credit for those at the cap, not considering degree of need\\
+			$\delta_5$ & The impact of an additional dollar of demonstrated need after the first \$4,500 of need\\
+			$\delta_6$ & The impact of an additional dollar of credit availability for those not at the cap (expected to be zero)\\
+			$\delta_7$ & The impact of an additional dollar of credit availability for those at the cap proportional to the student's need \\
+			\bottomrule
+		\end{tabular}
+	
+	\caption{Interaction Coefficient Interpretations}
+	\label{coefInterp}
+	\end{table}
 	
 	
 	\section{Results}
