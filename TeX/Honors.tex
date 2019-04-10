@@ -38,7 +38,8 @@
 \geometry{margin=1in, lmargin=1.5in}
 
 
-
+%Directory for regression results
+\newcommand{\regs}{../Analysis/Regressions/Output/}
 
 
 \begin{document}
@@ -223,8 +224,20 @@
 	 &+ \delta_5 atCap \times need + \delta_6 policyImpact \times need + \delta_7 atCap \times policyImpact \times need \\
 	 &+ \delta_8 fallSemester + \vec{\delta} i.year + \vec{\gamma} \vec{demographics}^T
 	 \end{align*} 
-	 Given our model is correct, our coefficient of interest is $\delta_7$, the impact of being in the treated cohort after the policy change in proportion to demonstrated need. Find an interpretation of each interaction coefficient in table \ref{coefInterp}.
+	 
+	 %Results of our various first stages
+	 \begin{table}
+	 	\centering
+	 	
+	 	\input{\regs tripdif.tex}
+	 	
+	 	\caption{Results of first stage regression}
+	 	\label{firststage}
+	 \end{table}
+	 
+	 The results of this model are given in table \ref{firststage} with time and demographic effects omitted. Given our model is correct, our coefficient of interest is $\delta_7$, the impact of being in the treated cohort after the policy change in proportion to demonstrated need. Find an interpretation of each interaction coefficient in table \ref{coefInterp}.
 	
+	%Interprets different interaction effects
 	\begin{table}
 		\centering
 		
@@ -249,7 +262,17 @@
 	
 	\section{Results}
 	
-	\blindtext
+	We will begin by estimating the likelihood of several types of careers. This will be done in the form of a probit model: either a student chooses to work in the relevant field, or they do not. Due to the nonlinearity of the tobit model used in the first stage, we use the estimates of debt from that equation as an instrument in this model. The form of the regression is as follows: $$majType = \beta_0 + \beta_1 \hat{loan} + \beta_2 year + \vec{\beta}\vec{demographics}^T$$
+	
+	\begin{table}
+		\centering
+		
+		\input{\regs stage2.tex}
+		\caption{Second stage results}
+		\label{stage2}
+	\end{table}
+	
+	The results of these regressions are visible in table \ref{stage2}.
 	
 	\section{Discussion}
 	
