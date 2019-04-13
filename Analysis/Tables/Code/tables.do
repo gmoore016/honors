@@ -19,8 +19,8 @@ quietly tabout sex race using ../Output/raceStats.tex, ///
 //Compares cohort before and after shift
 //on various background statistics
 tabulate cohort race, row chi2
+tabout cohort race using ../Output/chi2.tex, bt stats(chi2) cells(freq row) ///
+	style(tex) body replace
 tabulate cohort sex, row chi2
 tabulate cohort region, row chi2
-
-tabulate cohort, summarize(adjparinc)
-ttest adjparinc, by(cohort)
+tabulate cohort, summarize(adjinc)

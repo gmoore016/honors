@@ -24,6 +24,11 @@ eststo: tobit adjloan c.adjneed##atCap if !polImpact, ll
 eststo: tobit adjloan atCap##c.adjimp##c.adjneed i.year i.fall i.race i.sex i.region if year < 14, ll cluster(mid)
 esttab using ../Output/tripdif.tex, nobaselevels booktabs style(tex) ///
 	label keep(*atCap* *adjimp* *adjneed*) star(* 0.1 ** 0.05 *** 0.01) replace
+
+//Full version for appendix
+esttab using ../Output/tripdiffull.tex, nobaselevels booktabs style(tex) ///
+	label star(* 0.1 ** 0.05 *** 0.01) replace
+	
 eststo clear
 //Save predicted values to use as instrument
 predict adjloanHat, xb
@@ -48,7 +53,11 @@ eststo: ivprobit humMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.regio
 //Income
 eststo: ivregress 2sls adjincin2 (adjloan = adjloanHat) adjneed year i.sex i.race i.region, cluster(mid)
 
+
 esttab using ../Output/stage2.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) replace
+	
+esttab using ../Output/stage2full.tex, nobaselevels booktabs style(tex) ///
+	label star(* 0.1 ** 0.05 *** 0.01) replace
 
 eststo clear

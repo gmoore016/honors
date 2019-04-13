@@ -16,7 +16,10 @@ reg assets
 
 
 //Impute assets for those missing
-reg adjassets adjparinc adjparinc2 mAge sibs year i.race i.region if year < 14, cluster(mid)
+eststo clear
+eststo: reg adjassets adjparinc adjparinc2 mAge sibs year i.race i.region if year < 14, cluster(mid)
+esttab using ../Output/assethat.tex, nobaselevels booktabs style(tex) ///
+	label star(* 0.1 ** 0.05 *** 0.01) scalars(r2) replace
 predict adjassetshat
 replace adjassets = adjassetshat if missing(adjassets)
 replace assets = adjassets * cpi / 100 if missing(assets)
