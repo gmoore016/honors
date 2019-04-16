@@ -24,6 +24,7 @@ eststo: tobit adjloan c.adjneed##atCap if !polImpact, ll
 eststo: tobit adjloan atCap##c.adjimp##c.adjneed i.year i.fall i.race i.sex i.region if year < 14, ll cluster(mid)
 esttab using ../Output/tripdif.tex, nobaselevels booktabs style(tex) ///
 	label keep(*atCap* *adjimp* *adjneed*) star(* 0.1 ** 0.05 *** 0.01) replace
+test 1.atCap#c.adjimp 1.atCap#c.adjimp#c.adjneed
 
 //Full version for appendix
 esttab using ../Output/tripdiffull.tex, nobaselevels booktabs style(tex) ///
