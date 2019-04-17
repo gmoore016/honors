@@ -15,8 +15,8 @@ hist loan if loan, freq graphregion(color(white)) ///
 graph export ../Output/loanDist.pdf, replace
 
 //Scatter plot of need vs. loans
-twoway (scatter loan need if need > 0 & polImpact == 0, m(O)) ///
-	(scatter loan need if need > 0 & polImpact > 0 & !missing(polImpact), m(T)), ///
+twoway (scatter loan need if need > 0 & polImpact == 0 & need < 10000, m(O)) ///
+	(scatter loan need if need > 0 & polImpact > 0 & !missing(polImpact) & need < 10000, m(T)), ///
 	xline(4500)
 
 //Loan vs. Time by atCap
