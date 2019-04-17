@@ -23,12 +23,13 @@ eststo: tobit adjloan c.adjneed##atCap if !polImpact, ll
 //Triple difference model
 eststo: tobit adjloan atCap##c.adjimp##c.adjneed i.year i.fall i.race i.sex i.region if year < 14, ll vce(cluster mid)
 esttab using ../Output/tripdif.tex, nobaselevels booktabs style(tex) ///
-	label keep(*atCap* *adjimp* *adjneed*) star(* 0.1 ** 0.05 *** 0.01) replace
+	label keep(*atCap* *adjimp* *adjneed*) star(* 0.1 ** 0.05 *** 0.01) ///
+	scalars(chi2) replace
 test 1.atCap#c.adjimp 1.atCap#c.adjimp#c.adjneed
 
 //Full version for appendix
 esttab using ../Output/tripdiffull.tex, nobaselevels booktabs style(tex) ///
-	label star(* 0.1 ** 0.05 *** 0.01) replace
+	label star(* 0.1 ** 0.05 *** 0.01) scalars(chi2) replace
 	
 eststo clear
 //Save predicted values to use as instrument
@@ -56,9 +57,9 @@ eststo: ivregress 2sls adjincin2 (adjloan = adjloanHat) adjneed year i.sex i.rac
 
 
 esttab using ../Output/stage2.tex, nobaselevels booktabs style(tex) ///
-	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) replace
+	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars(chi2) replace
 	
 esttab using ../Output/stage2full.tex, nobaselevels booktabs style(tex) ///
-	label star(* 0.1 ** 0.05 *** 0.01) replace
+	label star(* 0.1 ** 0.05 *** 0.01) scalars(chi2) replace
 
 eststo clear
