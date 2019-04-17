@@ -19,8 +19,19 @@ quietly tabout sex race using ../Output/raceStats.tex, ///
 //Compares cohort before and after shift
 //on various background statistics
 tabulate cohort race, row chi2
-tabout cohort race using ../Output/chi2.tex, bt stats(chi2) cells(freq row) ///
-	style(tex) body replace
+quietly tabout cohort race using ../Output/raceFit.tex, bt stats(chi2) cells(freq row) ///
+	style(tex) replace
+	
 tabulate cohort sex, row chi2
+quietly tabout cohort sex using ../Output/sexFit.tex, bt stats(chi2) cells(freq row) ///
+	style(tex) replace
+	
 tabulate cohort region, row chi2
-tabulate cohort, summarize(adjinc)
+quietly tabout cohort region using ../Output/regionFit.tex, bt stats(chi2) cells(freq row) ///
+	style(tex) replace
+
+eststo clear
+
+estpost summarize adjparinc
+estpost ttest adjparinc, by(cohort)
+esttab using ../Output/parIncFit.tex, style(tex) booktabs label replace
