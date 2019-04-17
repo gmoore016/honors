@@ -50,7 +50,7 @@
 	
 	\section*{Abstract}
 	
-	\blindtext
+	In the summer of 2007, the Higher Education Reconciliation Act (or HERA) expanded the cap for federally subsidized student loans. To evaluate the impact of this shift on student career outcomes, I use data from the National Longitudinal Survey of Youth 1979 Child and Young Adult Cohort of students who were of college age when the policy was implemented. I compare both career choice and eventual salary of those granted the additional credit line to those of the students before the shift to calculate estimates of the effects. I find that student debt appears to have no impact on salary two years after graduation; however, it does seem to shift students' career choices, leading students to avoid careers in public service industries such as teaching and social work.
 	
 	\pagebreak
 	
@@ -72,7 +72,7 @@
 	
 	The focus of this paper is to determine whether increases in debt lead students to change their fields of study and eventually career choices. While prior work in the literature has largely focused on policy changes within a single institution, I hope to create a more representative picture of the nation as a whole using data from the National Longitudinal Survey of Youth. In 2006, the United States raised the cap for Stafford Loans for freshmen and sophomores, creating a natural experiment wherein the students before the policy change were more limited in their access to debt than the students after the shift.
 	
-	[RESULTS RESULTS RESULTS]
+	I find that student debt has negligible impact on incomes two years after graduation. However, students with more student debt are significantly less likely to work in public service positions such as education and social work. These career choice findings are in line with \textcite{rothstein2011} who also find reduced engagement in public service sectors. Also in line with Rothstein and Rouse, I find this impact is not present in other sectors; student debt appears to have no impact on students' choices to enter finance, STEM, or the humanities. 
 	
 	\section{Literature Review}
 	
@@ -142,7 +142,7 @@
 	
 	\section{Data}
 	
-	For my paper I use data from the National Longitudinal Survey of Youth '79 Children and Young Adults (NLSY79 CYA). A follow-up to the original National Longitudinal Survey of Youth '79, the CYA surveys the original respondents' children semiyearly from birth until the present day. Thus, we have respondents across the entire age spectrum during the implementation of the policy, allowing us to observe time-varying trends in debt acquisition and career choice. 
+	For my paper I use data from the National Longitudinal Survey of Youth '79 Children and Young Adults, or NLSY79 CYA \parencite{bls2018}. A follow-up to the original National Longitudinal Survey of Youth '79, the CYA surveys the original respondents' children semiyearly from birth until the present day. Thus, we have respondents across the entire age spectrum during the implementation of the policy, allowing us to observe time-varying trends in debt acquisition and career choice. 
 	
 	\begin{figure}
 		\centering
@@ -162,9 +162,9 @@
 	
 	One drawback of the CYA data set is that, as a survey, many of the figures are less precise than those in other sets. For example, when asked about their level of debt, the vast majority of responses are rounded numbers. While useful for qualitative analysis, this makes it difficult to assess data granularly as done by \textcite{lucca2018} in figure \ref{luc}. Fortunately, because they have a nationally representative dataset, there is no reason to believe their results would differ with our sample. Indeed, as our sample is of lower income relative to the general population, I would argue that subjects are bound more strongly by the policy as for many students federal loans may be their only option for college financing. In addition, as visible in figure \ref{loanDist}, we can see that 85\% of students received \$10,000 or less in debt, suggesting an additional \$1,000 would be meaningful relative to their overall quantity. 
 	
-	Because of the connection between the CYA and original NLSY79, we can import very rich background information for each of our participants. Specifically, for each student we can identify parental income for the year in question among other background traits inherited from parents. We adjust all of these variables for inflation using the CPI calculated by the Federal Reserve of St. Louis. [CITATION NEEDED] However, the drawback of being linked to the prior survey is that many of our observations are siblings, which would imply that they are not independently distributed if they share unobservable characteristics. To combat this issue, we will be clustering all standard errors based on the students' mothers. 
+	Because of the connection between the CYA and original NLSY79, we can import very rich background information for each of our participants. Specifically, for each student we can identify parental income for the year in question among other background traits inherited from parents. We adjust all of these variables for inflation using the Chained Consumer Price Index for all Urban Consumers \parencite{bls2019}. However, the drawback of being linked to the prior survey is that many of our observations are siblings, which would imply that they are not independently distributed if they share unobservable characteristics. To combat this issue, we will be clustering all standard errors based on the students' mothers. 
 	
-	Another difficulty with the NLSY sample is that certain questions are only asked in a more intensive form of the survey which is conducted on a subset of the sample every four years rather than every two. While the vast majority of our parameters are available for all subjects every other year, parental assets are only available in alternating years for roughly half the sample. I take two primary steps to rectify this. First, for those subjects who were surveyed about their assets, we extend the last known value into the missing year. For example, given asset data is missing in 2006, we use the subject's survey value for 2004. Second, for those parents with no existing asset data, we infer assets by performing the following regression on those whose asset data we do possess: $$\mbox{Assets} = \beta_0 + \beta_1 \mbox{Income} + \beta_2 \mbox{Income}^2 + \beta_3 \mbox{Age} + \beta_4 \mbox{Children} + \beta_5 \mbox{Year} + \vec{\beta} \vec{\mbox{Demographics}} + \epsilon$$ Since the subjects of the subsurvey were also chosen to be representative of the population, I feel comfortable that we are not extrapolating this data too far. I choose to let income be quadratic to reflect increasing marginal propensity to save among the wealthy [CITATION NEEDED]. This regression yields the results visible in table \ref{assetTab}.
+	Another difficulty with the NLSY sample is that certain questions are only asked in a more intensive form of the survey which is conducted on a subset of the sample every four years rather than every two. While the vast majority of our parameters are available for all subjects every other year, parental assets are only available in alternating years for roughly half the sample. I take two primary steps to rectify this. First, for those subjects who were surveyed about their assets, we extend the last known value into the missing year. For example, given asset data is missing in 2006, we use the subject's survey value for 2004. Second, for those parents with no existing asset data, we infer assets by performing the following regression on those whose asset data we do possess: $$\mbox{Assets} = \beta_0 + \beta_1 \mbox{Income} + \beta_2 \mbox{Income}^2 + \beta_3 \mbox{Age} + \beta_4 \mbox{Children} + \beta_5 \mbox{Year} + \vec{\beta} \vec{\mbox{Demographics}} + \epsilon$$ Since the subjects of the subsurvey were also chosen to be representative of the population, I feel comfortable that we are not extrapolating this data too far. I choose to let income be quadratic to reflect increasing marginal propensity to save among the wealthy [DO I NEED TO CITE THIS?]. This regression yields the results visible in table \ref{assetTab}.
 	
 	\begin{table}
 		\centering
@@ -172,6 +172,45 @@
 		\caption{Estimation of parental assets}
 		\label{assetTab}
 	\end{table}
+
+	Ensuring the comparability of samples before and after a policy shift is always a concern when examining any time-based shock. Fortunately, our samples before and after the policy change appear to be comparable across a variety of dimensions. The distributions of students before and after the policy change are visible by race in table \ref{racecomp}, sex in table \ref{sexcomp}, and region in table \ref{regioncomp}. Based on the $\chi^2$ values of these distributions, we can be relatively confident the composition of the student body before and after the treatment is comparable. In addition, table \ref{inccomp} contains a two-sample t-test which shows that parental income is not significantly different before and after the policy change. 
+	
+{
+	\begin{table}
+		\centering
+		\begin{tabular}{lrrrrrrrr}
+			\input{../Analysis/Tables/Output/raceFit.tex}			
+		\end{tabular}
+		\caption{Comparison of race before and after policy change}
+		\label{racecomp}
+	\end{table}
+
+	\begin{table}
+		\centering
+		\begin{tabular}{lrrrrrr}
+			\input{../Analysis/Tables/Output/sexFit.tex}
+		\end{tabular}
+		\caption{Comparison of sex before and after policy change}
+		\label{sexcomp}
+	\end{table}
+
+	\begin{table}
+	\centering
+	\begin{tabular}{lrrrrrrrrrr}
+		\input{../Analysis/Tables/Output/regionFit.tex}
+	\end{tabular}
+		\caption{Comparison of region before and after policy change}
+		\label{regioncomp}
+	\end{table}
+
+	\begin{table}
+		\centering
+		\input{../Analysis/Tables/Output/parIncFit.tex}
+		\caption{Comparison of parental income before and after policy change}
+		\label{inccomp}
+	\end{table}
+
+}
 	
 	\section{Statistical Model}
 	
@@ -179,8 +218,8 @@
 	
 	\begin{table}
 		\centering
-		\begin{tabular}{lr}
-		\end{tabular}
+		
+		\input{\regs naive.tex}
 		\caption{Results of the naive regression}
 		\label{naive2}
 	\end{table}
@@ -191,9 +230,9 @@
 
 	\begin{figure}
 		\centering
+		\includegraphics[width = 0.9\textwidth]{../Analysis/Charts/Output/majDist}
 		\caption{Breakdown of major in sample}
 		\label{majDist}
-		\includegraphics[width = 0.9\textwidth]{../Analysis/Charts/Output/majDist}
 	\end{figure}
 	
 	Our second model will be examining students' career outcomes. This is the outcome most widely researched in the literature, such as in \textcite{rothstein2011} and \textcite{field2009}. Similar to the regression above, this would use a series of probit models to examine whether increased debt pushes students into certain categories of career.
@@ -216,9 +255,9 @@
 	
 	Thus, our final model for the first stage is as follows: 
 	\begin{align*}
-	debt_i = \delta_0 &+ \delta_1 atCap + \delta_2 policyImpact + \delta_3 need + \delta_4 atCap \times policyImpact \\
-	 &+ \delta_5 atCap \times need + \delta_6 policyImpact \times need + \delta_7 atCap \times policyImpact \times need \\
-	 &+ \delta_8 fallSemester + \vec{\delta} i.year + \vec{\gamma} \vec{demographics}^T
+	debt_i = \delta_0 &+ \delta_1 need + \delta_2 atCap + \delta_3 atCap \times need + \delta_4 policyImpact + \delta_5 atCap \times policyImpact\\
+	 &+ \delta_6 policyImpact \times need + \delta_7 atCap \times policyImpact \times need + \delta_8 fallSemester \\
+	 &+ \vec{\delta} i.year + \vec{\gamma} \vec{demographics}^T
 	 \end{align*} 
 	 
 	 %Results of our various first stages
@@ -241,12 +280,12 @@
 			\toprule
 			Coefficient & Interpretation\\
 			\midrule
-			$\delta_1$ & Impact of having need greater than \$4,500 \\
-			$\delta_2$ & The impact of an additional dollar of credit line availability for those below the cap (expected to be zero)\\
-			$\delta_3$ & The impact of an additional dollar of need\\
-			$\delta_4$ & The impact of an additional dollar of credit for those at the cap, not considering degree of need\\
-			$\delta_5$ & The impact of an additional dollar of demonstrated need after the first \$4,500 of need\\
-			$\delta_6$ & The impact of an additional dollar of credit availability for those not at the cap (expected to be zero)\\
+			$\delta_1$ & Impact of an additional dollar of need\\
+			$\delta_2$ & Impact of having need greater than \$4,500 \\
+			$\delta_3$ & Additional impact of each dollar of need over \$4,500 \\
+			$\delta_4$ & Impact of an additional dollar of credit available for those below the cap (expected to be zero)\\
+			$\delta_5$ & Impact of an additional dollar of credit for those at the cap, not considering degree of need\\
+			$\delta_6$ & Impact of an additional dollar of credit available for those not at the cap (expected to be zero)\\
 			$\delta_7$ & The impact of an additional dollar of credit availability for those at the cap proportional to the student's need \\
 			\bottomrule
 		\end{tabular}
@@ -263,12 +302,22 @@
 	\begin{table}
 		\centering
 		
-		\input{\regs stage2.tex}
-		\caption{Second stage results}
-		\label{stage2}
+		\input{\regs majChoice.tex}
+		\caption{Second stage results on major choice}
+		\label{majChoice}
+	\end{table}
+
+	\begin{table}
+		\centering
+		
+		\input{\regs income.tex}
+		\caption{Second stage results on income}
+		\label{incomeRes}
 	\end{table}
 	
-	The results of these regressions are visible in table \ref{stage2}.
+	The abbreviated results of these regressions are visible in table \ref{majChoice}. Be aware that all regression tables in this section are truncated to the coefficients of interest; full results are available in the appendix. As consistent with Rothstein and Rouse's findings, students with more debt are less likely to choose a major in public service, in this case defined to be teaching or social work. These results are visible in regression (1). Also consistent with their findings, people are \emph{not} significantly more likely to go into more lucrative fields such as business, economics, engineering, or computer science, as visible in regressions (2) and (3). 
+	
+	It is worth noting however that unlike Rothstein and Rouse, we find no impact wages, as visible in table \ref{incomeRes}. Regression (1) here performs a 2SLS regression examining the income of students two years after graduation. To test for differential effects at different income levels, I also run probits in regressions (2) and (3) to test whether loans can push people over certain thresholds, defined to be the 25th and 90th percentiles of income in our sample. 
 	
 	\section{Discussion}
 	
@@ -276,10 +325,18 @@
 	
 	\section{Conclusion}
 	
-	\blindtext
+	Contrary to the existing literature, I find no relationship between student debt and career income. However, reinforcing findings from other studies, I do find that students with debt are significantly less likely to enter public service industries such as teaching. Given these are occupations which traditionally provide positive externalities to their communities, I would describe this as a negative byproduct of higher education's focus on student loans for education financing. \textcite{abraham2018} suggest using income based repayment as a means of mitigating the risks of student loan default. Depending on the mechanism through which debt impacts students' choices, this could be an effective method for correcting this distortion.
 	
 	\appendix
 	\section{Extended Regressions}
+	
+	\begin{table}
+		\centering
+		\input{\regs naivefull.tex}
+		\caption{Table \ref{naive2} full results}
+		\label{naivefull}
+	\end{table}
+
 	\begin{table}
 		\centering
 		\scriptsize
@@ -292,11 +349,21 @@
 	\begin{table}
 		\centering
 		\scriptsize
-		\input{\regs stage2full.tex}
+		\input{\regs majChoicefull.tex}
 		
-		\caption{Table \ref{stage2} full results}
+		\caption{Table \ref{majChoice} full results}
 	\end{table}
 
+	\begin{table}
+		\centering
+		\scriptsize
+		\input{\regs incomefull.tex}
+		
+		\caption{Table \ref{incomeRes} full results}
+	\end{table}
+
+	\pagebreak
+	
 	\printbibliography
 	
 \end{document}
