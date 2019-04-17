@@ -24,12 +24,12 @@ eststo: tobit adjloan c.adjneed##atCap if !polImpact, ll
 eststo: tobit adjloan atCap##c.adjimp##c.adjneed i.year i.fall i.race i.sex i.region if year < 14, ll vce(cluster mid)
 esttab using ../Output/tripdif.tex, nobaselevels booktabs style(tex) ///
 	label keep(*atCap* *adjimp* *adjneed*) star(* 0.1 ** 0.05 *** 0.01) ///
-	scalars(chi2) addn("Standard errors clustered by mother") replace
+	scalars("chi2 $\chi^2$") addn("Standard errors clustered by mother") replace
 test 1.atCap#c.adjimp 1.atCap#c.adjimp#c.adjneed
 
 //Full version for appendix
 esttab using ../Output/tripdiffull.tex, nobaselevels booktabs style(tex) ///
-	label star(* 0.1 ** 0.05 *** 0.01) scalars(chi2) ///
+	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
 	addn("Standard errors clustered by mother") replace
 	
 eststo clear
@@ -43,7 +43,14 @@ SECOND STAGES
 */
 
 //Naive approach
-reg adjincin2 adjloan adjneed year i.sex i.race i.region
+eststo: reg adjincin2 adjloan adjneed year i.sex i.race i.region, vce(cluster mid)
+esttab using ../Output/naive.tex, nobaselevels booktabs style(tex) ///
+	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
+	addn("Standard errors clustered by mother") replace
+	
+esttab using ../Output/naivefull.tex, nobaselevels booktabs style(tex) ///
+	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
+	addn("Standard errors clustered by mother") replace
 
 //Regression of outcomes on debt using instrument
 eststo clear
@@ -54,11 +61,11 @@ eststo: ivprobit lucMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.regio
 eststo: ivprobit humMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
 
 esttab using ../Output/majChoice.tex, nobaselevels booktabs style(tex) ///
-	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars(chi2) ///
+	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
 	addn("Standard errors clustered by mother") replace
 	
 esttab using ../Output/majChoicefull.tex, nobaselevels booktabs style(tex) ///
-	label star(* 0.1 ** 0.05 *** 0.01) scalars(chi2) ///
+	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
 	addn("Standard errors clustered by mother") replace
 
 eststo clear
@@ -71,11 +78,11 @@ eststo: ivprobit midClass (adjloan = adjloanHat) adjneed year i.sex i.race i.reg
 eststo: ivprobit highClass (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
 
 esttab using ../Output/income.tex, nobaselevels booktabs style(tex) ///
-	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars(chi2) ///
+	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
 	addn("Standard errors clustered by mother") replace
 	
 esttab using ../Output/incomefull.tex, nobaselevels booktabs style(tex) ///
-	label star(* 0.1 ** 0.05 *** 0.01) scalars(chi2) ///
+	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
 	addn("Standard errors clustered by mother") replace
 
 eststo clear

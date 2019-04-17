@@ -8,6 +8,7 @@ gen hhSize = 2 + sibs + momMarried
 
 //Mother's age
 gen mAge = floor((ym(2008, 1) - parDob) / 12)
+label variable mAge "Mother's age"
 
 //Imputing assets for those missing
 reg assets 
@@ -19,7 +20,8 @@ reg assets
 eststo clear
 eststo: reg adjassets adjparinc adjparinc2 mAge sibs year i.race i.region if year < 14, cluster(mid)
 esttab using ../Output/assethat.tex, nobaselevels booktabs style(tex) ///
-	label star(* 0.1 ** 0.05 *** 0.01) scalars(r2) replace
+	label star(* 0.1 ** 0.05 *** 0.01) scalars("r2 $ R^2$") replace ///
+	addn("Standard errors clustered by mother")
 predict adjassetshat
 replace adjassets = adjassetshat if missing(adjassets)
 replace assets = adjassets * cpi / 100 if missing(assets)
@@ -212,10 +214,12 @@ gen need = tuition - efc
 //Cap dummies
 gen atCap = 0 if !missing(need)
 replace atCap = 1 if need >= 4500 & !missing(need)
+label variable atCap "(Need $> 4500)$"
 
 //Inflation adjust new values
 gen adjefc = 100 * efc / cpi
 gen adjneed = 100 * need / cpi
+label variable adjneed "Need"
 
 //Drops temp variables (somehow not automatic?)
 drop __*

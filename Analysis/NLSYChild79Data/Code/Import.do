@@ -6,8 +6,8 @@ infile using ../Input/child.dct
 drop Y2267000
 
 //Define labels
-label define raceLab   1 "HISPANIC"  2 "BLACK"  3 "NON-BLACK, NON-HISPANIC"
-label define sexLab  1 "MALE"  2 "FEMALE"
+label define raceLab   1 "Hispanic"  2 "Black"  3 "Non-Black, Non-Hispanic"
+label define sexLab  1 "Male"  2 "Female"
 label define majLab  0 "NONE, NO MAJOR DECLARED YET"  /// 
 	1 "AGRICULTURE / NATURAL RESOURCES"  2 "ANTHROPOLOGY"  3 "ARCHAEOLOGY"  ///
 	4 "ARCHITECTURE/ENVIRONMENTAL DESIGN"  5 "AREA STUDIES"  ///
@@ -21,7 +21,7 @@ label define majLab  0 "NONE, NO MAJOR DECLARED YET"  ///
 	28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  ///
 	32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
 label define ynLab  1 "Yes"  0 "No"
-label define regionLab 1 "NORTHEAST" 2 "NORTH CENTRAL" 3 "SOUTH" 4 "WEST"
+label define regionLab 1 "Northeast" 2 "North Central" 3 "South" 4 "West"
 label define majTypeLab 0 "Humanities" 1 "STEM" 2 "Social Science" ///
 	3 "Professions" 4 "Business"
 label define gradeLab 1 "1ST GRADE"  2 "2ND GRADE"  3 "3RD GRADE"  ///
@@ -178,6 +178,7 @@ drop Y1* Y2*
 
 //Calculates how many siblings total
 duplicates tag mid, generate(sibs)
+label variable sibs "Number of siblings"
 
 //Get only observations with data on receiving loans
 drop if missing(recloan0) & missing(recloan2) ///
@@ -189,6 +190,7 @@ reshape long maj recloan loan region grade intDate tuition fulltuition partialtu
 
 //Marks data as panel data
 xtset cid year, delta(2)
+label variable year "Year"
 
 //Dummy for student in college; used to find concurrent siblings
 gen inCollege = grade >= 13 & !missing(grade)
@@ -253,21 +255,26 @@ replace majType = 4 if maj == 7
 
 //Dummy for if going into 'financy' major
 gen finMaj = inlist(maj, 7 /*Business*/, 11/*Economics*/, 18/*Home Ec*/)
+label variable finMaj "Finance"
 
 //Dummy for lucrative majors generally
 gen lucMaj = inlist(maj, 7 /*Business*/, 11/*Economics*/, 18/*Home Ec*/, ///
 	23 /*Engineering*/, 9 /*Computer Science*/)
+label variable lucMaj "Lucrative"
 
 //Dummy for low paying 'public servicy' major
 gen serveMaj = inlist(maj, 12 /*Education*/, 32 /*Social Work*/)
+label variable serveMaj "Public Service"
 
 //Dummy for humanities major
 gen humMaj = inlist(maj, 16 /*Language*/, 2 /*Anthropology*/, ///
 	23 /*Philosophy*/, 33 /*Theology*/, 17 /*History*/, 15 /*Art*/, ///
 	14 /*English*/)
+label variable humMaj "Humanities"
 	
 //Dummy for STEM major
 gen stemMaj = inlist(maj, 1, 4, 6, 9, 13, 20, 24)
+label variable stemMaj "STEM"
 
 //Generates log values of income and loans
 gen linc = ln(inc)
@@ -281,15 +288,16 @@ gen fallSemester = halfyear(dofm(intDate)) - 1
 
 //Generates income in two years
 gen incin2 = f.inc
+label variable incin2 "Income 2 years postgrad"
 
 //Generates dummies for income rank
 bysort year: egen midCutoff = pctile(incin2), p(25)
 gen midClass = (incin2 >= midCutoff)
-label variable midClass "In top 75% of earners"
+label variable midClass "Top 75\%"
 
 bysort year: egen highCutoff = pctile(incin2), p(90)
 gen highClass = (incin2 >= highCutoff)
-label variable highClass "In top 10% of earners"
+label variable highClass "Top 10\%"
 
 keep if grade == 16
 

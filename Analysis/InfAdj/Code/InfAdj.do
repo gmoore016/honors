@@ -25,6 +25,13 @@ gen adjparinc2 = adjparinc * adjparinc
 gen adjimp = 100 * polImpact / cpi
 gen adjassets = 100 * assets / cpi
 
+label variable adjincin2 "Income 2 years postgrad"
+label variable adjloan "Loans"
+label variable adjparinc "Parental income"
+label variable adjparinc2 "Parental income squared"
+label variable adjimp "Extra credit available"
+label variable adjassets "Parental assets"
+
 save ../Output/adjData.dta, replace
 
 
