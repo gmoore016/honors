@@ -38,8 +38,10 @@ rename C0000200 mid
 //Demographics
 rename C0005300 race
 label values race raceLab
+label variable race "Race of child"
 rename C0005400 sex
 label values sex sexLab
+label variable sex "Sex of child"
 rename C0005700 dob
 
 //Year of study
@@ -195,6 +197,9 @@ label variable year "Year"
 //Dummy for student in college; used to find concurrent siblings
 gen inCollege = grade >= 13 & !missing(grade)
 duplicates tag year mid inCollege if inCollege > 0, generate(sibsInCollege)
+
+//Applies label to region variable
+label variable region "Region of residence"
 
 //Code to Stata missings
 replace maj = . if maj < 0
