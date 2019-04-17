@@ -48,20 +48,33 @@ reg adjincin2 adjloan adjneed year i.sex i.race i.region
 //Regression of outcomes on debt using instrument
 eststo clear
 //Major bins
+eststo: ivprobit serveMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
 eststo: ivprobit finMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
 eststo: ivprobit lucMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
-eststo: ivprobit serveMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
 eststo: ivprobit humMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
 
-//Income
-eststo: ivregress 2sls adjincin2 (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
-
-
-esttab using ../Output/stage2.tex, nobaselevels booktabs style(tex) ///
+esttab using ../Output/majChoice.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars(chi2) ///
 	addn("Standard errors clustered by mother") replace
 	
-esttab using ../Output/stage2full.tex, nobaselevels booktabs style(tex) ///
+esttab using ../Output/majChoicefull.tex, nobaselevels booktabs style(tex) ///
+	label star(* 0.1 ** 0.05 *** 0.01) scalars(chi2) ///
+	addn("Standard errors clustered by mother") replace
+
+eststo clear
+	
+//Income
+eststo: ivregress 2sls adjincin2 (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
+
+eststo: ivprobit midClass (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
+
+eststo: ivprobit highClass (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
+
+esttab using ../Output/income.tex, nobaselevels booktabs style(tex) ///
+	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars(chi2) ///
+	addn("Standard errors clustered by mother") replace
+	
+esttab using ../Output/incomefull.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars(chi2) ///
 	addn("Standard errors clustered by mother") replace
 

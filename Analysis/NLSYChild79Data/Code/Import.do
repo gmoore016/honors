@@ -265,7 +265,9 @@ gen serveMaj = inlist(maj, 12 /*Education*/, 32 /*Social Work*/)
 gen humMaj = inlist(maj, 16 /*Language*/, 2 /*Anthropology*/, ///
 	23 /*Philosophy*/, 33 /*Theology*/, 17 /*History*/, 15 /*Art*/, ///
 	14 /*English*/)
-
+	
+//Dummy for STEM major
+gen stemMaj = inlist(maj, 1, 4, 6, 9, 13, 20, 24)
 
 //Generates log values of income and loans
 gen linc = ln(inc)
@@ -279,6 +281,15 @@ gen fallSemester = halfyear(dofm(intDate)) - 1
 
 //Generates income in two years
 gen incin2 = f.inc
+
+//Generates dummies for income rank
+bysort year: egen midCutoff = pctile(incin2), p(25)
+gen midClass = (incin2 >= midCutoff)
+label variable midClass "In top 75% of earners"
+
+bysort year: egen highCutoff = pctile(incin2), p(90)
+gen highClass = (incin2 >= highCutoff)
+label variable highClass "In top 10% of earners"
 
 keep if grade == 16
 
