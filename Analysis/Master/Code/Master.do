@@ -37,10 +37,10 @@ cd ../../Regressions/Code
 save ../Input/Need.dta, replace
 do regs
 
-/*
+
 cd ../../Tables/Code
 do tables
-*/
+
 
 if "`makechart'" != "-nc"{
 	cd ../../Charts/Code
