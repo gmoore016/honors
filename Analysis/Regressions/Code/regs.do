@@ -17,8 +17,8 @@ tobit adjloan atCap##c.adjimp adjneed i.year i.fall i.race i.sex i.region if yea
 
 //How debt changes with need--increased slope after cap
 //Slope steaper after policy change
-eststo: tobit adjloan c.adjneed##atCap if polImpact & !missing(polImpact), ll
 eststo: tobit adjloan c.adjneed##atCap if !polImpact, ll
+eststo: tobit adjloan c.adjneed##atCap if polImpact & !missing(polImpact), ll
 
 //Triple difference model
 eststo: tobit adjloan atCap##c.adjimp##c.adjneed i.year i.fall i.race i.sex i.region if year < 14, ll vce(cluster mid)

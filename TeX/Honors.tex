@@ -248,14 +248,16 @@
 	
 	Anticipated need is equal to students' tuition payments minus their expected family contribution, or EFC. While we cannot observe students' true EFC, we can calculate an approximation using the Free Application for Federal Student Aid (FAFSA). Then, using this approximation, we are able to generate a measure of need and so determine who is affected by the policy shift. We then generate a dummy $atCap$ equal to 1 if a student's need is greater than the old borrowing limit and so are in our sample. 
 	
-	Thus, our final model for the first stage is as follows: 
+	As an initial test of my instrument, I regress loans on students' need and whether they are at the cap both before and after the policy shift. If my instrument is valid, we would expect students after the policy shift to experience greater increases in debt based on their level of need given they are at the previous cap for demonstrated need. The results of this initial regression are visible in columns (1) and (2) respectively of table \ref{firststage}. In this specification the coefficient for need above the cap appears more positive after the policy change than before, as expected. 
+	
+	In my more rigorous model, I perform a triple difference approach, interacting $atCap$ with students' need and policy impact. This allows me to use both students before the policy shift (who experience no policy impact) and students after the policy shift who are below the threshold (and thus have $atCap = 0$) as controls for our cohort of interest. Thus, my final model for the first stage is as follows: 
 	\begin{align*}
 	debt_i = \delta_0 &+ \delta_1 need + \delta_2 atCap + \delta_3 atCap \times need + \delta_4 policyImpact + \delta_5 atCap \times policyImpact\\
 	 &+ \delta_6 policyImpact \times need + \delta_7 atCap \times policyImpact \times need + \delta_8 fallSemester \\
 	 &+ \vec{\delta} i.year + \vec{\gamma} \vec{demographics}^T
 	 \end{align*} 
 	 
-	 The results of this model are given in table \ref{firststage} with time and demographic effects omitted. Given our model is correct, our coefficient of interest is $\delta_7$, the impact of being in the treated cohort after the policy change in proportion to demonstrated need. Find an interpretation of each interaction coefficient in table \ref{coefInterp}.
+	 The results of this model are given in table \ref{firststage} with time and demographic effects omitted. Given our model is correct, our coefficient of interest is $\delta_7$, the impact of being in the treated cohort after the policy change in proportion to demonstrated need. An interpretation of each interaction coefficient is available in table \ref{coefInterp}.
 	 
 	 %Results of our various first stages
 	 \begin{table}
