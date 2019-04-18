@@ -168,8 +168,8 @@
 	
 	\begin{table}
 		\centering
-		\input{../Analysis/NeedCalc/Output/assethat.tex}
 		\caption{Estimation of parental assets}
+		\input{../Analysis/NeedCalc/Output/assethat.tex}
 		\label{assetTab}
 	\end{table}
 
@@ -178,35 +178,35 @@
 {
 	\begin{table}
 		\centering
+		\caption{Comparison of race before and after policy change}
 		\begin{tabular}{lrrrrrrrr}
 			\input{../Analysis/Tables/Output/raceFit.tex}			
 		\end{tabular}
-		\caption{Comparison of race before and after policy change}
 		\label{racecomp}
 	\end{table}
 
 	\begin{table}
 		\centering
+		\caption{Comparison of sex before and after policy change}
 		\begin{tabular}{lrrrrrr}
 			\input{../Analysis/Tables/Output/sexFit.tex}
 		\end{tabular}
-		\caption{Comparison of sex before and after policy change}
 		\label{sexcomp}
 	\end{table}
 
 	\begin{table}
-	\centering
-	\begin{tabular}{lrrrrrrrrrr}
-		\input{../Analysis/Tables/Output/regionFit.tex}
-	\end{tabular}
+		\centering
 		\caption{Comparison of region before and after policy change}
+		\begin{tabular}{lrrrrrrrrrr}
+			\input{../Analysis/Tables/Output/regionFit.tex}
+		\end{tabular}
 		\label{regioncomp}
 	\end{table}
 
 	\begin{table}
 		\centering
-		\input{../Analysis/Tables/Output/parIncFit.tex}
 		\caption{Comparison of parental income before and after policy change}
+		\input{../Analysis/Tables/Output/parIncFit.tex}
 		\label{inccomp}
 	\end{table}
 
@@ -218,9 +218,8 @@
 	
 	\begin{table}
 		\centering
-		
-		\input{\regs naive.tex}
 		\caption{Results of the naive regression}
+		\input{\regs naive.tex}
 		\label{naive2}
 	\end{table}
 	
@@ -230,8 +229,8 @@
 
 	\begin{figure}
 		\centering
-		\includegraphics[width = 0.9\textwidth]{../Analysis/Charts/Output/majDist}
 		\caption{Breakdown of major in sample}
+		\includegraphics[width = 0.9\textwidth]{../Analysis/Charts/Output/majDist}
 		\label{majDist}
 	\end{figure}
 	
@@ -263,10 +262,8 @@
 	 %Results of our various first stages
 	 \begin{table}
 	 	\centering
-	 	
+	 	\caption{Results of first stage regression}	 	
 	 	\input{\regs tripdif.tex}
-	 	
-	 	\caption{Results of first stage regression}
 	 	\label{firststage}
 	 \end{table}
 	 
@@ -275,7 +272,7 @@
 	%Interprets different interaction effects
 	\begin{table}
 		\centering
-		
+		\caption{Interaction Coefficient Interpretations}		
 		\begin{tabular}{lp{8cm}}
 			\toprule
 			Coefficient & Interpretation\\
@@ -290,8 +287,7 @@
 			\bottomrule
 		\end{tabular}
 	
-	\caption{Interaction Coefficient Interpretations}
-	\label{coefInterp}
+		\label{coefInterp}
 	\end{table}
 	
 	
@@ -301,17 +297,15 @@
 	
 	\begin{table}
 		\centering
-		
+		\caption{Second stage results on major choice}		
 		\input{\regs majChoice.tex}
-		\caption{Second stage results on major choice}
 		\label{majChoice}
 	\end{table}
 
 	\begin{table}
 		\centering
-		
+		\caption{Second stage results on income}		
 		\input{\regs income.tex}
-		\caption{Second stage results on income}
 		\label{incomeRes}
 	\end{table}
 	
@@ -332,34 +326,31 @@
 	
 	\begin{table}
 		\centering
+		\caption{Naive regression (table \ref{naive2}) full results}
 		\input{\regs naivefull.tex}
-		\caption{Table \ref{naive2} full results}
 		\label{naivefull}
 	\end{table}
 
 	\begin{table}
 		\centering
 		\scriptsize
+		\caption{First stage (table \ref{firststage}) full results}
 		\input{\regs tripdiffull.tex}
-		
-		\caption{Table \ref{firststage} full results}
 		\label{firststagefull}
 	\end{table}
 
 	\begin{table}
 		\centering
 		\scriptsize
+		\caption{Major selection (table \ref{majChoice}) full results}
 		\input{\regs majChoicefull.tex}
-		
-		\caption{Table \ref{majChoice} full results}
 	\end{table}
 
 	\begin{table}
 		\centering
 		\scriptsize
+		\caption{Income (table \ref{incomeRes}) full results}
 		\input{\regs incomefull.tex}
-		
-		\caption{Table \ref{incomeRes} full results}
 	\end{table}
 
 	\pagebreak
