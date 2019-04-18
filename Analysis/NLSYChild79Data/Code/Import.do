@@ -219,7 +219,7 @@ gen col = !missing(maj) | (grade >= 13 &!missing(grade))
 
 //Generates dummy for after policy change
 gen cohort = (year >= 8)
-label define cohLab 0 "control" 1 "test"
+label define cohLab 0 "Before 2008" 1 "2008 and Onward"
 label values cohort cohLab
 
 //Creates value of treatment
