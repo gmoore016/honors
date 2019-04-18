@@ -31,7 +31,3 @@ quietly tabout cohort region using ../Output/regionFit.tex, bt stats(chi2) cells
 	style(tex) replace
 
 eststo clear
-
-estpost summarize adjparinc
-estpost ttest adjparinc, by(cohort)
-esttab using ../Output/parIncFit.tex, style(tex) booktabs label replace

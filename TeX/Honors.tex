@@ -174,7 +174,7 @@
 		\label{assetTab}
 	\end{table}
 
-	To ensure our policy shift is not being confounded with a shifting student body, we must ensure the composition of students in our sample is constant before and after the policy change. Fortunately, our samples before and after the policy change appear to be comparable across a variety of dimensions. The distributions of students before and after the policy change are visible by race in table \ref{racecomp}, sex in table \ref{sexcomp}, and region in table \ref{regioncomp}. Based on the $\chi^2$ values of these distributions, we can be relatively confident the composition of the student body before and after the treatment is comparable. In addition, table \ref{inccomp} contains a two-sample t-test which shows that parental income is not significantly different before and after the policy change. 
+	To ensure our policy shift is not being confounded with a shifting student body, we must ensure the composition of students in our sample is constant before and after the policy change. Fortunately, our samples before and after the policy change appear to be comparable across a variety of dimensions. The distributions of students before and after the policy change are visible by race in table \ref{racecomp}, sex in table \ref{sexcomp}, and region in table \ref{regioncomp}. Based on the $\chi^2$ values of these distributions, we can be relatively confident the composition of the student body before and after the treatment is comparable across these factors. In addition, I conduct a two-sample t-test comparing (inflation-adjusted) parental incomes across the groups. Before 2008, there are 271 observations with a mean parental income of \$67,945. From 2008 on there are 484 observations with a mean parental income of \$74,806. Testing whether the means of these two groups are the same yields a $t$-statistic of 1.40 ($p = 0.16$). Thus, we fail to reject the hypothesis real parental income in the sample remained constant before and after the policy shift. 
 	
 {
 	\begin{table}
@@ -203,14 +203,6 @@
 		\end{tabular}
 		\label{regioncomp}
 	\end{table}
-
-	\begin{table}
-		\centering
-		\caption{Comparison of parental income before and after policy change}
-		\input{../Analysis/Tables/Output/parIncFit.tex}
-		\label{inccomp}
-	\end{table}
-
 }
 	
 	\section{Statistical Model}
