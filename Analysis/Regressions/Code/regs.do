@@ -50,7 +50,7 @@ eststo: probit humMaj adjloan adjneed year i.sex i.race i.region, vce(cluster mi
 
 esttab using ../Output/naive.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
-	addn("Standard errors clustered by mother." "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
+	addn("Standard errors clustered by mother." "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix." "Definitions of these groups are available in the appendix.") replace
 	
 esttab using ../Output/naivefull.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
@@ -66,7 +66,7 @@ eststo: ivprobit humMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.regio
 
 esttab using ../Output/majChoice.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
-	addn("Standard errors clustered by mother" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
+	addn("Standard errors clustered by mother" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix." "Definitions of these groups are available in the appendix.") replace
 	
 esttab using ../Output/majChoicefull.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
