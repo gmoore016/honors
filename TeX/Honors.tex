@@ -292,9 +292,9 @@
 	
 	\section{Results}
 	
-	We will begin by estimating the likelihood of several types of careers. This will be done in the form of a probit model: either a student chooses to work in the relevant field, or they do not. Due to the nonlinearity of the tobit model used in the first stage, we use the estimates of debt from that equation as an instrument in this model. The form of the regression is as follows: $$majType = \beta_0 + \beta_1 \hat{loan} + \beta_2 year + \vec{\beta}\vec{demographics}^T$$
+	We will begin by estimating the likelihood of several types of careers. This will be done in the form of a probit model: either a student chooses to work in the relevant field, or they do not. Due to the nonlinearity of the tobit model used in the first stage, we use the estimates of debt from that equation as an instrument in this model. The form of the regression is as follows: $$\mathbb{P}\left(major_i = majType\right) = \Phi\left(\beta_0 + \beta_1 \hat{loan_i} + \beta_2 year + \vec{\beta}\vec{demographics}^T_i\right)$$
 	
-	The abbreviated results of these regressions are visible in table \ref{majChoice}. Be aware that all regression tables in this section are truncated to the coefficients of interest; full results are available in the appendix. As consistent with Rothstein and Rouse's findings, students with more debt are less likely to choose a major in public service, in this case defined to be teaching or social work. These results are visible in regression (1). Also consistent with their findings, people are \emph{not} significantly more likely to go into more lucrative fields such as business, economics, engineering, or computer science, as visible in regressions (2) and (3). 
+	The abbreviated results of these regressions are visible in table \ref{majChoice}. Bin definitions are borrowed from \textcite{rothstein2011}; specifications for which degrees are grouped into each bin are visible in table \ref{majGroups} in the appendix. Be aware that all regression tables in this section are truncated to the coefficients of interest; full results are available in the appendix. As consistent with Rothstein and Rouse's findings, students with more debt are less likely to choose a major in public service, in this case defined to be teaching or social work. These results are visible in regression (1). Also consistent with their findings, people are \emph{not} significantly more likely to go into more lucrative fields such as business, economics, engineering, or computer science, as visible in regressions (2) and (3). 
 
 	\begin{table}
 		\centering
@@ -343,6 +343,22 @@
 		\scriptsize
 		\caption{Major selection (table \ref{majChoice}) full results}
 		\input{\regs majChoicefull.tex}
+		\label{majChoiceFull}
+	\end{table}
+
+	\begin{table}
+		\centering
+		\caption{Major group definitions as used in \ref{majChoice} and \ref{majChoiceFull}. Groups borrowed from \textcite{rothstein2011}.}
+		\begin{tabular}{lr}
+			\toprule
+			Major category & Included majors \\
+			\midrule 
+			Public Service & Education and social work \\
+			Finance & Business, Economics, Home Economics \\
+			Lucrative & Business, Economics, Home Economics, Engineering, Computer Science \\
+			Humanities & Language, Anthropology, Philosophy, Theology, History, Art, English \\ \bottomrule
+		\end{tabular}
+		\label{majGroups}
 	\end{table}
 
 	\begin{table}
