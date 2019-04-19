@@ -115,9 +115,11 @@
 		\includegraphics[width = 0.8\textwidth]{Images/ModelSketch}
 	\end{figure}
 
-	This model provides a concrete prediction regarding agents' behavior under a positive credit shock. In the absence of other factors, students who receive access to an increased line of credit should pivot \emph{away} from occupations with non-pecuniary benefits (those with higher $C$) towards those which are more lucrative. Depending on the context for $C$, this could have important societal consequences; for example, if $C$ is some sort of ``warm glow'' effect from helping others, this could be net detrimental to society as those positive externalities are lost when students choose career $H$ over career $L$. 
+	This model provides a concrete prediction regarding agents' behavior under a positive credit shock. In the absence of other factors, students who receive access to an increased line of credit should pivot \emph{away} from occupations with non-pecuniary benefits (those with higher $C$) towards those which are more lucrative. Depending on the context for $C$, this could have important consequences for a social planner; for example, if $C$ is some sort of ``warm glow'' effect from helping others, this could be net detrimental to society as those positive externalities are lost when students choose career $H$ over career $L$. 
 
 	\section{HERA and Subsidized Student Loans}
+	
+	It is possible that there exists endogeneity between quantity of loans and career choices. For example, if a student anticipates a greater salary in the future, they would likely choose to take out more loans as undergraduates in order to smooth their consumption over time. In this case, there would exist a positive correlation between loans and salary, but the greater quantity of loans would not have caused the increase in salary. On the other hand, if students from lower income backgrounds take out more loans, but also have lower salaries for reasons unrelated to their educational spending such as weaker professional networks, this would cause loans to be negatively correlated with salary despite the loans not having caused the salary reduction. Among other mechanisms, these two examples demonstrate the endogeneity present in the relationship between loans and career outcomes. To correct for this endogeneity, I perform a two-stage least squares regression using a 2006 shift in federal loan policy to pseudo-randomly assign debt to students, removing the endogeneity problem. Assuming that students before and after the policy are comparable (an assumption I support in section 6), the students after the policy have received a roughly 20\% increase in subsidized loans from the federal government. Thus, by comparing these students to those before the policy, I can parse out the causal effects of these additional loans.
 	
 	I borrow my identification strategy from \textcite{lucca2018} who examine how increased Federal subsidized credit lines impact university tuition. In 2006, the Higher Education Reconciliation Act (HERA) increased subsidized borrowing caps for the first time in fourteen years. Freshmen received boosts from \$2,625 to \$3,500 per year, while sophomores received a greater boost from \$3,500 to \$4,500 per year. Caps for older students remained static at \$5,500. While HERA also increased the availability of unsubsidized credit, Lucca and his coauthors make a compelling argument that the increase in unsubsidized loan caps had a middling effect at best on uptake for unsubsidized loans. Students who increase unsubsidized borrowing under the program shift would have to meet two criteria: first, the students would have to be well off enough to not qualify for a wholly subsidized program, and second, the students still chose to take advantage of their whole program allowance. The authors find that fewer than 1\% of the students in their sample met both of these criteria.
 	
@@ -211,11 +213,8 @@
 	
 	\section{Statistical Model}
 	
-	Our data set is a collection of seniors surveyed on even years between 2000 and 2014. If possible, we would hope to model some career outcome $Y$ according to the following equation: $$Y = \beta_0 + \beta_1 \mbox{debt}_{it} + \vec{\xi}^T \vec{\mbox{demographics}}_i + \epsilon_{it}$$ In this model, $Y$ could take one of several values, such as major choice, career choice, or salary. 
+	Our data set is a collection of seniors surveyed on even years between 2000 and 2014. If possible, we would hope to model some career outcome $Y$ according to the following equation: $$Y = \beta_0 + \beta_1 \mbox{debt}_{it} + \vec{\xi}^T \vec{\mbox{demographics}}_i + \epsilon_{it}$$ In this model, $Y$ could take one of several values, such as major choice, career choice, or salary. The results of this regression using several types of majors are visible in table \ref{naive2}. 
 	
-	The results of this regression using salary as the dependent variable are visible in table \ref{naive2}. 
-	
-		
 	\begin{table}
 		\centering
 		\caption{Results of the naive regression}
@@ -223,7 +222,7 @@
 		\label{naive2}
 	\end{table}
 	
-	Our first model will place major choice on the left hand side. I believe this to be the most novel outcome of interest, as few datasets have this level of resolution on their observations. Here I can place majors into several bins, and then run a probit regression on individual bins to determine the effect of the policy. The specifications of these bins can be found in the appendix, and we will adjust these bins later as a form of robustness testing. The distribution of students broken down by major is visible in figure \ref{majDist}.
+	Our first model will place major choice on the left hand side. I believe this to be the most novel outcome of interest, as few datasets have this level of resolution on their observations. Here I can place majors into several bins, and then run a probit regression on individual bins to determine the effect of the policy. The specifications of these bins can be found in the appendix, and we will adjust these bins later as a form of robustness  testing. The distribution of students broken down by major is visible in figure \ref{majDist}.
 
 	\begin{figure}
 		\centering
@@ -236,7 +235,7 @@
 	
 	Our final model will be directly examining students' final incomes. This is the most direct approach to measuring the impact of debt on choices; however, it may ignore factors such as career risk which would not be visible in simple income data.
 	
-	Unfortunately there exists reverse causality between debt and career choices; therefore, we must perform a two-stage least squares regression using exposure to the HERA credit increase as our instrumental variable in order to pseudo-randomly assign debt to our students. 
+	As outlined in section 4, it is likely there exists endogeneity between loans and career outcomes; therefore, we must perform a two-stage least squares regression using exposure to the HERA credit increase as our instrumental variable in order to pseudo-randomly assign debt to our students. 
 	
 	We assume that outside of our random assignment, debt levels are dependent on parental resources, time trends, and demographic characteristics such as sex, race, and region of residence. As the time trend for debt levels may not be linear, we use dummies for each year to represent average debt within our sample for a given year. Further, we anticipate students taking out loans each semester; thus, those interviewed in the fall of their senior year would have less debt than those in the spring, so we include a semester dummy as well.
 	
