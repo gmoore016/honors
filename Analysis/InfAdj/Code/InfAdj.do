@@ -25,6 +25,12 @@ gen adjparinc2 = adjparinc * adjparinc
 gen adjimp = 100 * polImpact / cpi
 gen adjassets = 100 * assets / cpi
 
+egen midCutoff = pctile(adjincin2), p(25)
+gen midClass = (adjincin2 >= midCutoff)
+
+egen highCutoff = pctile(adjincin2), p(90)
+gen highClass = (adjincin2 >= highCutoff)
+
 label variable adjincin2 "Income 2 years postgrad"
 label variable adjloan "Loans"
 label variable adjparinc "Parental income"
