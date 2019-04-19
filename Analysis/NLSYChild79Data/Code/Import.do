@@ -296,11 +296,11 @@ gen incin2 = f.inc
 label variable incin2 "Income 2 years postgrad"
 
 //Generates dummies for income rank
-bysort year: egen midCutoff = pctile(incin2), p(25)
+egen midCutoff = pctile(incin2), p(25)
 gen midClass = (incin2 >= midCutoff)
 label variable midClass "Top 75\%"
 
-bysort year: egen highCutoff = pctile(incin2), p(90)
+egen highCutoff = pctile(incin2), p(90)
 gen highClass = (incin2 >= highCutoff)
 label variable highClass "Top 10\%"
 
