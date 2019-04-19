@@ -73,7 +73,7 @@
 	
 	The focus of this paper is to determine whether increases in debt lead students to change their fields of study and eventually career choices. While prior work in the literature has largely focused on policy changes within a single institution, I hope to create a more representative picture of the nation as a whole using data from the National Longitudinal Survey of Youth. In 2006, the United States raised the cap for Stafford Loans for freshmen and sophomores, creating a natural experiment wherein the students before the policy change were more limited in their access to debt than the students after the shift.
 	
-	I find that student debt has negligible impact on incomes two years after graduation. However, students with more student debt are significantly less likely to work in public service positions such as education and social work. These career choice findings are in line with \textcite{rothstein2011} who also find reduced engagement in public service sectors. Also in line with Rothstein and Rouse, I find this impact is not present in other sectors; student debt appears to have no impact on students' choices to enter finance, STEM, or the humanities. 
+	I find that student debt has negligible impact on incomes two years after graduation. However, students with more student debt are significantly less likely to work in public service positions such as education and social work. These career choice findings are in line with \textcite{rothstein2011} who also find reduced engagement in public service sectors. Also in line with Rothstein and Rouse, I find this impact is not present in other sectors; student debt appears to have no impact on students' choices to enter finance, STEM, or the humanities. This appears to be in line with a model I propose where given a greater credit constraint, students substitute away from careers with non-monetary benefits towards those with a greater focus on remuneration. If those in public service receive some sort of non-monetary benefit from serving in an altruistic career, this shift in preference could negatively impact society utility as those positive externalities are lost when students migrate away from these public service fields.
 	
 	\section{Literature Review}
 	
@@ -83,9 +83,9 @@
 
 	\section{Structural Model}
 
-	Consider a two-stage consumption model. Individuals consume in period one entirely through borrowing against period two earnings, labeled as $B$. In period one agents choose to pursue a higher-paying career path $H$ or a lower-paying career path $L$. Consumption in period two is composed of two parts, less the quantity borrowed in period one. First, $C$, non-monetary utility from the chosen career path; consider the value of altruism for working in a non-profit or the value of expression for working as an artist. The second consumption parameter in time two is monetary salary, denoted $H$ and $L$ for the higher- and lower-paying careers respectively.
+	I propose a model of career choice and loan repayment similar to that developed by \textcite{abraham2018}. Consider a two-stage consumption model. Individuals consume in period one entirely through borrowing against period two earnings, labeled as $B$. In period one agents choose to pursue a higher-paying career path $H$ or a lower-paying career path $L$. Consumption in period two is composed of two parts, less the quantity borrowed in period one. First, $C$, non-monetary utility from the chosen career path; consider the value of altruism for working in a non-profit or the value of expression for working as an artist. The second consumption parameter in time two is monetary salary, denoted $H$ and $L$ for the higher- and lower-paying careers respectively.
 	
-	When taking career $L$, there is a risk $p$ of defaulting on your loan, in which case your monetary compensation for the period is reduced to zero, leaving only non-monetary compensation $C$. We assume that \emph{ceteris paribus} larger loans are more difficult to repay; thus, $p$ is a function increasing in $B$. Finally, there is some discount rate $r$ for the money borrowed in period one. This $r$ will favor the present, as we are examining interest-free loans for our students. This yields the following two utility functions for a risk-neutral consumer: 
+	Creditors are guaranteed to pay back their loan on career path $H$ due to their higher income. When taking career $L$, there is a risk $p$ of defaulting on your loan, in which case your monetary compensation for the period is reduced to zero, leaving only non-monetary compensation $C$. We assume that \emph{ceteris paribus} larger loans are more difficult to repay; thus, $p$ is a function increasing in $B$. Finally, there is some discount rate $r$ for the money borrowed in period one. This $r$ will favor the present, as we are examining interest-free loans for our students. This yields the following two utility functions for a risk-neutral consumer: 
 	\begin{align}
 	\mathbb{E}\left[U_H(B)\right] &= B + H - (1 - r)B \label{highu}\\
 	\mathbb{E}\left[U_L(B)\right] &= B + C + p(B) \times L - (1 - r)B \label{lowu}
@@ -114,6 +114,8 @@
 		\label{struc}
 		\includegraphics[width = 0.8\textwidth]{Images/ModelSketch}
 	\end{figure}
+
+	This model provides a concrete prediction regarding agents' behavior under a positive credit shock. In the absence of other factors, students who receive access to an increased line of credit should pivot \emph{away} from occupations with non-pecuniary benefits (those with higher $C$) towards those which are more lucrative. Depending on the context for $C$, this could have important societal consequences; for example, if $C$ is some sort of ``warm glow'' effect from helping others, this could be net detrimental to society as those positive externalities are lost when students choose career $H$ over career $L$. 
 
 	\section{HERA and Subsidized Student Loans}
 	
