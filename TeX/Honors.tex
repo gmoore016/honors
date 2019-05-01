@@ -190,13 +190,16 @@
 	\begin{table}
 		\centering
 		\caption{Comparison of race before and after policy change}
-		\begin{tabular}{lrrrrrrrr}
-			\input{../Analysis/Tables/Output/raceFit.tex}			
-		\end{tabular}
+		\resizebox{\textwidth}{!}{
+			\begin{tabular}{lrrrrrrrr}
+				\input{../Analysis/Tables/Output/raceFit.tex}			
+			\end{tabular}
+		}
 		\label{racecomp}
 	\end{table}
 
 	\begin{table}
+		\small
 		\centering
 		\caption{Comparison of sex before and after policy change}
 		\begin{tabular}{lrrrrrr}
@@ -208,9 +211,11 @@
 	\begin{table}
 		\centering
 		\caption{Comparison of region before and after policy change}
-		\begin{tabular}{lrrrrrrrrrr}
-			\input{../Analysis/Tables/Output/regionFit.tex}
-		\end{tabular}
+		\resizebox{\textwidth}{!}{
+			\begin{tabular}{lrrrrrrrrrr}
+				\input{../Analysis/Tables/Output/regionFit.tex}
+			\end{tabular}
+		}
 		\label{regioncomp}
 	\end{table}
 }
@@ -275,8 +280,10 @@
 	 %Results of our various first stages
 	 \begin{table}
 	 	\centering
-	 	\caption{Results of first stage regression}	 	
-	 	\input{\regs tripdif.tex}
+	 	\caption{Results of first stage regression}	 
+	 	\resizebox{\textwidth}{!}{	
+		 	\input{\regs tripdif.tex}
+		 }
 	 	\label{firststage}
 	 \end{table}
 	
@@ -334,7 +341,9 @@
 	\begin{table}
 		\centering
 		\caption{Naive regression (table \ref{naive2}) full results}
-		\input{\regs naivefull.tex}
+		\resizebox{\textwidth}{!}{
+			\input{\regs naivefull.tex}
+		}
 		\label{naivefull}
 	\end{table}
 
