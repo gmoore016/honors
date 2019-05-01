@@ -28,7 +28,7 @@
 \pagestyle{fancy}
 \lhead{Honors Thesis (Draft)}
 \chead{Gideon Moore}
-\rhead{April 2019}
+\rhead{May 2019}
 
 \usepackage{subcaption} %For subfigures
 
@@ -57,7 +57,7 @@
 	
 	\section{Introduction}
 	
-	From 2000 to 2015, total undergraduate enrollment rose by 30\% from 13.2 to 17 million students \parencite{mcfarland2017}. Meanwhile, the real quantity of outstanding student debt tripled from \$340 billion to more than \$1.3 trillion over the same period \parencite{feiveson2018}.
+	The returns to a college degree are astronomical; in 2014 the annual return to a college degree was more than twice that of standard investment vehicles such as stocks. That return was rising partially due to increasing wages of the skilled, but moreso due to falling wages for those lacking a degree \parencite{abel2014}. Partially in response to this high return, from 2000 to 2015 total undergraduate enrollment rose by 30\% from 13.2 to 17 million students \parencite{mcfarland2017}. These returns only continue to rise despite rising costs of tuition; from 1995 to 2015, the real cost of a college degree rose by 65\% \parencite{doe2016}. Because tuition continues to rise, many Americans are expected to take out loans in order to afford a degree. This has caused student debt in this country to balloon, tripling in real terms from \$340 billion to more than \$1.3 trillion between 2000 and 2015 \parencite{feiveson2018}. Today, student loans are the second largest source of household debt, falling only behind mortgages \parencite{dynarski2015}. 
 	
 	Traditional models of investment would suggest financing methodology would not change consumer behavior--for a given student, in the absence of credit constraints, whether they finance their education with debt or existing capital would not change their consumption decisions. However, empirically this is not the case. A survey by Nellie Mae suggests that one in six loan recipients have changed their career plans due to their debt obligation, though how those plans changed was not specified in the survey \parencite{baum2003}. This survey contained only those who had not yet defaulted on their debt; as defaulters were heavily affected by debt, the true number is likely greater. \textcite{minicozzi2005} finds that men who take on more undergraduate debt take jobs with higher initial wages but lower year-over-year wage growth, again suggesting a real impact of what should be a purely accounting-based change. 
 	
@@ -94,7 +94,9 @@
 	\end{align}
 	
 	Note that students choosing career $L$ over career $H$ suggests that equation \ref{highu} is greater than equation \ref{lowu}. Some algebra yields the following equivalence relationship: 
-	$$\mathbb{E}\left[U_L(B)\right] - \mathbb{E}\left[U_H(B)\right] > 0 \iff p(B) > \frac{H - C}{L} \label{choicecon}$$ 
+	\begin{equation}
+	\mathbb{E}\left[U_L(B)\right] - \mathbb{E}\left[U_H(B)\right] > 0 \iff p(B) > \frac{H - C}{L} \label{choicecon}
+	\end{equation} 
 	Thus, there are five factors that could shift students from $H$ to $L$:
 	\begin{itemize}
 		\singlespacing
@@ -117,7 +119,7 @@
 		\includegraphics[width = 0.8\textwidth]{Images/ModelSketch}
 	\end{figure}
 
-	This model provides a concrete prediction regarding agents' behavior under a positive credit shock. In the absence of other factors, students who receive access to an increased line of credit should pivot \emph{away} from occupations with non-pecuniary benefits (those with higher $C$) towards those which are more lucrative. Depending on the context for $C$, this could have important consequences for a social planner. For example, \textcite{benshem1991} suggest that many in ``helping professions'' such as education, rehabilitation, and social work, employees choose their careers due to valuing altruism over other choice factors. In this case, altruism is the $C$ which drives students to choose $L$; a social planner, then, would wish to preserve this $C$ in order to maintain the positive externalities which would be lost if those students instead chose career path $H$.
+	This model provides a concrete prediction regarding agents' behavior under a positive credit shock. In the absence of other factors, students who receive access to an increased line of credit should pivot \emph{away} from occupations with non-pecuniary benefits (those with higher $C$) towards those which are more lucrative. Depending on the context for $C$, this could have important consequences for a social planner. For example, \textcite{benshem1991} suggest that many in ``helping professions'' such as education, rehabilitation, and social work, employees choose their careers due to valuing altruism over other choice factors. Similarly, \textcite{hanson1995} found that social workers frequently ranked ``contributing to society'' and ``effecting social change'' above private benefits such as ``Job Security'' or ``Good Working Conditions.'' In this case, altruism is the $C$ which drives students to choose $L$; a social planner, then, would wish to preserve this $C$ in order to maintain the positive externalities which would be lost if those students instead chose career path $H$.
 
 	\section{HERA and Subsidized Student Loans}
 	
@@ -175,7 +177,14 @@
 	
 	Unfortunately, while the NLSY does contain information about each student's debt level, it does not break down these loans by type. Thus, from the given data I cannot tell how much debt is subsidized through the Stafford program and how much is unsubsidized. I overcome this hurdle by using other background characteristics of the students to impute how much subsidized debt they were offered based on their expected family contribution (or EFC) from the 2007 Free Application for Federal Student Aid (or FAFSA) \parencite{doe2007}. If students choose to take subsidized debt over unsubsidized debt, then I can assume any quantity of debt below their calculated need must be subsidized, as the government offers subsidized debt to students up to their need or the program cap, whichever is lower. Therefore, by calculated the EFC, I can impute how much subsidized debt students could access.
 	
-	The FAFSA bases your household's expected family contribution, and therefore your debt allotment, on mother's age, number of siblings, household income, and household assets. While most of these are easily accessible in the NLSY dataset, respondents are only surveyed about their assets every four years, and only a subset of the survey participants are surveyed. I take two primary steps to rectify this. First, for those subjects who were surveyed about their assets, we extend the last known value into the missing year. For example, given asset data is missing in 2006, we use the subject's survey value for 2004. Second, for those parents with no existing asset data, we infer assets by performing the following regression on those whose asset data we do possess: $$\mbox{Assets} = \beta_0 + \beta_1 \mbox{Income} + \beta_2 \mbox{Income}^2 + \beta_3 \mbox{Age} + \beta_4 \mbox{Children} + \beta_5 \mbox{Year} + \vec{\beta} \vec{\mbox{Demographics}} + \epsilon$$ Since the subjects of the subsurvey were also chosen to be representative of the population, I feel comfortable that we are not extrapolating this data too far. I choose to let income be quadratic to reflect increasing marginal propensity to save among the wealthy. This regression yields the results visible in table \ref{assetTab}.
+	The FAFSA bases your household's expected family contribution, and therefore your debt allotment, on mother's age, number of siblings, household income, and household assets. While most of these are easily accessible in the NLSY dataset, respondents are only surveyed about their assets every four years, and only a subset of the survey participants are surveyed. I take two primary steps to rectify this. First, for those subjects who were surveyed about their assets, we extend the last known value into the missing year. For example, given asset data is missing in 2006, we use the subject's survey value for 2004. Second, for those parents with no existing asset data, we infer assets by performing the following regression on those whose asset data we do possess: 
+	\begin{equation}
+	\begin{aligned}
+	\mbox{Assets} = \beta_0 &+ \beta_1 \mbox{Income} + \beta_2 \mbox{Income}^2 + \beta_3 \mbox{Age} \\
+	&+ \beta_4 \mbox{Children} + \beta_5 \mbox{Year} + \vec{\beta} \vec{\mbox{Demographics}} + \epsilon
+	\end{aligned}
+	\end{equation}
+	Since the subjects of the subsurvey were also chosen to be representative of the population, I feel comfortable that we are not extrapolating this data too far. I choose to let income be quadratic to reflect increasing marginal propensity to save among the wealthy. This regression yields the results visible in table \ref{assetTab}.
 	
 	\begin{table}
 		\centering
@@ -184,7 +193,7 @@
 		\label{assetTab}
 	\end{table}
 
-	To ensure our policy shift is not being confounded with a shifting student body, we must ensure the composition of students in our sample is constant before and after the policy change in 2007. Fortunately, our samples before and after the policy change appear to be comparable across a variety of dimensions. The distributions of students before and after the policy change are visible by race in table \ref{racecomp}, sex in table \ref{sexcomp}, and region in table \ref{regioncomp}. Based on the $\chi^2$ values of these distributions, we can be relatively confident the composition of the student body before and after the treatment is comparable across these factors. In addition, I conduct a two-sample t-test comparing (inflation-adjusted) parental incomes across the groups. Before 2008, there are 271 observations with a mean parental income of \$67,945. From 2008 on there are 484 observations with a mean parental income of \$74,806. Testing whether the means of these two groups are the same yields a $t$-statistic of 1.40 ($p = 0.16$). Thus, we fail to reject the hypothesis real parental income in the sample remained constant before and after the policy shift. 
+	To ensure our policy shift is not being confounded with a shifting student body, we must ensure the composition of students in our sample is constant before and after the policy change in 2007. Fortunately, our samples before and after the policy change appear to be comparable across a variety of dimensions. The distributions of students before and after the policy change are visible by race in table \ref{racecomp}, sex in table \ref{sexcomp}, and region in table \ref{regioncomp}. Based on the $\chi^2$ values of these distributions, we can be relatively confident the composition of the student body before and after the treatment is comparable across these factors. In addition, I conduct a two-sample t-test comparing (inflation-adjusted) parental incomes across the groups. Before 2008, there are 271 observations with a mean parental income of \$67,945. From 2008 on there are 484 observations with a mean parental income of \$74,806. Testing whether the means of these two groups are the same yields a $t$-statistic of 1.40 ($p = 0.16$). Thus, we fail to reject the hypothesis real parental income in the sample remained constant before and after the policy shift. These results are consistent with the literature on the topic; \textcite{dynarski2015} claims that despite the lowered cost of college from the interest subsidy, interest-based incentives are not ``salient.'' Because the subsidized interest is not visible at the ``moment of decision,'' students do not take it into account when making college enrollment decisions. 
 	
 {
 	\begin{table}
@@ -264,11 +273,14 @@
 	As an initial test of the impact of the policy, I regress loans on students' need and whether they are at the cap both before and after the policy shift. If my instrument is valid, we would expect students after the policy shift to experience greater increases in debt based on their level of need given they are at the previous cap for demonstrated need. The results of this initial regression are visible in columns (1) and (2) respectively of table \ref{firststage}. In this specification the coefficient for need above the cap appears more positive after the policy change than before, as expected. 
 	
 	In my more rigorous model, I perform a triple difference approach, interacting $atCap$ with students' need and policy shift. This allows me to use both students before the policy shift (who experience no policy impact) and students after the policy shift who are below the threshold (and thus have $atCap = 0$) as controls for our cohort of interest. Thus, my final model for the first stage is as follows: 
-	\begin{align*}
-	debt_i = \delta_0 &+ \delta_1 need + \delta_2 atCap + \delta_3 atCap \times need + \delta_4 policyImpact + \delta_5 atCap \times policyImpact\\
-	 &+ \delta_6 policyImpact \times need + \delta_7 atCap \times policyImpact \times need + \delta_8 fallSemester \\
-	 &+ \vec{\delta} i.year + \vec{\gamma} \vec{demographics}^T
-	 \end{align*} 
+	\begin{equation}
+	\begin{aligned}
+	debt_i = \delta_0 &+ \delta_1 need + \delta_2 atCap + \delta_3 atCap \times need + \delta_4 policyImpact \\
+	&+ \delta_5 atCap \times policyImpact + \delta_6 policyImpact \times need \\
+	&+ \delta_7 atCap \times policyImpact \times need \\
+	&+ \delta_8 fallSemester + \vec{\delta} i.year + \vec{\gamma} \vec{demographics}^T
+	 \end{aligned}
+	 \end{equation} 
 	 
 	 The results of this model are given in table \ref{firststage} with time and demographic effects omitted. Given our model is correct, our coefficient of interest is $\delta_7$, the impact of being in the treated cohort after the policy change in proportion to demonstrated need. An interpretation of each interaction coefficient is available in table \ref{coefInterp}.
 	 
@@ -306,9 +318,14 @@
 	
 	\section{Results}
 	
-	We will begin by estimating the likelihood of several types of careers. This will be done in the form of a probit model: either a student chooses to work in the relevant field, or they do not. Due to the nonlinearity of the tobit model used in the first stage, we use the estimates of debt from that equation as an instrument in this model (called $\hat{loan}$). The form of the regression is as follows: $$\mathbb{P}\left(major_i = majType\right) = \Phi\left(\beta_0 + \beta_1 \hat{loan_i} + \beta_2 year + \vec{\beta}\vec{demographics}^T_i\right)$$
+	We will begin by estimating the likelihood of several types of careers. This will be done in the form of a probit model: either a student chooses to work in the relevant field, or they do not. Due to the nonlinearity of the tobit model used in the first stage, we use the estimates of debt from that equation as an instrument in this model (called $\hat{loan}$). The form of the regression is as follows: 
+	\begin{equation}
+	\mathbb{P}\left(major_i = majType\right) = \Phi\left(\beta_0 + \beta_1 \hat{loan_i} + \beta_2 year + \vec{\beta}\vec{demographics}^T_i\right)
+	\end{equation}
 	
-	The abbreviated results of these regressions are visible in table \ref{majChoice}. Be aware that all regression tables in this section are shortened to the coefficients of interest; full results are available in the appendix. As consistent with Rothstein and Rouse's findings, students with more debt are less likely to choose a major in public service, in this case defined to be teaching or social work. These results are visible in regression (1). Also consistent with their findings, people are \emph{not} significantly more likely to go into more lucrative fields such as business, economics, engineering, or computer science, as visible in regressions (2) and (3). 
+	The abbreviated results of these regressions are visible in table \ref{majChoice}. Be aware that all regression tables in this section are shortened to the coefficients of interest; full results are available in the appendix. As consistent with Rothstein and Rouse's findings, students with more debt are less likely to choose a major in public service, in this case defined to be teaching or social work. These results are visible in regression (1). When converted to marginal effects, this suggests that every extra thousand dollars of debt a student receives lowers their probability of entering public service by roughly 5.5\%. Also consistent with Rothstein and Rouse's findings, people are \emph{not} significantly more likely to go into more lucrative fields such as business, economics, engineering, or computer science, as visible in regressions (2) and (3). 
+	
+	Also interesting is that I find needier students are more likely to work in public service as well. when converted to marginal effects, an extra thousand dollars of demonstrated need raises the probability of working in a public service position by 0.3\%. However, need does not appear to have impacts on the likelihood of entering other fields.
 
 	\begin{table}
 		\centering
@@ -328,7 +345,13 @@
 	
 	\section{Discussion and Conclusions}
 	
-	Contrary to the existing literature, I find no relationship between student debt and career income. However, reinforcing findings from other studies, I do find that students with debt are significantly less likely to enter public service industries such as teaching. Given these are occupations which traditionally provide positive externalities to their communities, I would describe this as a negative byproduct of higher education's focus on student loans for education financing. \textcite{abraham2018} suggest using income based repayment as a means of mitigating the risks of student loan default. Depending on the mechanism through which debt impacts students' choices, this could be an effective method for correcting this distortion.
+	Contrary to the existing literature, I find no relationship between student debt and career income. However, reinforcing findings from other studies, I do find that students with debt are significantly less likely to enter public service industries such as teaching, with the rate declining roughly 5\% per extra thousand dollars of debt. Given these are occupations which frequently provide positive externalities to their communities as shown in \textcite{benshem1991}, I would describe this as a negative byproduct of higher education's focus on student loans for education financing.
+	
+	However, to advocate against borrowing for education without providing an alternative is foolhardy; as seen in \textcite{abel2014}, college is increasingly necessary for a middle class existence in the United States. Thus, if we hope to both maintain an educated workforce and allow for social mobility, we must find a better solution which subjects students to less risk regarding loan default. While loan subsidies reduce the quantity of a loan, therefore reducing the number of payments required and thus the probability of default, it does so for all borrowers, not just those who would struggle to repay. Further, loan payments are reduced well into the borrower's life cycle when earnings are at their peak. This means that those who have repaid their loans until the point where the interest subsidy matters would likely have been able to continue to pay. Thus, interest rate subsidies are a far more costly tool than necessary when examining the subject of loan repayment \parencite{dynarski2015}.
+	
+	\textcite{abraham2018} suggest using income based repayment (or IBR) as a means of mitigating the risks of student loan default. Returning to the model from section 3, IBR raises the cost of borrowing for those on career path $H$, as they must pay more of their income, while lowering the cost for those on path $L$ since the risk of default is significantly reduced. Both lowering the probability of default and lowering the expected earnings of $H$ push more students towards career path $L$. If, as suggested by \textcite{benshem1991} and \textcite{hanson1995}, careers with high $C$ are more likely to be altruism focused, then IBR could significantly boost positive externalities targeted towards those in need.  Oregon and Michigan's ``Pay It Forward'' programs are already exploring these IBR programs at a state level. However, this is also not a perfect scheme. Similar to any insurance market, IBR is a target for adverse selection. If only students expecting remarkably low earnings take on IBR loans, then the lender will very rarely be repaid the full amount \parencite{dynarski2015}. One solution to this problem would be to find a way to pool high- and low-earners into individual lenders to that high earners repaying more than their loan can balance out the failed payments of low earners.
+	
+	
 	\clearpage
 	\appendix
 	\section{Extended Regressions}
