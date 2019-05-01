@@ -259,7 +259,7 @@
 	
 	The second difficulty this model faces is that it is difficult to determine which students are ``treated,'' as not all students observed after the policy change received the additional credit. Since subsidized loans are targeted at low-income families, only students whose anticipated need is greater than the existing cap were subject to this increased credit line. 
 	
-	Anticipated need is equal to students' tuition payments minus their EFC. While I cannot observe students' true EFC, I can calculate an approximation using the FAFSA, as outlined in section 4. Then, using this approximation, we are able to generate a measure of need and so determine who is affected by the policy shift. We then generate a dummy $atCap$ equal to 1 if a student's need is greater than the old borrowing limit and so are in our sample. 
+	Anticipated need is equal to students' tuition payments minus their EFC. While I cannot observe students' true EFC, I can calculate an approximation using the FAFSA, as outlined in section 4. Then, using this approximation, we are able to generate a measure of need and so determine who is affected by the policy shift. We then generate a dummy $atCap$ equal to 1 if a student's need is greater than the old borrowing limit. This would imply treatment by the policy given they attend school 2008 or later.
 	
 	As an initial test of the impact of the policy, I regress loans on students' need and whether they are at the cap both before and after the policy shift. If my instrument is valid, we would expect students after the policy shift to experience greater increases in debt based on their level of need given they are at the previous cap for demonstrated need. The results of this initial regression are visible in columns (1) and (2) respectively of table \ref{firststage}. In this specification the coefficient for need above the cap appears more positive after the policy change than before, as expected. 
 	
@@ -275,7 +275,7 @@
 	 %Results of our various first stages
 	 \begin{table}
 	 	\centering
-	 	\caption{Results of first stage regression}	 
+	 	\caption{Results of first stage regression of loans on policy impact}	 
 	 	\resizebox{\textwidth}{!}{	
 		 	\input{\regs tripdif.tex}
 		 }
