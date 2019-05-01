@@ -28,13 +28,13 @@ eststo: tobit adjloan c.adjneed##atCap if polImpact & !missing(polImpact), ll
 eststo: tobit adjloan atCap##c.adjimp##c.adjneed i.year i.fall i.race i.sex i.region if year < 14, ll vce(cluster mid)
 esttab using ../Output/tripdif.tex, nobaselevels booktabs style(tex) ///
 	label keep(*atCap* *adjimp* *adjneed*) star(* 0.1 ** 0.05 *** 0.01) ///
-	scalars("chi2 $\chi^2$") addn("Standard errors clustered by mother." "Regression performed on students from 2000 to 2012" "Controls for year, semester, race, sex, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
+	scalars("chi2 $\chi^2$") addn("Standard errors clustered by mother." "Regression performed on students graduating between 2000 and 2012" "Controls for year, semester, race, sex, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
 test 1.atCap#c.adjimp 1.atCap#c.adjimp#c.adjneed
 
 //Full version for appendix
 esttab using ../Output/tripdiffull.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
-	addn("Standard errors clustered by mother." "Regression performed on students from 2000 to 2012") replace
+	addn("Standard errors clustered by mother." "Regression performed on students graduating between 2000 and 2012") replace
 	
 eststo clear
 //Save predicted values to use as instrument
@@ -54,11 +54,11 @@ eststo: probit humMaj adjloan adjneed year i.sex i.race i.region, vce(cluster mi
 
 esttab using ../Output/naive.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
-	addn("Major type used as dependent variable in column title" "Standard errors clustered by mother" "Regression performed on students from 2000 to 2012" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
+	addn("Major type used as dependent variable in column title" "Standard errors clustered by mother" "Regression performed on students graduating between 2000 and 2012" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
 	
 esttab using ../Output/naivefull.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
-	addn("Major type used as dependent variable in column title" "Standard errors clustered by mother" "Regression performed on students from 2000 to 2012") replace
+	addn("Major type used as dependent variable in column title" "Standard errors clustered by mother" "Regression performed on students graduating between 2000 and 2012") replace
 
 //Regression of outcomes on debt using instrument
 eststo clear
@@ -70,11 +70,11 @@ eststo: ivprobit humMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.regio
 
 esttab using ../Output/majChoice.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
-	addn("Major type used as dependent variable in column title" "Standard errors clustered by mother" "Regression performed on students from 2000 to 2012" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
+	addn("Major type used as dependent variable in column title" "Standard errors clustered by mother" "Regression performed on students graduating between 2000 and 2012" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
 	
 esttab using ../Output/majChoicefull.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
-	addn("Major type used as dependent variable in column title" "Standard errors clustered by mother" "Regression performed on students from 2000 to 2012") replace
+	addn("Major type used as dependent variable in column title" "Standard errors clustered by mother" "Regression performed on students graduating between 2000 and 2012") replace
 
 eststo clear
 	
@@ -87,10 +87,10 @@ eststo: ivprobit highClass (adjloan = adjloanHat) adjneed year i.sex i.race i.re
 
 esttab using ../Output/income.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
-	addn("Standard errors clustered by mother" "Regression performed on students from 2000 to 2012" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
+	addn("Standard errors clustered by mother" "Regression performed on students graduating between 2000 and 2012" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
 	
 esttab using ../Output/incomefull.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$") ///
-	addn("Standard errors clustered by mother" "Regression performed on students from 2000 to 2012") replace
+	addn("Standard errors clustered by mother" "Regression performed on students graduating between 2000 and 2012") replace
 
 eststo clear
