@@ -217,20 +217,21 @@
 	
 	\section{Statistical Model}
 	
-	Our data set is a collection of seniors surveyed on even years between 2000 and 2014. If possible, we would hope to model some career outcome $Y$ according to the following equation: 
+	My data set is a collection of seniors surveyed on even years between 2000 and 2014. If possible, I would hope to model some career outcome $Y$ according to the following equation: 
 	\begin{equation}
 	Y = \beta_0 + \beta_1 \mbox{debt}_{it} + \vec{\xi}^T \vec{\mbox{demographics}}_i + \epsilon_{it} \label{naiveeq}
 	\end{equation} 
-	In this model, $Y$ could take one of several values, such as major choice, career choice, or salary. The results of this regression using several types of majors are separately visible in table \ref{naive2}. 
+	In this model, $Y$ could take one of several values, such as major choice, career choice, or salary. The results of this regression using several types of majors are separately visible in table \ref{naive2}. I base my major groups off of those used in \textcite{rothstein2011}. Here a ``public service'' major is defined to be working in either education or social work; while Rothstein and Rouse also include work in non-profits, our data set does not include designations on employer type. However, given they attribute their effects largely to the education sector, and the majority of their public service sector is involved in education, I argue my designation is comparable. ``Finance'' majors are defined to be students majoring in Economics, Business, or Home Economics, as the NLSY groups finance majors as a form of business major and several Finance programs are subdepartments of Economics. Again following Rothstein and Rouse's specification, ``lucrative'' majors are finance majors as well as particularly well-compensated STEM fields, specifically Engineering and Computer Science. Finally, ``humanities'' majors are defined to be Language, Anthropology, Philosophy, Theology, Art, and English. I show that under the naive specification, loans appear completely irrelevant to career choice in all  the above fields.
 	
+	My first model will place major choice on the left hand side. I believe this to be the most novel outcome of interest, as few datasets have this level of resolution on their observations. Here I can place majors into several bins, and then run a probit regression on individual bins to determine the effect of the policy. The specifications of these bins can be found in the appendix, and we will adjust these bins later as a form of robustness  testing. The distribution of students broken down by major is visible in figure \ref{majDist}.
+	
+		
 	\begin{table}
 		\centering
-		\caption{Results of the naive regression}
+		\caption{Results of the naive regression for career choice}
 		\input{\regs naive.tex}
 		\label{naive2}
 	\end{table}
-	
-	Our first model will place major choice on the left hand side. I believe this to be the most novel outcome of interest, as few datasets have this level of resolution on their observations. Here I can place majors into several bins, and then run a probit regression on individual bins to determine the effect of the policy. The specifications of these bins can be found in the appendix, and we will adjust these bins later as a form of robustness  testing. The distribution of students broken down by major is visible in figure \ref{majDist}.
 
 	\begin{figure}
 		\centering
@@ -239,9 +240,9 @@
 		\label{majDist}
 	\end{figure}
 	
-	Our second model will be examining students' career outcomes. This is the outcome most widely researched in the literature, such as in \textcite{rothstein2011} and \textcite{field2009}. Similar to the regression above, this would use a series of probit models to examine whether increased debt pushes students into certain categories of career.
+	My second model will be examining students' career outcomes. This is the outcome most widely researched in the literature, such as in \textcite{rothstein2011} and \textcite{field2009}. Similar to the regression above, this would use a series of probit models to examine whether increased debt pushes students into certain categories of career.
 	
-	Our final model will be directly examining students' final incomes. This is the most direct approach to measuring the impact of debt on choices; however, it may ignore factors such as career risk which would not be visible in simple income data.
+	My final model will be directly examining students' final incomes. This is the most direct approach to measuring the impact of debt on choices; however, it may ignore factors such as career risk which would not be visible in simple income data.
 	
 	As outlined in section 4, it is likely there exists endogeneity between loans and career outcomes; therefore, we perform a two-stage least squares regression using exposure to the HERA credit increase as our instrumental variable in order to pseudo-randomly assign debt to our students. 
 	
@@ -305,7 +306,7 @@
 	
 	We will begin by estimating the likelihood of several types of careers. This will be done in the form of a probit model: either a student chooses to work in the relevant field, or they do not. Due to the nonlinearity of the tobit model used in the first stage, we use the estimates of debt from that equation as an instrument in this model (called $\hat{loan}$). The form of the regression is as follows: $$\mathbb{P}\left(major_i = majType\right) = \Phi\left(\beta_0 + \beta_1 \hat{loan_i} + \beta_2 year + \vec{\beta}\vec{demographics}^T_i\right)$$
 	
-	The abbreviated results of these regressions are visible in table \ref{majChoice}. Bin definitions are borrowed from \textcite{rothstein2011}; specifications for which degrees are grouped into each bin are visible in table \ref{majGroups} in the appendix. Be aware that all regression tables in this section are shortened to the coefficients of interest; full results are available in the appendix. As consistent with Rothstein and Rouse's findings, students with more debt are less likely to choose a major in public service, in this case defined to be teaching or social work. These results are visible in regression (1). Also consistent with their findings, people are \emph{not} significantly more likely to go into more lucrative fields such as business, economics, engineering, or computer science, as visible in regressions (2) and (3). 
+	The abbreviated results of these regressions are visible in table \ref{majChoice}. Be aware that all regression tables in this section are shortened to the coefficients of interest; full results are available in the appendix. As consistent with Rothstein and Rouse's findings, students with more debt are less likely to choose a major in public service, in this case defined to be teaching or social work. These results are visible in regression (1). Also consistent with their findings, people are \emph{not} significantly more likely to go into more lucrative fields such as business, economics, engineering, or computer science, as visible in regressions (2) and (3). 
 
 	\begin{table}
 		\centering
@@ -351,21 +352,6 @@
 		\caption{Major selection (table \ref{majChoice}) full results}
 		\input{\regs majChoicefull.tex}
 		\label{majChoiceFull}
-	\end{table}
-
-	\begin{table}
-		\centering
-		\caption{Major group definitions as used in \ref{majChoice} and \ref{majChoiceFull}. Groups borrowed from \textcite{rothstein2011}.}
-		\begin{tabular}{lr}
-			\toprule
-			Major category & Included majors \\
-			\midrule 
-			Public Service & Education and social work \\
-			Finance & Business, Economics, Home Economics \\
-			Lucrative & Business, Economics, Home Economics, Engineering, Computer Science \\
-			Humanities & Language, Anthropology, Philosophy, Theology, History, Art, English \\ \bottomrule
-		\end{tabular}
-		\label{majGroups}
 	\end{table}
 
 	\begin{table}

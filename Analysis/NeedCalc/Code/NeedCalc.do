@@ -21,7 +21,7 @@ eststo clear
 eststo: reg adjassets adjparinc adjparinc2 mAge sibs year i.race i.region if year < 14, cluster(mid)
 esttab using ../Output/assethat.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("r2 $ R^2$") replace ///
-	addn("Standard errors clustered by mother")
+	addn("Standard errors clustered by mother" "Regression performed on students from 2000 to 2012")
 predict adjassetshat
 replace adjassets = adjassetshat if missing(adjassets)
 replace assets = adjassets * cpi / 100 if missing(assets)
