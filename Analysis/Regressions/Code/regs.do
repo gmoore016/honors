@@ -1,5 +1,9 @@
 use ../Input/Need.dta, clear
 
+replace adjloan = adjloan / 1000
+replace adjneed = adjneed / 1000
+replace adjimp = adjimp / 1000
+
 /*
 
 FIRST STAGES
