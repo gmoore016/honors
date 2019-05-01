@@ -226,30 +226,22 @@
 	\begin{equation}
 	Y = \beta_0 + \beta_1 \mbox{debt}_{it} + \vec{\xi}^T \vec{\mbox{demographics}}_i + \epsilon_{it} \label{naiveeq}
 	\end{equation} 
-	In this model, $Y$ could take one of several values, such as major choice, career choice, or salary. The results of this regression using several types of majors are separately visible in table \ref{naive2}. I base my major groups off of those used in \textcite{rothstein2011}. Here a ``public service'' major is defined to be working in either education or social work; while Rothstein and Rouse also include work in non-profits, our data set does not include designations on employer type. However, given they attribute their effects largely to the education sector, and the majority of their public service sector is involved in education, I argue my designation is comparable. ``Finance'' majors are defined to be students majoring in Economics, Business, or Home Economics, as the NLSY groups finance majors as a form of business major and several Finance programs are subdepartments of Economics. Again following Rothstein and Rouse's specification, ``lucrative'' majors are finance majors as well as particularly well-compensated STEM fields, specifically Engineering and Computer Science. Finally, ``humanities'' majors are defined to be Language, Anthropology, Philosophy, Theology, Art, and English. I show that under the naive specification, loans appear completely irrelevant to career choice in all  the above fields.
+	In this model, $Y$ could take one of several values, such as major choice, career choice, or salary. 
 	
-	My first model will place major choice on the left hand side. I believe this to be the most novel outcome of interest, as few datasets have this level of resolution on their observations. Here I can place majors into several bins, and then run a probit regression on individual bins to determine the effect of the policy. The specifications of these bins can be found in the appendix, and we will adjust these bins later as a form of robustness  testing. The distribution of students broken down by major is visible in figure \ref{majDist}.
+	My first model will place major choice on the left hand side. I believe this to be the most novel outcome of interest, as few datasets have this level of resolution on their observations. Here I can place majors into several bins, and then run a probit regression on individual bins to determine the effect of the policy. I base my major groups off of those used in \textcite{rothstein2011}. Here a ``public service'' major is defined to be working in either education or social work; while Rothstein and Rouse also include work in non-profits, our data set does not include designations on employer type. However, given they attribute their effects largely to the education sector, and the majority of their public service sector is involved in education, I argue my designation is comparable. ``Finance'' majors are defined to be students majoring in Economics, Business, or Home Economics, as the NLSY groups finance majors as a form of business major and several Finance programs are subdepartments of Economics. Again following Rothstein and Rouse's specification, ``lucrative'' majors are finance majors as well as particularly well-compensated STEM fields, specifically Engineering and Computer Science. Finally, ``humanities'' majors are defined to be Language, Anthropology, Philosophy, Theology, Art, and English.
 	
-		
+	My second model will be directly examining students' final incomes. This is the most direct approach to measuring the impact of debt on choices; however, it may ignore factors such as career risk which would not be visible in simple income data.
+	
+	The results of this naive model using several types of majors as dependent variables are visible in table \ref{naive2}. I show that under the naive specification, loans appear completely irrelevant to career choice in all fields.
+	
 	\begin{table}
 		\centering
 		\caption{Results of the naive regression for career choice}
 		\input{\regs naive.tex}
 		\label{naive2}
 	\end{table}
-
-	\begin{figure}
-		\centering
-		\caption{Breakdown of major in sample}
-		\includegraphics[width = 0.9\textwidth]{../Analysis/Charts/Output/majDist}
-		\label{majDist}
-	\end{figure}
 	
-	My second model will be examining students' career outcomes. This is the outcome most widely researched in the literature, such as in \textcite{rothstein2011} and \textcite{field2009}. Similar to the regression above, this would use a series of probit models to examine whether increased debt pushes students into certain categories of career.
-	
-	My final model will be directly examining students' final incomes. This is the most direct approach to measuring the impact of debt on choices; however, it may ignore factors such as career risk which would not be visible in simple income data.
-	
-	As outlined in section 4, it is likely there exists endogeneity between loans and career outcomes; therefore, we perform a two-stage least squares regression using exposure to the HERA credit increase as our instrumental variable in order to pseudo-randomly assign debt to our students. 
+	As outlined in section 4, however, it is likely there exists endogeneity between loans and career outcomes; therefore, we perform a two-stage least squares regression using exposure to the HERA credit increase as our instrumental variable in order to pseudo-randomly assign debt to our students. 
 	
 	We assume that outside of our random assignment, debt levels are dependent on parental resources, time trends, and demographic characteristics such as sex, race, and region of residence. As the time trend for debt levels may not be linear, we use dummies for each year to represent average debt within our sample for a given year. Further, we anticipate students taking out loans each semester; thus, those interviewed in the fall of their senior year would have less debt than those in the spring, so we include a semester dummy as well.
 	
