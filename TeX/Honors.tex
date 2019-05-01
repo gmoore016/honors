@@ -247,7 +247,10 @@
 	
 	The ideal first-stage model, then, would be: 
 	\begin{equation}
-	debt_i = \delta_0 + \delta_1 treatment_i + \delta_2 parIncome_i + \delta_3 fallSemester_i + \vec{\delta}^T i.year_i + \vec{\gamma}^T \vec{demographics}_i + \mu_i \label{fseq}
+	\begin{aligned}
+	debt_i = \delta_0 &+ \delta_1 treatment_i + \delta_2 parIncome_i + \delta_3 fallSemester_i \\
+	&+ \vec{\delta}^T i.year_i + \vec{\gamma}^T \vec{demographics}_i + \mu_i \label{fseq}
+	\end{aligned}
 	\end{equation}
 	
 	There exist two primary problems with this approach, however. The first is that debt is inherently left-censored. While students who take loans display some positive value, those who choose not to borrow display zero when they instead potentially chose some ``negative'' through investing their assets rather than borrowing. 
