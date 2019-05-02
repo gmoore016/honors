@@ -32,14 +32,14 @@ esttab using ../Output/tripdif.tex, nobaselevels booktabs style(tex) ///
 	label keep(*atCap* *adjimp* *adjneed*) star(* 0.1 ** 0.05 *** 0.01) ///
 	scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
 	addn("`tabnotes'" "Loan, need, and credit in thousands of dollars" "Controls for year, semester, race, sex, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") ///
-	mtitle("Before policy" "After policy" "Triple difference") replace
+	mtitle("Before policy" "After policy" "Triple difference") replace eqlabels(none)
 test 1.atCap 1.atCap#adjneed 1.atCap#c.adjimp 1.atCap#c.adjimp#c.adjneed
 
 //Full version for appendix
 esttab using ../Output/tripdiffull.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
 	addn("`tabnotes'" "Loan, need, and credit in thousands of dollars" ) ///
-	mtitle("Before policy" "After policy" "Triple difference") replace
+	mtitle("Before policy" "After policy" "Triple difference") replace eqlabels(none)
 	
 eststo clear
 //Save predicted values to use as instrument
@@ -60,11 +60,13 @@ eststo: probit humMaj adjloan adjneed year i.sex i.race i.region, vce(cluster mi
 
 esttab using ../Output/naive.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
-	addn("`tabnotes'" "Major type used as dependent variable in column title" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
+	addn("`tabnotes'" "Major type used as dependent variable in column title" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") ///
+	eqlabels(none) replace
 	
 esttab using ../Output/naivefull.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
-	addn("`tabnotes'" "Major type used as dependent variable in column title") replace
+	addn("`tabnotes'" "Major type used as dependent variable in column title") ///
+	eqlabels(none) replace
 	
 //Naive margins
 eststo clear
@@ -97,11 +99,13 @@ eststo: ivprobit humMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.regio
 
 esttab using ../Output/majChoice.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
-	addn("`tabnotes'" "Major type used as dependent variable in column title" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
+	addn("`tabnotes'" "Major type used as dependent variable in column title" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") ///
+	eqlabels("Stage 2: Major" "Stage 1: Fitted Tobit Value Instrument") replace
 	
 esttab using ../Output/majChoicefull.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
-	addn("`tabnotes'" "Major type used as dependent variable in column title") replace
+	addn("`tabnotes'" "Major type used as dependent variable in column title") ///
+	eqlabels("Stage 2: Major" "Stage 1: Fitted Tobit Value Instrument") replace
 
 //Major margins
 eststo clear
@@ -137,11 +141,11 @@ eststo: ivprobit highClass (adjloan = adjloanHat) adjneed year i.sex i.race i.re
 esttab using ../Output/income.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
 	addn("Model (1) examines income as a continuous value" "Models (2) and (3) use probits for certain thresholds as dependent variables" "`tabnotes'" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") ///
-	replace
+	eqlabels("Stage 2: Income" "Stage 1: Fitted Tobit Value Instrument") replace
 	
 esttab using ../Output/incomefull.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
-	addn("`tabnotes'") replace
+	addn("`tabnotes'") eqlabels("Stage 2: Income" "Stage 1: Fitted Tobit Value Instrument") replace
 
 //Income margins
 eststo clear
