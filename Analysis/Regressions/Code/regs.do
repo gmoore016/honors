@@ -31,7 +31,7 @@ eststo: tobit adjloan atCap##c.adjimp##c.adjneed i.year i.fall i.race i.sex i.re
 esttab using ../Output/tripdif.tex, nobaselevels booktabs style(tex) ///
 	label keep(*atCap* *adjimp* *adjneed*) star(* 0.1 ** 0.05 *** 0.01) ///
 	scalars("chi2 $\chi^2$") addn("`tabnotes'" "Loan, need, and credit in thousands of dollars" "Controls for year, semester, race, sex, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
-test 1.atCap#c.adjimp 1.atCap#c.adjimp#c.adjneed
+test 1.atCap 1.atCap#adjneed 1.atCap#c.adjimp 1.atCap#c.adjimp#c.adjneed
 
 //Full version for appendix
 esttab using ../Output/tripdiffull.tex, nobaselevels booktabs style(tex) ///
