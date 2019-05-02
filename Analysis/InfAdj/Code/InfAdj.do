@@ -26,10 +26,10 @@ gen adjimp = 100 * polImpact / cpi
 gen adjassets = 100 * assets / cpi
 
 egen midCutoff = pctile(adjincin2), p(25)
-gen midClass = (adjincin2 >= midCutoff)
+gen midClass = (adjincin2 >= midCutoff) & !missing(adjincin2)
 
 egen highCutoff = pctile(adjincin2), p(90)
-gen highClass = (adjincin2 >= highCutoff)
+gen highClass = (adjincin2 >= highCutoff) & !missing(adjincin2)
 
 label variable adjincin2 "Income 2 years postgrad"
 label variable adjloan "Loans"
