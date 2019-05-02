@@ -117,12 +117,12 @@ eststo: margins, dydx(*) predict(pr) post
 esttab using ../Output/majChoicemarg.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
 	addn("`tabnotes'" "Major type used as dependent variable in column title" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") ///
-	mtitle("Public Service" "Finance" "Lucrative" "Humanities") replace
+	mtitle("Public Service" "Finance" "Lucrative" "Humanities") replace drop(adjloanHat)
 	
 esttab using ../Output/majChoicefullmarg.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
 	addn("`tabnotes'" "Major type used as dependent variable in column title") ///
-	mtitle("Public Service" "Finance" "Lucrative" "Humanities") replace drop(adjloanhat)
+	mtitle("Public Service" "Finance" "Lucrative" "Humanities") replace drop(adjloanHat)
 	
 
 eststo clear
@@ -137,14 +137,14 @@ eststo: ivprobit highClass (adjloan = adjloanHat) adjneed year i.sex i.race i.re
 esttab using ../Output/income.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
 	addn("Model (1) examines income as a continuous value" "Models (2) and (3) use probits for certain thresholds as dependent variables" "`tabnotes'" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") ///
-	drop(adjloanhat) replace
+	replace
 	
 esttab using ../Output/incomefull.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
 	addn("`tabnotes'") replace
-	
+
+//Income margins
 eststo clear
-	
 ivprobit midClass (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
 eststo: margins, dydx(*) predict(pr) post
 ivprobit highClass (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
@@ -153,10 +153,10 @@ eststo: margins, dydx(*) predict(pr) post
 esttab using ../Output/incomemarg.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
 	addn("Model (1) examines income as a continuous value" "Models (2) and (3) use probits for certain thresholds as dependent variables" "`tabnotes'" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") ///
-	mtitle("$\geq$ 25th Percentile" "$\geq$ 90th Percentile") drop(adjloanhat) replace
+	mtitle("$\geq$ 25th Percentile" "$\geq$ 90th Percentile") drop(adjloanHat) replace
 	
 esttab using ../Output/incomefullmarg.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
-	addn("`tabnotes'") mtitle("$\geq$ 25th Percentile" "$\geq$ 90th Percentile") drop(adjloanhat) replace
+	addn("`tabnotes'") mtitle("$\geq$ 25th Percentile" "$\geq$ 90th Percentile") drop(adjloanHat) replace
 
 eststo clear
