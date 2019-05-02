@@ -90,7 +90,7 @@ eststo: ivprobit highClass (adjloan = adjloanHat) adjneed year i.sex i.race i.re
 
 esttab using ../Output/income.tex, nobaselevels booktabs style(tex) ///
 	label keep(adj* year) star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
-	addn("`tabnotes'" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
+	addn("Model (1) examines income as a continuous value" "Models (2) and (3) use probits for certain thresholds as dependent variables" "`tabnotes'" "Controls for year, sex, race, and region were used, but are excluded here for space." "Extended form of these results including those coefficients is available in the appendix.") replace
 	
 esttab using ../Output/incomefull.tex, nobaselevels booktabs style(tex) ///
 	label star(* 0.1 ** 0.05 *** 0.01) scalars("chi2 $\chi^2$ test all non-intercept coefficients equal zero") ///
