@@ -295,7 +295,7 @@
 	 %Results of our various first stages
 	 \begin{table}
 	 	\centering
-	 	\caption{Results of first stage regression of loans on policy impact}	 
+	 	\caption{Results of first stage Tobit regression of loans on policy impact}	 
 	 	\resizebox{\textwidth}{!}{	
 		 	\input{\regs tripdif.tex}
 		 }
@@ -326,7 +326,7 @@
 	
 	\section{Results}
 	
-	We will begin by estimating the likelihood of several types of careers. This will be done in the form of a probit model: either a student chooses to work in the relevant field, or they do not. Due to the nonlinearity of the tobit model used in the first stage, we use the estimates of debt from that equation as an instrument in this model (called $\hat{loan}$). The form of the regression is as follows: 
+	I begin by estimating the likelihood of several types of careers. This will be done in the form of a probit model: either a student chooses to work in the relevant field, or they do not. Due to the nonlinearity of the tobit model used in the first stage, we use the estimates of debt from that equation as an instrument in this model (called $\hat{loan}$). The form of the regression is as follows: 
 	\begin{equation}
 	\mathbb{P}\left(major_i = majType\right) = \Phi\left(\beta_0 + \beta_1 \hat{loan_i} + \beta_2 year + \vec{\beta}\vec{demographics}^T_i\right)
 	\end{equation}
@@ -337,8 +337,10 @@
 
 	\begin{table}
 		\centering
-		\caption{Second stage results on major choice}		
-		\input{\regs majChoice.tex}
+		\caption{Second stage results on major choice}	
+		\resizebox{\textwidth}{!}{	
+			\input{\regs majChoice.tex}
+		}
 		\label{majChoice}
 	\end{table}
 	
@@ -346,8 +348,10 @@
 	
 	\begin{table}
 		\centering
-		\caption{Second stage results on income}		
-		\input{\regs income.tex}
+		\caption{Second stage results on income}
+		\resizebox{\textwidth}{!}{		
+			\input{\regs income.tex}
+		}
 		\label{incomeRes}
 	\end{table}
 	
