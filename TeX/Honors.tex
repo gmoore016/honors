@@ -249,13 +249,25 @@
 	
 	My second model will directly examine students' final incomes. This is the most direct approach to measuring the impact of debt on choices; however, it may ignore factors such as career risk which would not be visible in simple income data.
 	
-	The results of this naive model using several types of majors as dependent variables are visible in table \ref{naive2}. I show that under the naive specification, loans appear completely irrelevant to career choice in all fields.
+	The results of this naive model using several types of majors as dependent variables are visible in table \ref{naive2} and the marginal effects are visible in table \ref{naive2marg}. I show that under the naive specification, loans appear completely irrelevant to career choice in all fields.
+	
 	
 	\begin{table}
 		\centering
 		\caption{Results of the naive regression for career choice}
-		\input{\regs naive.tex}
+		\resizebox{\textwidth}{!}{
+			\input{\regs naive.tex}
+		}
 		\label{naive2}
+	\end{table}
+
+	\begin{table}
+		\centering
+		\caption{Marginal effects of the naive regression for career choice}
+		\resizebox{\textwidth}{!}{
+			\input{\regs naivemarg.tex}
+		}
+		\label{naive2marg}
 	\end{table}
 	
 	As outlined in section 4, however, it is likely there exists endogeneity between loans and career outcomes; therefore, we perform a two-stage least squares regression using exposure to the HERA credit increase as our instrumental variable in order to pseudo-randomly assign debt to our students. 
@@ -331,7 +343,7 @@
 	\mathbb{P}\left(major_i = majType\right) = \Phi\left(\beta_0 + \beta_1 \hat{loan_i} + \beta_2 year + \vec{\beta}\vec{demographics}^T_i\right)
 	\end{equation}
 	
-	The abbreviated results of these regressions are visible in table \ref{majChoice}. Be aware that all regression tables in this section are shortened to the coefficients of interest; full results are available in the appendix. As consistent with Rothstein and Rouse's findings, students with more debt are less likely to choose a major in public service, in this case defined to be teaching or social work. These results are visible in regression (1). When converted to marginal effects, this suggests that every extra thousand dollars of debt a student receives lowers their probability of entering public service by roughly 5.5 percent. While this effect is significantly larger than that of Rothstein and Rouse, I would claim this is logical--as the students receiving these subsidized loans are significantly less wealthy than Princeton students, I would expect a smaller shift to be necessary to generate comparable results. Also consistent with Rothstein and Rouse's findings, people are \emph{not} significantly more likely to go into more lucrative fields such as business, economics, engineering, or computer science, as visible in regressions (2) and (3). 
+	The abbreviated results of these regressions are visible in table \ref{majChoice} with the marginal effects visible in table \ref{majChoicemarg}. Be aware that all regression tables in this section are shortened to the coefficients of interest; full results are available in the appendix. As consistent with Rothstein and Rouse's findings, students with more debt are less likely to choose a major in public service, in this case defined to be teaching or social work. These results are visible in regression (1). When converted to marginal effects, this suggests that every extra thousand dollars of debt a student receives lowers their probability of entering public service by roughly 5.5 percent. While this effect is significantly larger than that of Rothstein and Rouse, I would claim this is logical--as the students receiving these subsidized loans are significantly less wealthy than Princeton students, I would expect a smaller shift to be necessary to generate comparable results. Also consistent with Rothstein and Rouse's findings, people are \emph{not} significantly more likely to go into more lucrative fields such as business, economics, engineering, or computer science, as visible in regressions (2) and (3). 
 	
 	Also interesting is that I find needier students are more likely to work in public service as well. When converted to marginal effects, an extra thousand dollars of demonstrated need raises the probability of working in a public service position by 0.3 percent. However, need does not appear to have impacts on the likelihood of entering other fields.
 
@@ -343,8 +355,17 @@
 		}
 		\label{majChoice}
 	\end{table}
+
+	\begin{table}
+		\centering
+		\caption{Second stage marginal effects on major choice}	
+		\resizebox{\textwidth}{!}{	
+			\input{\regs majChoicemarg.tex}
+		}
+		\label{majChoicemarg}
+	\end{table}
 	
-	It is worth noting however that unlike Rothstein and Rouse, I find no impact wages, as visible in table \ref{incomeRes}. Regression (1) here performs a 2SLS regression examining the income of students two years after graduation. To test for differential effects at different income levels, I also run probits in regressions (2) and (3) to test whether loans can push people over certain thresholds, defined to be the 25th and 90th percentiles of income in our sample. While Rothstein and Rouse find that more debt leads students to avoid uniquely low paying positions, I do not replicate this result. While it is possible these mismatches are simply a failure in statistical power, it is also possible that this is a difference between Rothstein and Rouse's wealthier sample and my lower-income one. 
+	It is worth noting however that unlike Rothstein and Rouse, I find no impact wages, as visible in table \ref{incomeRes}. The marginal effects on the threshold probits are visible in table \ref{incomeResmarg}. Regression (1) here performs a 2SLS regression examining the income of students two years after graduation. To test for differential effects at different income levels, I also run probits in regressions (2) and (3) to test whether loans can push people over certain thresholds, defined to be the 25th and 90th percentiles of income in our sample. While Rothstein and Rouse find that more debt leads students to avoid uniquely low paying positions, I do not replicate this result. While it is possible these mismatches are simply a failure in statistical power, it is also possible that this is a difference between Rothstein and Rouse's wealthier sample and my lower-income one. 
 	
 	One explanation of this distinction could be differences in flexibility within a career path between classes. If students have varying levels of foresight, some students may make career choices in the context of their student debt early in their education while others could be more myopic. In this case, those with greater foresight would anticipate difficulty paying back student loans in public service careers, and thus avoid those careers, leading to the reduction seen in both my sample and Rothstein and Rouse's. However, suppose not all students anticipate this difficulty--\textcite{smith2013} suggest many students are overconfident in their ability to repay their student debt. 
 	
@@ -357,6 +378,15 @@
 			\input{\regs income.tex}
 		}
 		\label{incomeRes}
+	\end{table}
+
+	\begin{table}
+		\centering
+		\caption{2SLS Marginal Effects on Income Thresholds}
+		\resizebox{\textwidth}{!}{		
+			\input{\regs incomemarg.tex}
+		}
+		\label{incomeResmarg}
 	\end{table}
 	
 	\section{Discussion and Conclusions}
@@ -387,6 +417,14 @@
 
 	\begin{table}
 		\centering
+		\caption{Naive regression marginal effects (table \ref{naive2marg}) full results}
+		\resizebox{\textwidth}{!}{
+			\input{\regs naivefullmarg.tex}
+		}
+	\end{table}
+
+	\begin{table}
+		\centering
 		\scriptsize
 		\caption{First stage (table \ref{firststage}) full results}
 		\input{\regs tripdiffull.tex}
@@ -404,10 +442,24 @@
 	\begin{table}
 		\centering
 		\scriptsize
+		\caption{Major selection marginal effects(table \ref{majChoicemarg}) full results}
+		\input{\regs majChoicefullmarg.tex}
+		\label{majChoiceFullmarg}
+	\end{table}
+
+	\begin{table}
+		\centering
+		\scriptsize
 		\caption{Income (table \ref{incomeRes}) full results}
 		\input{\regs incomefull.tex}
 	\end{table}
 
+	\begin{table}
+		\centering
+		\scriptsize
+		\caption{Income marginal effects (table \ref{incomeResmarg}) full results}
+		\input{\regs incomefullmarg.tex}
+	\end{table}
 	\clearpage
 	
 	\printbibliography
