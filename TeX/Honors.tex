@@ -153,7 +153,7 @@
 		\label{luc07}
 		\includegraphics[width = \linewidth]{Images/Lucca6b.png}
 	\end{subfigure}
-\end{figure}
+	\end{figure}
 
 	
 	
@@ -161,7 +161,7 @@
 	
 	For my paper I use data from the National Longitudinal Survey of Youth '79 Children and Young Adults, or NLSY79 CYA \parencite{bls2018}. A follow-up to the original National Longitudinal Survey of Youth '79, the CYA surveys the original respondents' children every other year from birth until the present day. Thus, we have respondents across the entire age spectrum during the implementation of the policy, allowing us to observe time-varying trends in debt acquisition and career choice. 
 	
-	The benefits of the CYA data over the Princeton data from \textcite{rothstein2011} are two. First, the NLSY is designed to focus on lower income households rather than Anon U's much wealthier sample. As visible in figure \ref{incDist}, this sample is weighted towards middle- and lower-income households with a median income of \$70,000. Compare this with Princeton (believed to be Anon U), which has a median family income of \$181,600 \parencite{aisch2017}. Second, the students in this survey attend a much broader range of colleges than those in the Rothstein data set. As the students who are accepted into prestigious universities such as Anon U are by definition selected, they \emph{cannot} be representative of the general American college-bound population. 
+	The benefits of the CYA data over the Anon U data from \textcite{rothstein2011} are two. First, the NLSY is designed to focus on lower income households rather than Anon U's much wealthier sample. As visible in figure \ref{incDist}, the CYA sample is weighted towards middle- and lower-income households with a median income of \$70,000 in year 2000 dollars. Compare this with Princeton (believed to be Anon U), which has a median family income of \$186,100 \parencite{aisch2017}--roughly \$126,000 in year 2000 dollars. The average treated student in my sample (that is, the average student with need greater than or equal to the starting policy cap) had a family income of roughly \$29,600 in year 2000 dollars, compared with Anon U whose average treated student had a family income of \$59,900 in year 2000 dollars. The students in my sample are clearly from a much poorer economic background than those at Anon U, a group which has historically been underrepresented in these types of studies. Second, the students in this survey attend a much broader range of colleges than those in the Rothstein data set. As the students who are accepted into prestigious universities such as Anon U are by definition selected, they \emph{cannot} be representative of the general American college-bound population. 
 	
 	\begin{figure}
 		\centering
@@ -192,7 +192,7 @@
 	&+ \beta_4 \mbox{Children} + \beta_5 \mbox{Year} + \vec{\beta} \vec{\mbox{Demographics}} + \epsilon
 	\end{aligned}
 	\end{equation}
-	Since the subjects of the subsurvey were also chosen to be representative of the population, I feel comfortable that we are not extrapolating this data too far. I choose to let income be quadratic to reflect increasing marginal propensity to save among the wealthy. This regression yields the results visible in table \ref{assetTab}.
+	Since the subjects of the subsurvey were also chosen to be representative of the population, I feel comfortable that we are not extrapolating this data too far. I choose to let income be quadratic to reflect increasing marginal propensity to save among the wealthy. This regression yields the results visible in table \ref{assetTab}. The fit and model appear to be reasonable, so we use this relationship to impute asset values
 	
 	\begin{table}
 		\centering
