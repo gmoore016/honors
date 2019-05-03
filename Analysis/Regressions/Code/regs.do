@@ -180,6 +180,6 @@ esttab using ../Output/simResults, replace noobs nonumbers b(2) booktabs style(t
 	mtitle("Loan = 0" "Loan = 5" "Loan = 10" "Loan = 15" "Loan = 20") ///
 	coeflabels(1._at "Need = 0" 2._at "Need = 10" 3._at "Need = 20" 4._at "Need = 30" 5._at "Need = 40") ///
 	star(* 0.1 ** 0.05 *** 0.01) ///
-	addn("Source: author's calculations from NLSY79 CYA sample of college seniors 2000-2012" "Dollar amounts recorded in thousands of year 2000 dollars")
+	addn("Source: author's calculations from NLSY79 CYA sample of college seniors 2000-2012" "Dollar amounts recorded in thousands of year 2000 dollars" "Significance testing for hypothesis that probability of service work = 0")
 
 eststo clear
