@@ -1,5 +1,7 @@
 use ../../NeedCalc/Output/Need.dta, clear
 
+set scheme s2mono
+
 //General distribution of majors
 graph pie, over(majType) plabel(_all percent) graphregion(color(white))
 graph export ../Output/majDist.pdf, replace
