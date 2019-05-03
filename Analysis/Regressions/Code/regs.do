@@ -164,3 +164,22 @@ esttab using ../Output/incomefullmarg.tex, nobaselevels booktabs style(tex) ///
 	addn("`tabnotes'") mtitle("$\geq$ 25th Percentile" "$\geq$ 90th Percentile") drop(adjloanHat) replace
 
 eststo clear
+
+
+//Simulated probabilities
+//Stores relevant values
+ivprobit serveMaj (adjloan = adjloanHat) adjneed year i.sex i.race i.region, vce(cluster mid)
+//Can restore values after post option overwrites them
+estimates store serveEsts
+forvalues i = 0(5)20{
+	eststo: margins, at(adjneed =(0(10)40) adjloan=`i') predict(pr) post
+	estimates restore serveEsts
+}
+
+esttab using ../Output/simResults, replace noobs nonumbers b(2) booktabs style(tex) ///
+	mtitle("Loan = 0" "Loan = 5" "Loan = 10" "Loan = 15" "Loan = 20") ///
+	coeflabels(1._at "Need = 0" 2._at "Need = 10" 3._at "Need = 20" 4._at "Need = 30" 5._at "Need = 40") ///
+	star(* 0.1 ** 0.05 *** 0.01) ///
+	addn("Source: author's calculations from NLSY79 CYA sample of college seniors 2000-2012" "Dollar amounts recorded in thousands of year 2000 dollars")
+
+eststo clear
