@@ -1,0 +1,19 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Introduction}{3}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Literature Review}{7}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Structural Model}{9}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}HERA and Subsidized Student Loans}{13}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}Data}{15}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}Statistical Model}{24}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7}Results}{31}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8}Discussion and Conclusions}{38}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A}Extended Regressions}{41}% 
