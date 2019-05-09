@@ -3,6 +3,7 @@ use ../Input/Need.dta, clear
 replace adjloan = adjloan / 1000
 replace adjneed = adjneed / 1000
 replace adjimp = adjimp / 1000
+replace adjincin2 = adjincin2 / 1000
 
 local tabnotes "Source: author's calculations from NLSY79 CYA sample of college seniors 2000-2012" "Standard errors clustered by mother" "Dollar amounts recorded in thousands of year 2000 dollars"
 
