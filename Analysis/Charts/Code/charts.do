@@ -6,14 +6,18 @@ set scheme s2mono
 graph pie, over(majType) plabel(_all percent) graphregion(color(white))
 graph export ../Output/majDist.pdf, replace
 
+replace adjparinc = adjparinc / 1000
+
 //Student income distribution
-hist parInc, freq graphregion(color(white)) ///
-	xtitle("Parental Income in Year	of Graduation")
+hist adjparinc, freq graphregion(color(white)) ///
+	xtitle("Parental Income in Year	of Graduation (Thousands of Year 2000 Dollars)")
 graph export ../Output/parIncDist.pdf, replace 
 
+replace adjloan = adjloan / 1000
+
 //Debt distribution
-hist loan if loan, freq graphregion(color(white)) ///
-	xtitle("Debt When Graduating")
+hist adjloan if adjloan, freq graphregion(color(white)) ///
+	xtitle("Debt When Graduating (Thousands of Year 2000 Dollars)")
 graph export ../Output/loanDist.pdf, replace
 
 //Scatter plot of need vs. loans

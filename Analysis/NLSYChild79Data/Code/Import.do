@@ -21,7 +21,7 @@ label define majLab  0 "NONE, NO MAJOR DECLARED YET"  ///
 	28 "PRE-MED"  29 "PRE-VET"  30 "PSYCHOLOGY"  31 "SOCIOLOGY"  ///
 	32 "SOCIAL WORK"  33 "THEOLOGY/RELIGIOUS STUDIES"  99 "OTHER FIELD (SPECIFY)"
 label define ynLab  1 "Yes"  0 "No"
-label define regionLab 1 "Northeast" 2 "North Central" 3 "South" 4 "West"
+label define regionLab 1 "Northeast region" 2 "North Central region" 3 "South region" 4 "West region"
 label define majTypeLab 0 "Humanities" 1 "STEM" 2 "Social Science" ///
 	3 "Professions" 4 "Business"
 label define gradeLab 1 "1ST GRADE"  2 "2ND GRADE"  3 "3RD GRADE"  ///
