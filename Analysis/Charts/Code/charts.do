@@ -45,3 +45,12 @@ binscatter loan need if !polImpact & inrange(need, -5000, 30000), ///
 graph combine loanNeedNotPol loanNeedPol, ycommon
 graph export ../Output/LoanNeedPolBinscatter.pdf, replace
 
+//Need vs. Loans by cohort
+twoway scatter adjloan adjneed if adjloan & !cohort & adjloan < 30 & adjneed > -50, ///
+	msymbol(O) graphregion(color(white)) xtitle("Need (Thousands of Year 2000 Dollars)") ///
+	ytitle("Loans (Thousands of Year 2000 Dollars") || ///
+	scatter adjloan adjneed if adjloan & cohort & adjloan < 30 & adjneed > -50, ///
+	msymbol(T) legend(label(1 "Year < 2007") label(2 "Year >= 2008")) xline(4.5) ///
+	note("Omits those with loans > $30,000 or need < -$50,000" ///
+	"Vertical line represents pre-HERA subsidized loan cap")
+graph export ../Output/LoansvsNeed.pdf, replace
