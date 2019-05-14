@@ -48,7 +48,7 @@ graph export ../Output/LoanNeedPolBinscatter.pdf, replace
 //Need vs. Loans by cohort
 twoway scatter adjloan adjneed if adjloan & !cohort & adjloan < 30 & adjneed > -50, ///
 	msymbol(O) graphregion(color(white)) xtitle("Need (Thousands of Year 2000 Dollars)") ///
-	ytitle("Loans (Thousands of Year 2000 Dollars") || ///
+	ytitle("Loans (Thousands of Year 2000 Dollars)") || ///
 	scatter adjloan adjneed if adjloan & cohort & adjloan < 30 & adjneed > -50, ///
 	msymbol(T) legend(label(1 "Year < 2007") label(2 "Year >= 2008")) xline(4.5) ///
 	note("Omits those with loans > $30,000 or need < -$50,000" ///

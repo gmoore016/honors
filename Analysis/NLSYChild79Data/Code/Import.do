@@ -290,6 +290,7 @@ gen lloan = ln(loan)
 label values majType majTypeLab
 
 gen fallSemester = halfyear(dofm(intDate)) - 1
+label variable fallSemester "Fall Semester Interview"
 
 //Generates income in two years
 gen incin2 = f.inc

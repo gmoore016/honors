@@ -39,6 +39,7 @@ label variable adjparinc "Parental income"
 label variable adjparinc2 "Parental income squared"
 label variable adjimp "Extra credit available"
 label variable adjassets "Parental assets"
+label variable year "Year"
 
 save ../Output/adjData.dta, replace
 
